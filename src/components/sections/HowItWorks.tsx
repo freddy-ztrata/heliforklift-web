@@ -1,9 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+} from "framer-motion";
 import { Phone, FileText, Truck, Headphones } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const steps = [
   {
@@ -32,9 +36,97 @@ const steps = [
   },
 ];
 
+function DesktopDot({
+  index,
+  total,
+  progress,
+}: {
+  index: number;
+  total: number;
+  progress: ReturnType<typeof useTransform<number, number>>;
+}) {
+  const pos = index / (total - 1);
+  const bg = useTransform(
+    progress,
+    [Math.max(0, pos - 0.05), pos + 0.05],
+    ["#1a1a2e", "#CE142D"]
+  );
+  const border = useTransform(
+    progress,
+    [Math.max(0, pos - 0.05), pos + 0.05],
+    ["#2a2a3e", "#CE142D"]
+  );
+  const scale = useTransform(
+    progress,
+    [Math.max(0, pos - 0.05), pos + 0.05],
+    [0.7, 1]
+  );
+
+  return (
+    <div
+      className="absolute top-1/2 -translate-y-1/2"
+      style={{ left: `${pos * 100}%` }}
+    >
+      <motion.div
+        className="flex h-5 w-5 -translate-x-1/2 items-center justify-center rounded-full border-2"
+        style={{ backgroundColor: bg, borderColor: border, scale }}
+      >
+        <motion.div
+          className="h-2 w-2 rounded-full bg-white"
+          style={{
+            scale: useTransform(
+              progress,
+              [pos, pos + 0.05],
+              [0, 1]
+            ),
+          }}
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+function MobileDot({
+  index,
+  total,
+  progress,
+}: {
+  index: number;
+  total: number;
+  progress: ReturnType<typeof useTransform<number, number>>;
+}) {
+  const pos = index / (total - 1);
+  const bg = useTransform(
+    progress,
+    [Math.max(0, pos - 0.08), pos],
+    ["#1a1a2e", "#CE142D"]
+  );
+  const border = useTransform(
+    progress,
+    [Math.max(0, pos - 0.08), pos],
+    ["#2a2a3e", "#CE142D"]
+  );
+
+  return (
+    <motion.div
+      className="absolute left-0 top-3 h-4 w-4 -translate-x-[7px] rounded-full border-2"
+      style={{ backgroundColor: bg, borderColor: border }}
+    />
+  );
+}
+
 export default function HowItWorks() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.75", "end 0.4"],
+  });
+
+  const progress = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const fillWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const fillHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section
@@ -47,7 +139,7 @@ export default function HowItWorks() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="mb-12 md:mb-20 text-center">
+        <div className="mb-12 text-center md:mb-20">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -66,51 +158,25 @@ export default function HowItWorks() {
           </motion.h2>
         </div>
 
-        {/* Desktop horizontal timeline */}
+        {/* Desktop horizontal */}
         <div className="hidden md:block">
-          {/* Timeline bar + dots */}
-          <div className="relative mx-auto mb-14 max-w-4xl">
-            {/* Background track */}
-            <div className="h-[3px] w-full rounded-full bg-steel-800" />
-            {/* Animated fill — grows from left to right */}
+          {/* Timeline bar */}
+          <div className="relative mx-auto mb-14 h-[3px] max-w-4xl rounded-full bg-steel-800">
             <motion.div
-              className="absolute left-0 top-0 h-[3px] rounded-full bg-heli-red"
-              initial={{ width: "0%" }}
-              animate={isInView ? { width: "100%" } : {}}
-              transition={{ duration: 1.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute left-0 top-0 h-full rounded-full bg-heli-red"
+              style={{ width: fillWidth }}
             />
-            {/* Dots — positioned at 0%, 33%, 66%, 100% */}
-            {steps.map((_, i) => {
-              const pct = (i / (steps.length - 1)) * 100;
-              const dotDelay = 0.5 + (i / (steps.length - 1)) * 1.8;
-              return (
-                <div
-                  key={i}
-                  className="absolute top-1/2 -translate-y-1/2"
-                  style={{ left: `${pct}%` }}
-                >
-                  <motion.div
-                    className="h-4 w-4 -translate-x-1/2 rounded-full border-2"
-                    initial={{
-                      borderColor: "var(--steel-700)",
-                      backgroundColor: "var(--steel-900)",
-                    }}
-                    animate={
-                      isInView
-                        ? {
-                            borderColor: "var(--heli-red)",
-                            backgroundColor: "var(--heli-red)",
-                          }
-                        : {}
-                    }
-                    transition={{ duration: 0.3, delay: dotDelay }}
-                  />
-                </div>
-              );
-            })}
+            {steps.map((_, i) => (
+              <DesktopDot
+                key={i}
+                index={i}
+                total={steps.length}
+                progress={progress}
+              />
+            ))}
           </div>
 
-          {/* Steps row */}
+          {/* Steps */}
           <div className="mx-auto grid max-w-4xl grid-cols-4 gap-8">
             {steps.map((step, i) => {
               const Icon = step.icon;
@@ -119,7 +185,7 @@ export default function HowItWorks() {
                   key={step.number}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.6 + i * 0.2 }}
+                  transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
                   className="flex flex-col items-center text-center"
                 >
                   <span className="font-heading text-6xl leading-none text-heli-red md:text-7xl">
@@ -140,47 +206,30 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Mobile vertical timeline */}
+        {/* Mobile vertical */}
         <div className="block md:hidden">
           <div className="relative ml-6 sm:ml-8">
-            {/* Vertical track */}
             <div className="absolute left-0 top-0 h-full w-[3px] rounded-full bg-steel-800" />
-            {/* Animated fill */}
             <motion.div
               className="absolute left-0 top-0 w-[3px] rounded-full bg-heli-red"
-              initial={{ height: "0%" }}
-              animate={isInView ? { height: "100%" } : {}}
-              transition={{ duration: 2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{ height: fillHeight }}
             />
 
-            <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-14">
               {steps.map((step, i) => {
                 const Icon = step.icon;
-                const dotDelay = 0.5 + (i / (steps.length - 1)) * 2;
                 return (
                   <motion.div
                     key={step.number}
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.6 + i * 0.2 }}
+                    transition={{ duration: 0.5, delay: 0.3 + i * 0.15 }}
                     className="relative pl-10"
                   >
-                    {/* Dot */}
-                    <motion.div
-                      className="absolute left-0 top-2 h-4 w-4 -translate-x-[6.5px] rounded-full border-2"
-                      initial={{
-                        borderColor: "var(--steel-700)",
-                        backgroundColor: "var(--steel-900)",
-                      }}
-                      animate={
-                        isInView
-                          ? {
-                              borderColor: "var(--heli-red)",
-                              backgroundColor: "var(--heli-red)",
-                            }
-                          : {}
-                      }
-                      transition={{ duration: 0.3, delay: dotDelay }}
+                    <MobileDot
+                      index={i}
+                      total={steps.length}
+                      progress={progress}
                     />
                     <span className="font-heading text-5xl leading-none text-heli-red">
                       {step.number}
