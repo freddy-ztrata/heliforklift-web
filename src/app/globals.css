@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+/* ========================================
+   HELIFORK LIFT — Design System
+   Color: Industrial Red + Dark Steel
+   ======================================== */
+
+:root {
+  /* Brand Colors */
+  --heli-red: #CE142D;
+  --heli-red-dark: #A8102A;
+  --heli-red-light: #E8354D;
+  --heli-yellow: #F5A623;
+  --heli-yellow-light: #FFD166;
+
+  /* Neutrals */
+  --steel-950: #0a0a0f;
+  --steel-900: #111118;
+  --steel-800: #1a1a2e;
+  --steel-700: #2a2a3e;
+  --steel-600: #3a3a4e;
+  --steel-500: #6b6b80;
+  --steel-400: #9b9bae;
+  --steel-300: #c4c4d4;
+  --steel-200: #e0e0ea;
+  --steel-100: #f0f0f5;
+  --steel-50: #f8f8fb;
+
+  /* Theme - Dark by default (industrial) */
+  --background: var(--steel-950);
+  --foreground: var(--steel-100);
+  --card: var(--steel-900);
+  --card-foreground: var(--steel-100);
+  --primary: var(--heli-red);
+  --primary-foreground: #ffffff;
+  --secondary: var(--steel-800);
+  --secondary-foreground: var(--steel-200);
+  --muted: var(--steel-800);
+  --muted-foreground: var(--steel-400);
+  --accent: var(--heli-yellow);
+  --accent-foreground: var(--steel-950);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: var(--steel-700);
+  --input: var(--steel-700);
+  --ring: var(--heli-red);
+  --radius: 0.75rem;
+}
+
+.light {
+  --background: var(--steel-50);
+  --foreground: var(--steel-950);
+  --card: #ffffff;
+  --card-foreground: var(--steel-950);
+  --primary: var(--heli-red);
+  --primary-foreground: #ffffff;
+  --secondary: var(--steel-100);
+  --secondary-foreground: var(--steel-900);
+  --muted: var(--steel-100);
+  --muted-foreground: var(--steel-500);
+  --accent: var(--heli-yellow);
+  --accent-foreground: var(--steel-950);
+  --border: var(--steel-200);
+  --input: var(--steel-200);
+  --ring: var(--heli-red);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-bebas-neue);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* Custom brand colors */
+  --color-heli-red: var(--heli-red);
+  --color-heli-red-dark: var(--heli-red-dark);
+  --color-heli-red-light: var(--heli-red-light);
+  --color-heli-yellow: var(--heli-yellow);
+  --color-heli-yellow-light: var(--heli-yellow-light);
+  --color-steel-950: var(--steel-950);
+  --color-steel-900: var(--steel-900);
+  --color-steel-800: var(--steel-800);
+  --color-steel-700: var(--steel-700);
+  --color-steel-600: var(--steel-600);
+  --color-steel-500: var(--steel-500);
+  --color-steel-400: var(--steel-400);
+  --color-steel-300: var(--steel-300);
+  --color-steel-200: var(--steel-200);
+  --color-steel-100: var(--steel-100);
+  --color-steel-50: var(--steel-50);
+}
+
+/* Base styles */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--steel-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--steel-600);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--heli-red);
+}
+
+/* Selection color */
+::selection {
+  background: var(--heli-red);
+  color: white;
+}
+
+/* Heading font */
+.font-heading {
+  font-family: var(--font-heading, "Bebas Neue", sans-serif);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Counter animation helper */
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+/* Prevent horizontal overflow globally */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Ensure minimum tap target size on mobile */
+@media (pointer: coarse) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Except for inline text links and tiny icon-only elements that already have proper sizing */
+  nav a, .inline-link {
+    min-height: auto;
+    min-width: auto;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Glow effect for CTAs */
+.glow-red {
+  box-shadow: 0 0 20px rgba(206, 20, 45, 0.4), 0 0 60px rgba(206, 20, 45, 0.15);
+}
+
+.glow-red:hover {
+  box-shadow: 0 0 30px rgba(206, 20, 45, 0.6), 0 0 80px rgba(206, 20, 45, 0.25);
+}
+
+/* Product image — clean white bg on dark cards */
+.product-img-container {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  border-radius: var(--radius-lg);
+}
+.product-img-container img {
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+/* Dot grid background pattern */
+.bg-dot-pattern {
+  background-image: radial-gradient(circle, var(--steel-600) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Grid background pattern */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(var(--steel-800) 1px, transparent 1px),
+    linear-gradient(90deg, var(--steel-800) 1px, transparent 1px);
+  background-size: 60px 60px;
+}

@@ -1,0 +1,367 @@
+{
+  "company": {
+    "name": "Helifork Lift",
+    "legalName": "HELI Chile",
+    "brand": "HELI",
+    "tagline": "ELEVANDO EL FUTURO",
+    "founded": 1958,
+    "yearsInBusiness": 67,
+    "yearsInChile": 12,
+    "globalRanking": 7,
+    "goalRanking": 5,
+    "unitsSoldChile": 1100,
+    "exportCountries": 150,
+    "machineModels": 1700,
+    "tonnageClasses": 22,
+    "mission": "Entrar al Top 5 de fabricantes mundiales de vehículos industriales. Concepto: HELI Centenaria, Top 5 Global.",
+    "vision": "Queremos ser uno de los cinco principales fabricantes mundiales de vehículos industriales a corto plazo. Convertirnos en una empresa centenaria de clase mundial.",
+    "values": ["Responsabilidad", "Innovación", "Expansión internacional", "Equipos amigables con el ecosistema", "Seguridad y salud laboral"],
+    "corporateSpirit": "Realista, innovador, unido, eficiente",
+    "businessStyle": "Meticuloso y de rápido funcionamiento — refleja confianza, actitud positiva, excelencia y responsabilidad",
+    "description": "Cuando se trata de satisfacer las necesidades de nuestros clientes siempre estamos un paso adelante, a la vanguardia de nuevas tecnologías eficientes y amigables con el ecosistema.",
+    "milestones": [
+      { "year": 1958, "event": "Fundación de HELI" },
+      { "year": 1962, "event": "Desarrollo de la primera grúa horquilla de combustión" },
+      { "year": 1991, "event": "Nº1 en ventas de grúas horquillas en China" },
+      { "year": 1995, "event": "Centro Técnico de Nivel Nacional" },
+      { "year": 1996, "event": "Cotización en la Bolsa de Shanghái" },
+      { "year": 2004, "event": "Inicio construcción Parque Industrial HELI" },
+      { "year": 2013, "event": "Primera nominación al Premio de Calidad en China" },
+      { "year": 2014, "event": "Establecimiento del Centro Europeo" },
+      { "year": 2017, "event": "Más de 120.000 unidades vendidas" },
+      { "year": 2018, "event": "Centro del Sudeste Asiático en Tailandia. Asociación con ZF Alemania" },
+      { "year": 2019, "event": "Conferencia Global de Distribuidores. HELI America Inc. establecida" },
+      { "year": 2020, "event": "Lanzamiento de máquina de hidrógeno verde (celda de combustible)" },
+      { "year": 2021, "event": "División Chile distribuye accesorios propietarios" }
+    ]
+  },
+  "contact": {
+    "mainPhone": "+56 9 5818 7035",
+    "phones": [
+      "+56 9 5818 7035",
+      "+56 9 9320 9186",
+      "+56 9 6122 3038",
+      "+56 9 6190 8327",
+      "+56 9 3253 7997"
+    ],
+    "mainEmail": "contacto@heliforklift.cl",
+    "emails": [
+      "contacto@heliforklift.cl",
+      "sebastian@heliforklift.cl",
+      "portiz@heliforklift.cl",
+      "repuestos@heliforklift.cl",
+      "chenriquez@heliforklift.cl"
+    ],
+    "whatsapp": "+56958187035",
+    "locations": [
+      {
+        "city": "Santiago",
+        "address": "Av. Américo Vespucio 1445, Quilicura",
+        "isMain": true
+      },
+      {
+        "city": "Antofagasta",
+        "address": "Calle 9 425, Galpón 27, AGPIA II"
+      },
+      {
+        "city": "Copiapó",
+        "address": "Megacentro Copiapó, bodega 15, Panamericana Norte 185"
+      },
+      {
+        "city": "TalTal",
+        "address": "Francisco Bilbao 132"
+      },
+      {
+        "city": "Iquique",
+        "address": "Santa Rosa de Molle 4006"
+      },
+      {
+        "city": "Puerto Varas",
+        "address": "Ruta Sur kilómetro 1015, La Foresta 111, Los Lagos"
+      },
+      {
+        "city": "Miami, Florida",
+        "address": "4320 NW 72 Ave, 33166",
+        "isInternational": true
+      }
+    ],
+    "socialMedia": {
+      "facebook": "https://facebook.com/heliforkliftCL",
+      "linkedin": "https://linkedin.com/company/heliforkliftcl/",
+      "instagram": "https://instagram.com/heliforkliftcl/"
+    },
+    "team": [
+      { "name": "Claudia Henríquez", "role": "Gerente Comercial", "phone": "+56 9 5818 7035", "email": "chenriquez@heliforklift.cl" },
+      { "name": "Sebastián Araya", "role": "Ventas Antofagasta", "phone": "+56 9 6122 3038", "email": "sebastian@heliforklift.cl" },
+      { "name": "Paola Ortiz", "role": "Repuestos Antofagasta", "phone": "+56 9 6190 8327", "email": "portiz@heliforklift.cl" },
+      { "name": "Ángel Leiva", "role": "Repuestos Santiago", "phone": "+56 9 3253 7997", "email": "repuestos@heliforklift.cl" },
+      { "name": "Mirtha Suárez", "role": "Ventas Zona Central", "phone": "+56 9 5818 7022", "email": "mirthas@heliforklift.cl" },
+      { "name": "John Díaz", "role": "Ventas Zona Central", "phone": "+56 9 6122 3319", "email": "jdiaz@heliforklift.cl" },
+      { "name": "Marcela Huerta", "role": "Ventas Regiones 6-7", "phone": "+56 9 7333 6852", "email": "mhuerta@heliforklift.cl" },
+      { "name": "Francisco Errázuriz", "role": "Ventas Múltiples Regiones", "phone": "+56 9 3252 8102", "email": "ferrazuriz@heliforklift.cl" },
+      { "name": "Alain Marchant", "role": "Ventas Múltiples Regiones", "phone": "+56 9 6895 5890", "email": "amarchant@heliforklift.cl" }
+    ]
+  },
+  "products": {
+    "categories": [
+      {
+        "id": "transpaletas",
+        "name": "Transpaletas",
+        "slug": "transpaletas",
+        "description": "Transpaletas eléctricas y manuales para movimiento de carga en bodega"
+      },
+      {
+        "id": "apiladores",
+        "name": "Apiladores",
+        "slug": "apiladores",
+        "description": "Apiladores eléctricos para almacenamiento vertical eficiente"
+      },
+      {
+        "id": "reach-truck",
+        "name": "Reach Truck",
+        "slug": "reach-truck",
+        "description": "Reach trucks para pasillos angostos y altura máxima de almacenamiento"
+      },
+      {
+        "id": "gruas-hidrogeno",
+        "name": "Grúas Hidrógeno",
+        "slug": "gruas-hidrogeno-verde",
+        "description": "PIONEROS EN HIDRÓGENO VERDE — Tecnología de celda de combustible de hidrógeno, cero emisiones",
+        "highlight": true
+      },
+      {
+        "id": "gruas-electricas",
+        "name": "Grúas Eléctricas",
+        "slug": "gruas-horquillas-electricas",
+        "description": "Energía limpia a bajo costo. Sin costos de mantenimiento. Eficiencia energética superior.",
+        "featured": true
+      },
+      {
+        "id": "gruas-combustion",
+        "name": "Grúas Combustión",
+        "slug": "gruas-horquillas-combustion",
+        "description": "Grúas horquillas de combustión interna para trabajo pesado",
+        "subcategories": [
+          {
+            "id": "gas-gasolina",
+            "name": "Motores Gas/Gasolina",
+            "slug": "motores-gas-gasolina"
+          },
+          {
+            "id": "tier-4-5",
+            "name": "Motores TIER 4-5",
+            "slug": "motores-tier-4-5"
+          }
+        ]
+      },
+      {
+        "id": "gruas-todo-terreno",
+        "name": "Grúas Todo Terreno",
+        "slug": "gruas-horquillas-todo-terreno",
+        "description": "Grúas horquillas para terrenos difíciles, construcción y exteriores"
+      },
+      {
+        "id": "manipuladores-telescopicos",
+        "name": "Manipuladores Telescópicos",
+        "slug": "manipuladores-telescopicos",
+        "description": "Manipuladores telescópicos para alcance extendido y versatilidad"
+      },
+      {
+        "id": "porta-contenedores",
+        "name": "Porta Contenedores",
+        "slug": "porta-contenedores",
+        "description": "Equipos para manejo de contenedores en puertos y centros de distribución"
+      },
+      {
+        "id": "tractores-tiro",
+        "name": "Tractores de Tiro",
+        "slug": "tractores-de-tiro",
+        "description": "Tractores de tiro para transporte interno de materiales"
+      },
+      {
+        "id": "plataformas-elevadoras",
+        "name": "Plataformas Elevadoras",
+        "slug": "plataformas-elevadoras",
+        "description": "Plataformas para trabajo en altura seguro y eficiente"
+      },
+      {
+        "id": "accesorios",
+        "name": "Accesorios",
+        "slug": "accesorios",
+        "description": "Accesorios y aditamentos para grúas horquillas"
+      }
+    ],
+    "featuredProducts": [
+      {
+        "name": "G Series 1-3.5 TON",
+        "type": "Eléctrica",
+        "capacityRange": "1,000-3,500 kg",
+        "heightRange": "3,300-6,000 mm",
+        "power": "Eléctrica",
+        "image": "/assets/legacy/products/g-series-electric-1-2.5t.jpg"
+      },
+      {
+        "name": "G2 Series 2-3.5 TON",
+        "type": "Combustión",
+        "capacityRange": "2,000-3,500 kg",
+        "heightRange": "2,000-6,000 mm",
+        "power": "Diésel / Gas Licuado",
+        "image": "/assets/legacy/products/g2-series-2-3.5t.jpg"
+      },
+      {
+        "name": "G Series 5-10 TON",
+        "type": "Combustión",
+        "capacityRange": "5,000-10,000 kg",
+        "heightRange": "3,000-6,000 mm",
+        "power": "Diésel / Gas Licuado",
+        "image": "/assets/legacy/products/g-series-ic-5-10t.jpg"
+      },
+      {
+        "name": "H3 Series 1-3.5 TON",
+        "type": "Combustión",
+        "capacityRange": "1,000-3,500 kg",
+        "features": ["Vibración reducida", "Ruido reducido", "Más espacio de trabajo"],
+        "power": "Combustión interna"
+      }
+    ]
+  },
+  "services": [
+    {
+      "id": "venta",
+      "name": "Venta de Grúas Horquillas",
+      "description": "Venta de grúas horquillas nuevas HELI — eléctricas, combustión, hidrógeno. Financiamiento disponible.",
+      "icon": "ShoppingCart",
+      "features": ["Equipos nuevos certificados", "Múltiples categorías y tonnajes", "Financiamiento flexible", "Asesoría personalizada"]
+    },
+    {
+      "id": "arriendo",
+      "name": "Arriendo de Equipos",
+      "description": "Arriendo de grúas horquillas a corto y largo plazo en todo Chile.",
+      "icon": "Clock",
+      "features": ["Corto y largo plazo", "Entrega rápida", "Flota disponible inmediatamente", "Cobertura nacional"]
+    },
+    {
+      "id": "postventa",
+      "name": "Servicio Técnico / Postventa",
+      "description": "Personal técnico seleccionado, expertos en montacargas de todos los tipos, capacitados y experimentados. Mantención periódica para preservar la garantía.",
+      "icon": "Wrench",
+      "features": ["Mantención preventiva y correctiva", "Técnicos certificados", "Respuestos originales HELI", "Cobertura nacional"]
+    },
+    {
+      "id": "repuestos",
+      "name": "Repuestos Originales",
+      "description": "Stock permanente de repuestos originales HELI y lubricantes autorizados para mantener la vida útil de tus equipos.",
+      "icon": "Cog",
+      "features": ["Stock permanente", "Repuestos originales certificados", "Lubricantes autorizados", "Envío a todo Chile"]
+    },
+    {
+      "id": "usados",
+      "name": "Equipos Usados",
+      "description": "Venta de equipos usados de múltiples marcas, retomas y comercialización de tu equipo antiguo.",
+      "icon": "RefreshCw",
+      "features": ["Retoma: tu grúa antigua como pie", "Comercialización de tu equipo", "Venta de usados multimarca", "Equipos testeados y mantenidos"]
+    },
+    {
+      "id": "mineria",
+      "name": "Soluciones Minería",
+      "description": "Equipos especializados para operaciones mineras, con certificaciones y estándares de seguridad de la industria.",
+      "icon": "Mountain",
+      "features": ["Equipos certificados para minería", "Servicio técnico especializado", "Estándares de seguridad minera", "Cobertura zona norte"]
+    }
+  ],
+  "certifications": [
+    { "name": "ISO 9001", "description": "Sistema de gestión de calidad" },
+    { "name": "ISO 14001", "description": "Sistema de gestión ambiental" },
+    { "name": "OHSAS 18001", "description": "Sistema de gestión de seguridad y salud ocupacional" },
+    { "name": "CE", "description": "Certificación de seguridad Unión Europea" },
+    { "name": "EPA", "description": "Certificación Agencia de Protección Ambiental (EE.UU.)" },
+    { "name": "GB/T 28001", "description": "Certificación seguridad y salud ocupacional (estándar chino)" }
+  ],
+  "awards": [
+    "Fábrica Nacional Amigable con el Ecosistema",
+    "Premio de innovación en vehículos industriales en China",
+    "Marca Distinguida de Exportación",
+    "Centro Técnico Empresarial — reconocimiento conjunto de 4 ministerios chinos",
+    "Marca Nº1 del Mercado Chino para Montacargas",
+    "Líder en desarrollo de 12 estándares nacionales de seguridad",
+    "Co-preside comité de 5 estándares ISO en desarrollo"
+  ],
+  "news": [
+    {
+      "title": "Entrega de la flota de gran tonelaje en sucursal de Quilicura",
+      "date": "2025-08-14",
+      "summary": "Entrega exitosa de grúas horquillas de 16 toneladas en sucursal de Santiago Quilicura.",
+      "image": "/assets/legacy/misc/news-quilicura.jpg",
+      "url": "/noticias/entrega-flota-quilicura"
+    },
+    {
+      "title": "Entrega de Maquinarias en Puerto Montt",
+      "date": "2023-04-03",
+      "summary": "Distribuidor Pro Maquinaria entregó flota de grúas 2.5 ton gas/gasolina a empresa pesquera local.",
+      "url": "/noticias/entrega-puerto-montt"
+    },
+    {
+      "title": "Grúas horquilla eléctricas: Inversión en economía y medioambiente",
+      "date": "2022-04-14",
+      "summary": "Ventajas económicas y ambientales de las grúas horquillas eléctricas.",
+      "image": "/assets/legacy/misc/news-electric.jpg",
+      "url": "/noticias/gruas-electricas-inversion"
+    }
+  ],
+  "images": {
+    "logos": [
+      "/assets/legacy/logos/heli-chile-logo.png",
+      "/assets/legacy/logos/logo-mobile.png"
+    ],
+    "products": [
+      "/assets/legacy/products/g-series-electric-1-2.5t.jpg",
+      "/assets/legacy/products/g2-series-2-3.5t.jpg",
+      "/assets/legacy/products/g-series-ic-5-10t.jpg"
+    ],
+    "banners": [
+      "/assets/legacy/banners/banner-oferta.png",
+      "/assets/legacy/banners/logo-heli-hidrogeno.png",
+      "/assets/legacy/banners/banner-mineria.jpg",
+      "/assets/legacy/banners/top-6-heli.jpg"
+    ]
+  },
+  "seo": {
+    "primaryKeyword": "grúas horquillas",
+    "secondaryKeywords": [
+      "grúas horquillas Chile",
+      "arriendo grúas horquillas",
+      "venta grúas horquillas Santiago",
+      "grúa horquilla eléctrica",
+      "grúa horquilla diésel",
+      "grúa horquilla GLP",
+      "montacargas Chile",
+      "servicio técnico grúas horquillas",
+      "repuestos grúas horquillas",
+      "mantención grúas horquillas",
+      "grúa horquilla usada",
+      "arriendo montacargas Santiago",
+      "equipos de bodega Chile",
+      "transpaletas Chile",
+      "apiladores Chile",
+      "grúa horquilla precio Chile",
+      "Helifork",
+      "HELI Chile"
+    ]
+  },
+  "colors": {
+    "primaryRed": "#CE142D",
+    "secondaryRed": "#CF0C2E",
+    "textDark": "#232323",
+    "accent": "#E0E0E0"
+  },
+  "urls": {
+    "home": "https://heliforklift.cl/",
+    "equipos": "https://heliforklift.cl/equipos/",
+    "nosotros": "https://heliforklift.cl/nosotros/",
+    "postventa": "https://heliforklift.cl/postventa/",
+    "usados": "https://heliforklift.cl/usados/",
+    "noticias": "https://heliforklift.cl/noticias/",
+    "contacto": "https://heliforklift.cl/contacto/",
+    "certificaciones": "https://heliforklift.cl/certificaciones/"
+  }
+}
