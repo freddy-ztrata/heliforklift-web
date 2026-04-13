@@ -52,17 +52,25 @@ export default function Services() {
         </motion.div>
 
         {/* Cards — horizontal scroll on mobile, grid on desktop */}
+        {/* Use 6-col grid on lg so last 2 cards center: cols 2-3 and 4-5 */}
         <div
           className={cn(
             "flex gap-6 pb-4 -mx-4 px-4 overflow-x-auto snap-x snap-mandatory",
             "md:grid md:grid-cols-2 md:overflow-visible md:mx-0 md:px-0 md:snap-none",
-            "lg:grid-cols-3",
-            /* Hide scrollbar on mobile */
+            "lg:grid-cols-6",
             "[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           )}
         >
           {services.map((service, index) => {
             const Icon = iconMap[service.icon];
+            // 6-col grid: first 3 cards span 2 cols each (filling row 1)
+            // Last 2 cards: card4 at cols 2-3, card5 at cols 4-5 (centered)
+            const colSpan =
+              index < 3
+                ? "lg:col-span-2"
+                : index === 3
+                  ? "lg:col-span-2 lg:col-start-2"
+                  : "lg:col-span-2";
 
             return (
               <motion.article
@@ -78,7 +86,8 @@ export default function Services() {
                   "group flex-shrink-0 w-[80vw] sm:w-[70vw] md:w-auto snap-center",
                   "flex flex-col rounded-xl border border-steel-700/50 bg-steel-900/80 backdrop-blur-sm",
                   "p-6 transition-all duration-300",
-                  "hover:-translate-y-1 hover:border-heli-red/30 hover:shadow-[0_0_30px_rgba(206,20,45,0.12)]"
+                  "hover:-translate-y-1 hover:border-heli-red/30 hover:shadow-[0_0_30px_rgba(206,20,45,0.12)]",
+                  colSpan
                 )}
               >
                 {/* Icon */}
