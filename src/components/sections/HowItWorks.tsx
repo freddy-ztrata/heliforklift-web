@@ -121,7 +121,7 @@ export default function HowItWorks() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start 0.9", "center 0.55"],
+    offset: ["0.35 1", "0.65 0.3"],
   });
 
   const progress = useTransform(scrollYProgress, [0, 1], [0, 1]);
