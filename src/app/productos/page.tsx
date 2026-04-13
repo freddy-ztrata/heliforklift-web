@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   description:
     "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y más. Venta y arriendo en Chile. Cotiza hoy.",
   alternates: { canonical: "/productos" },
+  openGraph: {
+    title: "Equipos y Grúas Horquillas — Catálogo Completo",
+    description:
+      "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde y más. Venta y arriendo en Chile.",
+  },
 };
 
 export default function ProductosPage() {

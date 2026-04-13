@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   description:
     "Contáctanos para cotizar grúas horquillas, arriendo, servicio técnico o repuestos. Respuesta en menos de 2 horas. Santiago, Antofagasta y todo Chile. +56 9 5818 7035.",
   alternates: { canonical: "/contacto" },
+  openGraph: {
+    title: "Contacto — Cotiza tu Grúa Horquilla",
+    description:
+      "Contáctanos para cotizar grúas horquillas. Respuesta en menos de 2 horas. Santiago, Antofagasta y todo Chile.",
+  },
 };
 
 export default function ContactoPage() {

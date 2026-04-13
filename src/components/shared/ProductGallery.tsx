@@ -54,14 +54,14 @@ export default function ProductGallery({
           <>
             <button
               onClick={goPrev}
-              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-steel-900/80 text-white backdrop-blur-sm transition-all hover:bg-heli-red"
+              className="absolute left-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-steel-900/80 text-white backdrop-blur-sm transition-all hover:bg-heli-red"
               aria-label="Imagen anterior"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               onClick={goNext}
-              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-steel-900/80 text-white backdrop-blur-sm transition-all hover:bg-heli-red"
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-steel-900/80 text-white backdrop-blur-sm transition-all hover:bg-heli-red"
               aria-label="Imagen siguiente"
             >
               <ChevronRight className="h-5 w-5" />

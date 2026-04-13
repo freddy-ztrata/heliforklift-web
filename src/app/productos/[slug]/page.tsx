@@ -158,9 +158,9 @@ export default async function ProductDetailPage({ params }: Props) {
               {/* Features */}
               {product.features && product.features.length > 0 && (
                 <div className="mt-8">
-                  <h3 className="mb-3 font-semibold text-white">
+                  <h2 className="mb-3 text-lg font-semibold text-white">
                     Características
-                  </h3>
+                  </h2>
                   <ul className="space-y-2">
                     {product.features.map((f) => (
                       <li
