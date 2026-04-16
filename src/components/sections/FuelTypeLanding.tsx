@@ -80,8 +80,9 @@ export default function FuelTypeLanding() {
                   "hover:border-white/15 hover:shadow-2xl"
                 )}
               >
-                {/* Background image */}
+                {/* Background: neutral gradient + machine image contained */}
                 <div className="absolute inset-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-steel-800 via-steel-900 to-steel-950" />
                   <Image
                     src={cat.image}
                     alt={`Grúas horquillas ${cat.name}`}
@@ -91,15 +92,12 @@ export default function FuelTypeLanding() {
                         ? "(max-width: 768px) 100vw, 100vw"
                         : "(max-width: 768px) 100vw, 50vw"
                     }
-                    className={cn(
-                      "transition-transform duration-700 group-hover:scale-105",
-                      isWide ? "object-cover object-center" : "object-cover"
-                    )}
+                    className="object-contain p-8 sm:p-10 pb-20 sm:pb-24 transition-transform duration-700 group-hover:scale-105 drop-shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
                     loading={i < 2 ? "eager" : "lazy"}
                     quality={80}
                   />
-                  {/* Darker overlay so text is readable but machine shows through */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/15 transition-all duration-500 group-hover:via-black/30" />
+                  {/* Bottom gradient for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent" />
                 </div>
 
                 {/* Badge — top right, solid color */}
