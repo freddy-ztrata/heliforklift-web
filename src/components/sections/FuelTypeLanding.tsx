@@ -61,7 +61,7 @@ function FuelCard({ category, className, large }: CardProps) {
             alt={`Grúas horquillas ${category.name}`}
             fill
             sizes={large ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-            className="product-img-dark h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+            className="product-img-dark h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
             quality={75}
           />
