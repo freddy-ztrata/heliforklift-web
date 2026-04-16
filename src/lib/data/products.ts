@@ -270,7 +270,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Tecnologia de celda de combustible: cero emisiones, recarga en 3 minutos y operacion continua 24/7. El futuro es hoy.",
     icon: "Atom",
-    image: `${IMG}/cpd20-25-hidrogeno.png`,
+    image: `${IMG}/cpd40-50-hidrogeno.png`,
     color: "teal",
     productCount: countByFuel("hidrogeno"),
   },

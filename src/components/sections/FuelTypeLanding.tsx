@@ -61,7 +61,7 @@ function FuelCard({ category, className, large }: CardProps) {
             alt={`Grúas horquillas ${category.name}`}
             fill
             sizes={large ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
-            className="product-img-dark h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="product-img-dark h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
             quality={75}
           />
@@ -145,11 +145,11 @@ export default function FuelTypeLanding() {
           category={fuelTypeCategories[2]}
           className="min-h-[240px] md:min-h-[260px]"
         />
-        {/* Hidrogeno — spans full width */}
+        {/* Hidrogeno — spans full width, taller */}
         <FuelCard
           category={fuelTypeCategories[3]}
           large
-          className="min-h-[240px] md:min-h-[260px] lg:col-span-3"
+          className="min-h-[280px] md:min-h-[340px] lg:col-span-3"
         />
       </motion.div>
 
