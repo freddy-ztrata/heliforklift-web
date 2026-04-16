@@ -145,11 +145,11 @@ export default function FuelTypeLanding() {
           category={fuelTypeCategories[2]}
           className="min-h-[240px] md:min-h-[260px]"
         />
-        {/* Hidrogeno — spans full width, taller */}
+        {/* Hidrogeno — spans full width, tall */}
         <FuelCard
           category={fuelTypeCategories[3]}
           large
-          className="min-h-[280px] md:min-h-[340px] lg:col-span-3"
+          className="min-h-[320px] md:min-h-[420px] lg:col-span-3"
         />
       </motion.div>
 
