@@ -1,5 +1,6 @@
 import {
   allProducts,
+  deriveFuelType,
   electricForklifts,
   combustionForklifts,
   hydrogenForklifts,
@@ -8,11 +9,12 @@ import {
   stackers,
   containerHandlers,
   type FullProduct,
+  type FuelType,
 } from "./all-products";
 
 // Re-export the FullProduct type and allProducts for convenience
-export type { FullProduct };
-export { allProducts };
+export type { FullProduct, FuelType };
+export { allProducts, deriveFuelType };
 
 export interface ProductCategory {
   id: string;
@@ -30,6 +32,7 @@ export interface Product {
   name: string;
   category: string;
   type: string;
+  fuelType: FuelType;
   capacityRange: string;
   heightRange?: string;
   power: string;
@@ -161,6 +164,7 @@ function toProduct(fp: FullProduct): Product {
     name: fp.name,
     category: fp.categorySlug,
     type: fp.type,
+    fuelType: fp.fuelType,
     capacityRange: fp.capacityRange,
     heightRange: fp.heightRange,
     power: fp.power,
@@ -172,18 +176,18 @@ function toProduct(fp: FullProduct): Product {
 
 /**
  * Featured products shown on the homepage grid.
- * Picks representative models from key categories.
+ * Picks representative models from key categories by ID.
  */
-export const featuredProducts: Product[] = [
-  // Electric -- G Series flagship
-  toProduct(electricForklifts[0]),
-  // Combustion -- K2 Series
-  toProduct(combustionForklifts[0]),
-  // Combustion -- heavy duty
-  toProduct(combustionForklifts[5]),
-  // Hydrogen -- flagship green tech
-  toProduct(hydrogenForklifts[0]),
+const featuredIds = [
+  "g-series-1-3.5t-electric",     // Electric -- G Series flagship
+  "k2-series-2-3.5t-combustion",  // Combustion -- K2 Series
+  "g3-series-5-10t-combustion",   // Combustion -- heavy duty
+  "cpd20-25-hidrogeno",           // Hydrogen -- flagship green tech
 ];
+export const featuredProducts: Product[] = featuredIds
+  .map((id) => allProducts.find((p) => p.id === id))
+  .filter((p): p is FullProduct => p !== undefined)
+  .map(toProduct);
 
 /**
  * Get Product[] for a given category (simple interface for components).
@@ -192,4 +196,111 @@ export function getCategoryProducts(categorySlug: string): Product[] {
   return allProducts
     .filter((p) => p.categorySlug === categorySlug)
     .map(toProduct);
+}
+
+// =============================================================================
+// FUEL TYPE CATEGORIES — For the /productos landing page
+// =============================================================================
+
+export interface FuelTypeCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  icon: string;
+  image: string;
+  color: "emerald" | "amber" | "sky" | "teal";
+}
+
+function countByFuel(slug: string): number {
+  return allProducts.filter((p) => {
+    switch (slug) {
+      case "electrica":
+        return p.fuelType === "Electrica";
+      case "diesel":
+        return p.fuelType === "Diesel" || p.fuelType === "Diesel / GLP";
+      case "glp":
+        return p.fuelType === "GLP" || p.fuelType === "Diesel / GLP";
+      case "hidrogeno":
+        return p.fuelType === "Hidrogeno";
+      default:
+        return false;
+    }
+  }).length;
+}
+
+export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[] = [
+  {
+    id: "electrica",
+    name: "Electrica",
+    slug: "electrica",
+    description:
+      "Energia limpia, cero emisiones y bajo costo operativo. Litio-ion de ultima generacion para operaciones en interiores y exteriores.",
+    icon: "Zap",
+    image: `${IMG}/g-series-1-3.5t-electric.jpg`,
+    color: "emerald",
+    productCount: countByFuel("electrica"),
+  },
+  {
+    id: "diesel",
+    name: "Diesel",
+    slug: "diesel",
+    description:
+      "Potencia y rendimiento para las operaciones mas exigentes. Motores certificados TIER IV/V con maxima eficiencia de combustible.",
+    icon: "Fuel",
+    image: `${IMG}/g3-series-5-10t-combustion.jpg`,
+    color: "amber",
+    productCount: countByFuel("diesel"),
+  },
+  {
+    id: "glp",
+    name: "Gas (GLP)",
+    slug: "glp",
+    description:
+      "Gas licuado de petroleo: menor costo que diesel, apta para uso interior/exterior. Ideal para operaciones mixtas.",
+    icon: "Flame",
+    image: `${IMG}/g3-series-4-5t-gas.png`,
+    color: "sky",
+    productCount: countByFuel("glp"),
+  },
+  {
+    id: "hidrogeno",
+    name: "Hidrogeno Verde",
+    slug: "hidrogeno",
+    description:
+      "Tecnologia de celda de combustible: cero emisiones, recarga en 3 minutos y operacion continua 24/7. El futuro es hoy.",
+    icon: "Atom",
+    image: `${IMG}/cpd20-25-hidrogeno.png`,
+    color: "teal",
+    productCount: countByFuel("hidrogeno"),
+  },
+];
+
+/** Filter products by fuel type slug */
+export function getProductsByFuelType(tipo: string): FullProduct[] {
+  return allProducts.filter((p) => {
+    switch (tipo) {
+      case "electrica":
+        return p.fuelType === "Electrica";
+      case "diesel":
+        return p.fuelType === "Diesel" || p.fuelType === "Diesel / GLP";
+      case "glp":
+        return p.fuelType === "GLP" || p.fuelType === "Diesel / GLP";
+      case "hidrogeno":
+        return p.fuelType === "Hidrogeno";
+      default:
+        return true;
+    }
+  });
+}
+
+/** Map a fuel type slug to its display name */
+export function getFuelTypeName(slug: string): string {
+  const map: Record<string, string> = {
+    electrica: "Electrica",
+    diesel: "Diesel",
+    glp: "Gas (GLP)",
+    hidrogeno: "Hidrogeno Verde",
+  };
+  return map[slug] || "Todos";
 }

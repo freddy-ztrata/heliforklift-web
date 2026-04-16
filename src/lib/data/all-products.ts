@@ -3,7 +3,16 @@
 // Comprehensive product catalog with real specs and image paths.
 // =============================================================================
 
-export interface FullProduct {
+export type FuelType =
+  | "Electrica"
+  | "Diesel"
+  | "GLP"
+  | "Diesel / GLP"
+  | "Hidrogeno"
+  | "N/A";
+
+/** Raw product definition — fuelType is derived automatically */
+interface RawProduct {
   id: string;
   name: string;
   model?: string;
@@ -19,6 +28,21 @@ export interface FullProduct {
   slug: string;
 }
 
+/** Product with derived fuelType — always present in allProducts */
+export interface FullProduct extends RawProduct {
+  fuelType: FuelType;
+}
+
+/** Derive a normalized fuel type from the `power` field */
+export function deriveFuelType(power: string): FuelType {
+  if (power.startsWith("Electrica")) return "Electrica";
+  if (power === "Celda de Combustible H2") return "Hidrogeno";
+  if (power === "GLP (Gas Licuado)") return "GLP";
+  if (power.includes("Diesel") && power.includes("GLP")) return "Diesel / GLP";
+  if (power.startsWith("Diesel") || power.includes("Diesel")) return "Diesel";
+  return "N/A";
+}
+
 // ---------------------------------------------------------------------------
 // Image base path
 // ---------------------------------------------------------------------------
@@ -27,7 +51,7 @@ const IMG = "/assets/legacy/products";
 // =============================================================================
 // 1. GRUAS ELECTRICAS (Electric Forklifts)
 // =============================================================================
-export const electricForklifts: FullProduct[] = [
+export const electricForklifts: RawProduct[] = [
   {
     id: "g-series-1-3.5t-electric",
     name: "G Series 1-3.5 TON Electrica",
@@ -265,7 +289,7 @@ export const electricForklifts: FullProduct[] = [
 // =============================================================================
 // 2. GRUAS COMBUSTION (Gas / Diesel Forklifts)
 // =============================================================================
-export const combustionForklifts: FullProduct[] = [
+export const combustionForklifts: RawProduct[] = [
   {
     id: "k2-series-2-3.5t-combustion",
     name: "K2 Series 2-3.5 TON Combustion",
@@ -565,7 +589,7 @@ export const combustionForklifts: FullProduct[] = [
 // =============================================================================
 // 3. GRUAS HIDROGENO VERDE (Hydrogen Fuel Cell Forklifts)
 // =============================================================================
-export const hydrogenForklifts: FullProduct[] = [
+export const hydrogenForklifts: RawProduct[] = [
   {
     id: "cpd20-25-hidrogeno",
     name: "CPD20/25/30 Hidrogeno 2-3 TON",
@@ -655,7 +679,7 @@ export const hydrogenForklifts: FullProduct[] = [
 // =============================================================================
 // 4. GRUAS TODO TERRENO (All Terrain Forklifts)
 // =============================================================================
-export const allTerrainForklifts: FullProduct[] = [
+export const allTerrainForklifts: RawProduct[] = [
   {
     id: "g3-5t-todo-terreno",
     name: "G3 5T Todo Terreno",
@@ -703,7 +727,7 @@ export const allTerrainForklifts: FullProduct[] = [
 // =============================================================================
 // 5. TRANSPALETAS (Pallet Jacks)
 // =============================================================================
-export const palletJacks: FullProduct[] = [
+export const palletJacks: RawProduct[] = [
   {
     id: "cbd15-20-transpaleta",
     name: "CBD15/20 Transpaleta Electrica",
@@ -789,7 +813,7 @@ export const palletJacks: FullProduct[] = [
 // =============================================================================
 // 6. APILADORES (Stackers)
 // =============================================================================
-export const stackers: FullProduct[] = [
+export const stackers: RawProduct[] = [
   {
     id: "ops15-order-picker",
     name: "OPS15 Order Picker",
@@ -942,7 +966,7 @@ export const stackers: FullProduct[] = [
 // =============================================================================
 // 7. REACH TRUCK
 // =============================================================================
-export const reachTrucks: FullProduct[] = [
+export const reachTrucks: RawProduct[] = [
   {
     id: "g-series-reach-truck",
     name: "G Series Reach Truck 1.5-2.0 TON",
@@ -1011,7 +1035,7 @@ export const reachTrucks: FullProduct[] = [
 // =============================================================================
 // 8. MANIPULADORES TELESCOPICOS (Telehandlers)
 // =============================================================================
-export const telehandlers: FullProduct[] = [
+export const telehandlers: RawProduct[] = [
   {
     id: "telehandler-40h130-170s",
     name: "Manipulador Telescopico 40H130-170S",
@@ -1038,7 +1062,7 @@ export const telehandlers: FullProduct[] = [
 // =============================================================================
 // 9. PORTA CONTENEDORES (Container Handlers & Reachstackers)
 // =============================================================================
-export const containerHandlers: FullProduct[] = [
+export const containerHandlers: RawProduct[] = [
   {
     id: "cpcd250-porta-contenedor",
     name: "CPCD250EC Porta Contenedor",
@@ -1128,7 +1152,7 @@ export const containerHandlers: FullProduct[] = [
 // =============================================================================
 // 10. TRACTORES DE TIRO (Tow Tractors)
 // =============================================================================
-export const towTractors: FullProduct[] = [
+export const towTractors: RawProduct[] = [
   {
     id: "qyd-tractor-electrico-80-150",
     name: "QYD80-150 Tractor Electrico",
@@ -1274,7 +1298,7 @@ export const towTractors: FullProduct[] = [
 // =============================================================================
 // 11. PLATAFORMAS ELEVADORAS (Aerial Work Platforms)
 // =============================================================================
-export const platforms: FullProduct[] = [
+export const platforms: RawProduct[] = [
   {
     id: "js07-plataforma",
     name: "JS07 Plataforma Elevadora Tipo Tijera",
@@ -1301,7 +1325,7 @@ export const platforms: FullProduct[] = [
 // =============================================================================
 // 12. ACCESORIOS (Accessories / Attachments)
 // =============================================================================
-export const accessories: FullProduct[] = [
+export const accessories: RawProduct[] = [
   {
     id: "accessory-side-shifter",
     name: "Side Shifter (Desplazador Lateral)",
@@ -1632,6 +1656,7 @@ export const accessories: FullProduct[] = [
 // =============================================================================
 // COMBINED: ALL PRODUCTS
 // =============================================================================
+// Augment every product with a derived fuelType
 export const allProducts: FullProduct[] = [
   ...electricForklifts,
   ...combustionForklifts,
@@ -1645,7 +1670,10 @@ export const allProducts: FullProduct[] = [
   ...towTractors,
   ...platforms,
   ...accessories,
-];
+].map((p) => ({
+  ...p,
+  fuelType: deriveFuelType(p.power),
+}));
 
 // =============================================================================
 // HELPER FUNCTIONS

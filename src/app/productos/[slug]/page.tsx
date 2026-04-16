@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/sections/Footer";
@@ -7,6 +8,7 @@ import CTASection from "@/components/sections/CTASection";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import ScrollProgress from "@/components/shared/ScrollProgress";
 import ProductGallery from "@/components/shared/ProductGallery";
+import FuelTypeBadge from "@/components/shared/FuelTypeBadge";
 import { allProducts } from "@/lib/data/all-products";
 import { getProductGallery } from "@/lib/data/product-galleries";
 import {
@@ -100,9 +102,12 @@ export default async function ProductDetailPage({ params }: Props) {
 
             {/* Info */}
             <div className="flex flex-col justify-center">
-              <span className="text-sm font-medium uppercase tracking-widest text-heli-red">
-                {product.type}
-              </span>
+              <div className="flex items-center gap-3 flex-wrap">
+                <span className="text-sm font-medium uppercase tracking-widest text-heli-red">
+                  {product.type}
+                </span>
+                <FuelTypeBadge fuelType={product.fuelType} size="md" />
+              </div>
               <h1 className="font-heading mt-2 text-[clamp(2rem,5vw,3.5rem)] leading-none text-white">
                 {product.name}
               </h1>
@@ -207,17 +212,24 @@ export default async function ProductDetailPage({ params }: Props) {
                   href={`/productos/${rp.slug}`}
                   className="group overflow-hidden rounded-2xl border border-steel-700/50 bg-steel-900 transition-all hover:-translate-y-2 hover:border-heli-red/40 hover:shadow-xl hover:shadow-heli-red/10"
                 >
-                  <div className="product-img-container aspect-square overflow-hidden p-5">
-                    <img
+                  <div className="product-img-container relative aspect-square overflow-hidden p-5">
+                    <Image
                       src={rp.image}
                       alt={rp.name}
-                      className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 640px) 50vw, 25vw"
+                      className="object-contain transition-transform duration-300 group-hover:scale-105 p-5"
+                      loading="lazy"
+                      quality={75}
                     />
                   </div>
                   <div className="border-t border-steel-800 p-4">
-                    <span className="text-xs font-medium uppercase text-heli-red">
-                      {rp.type}
-                    </span>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-medium uppercase text-heli-red">
+                        {rp.type}
+                      </span>
+                      <FuelTypeBadge fuelType={rp.fuelType} size="sm" />
+                    </div>
                     <h3 className="mt-1 font-bold text-white">{rp.name}</h3>
                     <p className="mt-1 text-sm text-steel-400">
                       {rp.capacityRange}
@@ -232,11 +244,11 @@ export default async function ProductDetailPage({ params }: Props) {
         {/* Back link */}
         <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
           <Link
-            href="/productos"
+            href="/productos?tipo=todos"
             className="inline-flex items-center gap-2 text-steel-400 transition-colors hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
-            Volver al catálogo completo
+            Volver al catalogo completo
           </Link>
         </div>
 
@@ -281,6 +293,11 @@ export default async function ProductDetailPage({ params }: Props) {
                 "@type": "PropertyValue",
                 name: "Motor",
                 value: product.power,
+              },
+              {
+                "@type": "PropertyValue",
+                name: "Tipo de Energia",
+                value: product.fuelType,
               },
               ...(product.heightRange
                 ? [
