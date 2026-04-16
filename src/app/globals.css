@@ -208,6 +208,17 @@ html {
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
 }
 
+/* GPU-accelerate animated elements */
+.product-img-dark {
+  will-change: transform;
+}
+
+/* Defer rendering of off-screen sections */
+section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* Dot grid background pattern */
 .bg-dot-pattern {
   background-image: radial-gradient(circle, var(--steel-600) 1px, transparent 1px);

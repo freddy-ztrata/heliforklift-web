@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { featuredProducts } from "@/lib/data/products";
 
@@ -15,11 +16,15 @@ export default function ProductGrid() {
           transition={{ delay: index * 0.1, duration: 0.5 }}
           className="group overflow-hidden rounded-2xl border border-steel-700/50 bg-steel-900 transition-all hover:-translate-y-2 hover:border-heli-red/40 hover:shadow-xl hover:shadow-heli-red/10"
         >
-          <div className="product-img-container aspect-square overflow-hidden p-6">
-            <img
+          <div className="product-img-container relative aspect-square overflow-hidden p-6">
+            <Image
               src={product.image}
               alt={`${product.name} — grúa horquilla ${product.type}`}
-              className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-contain transition-transform duration-500 group-hover:scale-110 p-6"
+              loading="lazy"
+              quality={75}
             />
           </div>
           <div className="p-5">

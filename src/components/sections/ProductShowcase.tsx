@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,11 +46,14 @@ function ProductCard({ category, className, large }: CardProps) {
       >
         {/* Background image */}
         <div className="absolute inset-0 bg-steel-950">
-          <img
+          <Image
             src={category.image}
             alt={`${category.name} — grúas horquillas Chile`}
-            className="product-img-dark h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            fill
+            sizes={large ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+            className="product-img-dark object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
+            quality={75}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 group-hover:from-black/80 group-hover:via-black/40 transition-all duration-500" />
         </div>

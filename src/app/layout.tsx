@@ -116,6 +116,12 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href="/assets/legacy/banners/heli-fleet-delivery.jpg"
+          as="image"
+        />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </head>
       <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
         {children}

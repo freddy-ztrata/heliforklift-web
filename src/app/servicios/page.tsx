@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/sections/Footer";
 import CTASection from "@/components/sections/CTASection";
@@ -77,10 +78,14 @@ export default function ServiciosPage() {
                 >
                   {/* Background image */}
                   <div className="absolute inset-0">
-                    <img
+                    <Image
                       src={bgImage}
                       alt=""
-                      className="h-full w-full object-cover opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-30"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-30"
+                      loading="lazy"
+                      quality={60}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-steel-950 via-steel-950/95 to-steel-950/80" />
                   </div>

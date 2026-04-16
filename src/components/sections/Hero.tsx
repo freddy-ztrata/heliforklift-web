@@ -144,7 +144,8 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster="/assets/legacy/banners/heli-fleet-delivery.jpg"
           className="absolute inset-0 h-full w-full object-cover"
         >
           <source src="/assets/hero-video.mp4" type="video/mp4" />

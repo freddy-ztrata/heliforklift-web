@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -34,18 +35,25 @@ export default function ProductGallery({
     <div className="flex flex-col gap-4">
       {/* Main image */}
       <div className="product-img-container relative overflow-hidden rounded-2xl border border-steel-700/50">
-        <div className="aspect-square p-4 sm:p-6 md:p-10">
+        <div className="relative aspect-square">
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.div
               key={activeIndex}
-              src={images[activeIndex]}
-              alt={`${productName} — vista ${activeIndex + 1}`}
-              className="h-full w-full object-contain"
+              className="absolute inset-0"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-            />
+            >
+              <Image
+                src={images[activeIndex]}
+                alt={`${productName} — vista ${activeIndex + 1}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-4 sm:p-6 md:p-10"
+                quality={85}
+              />
+            </motion.div>
           </AnimatePresence>
         </div>
 
@@ -92,11 +100,14 @@ export default function ProductGallery({
               )}
               style={{ width: 64, height: 64 }}
             >
-              <img
+              <Image
                 src={img}
                 alt={`${productName} miniatura ${idx + 1}`}
+                width={56}
+                height={56}
                 className="h-full w-full object-contain"
                 loading="lazy"
+                quality={50}
               />
             </button>
           ))}

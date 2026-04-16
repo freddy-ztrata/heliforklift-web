@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Check, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { company, contact } from "@/lib/data/company";
@@ -97,10 +98,14 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative hidden lg:flex items-end rounded-2xl overflow-hidden min-h-[520px]"
           >
-            <img
+            <Image
               src="/assets/legacy/products/g-series-1-3.5t-electric.jpg"
               alt="Grúa horquilla HELI en operación"
-              className="absolute inset-0 h-full w-full object-cover"
+              fill
+              sizes="50vw"
+              className="object-cover"
+              loading="lazy"
+              quality={75}
             />
             {/* Dark overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
