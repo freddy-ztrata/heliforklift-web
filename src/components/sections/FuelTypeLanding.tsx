@@ -10,54 +10,11 @@ import { fuelTypeCategories, allProducts } from "@/lib/data/products";
 
 const iconMap: Record<string, typeof Zap> = { Zap, Fuel, Flame, Atom };
 
-const colorConfig: Record<
-  string,
-  {
-    bg: string;
-    bgHover: string;
-    border: string;
-    borderHover: string;
-    badgeBg: string;
-    accent: string;
-    glow: string;
-  }
-> = {
-  emerald: {
-    bg: "bg-emerald-950/40",
-    bgHover: "group-hover:bg-emerald-950/60",
-    border: "border-emerald-500/20",
-    borderHover: "hover:border-emerald-400/50",
-    badgeBg: "bg-emerald-500",
-    accent: "text-emerald-400",
-    glow: "hover:shadow-[0_8px_40px_rgba(52,211,153,0.15)]",
-  },
-  amber: {
-    bg: "bg-amber-950/40",
-    bgHover: "group-hover:bg-amber-950/60",
-    border: "border-amber-500/20",
-    borderHover: "hover:border-amber-400/50",
-    badgeBg: "bg-amber-500",
-    accent: "text-amber-400",
-    glow: "hover:shadow-[0_8px_40px_rgba(251,191,36,0.15)]",
-  },
-  sky: {
-    bg: "bg-sky-950/40",
-    bgHover: "group-hover:bg-sky-950/60",
-    border: "border-sky-500/20",
-    borderHover: "hover:border-sky-400/50",
-    badgeBg: "bg-sky-500",
-    accent: "text-sky-400",
-    glow: "hover:shadow-[0_8px_40px_rgba(56,189,248,0.15)]",
-  },
-  teal: {
-    bg: "bg-teal-950/40",
-    bgHover: "group-hover:bg-teal-950/60",
-    border: "border-teal-500/20",
-    borderHover: "hover:border-teal-400/50",
-    badgeBg: "bg-teal-500",
-    accent: "text-teal-400",
-    glow: "hover:shadow-[0_8px_40px_rgba(45,212,191,0.15)]",
-  },
+const colorConfig: Record<string, { badgeBg: string; accent: string }> = {
+  emerald: { badgeBg: "bg-emerald-500", accent: "text-emerald-400" },
+  amber: { badgeBg: "bg-amber-500", accent: "text-amber-400" },
+  sky: { badgeBg: "bg-sky-500", accent: "text-sky-400" },
+  teal: { badgeBg: "bg-teal-500", accent: "text-teal-400" },
 };
 
 const containerVariants = {
@@ -82,89 +39,120 @@ export default function FuelTypeLanding() {
 
   return (
     <div ref={sectionRef}>
-      {/* Grid: 2x2 on desktop, equal sized cards */}
+      {/*
+        Grid: 2 cols x 2 rows on desktop.
+        Row 1: Electrica (tall, left) + Diesel (right-top)
+        Row 2: Electrica continues  + GLP (right-mid)
+        Row 3 full width: Hidrogeno Verde (spans 2 cols)
+      */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 gap-4 sm:gap-5 sm:grid-cols-2"
+        className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:grid-rows-[1fr_1fr_auto]"
       >
         {fuelTypeCategories.map((cat, i) => {
           const Icon = iconMap[cat.icon] || Zap;
           const c = colorConfig[cat.color];
+          // i=0 Electrica: spans 2 rows on left
+          // i=1 Diesel: right top
+          // i=2 GLP: right bottom
+          // i=3 Hidrogeno: full width bottom row
+          const isHero = i === 0;
+          const isWide = i === 3;
 
           return (
-            <motion.div key={cat.id} variants={cardVariants}>
+            <motion.div
+              key={cat.id}
+              variants={cardVariants}
+              className={cn(
+                isHero && "md:row-span-2 min-h-[300px] sm:min-h-[360px]",
+                !isHero && !isWide && "min-h-[240px] sm:min-h-[260px]",
+                isWide && "md:col-span-2 min-h-[220px] sm:min-h-[260px]"
+              )}
+            >
               <Link
                 href={`/productos?tipo=${cat.slug}`}
                 className={cn(
-                  "group relative flex flex-col overflow-hidden rounded-2xl",
-                  "border transition-all duration-500",
-                  c.border,
-                  c.borderHover,
-                  c.glow,
-                  "bg-steel-900"
+                  "group relative flex h-full w-full flex-col justify-end overflow-hidden rounded-2xl",
+                  "border border-white/[0.06] bg-steel-900",
+                  "transition-all duration-500",
+                  "hover:border-white/15 hover:shadow-2xl"
                 )}
               >
-                {/* Top: Product image on light gradient bg */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  {/* Light gradient background so the machine looks good */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f0] to-[#d8d8d8]" />
+                {/* Background image */}
+                <div className="absolute inset-0">
                   <Image
                     src={cat.image}
                     alt={`Grúas horquillas ${cat.name}`}
                     fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-contain p-6 sm:p-8 transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
+                    sizes={
+                      isWide
+                        ? "(max-width: 768px) 100vw, 100vw"
+                        : "(max-width: 768px) 100vw, 50vw"
+                    }
+                    className={cn(
+                      "transition-transform duration-700 group-hover:scale-105",
+                      isWide ? "object-cover object-center" : "object-cover"
+                    )}
                     loading={i < 2 ? "eager" : "lazy"}
                     quality={80}
                   />
-
-                  {/* Badge — top right */}
-                  <div className="absolute right-3 top-3 z-10">
-                    <span
-                      className={cn(
-                        "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5",
-                        "text-[11px] sm:text-xs font-bold uppercase tracking-wider",
-                        "text-white shadow-lg",
-                        c.badgeBg
-                      )}
-                    >
-                      <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-                      {cat.name}
-                    </span>
-                  </div>
-
-                  {/* Product count pill */}
-                  <div className="absolute left-3 top-3 z-10">
-                    <span className="rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-                      {cat.productCount} equipos
-                    </span>
-                  </div>
+                  {/* Darker overlay so text is readable but machine shows through */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/15 transition-all duration-500 group-hover:via-black/30" />
                 </div>
 
-                {/* Bottom: Info section on dark bg */}
-                <div className={cn("flex flex-1 flex-col p-5 sm:p-6", c.bg, c.bgHover, "transition-colors duration-500")}>
-                  <h3 className="font-heading text-2xl sm:text-3xl leading-none tracking-wide text-white">
+                {/* Badge — top right, solid color */}
+                <div className="absolute right-3 top-3 z-10 sm:right-4 sm:top-4">
+                  <span
+                    className={cn(
+                      "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5",
+                      "text-[11px] sm:text-xs font-bold uppercase tracking-wider",
+                      "text-white shadow-lg",
+                      c.badgeBg
+                    )}
+                  >
+                    <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                    {cat.name}
+                  </span>
+                </div>
+
+                {/* Content — bottom */}
+                <div
+                  className={cn(
+                    "relative z-10 p-5 sm:p-6",
+                    isHero && "lg:p-8"
+                  )}
+                >
+                  <h3
+                    className={cn(
+                      "font-heading leading-none tracking-wide text-white",
+                      isHero
+                        ? "text-4xl sm:text-5xl lg:text-6xl"
+                        : isWide
+                          ? "text-3xl sm:text-4xl"
+                          : "text-2xl sm:text-3xl"
+                    )}
+                  >
                     {cat.name.toUpperCase()}
                   </h3>
 
-                  <p className="mt-2 text-sm text-steel-400 line-clamp-2 leading-relaxed">
+                  <p
+                    className={cn(
+                      "mt-2 text-steel-300 line-clamp-2",
+                      isHero
+                        ? "text-sm sm:text-base max-w-lg"
+                        : "text-xs sm:text-sm max-w-md"
+                    )}
+                  >
                     {cat.description}
                   </p>
 
-                  <div className="mt-4 flex items-center justify-between pt-3 border-t border-white/[0.06]">
-                    <span className={cn("text-xs font-semibold uppercase tracking-wider", c.accent)}>
-                      <Icon className="mr-1.5 inline h-3.5 w-3.5" />
-                      {cat.name}
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-xs text-steel-500 font-medium">
+                      {cat.productCount} equipos disponibles
                     </span>
-                    <span
-                      className={cn(
-                        "inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider",
-                        "text-white/60 transition-all duration-300",
-                        "group-hover:text-white group-hover:gap-2.5"
-                      )}
-                    >
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/60 transition-all duration-300 group-hover:text-white group-hover:gap-2.5">
                       Ver equipos
                       <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
@@ -176,7 +164,7 @@ export default function FuelTypeLanding() {
         })}
       </motion.div>
 
-      {/* Bottom CTA — see all */}
+      {/* Bottom CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
