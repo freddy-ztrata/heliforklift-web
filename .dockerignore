@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+.gitattributes
+README.md
+CLAUDE.md
+AGENTS.md
+content-inventory.json
+research
+.env*.local
+.DS_Store
+*.log
+npm-debug.log*
+.vercel
+.idea
+.vscode

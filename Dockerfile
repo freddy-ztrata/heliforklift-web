@@ -1,30 +1,36 @@
 FROM node:20-alpine AS base
 
-# Install dependencies only when needed
+# ─── Dependencies stage ───
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Build the application
+# ─── Builder stage ───
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+# Increase Node memory limit for large product datasets
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
 RUN npm run build
 
-# Production image
+# ─── Runner stage ───
 FROM base AS runner
 WORKDIR /app
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
 
+# Copy built artifacts from builder
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
