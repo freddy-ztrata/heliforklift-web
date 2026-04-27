@@ -11,6 +11,7 @@ import ProductGallery from "@/components/shared/ProductGallery";
 import FuelTypeBadge from "@/components/shared/FuelTypeBadge";
 import { allProducts } from "@/lib/data/all-products";
 import { getProductGallery } from "@/lib/data/product-galleries";
+import { getDatasheet } from "@/lib/data/product-datasheets";
 import {
   ArrowLeft,
   Zap,
@@ -63,6 +64,7 @@ export default async function ProductDetailPage({ params }: Props) {
     .slice(0, 4);
 
   const galleryImages = getProductGallery(product.slug, product.image);
+  const datasheet = getDatasheet(product.slug);
 
   return (
     <>
@@ -201,15 +203,28 @@ export default async function ProductDetailPage({ params }: Props) {
 
               {/* Secondary: Catálogo + WhatsApp */}
               <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                {datasheet ? (
+                  <a
+                    href={datasheet}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-heli-red/40 bg-heli-red/10 px-5 py-3 text-sm font-bold text-white transition-all hover:border-heli-red hover:bg-heli-red/20"
+                  >
+                    <FileDown className="h-4 w-4 text-heli-red" />
+                    Descargar ficha técnica PDF
+                  </a>
+                ) : (
+                  <a
+                    href={`/contacto?equipo=${encodeURIComponent(product.name)}&tipo=catalogo`}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-steel-700 bg-steel-900/60 px-5 py-3 text-sm font-medium text-steel-200 transition-all hover:border-heli-red/40 hover:text-white"
+                  >
+                    <FileDown className="h-4 w-4 text-heli-red" />
+                    Solicitar ficha técnica
+                  </a>
+                )}
                 <a
-                  href={`/contacto?equipo=${encodeURIComponent(product.name)}&tipo=catalogo`}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-steel-700 bg-steel-900/60 px-5 py-3 text-sm font-medium text-steel-200 transition-all hover:border-heli-red/40 hover:text-white"
-                >
-                  <FileDown className="h-4 w-4 text-heli-red" />
-                  Solicitar ficha técnica / catálogo PDF
-                </a>
-                <a
-                  href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hola, me interesa el equipo ${product.name}. ¿Pueden enviarme la ficha técnica?`)}`}
+                  href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hola, me interesa el equipo ${product.name}. ¿Pueden enviarme más información?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-green-500/30 bg-green-500/5 px-5 py-3 text-sm font-medium text-green-400 transition-all hover:border-green-500/60 hover:bg-green-500/10"
