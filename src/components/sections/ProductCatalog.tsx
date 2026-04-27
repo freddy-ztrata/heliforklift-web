@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -103,6 +103,12 @@ export default function ProductCatalog({ defaultFuelType }: ProductCatalogProps)
 
   const [activeFuelType, setActiveFuelType] = useState(tipoFromUrl);
   const [activeCategory, setActiveCategory] = useState("Todos");
+
+  // Sync state with URL changes (when user navigates back/forward or clicks a different ?tipo link)
+  useEffect(() => {
+    setActiveFuelType(tipoFromUrl);
+    setActiveCategory("Todos");
+  }, [tipoFromUrl]);
 
   // Filter by fuel type first
   const fuelFiltered = useMemo(() => {

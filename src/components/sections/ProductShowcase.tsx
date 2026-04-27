@@ -10,6 +10,24 @@ import { productCategories } from "@/lib/data/products";
 
 const showcaseCategories = productCategories.slice(0, 6);
 
+/**
+ * Map a productCategory id to the corresponding catalog filter URL.
+ * Fuel-type-based categories deep-link to filtered catalog,
+ * other categories go to the full catalog.
+ */
+function getCategoryHref(categoryId: string): string {
+  switch (categoryId) {
+    case "gruas-electricas":
+      return "/productos?tipo=electrica";
+    case "gruas-combustion":
+      return "/productos?tipo=diesel";
+    case "gruas-hidrogeno":
+      return "/productos?tipo=hidrogeno";
+    default:
+      return "/productos?tipo=todos";
+  }
+}
+
 const containerVariants = {
   hidden: {},
   visible: {
@@ -36,7 +54,7 @@ function ProductCard({ category, className, large }: CardProps) {
   return (
     <motion.div variants={cardVariants} className={className}>
       <Link
-        href="/productos"
+        href={getCategoryHref(category.id)}
         className={cn(
           "group relative block h-full w-full overflow-hidden rounded-2xl",
           "border border-white/[0.08] bg-steel-900",
