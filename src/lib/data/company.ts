@@ -51,11 +51,6 @@ export const contact = {
       city: "Copiapó",
       address: "Megacentro Copiapó, bodega 15, Panamericana Norte 185",
     },
-    {
-      city: "Miami, Florida",
-      address: "4320 NW 72 Ave, 33166",
-      isInternational: true,
-    },
   ],
   socialMedia: {
     facebook: "https://facebook.com/heliforkliftCL",

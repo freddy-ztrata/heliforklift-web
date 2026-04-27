@@ -18,7 +18,10 @@ import {
   ArrowUpDown,
   Fuel,
   CheckCircle2,
+  FileDown,
+  MessageCircle,
 } from "lucide-react";
+import { contact } from "@/lib/data/company";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -193,6 +196,26 @@ export default async function ProductDetailPage({ params }: Props) {
                   className="inline-flex items-center justify-center rounded-xl border border-steel-600 px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-medium text-white transition-all hover:border-white hover:bg-white/5"
                 >
                   LLAMAR AHORA
+                </a>
+              </div>
+
+              {/* Secondary: Catálogo + WhatsApp */}
+              <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={`/contacto?equipo=${encodeURIComponent(product.name)}&tipo=catalogo`}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-steel-700 bg-steel-900/60 px-5 py-3 text-sm font-medium text-steel-200 transition-all hover:border-heli-red/40 hover:text-white"
+                >
+                  <FileDown className="h-4 w-4 text-heli-red" />
+                  Solicitar ficha técnica / catálogo PDF
+                </a>
+                <a
+                  href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hola, me interesa el equipo ${product.name}. ¿Pueden enviarme la ficha técnica?`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-green-500/30 bg-green-500/5 px-5 py-3 text-sm font-medium text-green-400 transition-all hover:border-green-500/60 hover:bg-green-500/10"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  Consultar por WhatsApp
                 </a>
               </div>
             </div>

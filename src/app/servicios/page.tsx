@@ -122,14 +122,22 @@ export default function ServiciosPage() {
                       ))}
                     </ul>
 
-                    {/* CTA */}
-                    <Link
-                      href={`/contacto?servicio=${encodeURIComponent(service.name)}`}
-                      className="mt-6 inline-flex w-fit items-center gap-2 rounded-lg bg-heli-red px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-heli-red-dark hover:gap-3"
-                    >
-                      {service.cta}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
+                    {/* CTAs: ver detalle + cotizar */}
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      <Link
+                        href={`/servicios/${service.slug}`}
+                        className="inline-flex items-center gap-2 rounded-lg bg-heli-red px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-heli-red-dark hover:gap-3"
+                      >
+                        Ver más
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link
+                        href={`/contacto?servicio=${encodeURIComponent(service.name)}`}
+                        className="inline-flex items-center gap-2 rounded-lg border border-steel-600 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/5"
+                      >
+                        {service.cta}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );

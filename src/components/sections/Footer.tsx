@@ -55,20 +55,19 @@ function LinkedinIcon({ className }: { className?: string }) {
 }
 
 const equiposLinks = [
-  { label: "Grúas Eléctricas", href: "/productos" },
-  { label: "Grúas Combustión", href: "/productos" },
-  { label: "Grúas Hidrógeno", href: "/productos" },
-  { label: "Todo Terreno", href: "/productos" },
-  { label: "Transpaletas", href: "/productos" },
-  { label: "Apiladores", href: "/productos" },
+  { label: "Grúas Eléctricas", href: "/productos?tipo=electrica" },
+  { label: "Grúas Diésel", href: "/productos?tipo=diesel" },
+  { label: "Grúas GLP", href: "/productos?tipo=glp" },
+  { label: "Grúas Hidrógeno", href: "/productos?tipo=hidrogeno" },
+  { label: "Todos los equipos", href: "/productos" },
 ];
 
 const serviciosLinks = [
-  { label: "Venta", href: "/servicios" },
-  { label: "Arriendo", href: "/servicios" },
-  { label: "Servicio Técnico", href: "/servicios" },
-  { label: "Repuestos", href: "/servicios" },
-  { label: "Equipos Usados", href: "/servicios" },
+  { label: "Venta", href: "/servicios/venta" },
+  { label: "Arriendo", href: "/servicios/arriendo" },
+  { label: "Servicio Técnico", href: "/servicios/servicio-tecnico" },
+  { label: "Repuestos", href: "/servicios/repuestos" },
+  { label: "Equipos Usados", href: "/servicios/usados" },
 ];
 
 const empresaLinks = [

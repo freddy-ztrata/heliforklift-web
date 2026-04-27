@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allProducts } from "@/lib/data/all-products";
+import { services } from "@/lib/data/services";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://heliforklift.cl";
@@ -45,5 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...productPages];
+  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${baseUrl}/servicios/${service.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...servicePages, ...productPages];
 }
