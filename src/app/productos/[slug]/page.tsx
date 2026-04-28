@@ -36,11 +36,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${product.name} — Grúa Horquilla ${product.type}`,
     description: `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta y arriendo en Chile. Cotiza ahora.`,
+    keywords: [
+      product.name,
+      `grúa horquilla ${product.type.toLowerCase()}`,
+      `grúa horquilla ${product.capacityRange}`,
+      `grúa horquilla ${product.fuelType.toLowerCase()}`,
+      "HELI Chile",
+      "grúa horquilla precio Chile",
+      "venta grúa horquilla",
+      "arriendo grúa horquilla",
+    ],
     alternates: { canonical: `/productos/${slug}` },
     openGraph: {
       title: `${product.name} — Grúa Horquilla ${product.type}`,
       description: `${product.type} con capacidad ${product.capacityRange}. Repuestos originales y servicio técnico.`,
-      images: [{ url: product.image }],
+      images: [{ url: product.image, width: 600, height: 600, alt: product.name }],
+      type: "website",
     },
   };
 }

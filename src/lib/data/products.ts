@@ -297,10 +297,10 @@ export function getProductsByFuelType(tipo: string): FullProduct[] {
 /** Map a fuel type slug to its display name */
 export function getFuelTypeName(slug: string): string {
   const map: Record<string, string> = {
-    electrica: "Electrica",
-    diesel: "Diesel",
+    electrica: "Eléctricas",
+    diesel: "Diésel",
     glp: "Gas (GLP)",
-    hidrogeno: "Hidrogeno Verde",
+    hidrogeno: "Hidrógeno Verde",
   };
   return map[slug] || "Todos";
 }

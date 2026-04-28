@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return { title: "Servicio no encontrado" };
 
   return {
-    title: `${service.name} — Helifork Lift`,
+    title: service.name,
     description: service.description,
     alternates: { canonical: `/servicios/${slug}` },
     openGraph: {
