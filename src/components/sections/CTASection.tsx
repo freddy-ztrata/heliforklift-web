@@ -2,15 +2,27 @@
 
 import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle, Loader2, Send, ChevronDown } from "lucide-react";
+import {
+  CheckCircle,
+  Loader2,
+  Send,
+  ChevronDown,
+  Zap,
+  Calendar,
+  CalendarRange,
+  Eye,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FormData {
   nombre: string;
   empresa: string;
+  rut: string;
   telefono: string;
   email: string;
+  emailEmpresa: string;
   servicio: string;
+  plazoInversion: string;
   mensaje: string;
 }
 
@@ -18,6 +30,8 @@ interface FormErrors {
   nombre?: string;
   telefono?: string;
   email?: string;
+  emailEmpresa?: string;
+  rut?: string;
 }
 
 const SERVICE_OPTIONS = [
@@ -46,6 +60,70 @@ function validateEmail(email: string): boolean {
   if (!email) return true; // Email is optional
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+/**
+ * Validate Chilean RUT (Rol Único Tributario).
+ * Accepts formats: 12.345.678-9, 12345678-9, 123456789
+ * Empty string is valid (optional field on form).
+ */
+function validateRut(rut: string): boolean {
+  if (!rut) return true;
+  const cleaned = rut.replace(/[.\-\s]/g, "").toUpperCase();
+  if (!/^\d{7,8}[0-9K]$/.test(cleaned)) return false;
+  const body = cleaned.slice(0, -1);
+  const dv = cleaned.slice(-1);
+  let sum = 0;
+  let mul = 2;
+  for (let i = body.length - 1; i >= 0; i--) {
+    sum += parseInt(body[i], 10) * mul;
+    mul = mul === 7 ? 2 : mul + 1;
+  }
+  const expected = 11 - (sum % 11);
+  const expectedDv = expected === 11 ? "0" : expected === 10 ? "K" : String(expected);
+  return dv === expectedDv;
+}
+
+/** Format RUT as user types: 12.345.678-9 */
+function formatRut(rut: string): string {
+  const cleaned = rut.replace(/[.\-\s]/g, "").toUpperCase();
+  if (cleaned.length <= 1) return cleaned;
+  const body = cleaned.slice(0, -1);
+  const dv = cleaned.slice(-1);
+  // Add thousands separators
+  const formattedBody = body.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `${formattedBody}-${dv}`;
+}
+
+const PLAZO_OPTIONS = [
+  {
+    value: "30-dias",
+    label: "Próximos 30 días",
+    description: "Compra urgente",
+    icon: Zap,
+    accent: "border-heli-red bg-heli-red/10 text-white",
+  },
+  {
+    value: "30-60-dias",
+    label: "30 a 60 días",
+    description: "Próximo trimestre",
+    icon: Calendar,
+    accent: "border-heli-yellow bg-heli-yellow/10 text-white",
+  },
+  {
+    value: "60-90-dias",
+    label: "60 a 90 días",
+    description: "Planeando inversión",
+    icon: CalendarRange,
+    accent: "border-sky-500 bg-sky-500/10 text-white",
+  },
+  {
+    value: "solo-precios",
+    label: "Sólo conocer precios",
+    description: "Investigando opciones",
+    icon: Eye,
+    accent: "border-steel-500 bg-steel-700/30 text-white",
+  },
+] as const;
 
 /* ---- Custom Select Dropdown ---- */
 function CustomSelect({
@@ -137,9 +215,12 @@ export default function CTASection() {
   const [formData, setFormData] = useState<FormData>({
     nombre: "",
     empresa: "",
+    rut: "",
     telefono: "",
     email: "",
+    emailEmpresa: "",
     servicio: "",
+    plazoInversion: "",
     mensaje: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -150,7 +231,9 @@ export default function CTASection() {
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Auto-format RUT as user types
+    const finalValue = name === "rut" ? formatRut(value) : value;
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
     // Clear error on change
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -172,6 +255,14 @@ export default function CTASection() {
 
     if (formData.email && !validateEmail(formData.email)) {
       newErrors.email = "Email inválido";
+    }
+
+    if (formData.emailEmpresa && !validateEmail(formData.emailEmpresa)) {
+      newErrors.emailEmpresa = "Email inválido";
+    }
+
+    if (formData.rut && !validateRut(formData.rut)) {
+      newErrors.rut = "RUT inválido";
     }
 
     return newErrors;
@@ -293,7 +384,8 @@ export default function CTASection() {
                 transition={{ duration: 0.3 }}
                 className="relative space-y-5"
               >
-                {/* Name + Company row */}
+                {/* === STEP 1: Identificación rápida === */}
+                {/* Name + Phone row — los más simples primero para ganchear conversión */}
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
@@ -315,32 +407,9 @@ export default function CTASection() {
                       )}
                     />
                     {errors.nombre && (
-                      <p className="mt-1 text-xs text-red-400">
-                        {errors.nombre}
-                      </p>
+                      <p className="mt-1 text-xs text-red-400">{errors.nombre}</p>
                     )}
                   </div>
-                  <div>
-                    <label
-                      htmlFor="empresa"
-                      className="mb-1.5 block text-sm font-medium text-steel-300"
-                    >
-                      Empresa
-                    </label>
-                    <input
-                      id="empresa"
-                      name="empresa"
-                      type="text"
-                      placeholder="Mi Empresa S.A."
-                      value={formData.empresa}
-                      onChange={handleChange}
-                      className={inputBaseClasses}
-                    />
-                  </div>
-                </div>
-
-                {/* Phone + Email row */}
-                <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="telefono"
@@ -361,39 +430,77 @@ export default function CTASection() {
                       )}
                     />
                     {errors.telefono && (
-                      <p className="mt-1 text-xs text-red-400">
-                        {errors.telefono}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="mb-1.5 block text-sm font-medium text-steel-300"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="correo@empresa.cl"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={cn(
-                        inputBaseClasses,
-                        errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/30"
-                      )}
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-xs text-red-400">
-                        {errors.email}
-                      </p>
+                      <p className="mt-1 text-xs text-red-400">{errors.telefono}</p>
                     )}
                   </div>
                 </div>
 
-                {/* Service select — custom dropdown */}
+                {/* === STEP 2: Plazo de inversión (segmentación de lead) === */}
+                {/* Botones tipo radio cards — segmentan al lead y mejoran conversión */}
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-steel-300">
+                    ¿Cuándo planeas hacer la inversión?{" "}
+                    <span className="text-heli-red">*</span>
+                  </label>
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    {PLAZO_OPTIONS.map((opt) => {
+                      const Icon = opt.icon;
+                      const isSelected = formData.plazoInversion === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              plazoInversion: opt.value,
+                            }))
+                          }
+                          className={cn(
+                            "flex items-center gap-3 rounded-lg border-2 px-3 py-3 text-left transition-all duration-200",
+                            isSelected
+                              ? opt.accent + " shadow-[0_0_20px_rgba(206,20,45,0.15)]"
+                              : "border-steel-700 bg-steel-800/40 text-steel-300 hover:border-steel-500 hover:bg-steel-800/60"
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+                              isSelected
+                                ? "bg-white/10"
+                                : "bg-steel-700/50"
+                            )}
+                          >
+                            <Icon
+                              className={cn(
+                                "h-4 w-4",
+                                isSelected ? "text-white" : "text-steel-400"
+                              )}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <div className="text-sm font-semibold">
+                              {opt.label}
+                            </div>
+                            <div
+                              className={cn(
+                                "text-xs",
+                                isSelected ? "text-white/70" : "text-steel-500"
+                              )}
+                            >
+                              {opt.description}
+                            </div>
+                          </div>
+                          {isSelected && (
+                            <CheckCircle className="h-4 w-4 shrink-0 text-white" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* === STEP 3: Tipo de servicio === */}
                 <CustomSelect
                   label="Tipo de servicio"
                   options={SERVICE_OPTIONS}
@@ -403,7 +510,108 @@ export default function CTASection() {
                   }
                 />
 
-                {/* Message textarea */}
+                {/* === STEP 4: Datos de empresa === */}
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="empresa"
+                      className="mb-1.5 block text-sm font-medium text-steel-300"
+                    >
+                      Empresa
+                    </label>
+                    <input
+                      id="empresa"
+                      name="empresa"
+                      type="text"
+                      placeholder="Mi Empresa S.A."
+                      value={formData.empresa}
+                      onChange={handleChange}
+                      className={inputBaseClasses}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="rut"
+                      className="mb-1.5 block text-sm font-medium text-steel-300"
+                    >
+                      RUT empresa{" "}
+                      <span className="text-steel-500">(opcional)</span>
+                    </label>
+                    <input
+                      id="rut"
+                      name="rut"
+                      type="text"
+                      inputMode="text"
+                      placeholder="12.345.678-9"
+                      value={formData.rut}
+                      onChange={handleChange}
+                      maxLength={12}
+                      className={cn(
+                        inputBaseClasses,
+                        errors.rut && "border-red-500 focus:border-red-500 focus:ring-red-500/30"
+                      )}
+                    />
+                    {errors.rut && (
+                      <p className="mt-1 text-xs text-red-400">{errors.rut}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* === STEP 5: Emails (personal + empresa) === */}
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-1.5 block text-sm font-medium text-steel-300"
+                    >
+                      Email personal{" "}
+                      <span className="text-steel-500">(opcional)</span>
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="juan@gmail.com"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={cn(
+                        inputBaseClasses,
+                        errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/30"
+                      )}
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-red-400">{errors.email}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="emailEmpresa"
+                      className="mb-1.5 block text-sm font-medium text-steel-300"
+                    >
+                      Email empresa{" "}
+                      <span className="text-steel-500">(opcional)</span>
+                    </label>
+                    <input
+                      id="emailEmpresa"
+                      name="emailEmpresa"
+                      type="email"
+                      placeholder="contacto@miempresa.cl"
+                      value={formData.emailEmpresa}
+                      onChange={handleChange}
+                      className={cn(
+                        inputBaseClasses,
+                        errors.emailEmpresa && "border-red-500 focus:border-red-500 focus:ring-red-500/30"
+                      )}
+                    />
+                    {errors.emailEmpresa && (
+                      <p className="mt-1 text-xs text-red-400">
+                        {errors.emailEmpresa}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* === STEP 6: Mensaje opcional === */}
                 <div>
                   <label
                     htmlFor="mensaje"
@@ -415,7 +623,7 @@ export default function CTASection() {
                   <textarea
                     id="mensaje"
                     name="mensaje"
-                    rows={4}
+                    rows={3}
                     placeholder="Cuéntanos más sobre lo que necesitas..."
                     value={formData.mensaje}
                     onChange={handleChange}
