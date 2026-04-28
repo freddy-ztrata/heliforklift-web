@@ -62,15 +62,15 @@ export default function NosotrosPage() {
                 <Factory className="h-6 w-6 text-heli-yellow" />
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-white">Nuestra Visión</h2>
-              <p className="mt-4 text-steel-300">{company.vision}</p>
+              <p className="mt-4 text-sm sm:text-base text-steel-300">{company.vision}</p>
             </div>
           </div>
         </section>
 
         {/* Timeline */}
-        <section className="bg-steel-900/30 py-20">
+        <section className="bg-steel-900/30 py-12 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
+            <div className="mb-8 sm:mb-12 text-center">
               <p className="text-sm font-medium uppercase tracking-widest text-steel-400">
                 Hitos importantes
               </p>
@@ -83,8 +83,8 @@ export default function NosotrosPage() {
         </section>
 
         {/* Certificaciones */}
-        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+        <section className="mx-auto max-w-7xl px-4 py-12 sm:py-20 sm:px-6 lg:px-8">
+          <div className="mb-8 sm:mb-12 text-center">
             <p className="text-sm font-medium uppercase tracking-widest text-steel-400">
               Calidad garantizada
             </p>
@@ -99,7 +99,7 @@ export default function NosotrosPage() {
                 className="flex flex-col items-center rounded-xl border border-steel-700 bg-steel-900/50 p-4 sm:p-6 text-center transition-all hover:border-heli-red/50"
               >
                 <Shield className="mb-3 h-8 w-8 text-heli-red" />
-                <div className="font-bold text-white">{cert.name}</div>
+                <div className="font-bold text-white text-sm sm:text-base">{cert.name}</div>
                 <div className="mt-1 text-xs text-steel-400">
                   {cert.description}
                 </div>
@@ -109,9 +109,9 @@ export default function NosotrosPage() {
         </section>
 
         {/* Valores */}
-        <section className="bg-steel-900/30 py-20">
+        <section className="bg-steel-900/30 py-12 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mb-12 text-center">
+            <div className="mb-8 sm:mb-12 text-center">
               <h2 className="font-heading text-[clamp(2rem,5vw,4rem)] leading-none text-white">
                 NUESTROS VALORES
               </h2>

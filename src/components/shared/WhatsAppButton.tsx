@@ -16,8 +16,8 @@ export default function WhatsAppButton() {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 1, type: "spring", stiffness: 260, damping: 20 }}
     >
-      {/* Pulse ring */}
-      <span className="absolute inset-0 z-0">
+      {/* Pulse ring — sized to match the 56x56px (h-14 w-14) icon circle */}
+      <span className="pointer-events-none absolute right-0 bottom-0 z-0 h-14 w-14">
         <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/40" />
       </span>
 

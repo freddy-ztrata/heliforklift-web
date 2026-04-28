@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/sections/Footer";
@@ -117,17 +118,17 @@ export default async function ServicioDetailPage({ params }: Props) {
               </ul>
 
               {/* CTAs */}
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                 <Link
                   href={`/contacto?servicio=${encodeURIComponent(service.name)}`}
-                  className="glow-red inline-flex items-center justify-center gap-2 rounded-xl bg-heli-red px-7 py-3.5 font-bold text-white transition-all hover:bg-heli-red-dark"
+                  className="glow-red inline-flex w-full items-center justify-center gap-2 rounded-xl bg-heli-red px-6 py-3.5 font-bold text-white transition-all hover:bg-heli-red-dark sm:w-auto sm:px-7"
                 >
                   {service.cta}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
                   href="tel:+56958187035"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-steel-600 px-7 py-3.5 font-medium text-white transition-all hover:border-white hover:bg-white/5"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-steel-600 px-6 py-3.5 font-medium text-white transition-all hover:border-white hover:bg-white/5 sm:w-auto sm:px-7"
                 >
                   <Phone className="h-4 w-4" />
                   +56 9 5818 7035
@@ -137,11 +138,15 @@ export default async function ServicioDetailPage({ params }: Props) {
 
             {/* Image */}
             <div className="relative overflow-hidden rounded-2xl border border-steel-700/50 bg-steel-900">
-              <div className="aspect-[4/3] product-img-container p-8">
-                <img
+              <div className="relative aspect-[4/3] product-img-container p-4 sm:p-8">
+                <Image
                   src={service.image}
                   alt={`${service.name} — Helifork Lift Chile`}
-                  className="h-full w-full object-contain"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain p-4 sm:p-8"
+                  quality={80}
+                  priority
                 />
               </div>
             </div>
