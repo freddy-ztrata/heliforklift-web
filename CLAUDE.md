@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Start dev server (Turbopack)
-npm run build        # Production build (86+ static pages)
+npm run dev          # Dev server (Turbopack)
+npm run build        # Production build (86+ static pages, output: "standalone")
 npm run start        # Serve production build on port 3000
 npm run lint         # ESLint
 npx tsc --noEmit     # Type check without emitting
 ```
 
-**Known build issue:** `output: "standalone"` fails on the final copy step on Windows+OneDrive due to Sharp's `.node` binary file locking. The compilation and static page generation succeed — only the standalone bundling step errors. This does not affect `npm run dev` or deployment via Docker on Linux.
+**Known build issue:** `output: "standalone"` fails on the final copy step on Windows+OneDrive due to Sharp's `.node` binary file locking. Compilation and static page generation succeed — only the standalone bundling step errors. Does not affect `npm run dev` or Linux/Docker deployment.
 
 ## Architecture
 
@@ -20,87 +20,104 @@ npx tsc --noEmit     # Type check without emitting
 
 ### Next.js 16 — Read the Docs First
 
-This uses Next.js 16 which has breaking changes from earlier versions. Before writing any code, check `node_modules/next/dist/docs/01-app/` for current API docs. Key differences: `params` and `searchParams` are `Promise`-based (must `await`), `dynamic` import from `next/dynamic` is the lazy-loading API.
+This uses Next.js 16 which has breaking changes from earlier versions. Before writing API code, check `node_modules/next/dist/docs/01-app/`. Key differences: `params` and `searchParams` are `Promise`-based (must `await`), and `dynamic` import from `next/dynamic` requires `"use client"` to use `ssr: false`.
 
 ### Tailwind CSS v4
 
-Uses `@import "tailwindcss"` syntax with `@theme inline` in `globals.css`. All theme colors are CSS variables (`--heli-red: #CE142D`, `--steel-900: #111118`, etc.) mapped via `--color-*` tokens. There is **no `tailwind.config.ts`** — everything is in CSS. Custom utility classes: `.bg-dot-pattern`, `.bg-grid-pattern`, `.glow-red`, `.font-heading`, `.product-img-container`.
+Uses `@import "tailwindcss"` syntax with `@theme inline` in `globals.css`. Theme colors are CSS variables (`--heli-red: #CE142D`, `--steel-900: #111118`, etc.) mapped via `--color-*` tokens. **No `tailwind.config.ts`** — everything is in CSS. Custom utility classes: `.bg-dot-pattern`, `.bg-grid-pattern`, `.glow-red`, `.font-heading`, `.product-img-container`.
 
 ### Component Pattern
 
 - **Server Components** by default (pages, Footer)
 - **Client Components** (`"use client"`) for hooks, framer-motion, browser APIs
-- `ClientOnly.tsx` wraps `ssr: false` components
-- Animated sections use framer-motion with `useInView` (scroll-triggered, `once: true`) or `useScroll`/`useTransform` (scroll-driven continuous)
-- Homepage uses `dynamic()` imports for below-fold sections (Services, WhyChooseUs, HowItWorks, CTASection)
+- `ClientOnly.tsx` wraps `ssr: false` components (Server Components forbid `ssr: false` in Next.js 16)
+- Animated sections use framer-motion with `useInView` (scroll-triggered, `once: true`) OR `useScroll`/`useTransform` (scroll-driven continuous, e.g. `HowItWorks`, `AnimatedTimeline`)
+- Homepage uses `dynamic()` imports for below-fold sections
 
 ### Data Layer
 
 `src/lib/data/` is the single source of truth for all content:
 
-- `all-products.ts` — **76 products** across 12 categories. Defines `RawProduct` (without fuelType) and `FullProduct` (with fuelType). Individual category arrays (`electricForklifts`, `combustionForklifts`, etc.) are `RawProduct[]`. The exported `allProducts` array maps all products to `FullProduct[]` by deriving `fuelType` from the `power` field via `deriveFuelType()`.
-- `products.ts` — re-exports from all-products, adds `ProductCategory[]`, `featuredProducts`, `fuelTypeCategories` (4 fuel types with counts), `getProductsByFuelType()`, `getFuelTypeName()`, `getCategoryProducts()`
-- `product-galleries.ts` — maps product slugs to gallery image path arrays
-- `company.ts` — company info, contact details, stats, certifications
-- `services.ts` — 5 service definitions with icon names, features, CTA text
+- **`all-products.ts`** — 76 products across 12 categories. Defines `RawProduct` (without fuelType) and `FullProduct` (with fuelType). Individual category arrays (`electricForklifts`, `combustionForklifts`, etc.) are `RawProduct[]`. Exported `allProducts` is `FullProduct[]` mapped via `deriveFuelType()` from each product's `power` field.
+- **`products.ts`** — re-exports from all-products, adds `ProductCategory[]`, `featuredProducts`, `fuelTypeCategories` (4 fuel types with counts), `getProductsByFuelType()`, `getFuelTypeName()`, `getCategoryProducts()`
+- **`product-galleries.ts`** — maps product slugs to gallery image path arrays. Pattern: `{slug}-gallery-{n}.{ext}`
+- **`product-datasheets.ts`** — maps product slugs to PDF datasheet paths. 42 of 76 products have a datasheet. Use `getDatasheet(slug)` which returns `null` if not available; product detail page falls back to "Solicitar ficha técnica" link.
+- **`company.ts`** — company info, contact details (3 locations: Santiago, Antofagasta, Copiapó — Miami removed per client request), stats, certifications
+- **`services.ts`** — 5 services with `slug`, `heroSubtitle`, `sections[]`, `benefits[]` for individual `/servicios/[slug]` pages
 
 ### Fuel Type System
 
 Every product has a `fuelType: FuelType` field derived from `power`:
 - `"Electrica"` — power starts with "Electrica"
 - `"Diesel"` — power starts with "Diesel" (without GLP)
-- `"Diesel / GLP"` — power contains both "Diesel" and "GLP"
+- `"Diesel / GLP"` — power contains both
 - `"GLP"` — power is "GLP (Gas Licuado)"
 - `"Hidrogeno"` — power is "Celda de Combustible H2"
 - `"N/A"` — accessories (Hidraulico, Mecanico)
 
-Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Accessories (`"N/A"`) only appear in "Todos" view with no badge.
+Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Accessories (`"N/A"`) only show in "Todos" with no badge.
 
 ### Page Structure
 
-- `/` — Homepage: Hero (video bg) → TrustBar (marquee) → ProductShowcase (bento) → Services → WhyChooseUs → HowItWorks → CTASection (form)
-- `/productos` — **Landing page**: FuelTypeLanding bento grid showing 4 energy types (Electrica, Diesel, GLP, Hidrogeno). Each links to filtered catalog.
-- `/productos?tipo=electrica|diesel|glp|hidrogeno|todos` — **Filtered catalog**: ProductCatalog with dual-level filters (fuel type pills + category tabs). URL sync via `router.replace`.
-- `/productos/[slug]` — Product detail with ProductGallery, specs grid, FuelTypeBadge, related products, Product schema JSON-LD. Uses `generateStaticParams()` for SSG.
-- `/servicios` — 5 service cards with background images
-- `/nosotros` — AboutHero, mission/vision, AnimatedTimeline, certifications, values
-- `/contacto` — Quick-action cards (phone/email/WhatsApp), map + locations grid
+- `/` — Homepage: Hero (video bg) → TrustBar (marquee) → ProductShowcase (bento, links to filtered catalog by fuel type) → Services → WhyChooseUs → HowItWorks → CTASection
+- `/productos` — **Landing**: `FuelTypeLanding` bento (4 energy types). No `?tipo=` param shows landing.
+- `/productos?tipo=electrica|diesel|glp|hidrogeno|todos` — **Filtered catalog**: `ProductCatalog` with dual filters (fuel type pills + category tabs). URL sync via `router.replace` and `useEffect` syncs state when URL changes externally.
+- `/productos/[slug]` — Product detail with `ProductGallery`, specs, `FuelTypeBadge`, datasheet download (when available), related products, Product schema JSON-LD. SSG via `generateStaticParams()`.
+- `/servicios` — Service cards (6-col grid centers last 2 cards on desktop)
+- `/servicios/[slug]` — Service detail with hero, benefits stats, long-form sections, other services. SSG. 5 routes: venta, arriendo, servicio-tecnico, repuestos, usados.
+- `/nosotros` — `AboutHero`, mission/vision, `AnimatedTimeline` (scroll-driven), certifications, values
+- `/contacto` — Quick-action cards (phone/email/WhatsApp), Google Maps + locations grid
+
+### Quote Form (CTASection.tsx)
+
+The main conversion form. Fields ordered for B2B conversion optimization:
+1. Nombre + Teléfono (hook fields)
+2. **Plazo de inversión** — radio cards (NOT dropdown) with 4 options that segment leads visually: Próximos 30 días (urgent, red), 30-60 días (yellow), 60-90 días (sky), Sólo precios (gray). Each has icon + label + description.
+3. Tipo de servicio (CustomSelect dropdown)
+4. Empresa + RUT (auto-formatted Chilean RUT validation via `validateRut()` and `formatRut()`)
+5. Email personal + Email empresa (separate fields)
+6. Mensaje opcional
+
+Validation: name + phone required, RUT/email validated only if present.
 
 ### Images
 
-All product/category images use `next/image` `<Image>` component with:
-- `fill` + `sizes` for responsive srcset
-- `quality={75}` for product images, `quality={80}` for hero/landing
-- Formats: AVIF and WebP (configured in `next.config.ts`)
-- `minimumCacheTTL: 30 days` for optimized image cache
-- Static assets have `Cache-Control: immutable` headers (1 year)
+All product/category images use `next/image` `<Image>` with `fill` + `sizes` for responsive srcset. Quality 75 for products, 80 for hero/landing. Formats: AVIF + WebP. `minimumCacheTTL: 30 days`.
 
-Product images in `public/assets/legacy/products/` (200+ files) have white/light backgrounds. Use `product-img-container` CSS class on container divs for matching light gradient bg on dark theme. The `FuelTypeLanding` component uses these as `object-cover` background images with dark gradient overlay.
+Product images in `public/assets/legacy/products/` (200+ files) have white/light backgrounds. Use `product-img-container` CSS class on container divs to provide matching light gradient bg. `FuelTypeLanding` uses them as `object-cover` background with dark gradient overlay.
 
-Gallery images follow the pattern: `{slug}-gallery-{n}.{ext}` in `product-galleries.ts`.
+### Git LFS Assets
 
-### Hero Video
+Both `*.mp4` and `*.pdf` are tracked via Git LFS (see `.gitattributes`):
+- `public/assets/hero-video.mp4` (99MB) — Hero background, uses `preload="metadata"` for fast load
+- `public/assets/legacy/datasheets/*.pdf` (45 files, ~480MB) — Real datasheets scraped from heliforklift.cl
 
-`public/assets/hero-video.mp4` (99MB) tracked via **Git LFS**. Uses `preload="metadata"` (not "auto") with a poster image for fast initial display. After `git clone`, run `git lfs pull` if the video isn't downloaded.
+After `git clone`, run `git lfs pull` to download. Linux build context for Docker copies all LFS-resolved files (~600MB transfer).
 
 ### SEO
 
 - `layout.tsx`: Organization + LocalBusiness schema, `title.template: "%s | Helifork Lift"`, metadataBase
-- `/productos` page has dynamic metadata via `generateMetadata()` based on `?tipo=` param
-- Product detail pages inject Product schema JSON-LD with specs including fuel type
-- `sitemap.ts` generates URLs dynamically (5 static + 76 products)
+- Each page defines `alternates: { canonical: "/path" }` (relative, resolved against metadataBase)
+- `/productos` has dynamic metadata via `generateMetadata()` based on `?tipo=` param (e.g., "Grúas Eléctricas — Catálogo de Equipos")
+- Product detail pages inject Product schema JSON-LD with specs and fuel type
+- Service detail pages have unique title without duplicating "| Helifork Lift" suffix (template adds it)
+- `sitemap.ts` generates 86 URLs (5 static + 5 services + 76 products)
 
-### Deployment
+### Deployment (Dokploy)
 
-Dockerfile uses multi-stage build with `node:20-alpine`. Requires `output: "standalone"` in `next.config.ts`. Exposes port 3000.
+Dokploy on AWS EC2 runs Docker. Multi-stage build with `node:20-alpine`. Requires `output: "standalone"`. Exposes port 3000. Server domain via `traefik.me` with self-signed SSL.
+
+**Common deploy issues:**
+- **Docker Hub rate limit (429)**: server pulls `node:20-alpine` from Docker Hub. If hit, login as root: `sudo cp ~/.docker/config.json /root/.docker/config.json` after `docker login`.
+- **No space left**: build context with PDFs is ~700MB. Server needs adequate disk.
 
 ### Key Conventions
 
-- All text in **Spanish (Chile)**, using "tú" (informal). Use proper accents (á, é, í, ó, ú, ñ).
+- All text in **Spanish (Chile)**, "tú" (informal). Use proper accents (á, é, í, ó, ú, ñ).
 - Brand color: `--heli-red: #CE142D`. Accent: `--heli-yellow: #F5A623`
-- Font stack: DM Sans (body), Bebas Neue (headings via `.font-heading`), JetBrains Mono (data)
-- `cn()` utility from `@/lib/utils` for className merging (clsx + tailwind-merge)
+- Font stack: DM Sans (body), Bebas Neue (`.font-heading`), JetBrains Mono (data)
+- `cn()` from `@/lib/utils` for className merging (clsx + tailwind-merge)
 - Touch targets: minimum 44px via `@media (pointer: coarse)` in globals.css
-- `FuelTypeBadge` component for fuel type indicators: `sm` size (translucent, for cards), `md` size (solid bg, for detail pages)
+- `FuelTypeBadge` component: `sm` size (translucent, cards), `md` size (solid bg, detail pages)
 
 @AGENTS.md
