@@ -64,15 +64,15 @@ export default function ProductCategoriesGrid() {
             >
               {/* Imagen — fondo claro como tarjetas de producto */}
               <div className="relative aspect-[4/3] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#f0f0f0] to-[#d8d8d8]" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#f5f5f5] to-[#d8d8d8]" />
                 <Image
                   src={cat.image}
                   alt={`Grúas horquillas ${cat.name}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-contain p-5 sm:p-6 transition-transform duration-700 group-hover:scale-110 drop-shadow-[0_4px_12px_rgba(0,0,0,0.18)]"
+                  className="object-contain p-2 sm:p-3 transition-transform duration-700 group-hover:scale-105 drop-shadow-[0_6px_16px_rgba(0,0,0,0.22)]"
                   loading="lazy"
-                  quality={75}
+                  quality={80}
                 />
 
                 {/* Badge highlight (Hidrogeno) */}
