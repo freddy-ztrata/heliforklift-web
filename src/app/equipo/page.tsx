@@ -46,10 +46,7 @@ export default function EquipoPage() {
         <section className="relative overflow-hidden bg-steel-950 py-16 sm:py-20">
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.04]" />
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-sm font-medium uppercase tracking-widest text-steel-400">
-              Quiénes somos
-            </p>
-            <h1 className="font-heading mt-2 text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
+            <h1 className="font-heading text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
               NUESTRO EQUIPO
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-steel-300">
