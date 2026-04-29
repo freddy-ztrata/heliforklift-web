@@ -69,7 +69,7 @@ export const certifications = [
 ] as const;
 
 // =============================================================================
-// EQUIPO COMERCIAL — Vendedores y áreas (scraped de heliforklift.cl)
+// EQUIPO COMERCIAL — Vendedores agrupados por sucursal (scraped heliforklift.cl)
 // =============================================================================
 
 export interface SalesContact {
@@ -80,67 +80,147 @@ export interface SalesContact {
   zone?: string;
 }
 
-export const salesTeam: SalesContact[] = [
+export interface BranchTeam {
+  branch: string;
+  address: string;
+  contacts: SalesContact[];
+}
+
+export const teamByBranch: BranchTeam[] = [
   {
-    name: "Mauricio Glaser",
-    role: "Gerente de Ventas",
-    email: "mglaser@heliforklift.cl",
-    phone: "+56 9 5818 7035",
-    zone: "Casa Matriz - Antofagasta",
+    branch: "Antofagasta",
+    address: "Calle 9 425, Galpón 27, Agpia II, Antofagasta",
+    contacts: [
+      {
+        name: "Sebastián Araya",
+        role: "Ventas",
+        email: "sebastian@heliforklift.cl",
+        phone: "+56 9 6122 3038",
+      },
+      {
+        name: "Paola Ortiz",
+        role: "Repuestos",
+        email: "portiz@heliforklift.cl",
+        phone: "+56 9 6190 8327",
+      },
+    ],
   },
   {
-    name: "Claudia Henríquez",
-    role: "Gerente Comercial",
-    email: "chenriquez@heliforklift.cl",
-    phone: "+56 9 5818 7035",
+    branch: "Santiago",
+    address: "Av. Américo Vespucio 1445, Quilicura",
+    contacts: [
+      {
+        name: "Claudia Henríquez",
+        role: "Gerente Comercial",
+        email: "chenriquez@heliforklift.cl",
+        phone: "+56 9 5818 7035",
+      },
+      {
+        name: "Mirtha Suárez",
+        role: "Ventas",
+        email: "mirthas@heliforklift.cl",
+        phone: "+56 9 5818 7022",
+        zone: "Zona Centro",
+      },
+      {
+        name: "John Díaz",
+        role: "Ventas",
+        email: "jdiaz@heliforklift.cl",
+        phone: "+56 9 6122 3319",
+        zone: "Zona Centro",
+      },
+      {
+        name: "Marcela Huerta",
+        role: "Ventas",
+        email: "mhuerta@heliforklift.cl",
+        phone: "+56 9 7333 6852",
+        zone: "Sexta y Séptima Región",
+      },
+      {
+        name: "Francisco Errázuriz",
+        role: "Ventas",
+        email: "ferrazuriz@heliforklift.cl",
+        phone: "+56 9 3252 8102",
+        zone: "Centro, Concepción, Chillán, Los Ángeles, Temuco",
+      },
+      {
+        name: "Alain Marchant",
+        role: "Ventas",
+        email: "amarchant@heliforklift.cl",
+        phone: "+56 9 6895 5890",
+        zone: "Centro, La Serena, Coquimbo, Copiapó, Arica",
+      },
+      {
+        name: "Ángel Leiva",
+        role: "Repuestos",
+        email: "repuestos@heliforklift.cl",
+        phone: "+56 9 3253 7997",
+      },
+    ],
+  },
+];
+
+// Flat list para compatibilidad con paginas que ya consumen salesTeam
+export const salesTeam: SalesContact[] = teamByBranch.flatMap((b) => b.contacts);
+
+// =============================================================================
+// SOCIOS ESTRATÉGICOS / PUNTOS DE VENTA
+// =============================================================================
+
+export interface StrategicPartner {
+  name: string;
+  address: string;
+  city: string;
+  region: string;
+  contactName: string;
+  contactEmail?: string;
+  contactPhone: string;
+  isOwn?: boolean; // si es sucursal propia o partner externo
+}
+
+export const strategicPartners: StrategicPartner[] = [
+  {
+    name: "Heli Forklift Chile - Copiapó",
+    address: "Megacentro Copiapó, bodega 15, Panamericana Norte 185",
+    city: "Copiapó",
+    region: "Atacama",
+    contactName: "Claudia Henríquez",
+    contactEmail: "chenriquez@heliforklift.cl",
+    contactPhone: "+56 9 5818 7035",
+    isOwn: true,
   },
   {
-    name: "Sebastián Araya",
-    role: "Ejecutivo de Ventas",
-    email: "sebastian@heliforklift.cl",
-    phone: "+56 9 6122 3038",
-    zone: "Antofagasta",
+    name: "Lubricentro Opazo y López",
+    address: "Francisco Bilbao 132",
+    city: "Taltal",
+    region: "Antofagasta",
+    contactName: "José Luis Opazo",
+    contactEmail: "opazoylopez.servicios@gmail.com",
+    contactPhone: "+56 9 8761 3555",
   },
   {
-    name: "Alain Marchant",
-    role: "Ejecutivo de Ventas",
-    email: "amarchant@heliforklift.cl",
-    phone: "+56 9 6895 5890",
-    zone: "La Serena, Coquimbo, Copiapó, Arica",
+    name: "Bailac",
+    address: "Santa Rosa de Molle 4006",
+    city: "Iquique",
+    region: "Tarapacá",
+    contactName: "Francisco Poblete Trullen",
+    contactEmail: "francisco.poblete@bailac.com",
+    contactPhone: "+56 9 3377 2027",
   },
   {
-    name: "Mirtha Suárez",
-    role: "Ejecutiva de Ventas",
-    email: "mirthas@heliforklift.cl",
-    phone: "+56 9 5818 7022",
-    zone: "Zona Centro",
-  },
-  {
-    name: "John Díaz",
-    role: "Ejecutivo de Ventas",
-    email: "jdiaz@heliforklift.cl",
-    phone: "+56 9 6122 3319",
-    zone: "Zona Centro",
-  },
-  {
-    name: "Marcela Huerta",
-    role: "Ejecutiva de Ventas",
-    email: "mhuerta@heliforklift.cl",
-    phone: "+56 9 7333 6852",
-    zone: "VI y VII Región",
-  },
-  {
-    name: "Francisco Errázuriz",
-    role: "Ejecutivo de Ventas",
-    email: "ferrazuriz@heliforklift.cl",
-    phone: "+56 9 3252 8102",
-    zone: "Concepción, Chillán, Los Ángeles, Temuco",
+    name: "Pro Maquinaria",
+    address: "Ruta Sur km 1015, La Foresta 111",
+    city: "Puerto Varas",
+    region: "Los Lagos",
+    contactName: "Jean Phillipe Brunet",
+    contactEmail: "jpbrunet@promaquinaria.cl",
+    contactPhone: "+56 9 7388 1836",
   },
 ];
 
 export const partsTeam = {
-  email: "contacto@heliforklift.cl",
-  phone: "+56 9 9320 9186",
+  email: "repuestos@heliforklift.cl",
+  phone: "+56 9 3253 7997",
   description:
     "Stock permanente de repuestos originales HELI y lubricantes autorizados. Envío a todo Chile.",
 };
