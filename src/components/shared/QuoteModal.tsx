@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 
 const SERVICE_OPTIONS = [
   "Comprar",
-  "Arrendar",
   "Servicio técnico",
   "Repuestos",
   "Otro",

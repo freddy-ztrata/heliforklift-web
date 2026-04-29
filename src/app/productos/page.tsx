@@ -22,11 +22,11 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     const name = getFuelTypeName(tipo);
     return {
       title: `Grúas ${name} — Catálogo de Equipos`,
-      description: `Catálogo de grúas horquillas ${name.toLowerCase()} HELI. Venta y arriendo en Chile. Cotiza hoy.`,
+      description: `Catálogo de grúas horquillas ${name.toLowerCase()} HELI. Venta en Chile. Cotiza hoy.`,
       alternates: { canonical: `/productos?tipo=${tipo}` },
       openGraph: {
         title: `Grúas ${name} — Catálogo de Equipos`,
-        description: `Grúas horquillas ${name.toLowerCase()} HELI: venta, arriendo y servicio técnico en Chile.`,
+        description: `Grúas horquillas ${name.toLowerCase()} HELI: venta y servicio técnico en Chile.`,
       },
     };
   }
@@ -34,12 +34,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   return {
     title: "Equipos y Grúas Horquillas — Catálogo Completo",
     description:
-      "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y más. Venta y arriendo en Chile. Cotiza hoy.",
+      "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y más. Venta en Chile. Cotiza hoy.",
     alternates: { canonical: "/productos" },
     openGraph: {
       title: "Equipos y Grúas Horquillas — Catálogo Completo",
       description:
-        "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde y más. Venta y arriendo en Chile.",
+        "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde y más. Venta en Chile.",
     },
   };
 }

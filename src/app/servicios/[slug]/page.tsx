@@ -127,11 +127,11 @@ export default async function ServicioDetailPage({ params }: Props) {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="tel:+56958187035"
+                  href="tel:+56993209186"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-steel-600 px-6 py-3.5 font-medium text-white transition-all hover:border-white hover:bg-white/5 sm:w-auto sm:px-7"
                 >
                   <Phone className="h-4 w-4" />
-                  +56 9 5818 7035
+                  +56 9 9320 9186
                 </a>
               </div>
             </div>

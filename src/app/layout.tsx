@@ -27,15 +27,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://heliforklift.cl"),
   title: {
     default:
-      "Helifork Lift — Grúas Horquillas Chile | Venta, Arriendo y Servicio Técnico",
+      "Helifork Lift — Grúas Horquillas Chile | Venta y Servicio Técnico",
     template: "%s | Helifork Lift",
   },
   description:
-    "Venta y arriendo de grúas horquillas en Santiago y todo Chile. Grúas eléctricas, diésel y GLP. Servicio técnico 24/7, repuestos originales HELI. +67 años de experiencia, +1100 equipos vendidos. Cotiza ahora.",
+    "Venta de grúas horquillas en Santiago y todo Chile. Grúas eléctricas, diésel y GLP. Servicio técnico, repuestos originales HELI. +67 años de experiencia, +1100 equipos vendidos. Cotiza ahora.",
   keywords: [
     "grúas horquillas",
     "grúas horquillas Chile",
-    "arriendo grúas horquillas",
     "venta grúas horquillas Santiago",
     "grúa horquilla eléctrica",
     "grúa horquilla diésel",
@@ -69,9 +68,9 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl",
     siteName: "Helifork Lift",
     title:
-      "Helifork Lift — Grúas Horquillas Chile | Venta, Arriendo y Servicio Técnico",
+      "Helifork Lift — Grúas Horquillas Chile | Venta y Servicio Técnico",
     description:
-      "Especialistas en grúas horquillas en Chile. Venta, arriendo, servicio técnico y repuestos originales HELI. +67 años de experiencia. Cotiza hoy.",
+      "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales HELI. +67 años de experiencia. Cotiza hoy.",
     images: [
       {
         url: "/og-image.jpg",
@@ -85,7 +84,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Helifork Lift — Grúas Horquillas Chile",
     description:
-      "Venta y arriendo de grúas horquillas. Servicio técnico 24/7. Repuestos originales. Cotiza ahora.",
+      "Venta de grúas horquillas. Servicio técnico. Repuestos originales. Cotiza ahora.",
     images: ["/og-image.jpg"],
   },
   alternates: {
@@ -137,7 +136,7 @@ export default function RootLayout({
               url: "https://heliforklift.cl",
               logo: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.png",
               description:
-                "Especialistas en grúas horquillas en Chile. Venta, arriendo, servicio técnico y repuestos originales.",
+                "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales.",
               foundingDate: "1958",
               address: {
                 "@type": "PostalAddress",

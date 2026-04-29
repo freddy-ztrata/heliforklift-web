@@ -32,9 +32,9 @@ export const company = {
 } as const;
 
 export const contact = {
-  mainPhone: "+56 9 5818 7035",
+  mainPhone: "+56 9 9320 9186",
   mainEmail: "contacto@heliforklift.cl",
-  whatsapp: "56958187035",
+  whatsapp: "56993209186",
   whatsappMessage:
     "Hola, me interesa cotizar una grúa horquilla. ¿Pueden ayudarme?",
   locations: [
@@ -57,7 +57,7 @@ export const contact = {
     linkedin: "https://linkedin.com/company/heliforkliftcl/",
     instagram: "https://instagram.com/heliforkliftcl/",
   },
-  hours: "Lun-Vie: 8:00 - 18:00 | Emergencias 24/7",
+  hours: "Lun-Vie: 08:30 - 18:00 hrs",
 } as const;
 
 export const certifications = [
@@ -67,3 +67,87 @@ export const certifications = [
   { name: "CE", description: "Certificación Unión Europea" },
   { name: "EPA", description: "Agencia de Protección Ambiental (EE.UU.)" },
 ] as const;
+
+// =============================================================================
+// EQUIPO COMERCIAL — Vendedores y áreas (scraped de heliforklift.cl)
+// =============================================================================
+
+export interface SalesContact {
+  name: string;
+  role: string;
+  email: string;
+  phone: string;
+  zone?: string;
+}
+
+export const salesTeam: SalesContact[] = [
+  {
+    name: "Mauricio Glaser",
+    role: "Gerente de Ventas",
+    email: "mglaser@heliforklift.cl",
+    phone: "+56 9 5818 7035",
+    zone: "Casa Matriz - Antofagasta",
+  },
+  {
+    name: "Claudia Henríquez",
+    role: "Gerente Comercial",
+    email: "chenriquez@heliforklift.cl",
+    phone: "+56 9 5818 7035",
+  },
+  {
+    name: "Sebastián Araya",
+    role: "Ejecutivo de Ventas",
+    email: "sebastian@heliforklift.cl",
+    phone: "+56 9 6122 3038",
+    zone: "Antofagasta",
+  },
+  {
+    name: "Alain Marchant",
+    role: "Ejecutivo de Ventas",
+    email: "amarchant@heliforklift.cl",
+    phone: "+56 9 6895 5890",
+    zone: "La Serena, Coquimbo, Copiapó, Arica",
+  },
+  {
+    name: "Mirtha Suárez",
+    role: "Ejecutiva de Ventas",
+    email: "mirthas@heliforklift.cl",
+    phone: "+56 9 5818 7022",
+    zone: "Zona Centro",
+  },
+  {
+    name: "John Díaz",
+    role: "Ejecutivo de Ventas",
+    email: "jdiaz@heliforklift.cl",
+    phone: "+56 9 6122 3319",
+    zone: "Zona Centro",
+  },
+  {
+    name: "Marcela Huerta",
+    role: "Ejecutiva de Ventas",
+    email: "mhuerta@heliforklift.cl",
+    phone: "+56 9 7333 6852",
+    zone: "VI y VII Región",
+  },
+  {
+    name: "Francisco Errázuriz",
+    role: "Ejecutivo de Ventas",
+    email: "ferrazuriz@heliforklift.cl",
+    phone: "+56 9 3252 8102",
+    zone: "Concepción, Chillán, Los Ángeles, Temuco",
+  },
+];
+
+export const partsTeam = {
+  email: "contacto@heliforklift.cl",
+  phone: "+56 9 9320 9186",
+  description:
+    "Stock permanente de repuestos originales HELI y lubricantes autorizados. Envío a todo Chile.",
+};
+
+export const serviceTeam = {
+  email: "contacto@heliforklift.cl",
+  phone: "+56 9 9320 9186",
+  description:
+    "Técnicos certificados HELI con cobertura nacional. Mantención preventiva, correctiva y emergencias.",
+};

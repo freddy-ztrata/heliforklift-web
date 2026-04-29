@@ -37,7 +37,6 @@ interface FormErrors {
 const SERVICE_OPTIONS = [
   { value: "", label: "Selecciona un servicio" },
   { value: "comprar", label: "Comprar grúa horquilla" },
-  { value: "arrendar", label: "Arrendar grúa horquilla" },
   { value: "servicio-tecnico", label: "Servicio técnico" },
   { value: "repuestos", label: "Repuestos" },
   { value: "otro", label: "Otro" },
@@ -46,7 +45,7 @@ const SERVICE_OPTIONS = [
 const TRUST_ELEMENTS = [
   { text: "Respuesta en menos de 2 horas", emoji: "\u26A1", href: null },
   { text: "+1,100 empresas ya confían en nosotros", emoji: "\uD83C\uDFC6", href: null },
-  { text: "¿Prefieres llamar? +56 9 5818 7035", emoji: "\uD83D\uDCDE", href: "tel:+56958187035" },
+  { text: "¿Prefieres llamar? +56 9 9320 9186", emoji: "\uD83D\uDCDE", href: "tel:+56993209186" },
   { text: "Tus datos están seguros. No spam.", emoji: "\uD83D\uDD12", href: null },
 ];
 

@@ -18,14 +18,14 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Servicios — Venta, Arriendo, Servicio Técnico y Repuestos",
+  title: "Servicios — Venta, Servicio Técnico y Repuestos",
   description:
-    "Servicios completos para grúas horquillas: venta de equipos nuevos, arriendo corto y largo plazo, servicio técnico 24/7, repuestos originales HELI. Cobertura en todo Chile.",
+    "Servicios completos para grúas horquillas: venta de equipos nuevos, servicio técnico, repuestos originales HELI. Cobertura en todo Chile.",
   alternates: { canonical: "/servicios" },
   openGraph: {
-    title: "Servicios — Venta, Arriendo, Servicio Técnico y Repuestos",
+    title: "Servicios — Venta, Servicio Técnico y Repuestos",
     description:
-      "Servicios completos para grúas horquillas: venta, arriendo, servicio técnico 24/7 y repuestos originales HELI en Chile.",
+      "Servicios completos para grúas horquillas: venta, servicio técnico y repuestos originales HELI en Chile.",
   },
 };
 

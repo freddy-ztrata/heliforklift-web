@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${product.name} — Grúa Horquilla ${product.type}`,
-    description: `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta y arriendo en Chile. Cotiza ahora.`,
+    description: `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta en Chile. Cotiza ahora.`,
     keywords: [
       product.name,
       `grúa horquilla ${product.type.toLowerCase()}`,
@@ -205,7 +205,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   COTIZAR ESTE EQUIPO
                 </a>
                 <a
-                  href="tel:+56958187035"
+                  href="tel:+56993209186"
                   className="inline-flex items-center justify-center rounded-xl border border-steel-600 px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg font-medium text-white transition-all hover:border-white hover:bg-white/5"
                 >
                   LLAMAR AHORA

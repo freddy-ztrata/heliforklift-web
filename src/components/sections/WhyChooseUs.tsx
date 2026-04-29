@@ -65,7 +65,7 @@ const differentiators = [
   "T\u00e9cnicos certificados por HELI",
   "Respuesta en menos de 2 horas",
   "Financiamiento flexible para tu empresa",
-  "Flota de arriendo disponible inmediatamente",
+  "Cobertura nacional de servicio tecnico",
 ];
 
 /* -------------------------------------------------------

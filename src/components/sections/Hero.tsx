@@ -208,7 +208,7 @@ export default function Hero() {
           animate="visible"
           className="max-w-2xl text-base sm:text-lg text-steel-400 leading-relaxed mb-10"
         >
-          Venta, arriendo y servicio técnico de grúas horquillas con{" "}
+          Venta y servicio técnico de grúas horquillas con{" "}
           <span className="text-white font-semibold">+67 años de experiencia</span>.
           Respuesta en menos de{" "}
           <span className="text-[#CE142D] font-semibold">2 horas</span>.
@@ -240,7 +240,7 @@ export default function Hero() {
 
           {/* Secondary CTA */}
           <a
-            href="tel:+56958187035"
+            href="tel:+56993209186"
             className={cn(
               "flex w-full sm:w-auto items-center justify-center gap-2.5 px-8 py-4 rounded-lg",
               "text-base font-bold uppercase tracking-wider",

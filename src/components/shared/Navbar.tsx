@@ -9,14 +9,15 @@ import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
+  { label: "Nosotros", href: "/nosotros" },
   { label: "Equipos", href: "/productos" },
   { label: "Servicios", href: "/servicios" },
-  { label: "Nosotros", href: "/nosotros" },
+  { label: "Noticias", href: "/noticias" },
   { label: "Contacto", href: "/contacto" },
 ];
 
-const PHONE_NUMBER = "+56 9 5818 7035";
-const PHONE_HREF = "tel:+56958187035";
+const PHONE_NUMBER = "+56 9 9320 9186";
+const PHONE_HREF = "tel:+56993209186";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

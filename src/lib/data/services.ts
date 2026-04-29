@@ -64,48 +64,6 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "arriendo",
-    slug: "arriendo",
-    name: "Arriendo de Equipos",
-    description:
-      "Arriendo de grúas horquillas a corto y largo plazo, con o sin operador. Entrega rápida en todo Chile.",
-    icon: "Clock",
-    image: "/assets/legacy/products/h3-series-1-3.5t-combustion.jpg",
-    heroSubtitle:
-      "Flota disponible inmediatamente. Sin inversión inicial, sin costos de mantenimiento. Tú operas, nosotros nos encargamos del resto.",
-    features: [
-      "Corto y largo plazo",
-      "Con o sin operador",
-      "Entrega en 24 horas",
-      "Cobertura nacional",
-    ],
-    cta: "Solicitar arriendo",
-    ctaPrefilledMessage: "Arrendar grúa horquilla",
-    sections: [
-      {
-        title: "Flexibilidad total",
-        content:
-          "Ofrecemos arriendos desde 1 día hasta varios años. Ideal para proyectos puntuales, períodos peak de producción, reemplazo durante mantenciones, o como alternativa permanente a la compra. Tarifas diarias, semanales y mensuales con descuentos progresivos.",
-      },
-      {
-        title: "Mantención incluida",
-        content:
-          "Todos nuestros arriendos incluyen mantención preventiva, repuestos consumibles y atención de emergencias 24/7. Si tu equipo falla, te lo cambiamos en menos de 24 horas. Tú solo te preocupas de operar.",
-      },
-      {
-        title: "Operador certificado opcional",
-        content:
-          "Si lo necesitas, te enviamos un operador certificado HELI con experiencia comprobada. Cumple con todas las normativas de seguridad chilenas y trae su propia certificación vigente.",
-      },
-    ],
-    benefits: [
-      { title: "24h", description: "Entrega rápida" },
-      { title: "0 mantención", description: "Todo incluido" },
-      { title: "Sin inversión", description: "Solo pagas el uso" },
-      { title: "24/7", description: "Soporte continuo" },
-    ],
-  },
-  {
     id: "servicio-tecnico",
     slug: "servicio-tecnico",
     name: "Servicio Técnico",
@@ -187,48 +145,6 @@ export const services: Service[] = [
       { title: "100%", description: "Originales certificados" },
       { title: "Envío", description: "A todo Chile" },
       { title: "Garantía", description: "Del fabricante HELI" },
-    ],
-  },
-  {
-    id: "usados",
-    slug: "usados",
-    name: "Equipos Usados",
-    description:
-      "Compra, venta y retoma de equipos usados multimarca. Todos testeados y con mantención al día.",
-    icon: "RefreshCw",
-    image: "/assets/legacy/products/g3-series-2-3.5t-gas.jpg",
-    heroSubtitle:
-      "Equipos usados certificados con mantención al día. Una alternativa económica con la confianza de HELI Chile.",
-    features: [
-      "Retoma: tu equipo como pie",
-      "Comercialización de tu equipo",
-      "Multimarca disponible",
-      "Equipos testeados y mantenidos",
-    ],
-    cta: "Ver equipos usados",
-    ctaPrefilledMessage: "Equipos usados",
-    sections: [
-      {
-        title: "Compra de equipos usados",
-        content:
-          "Adquirimos tu grúa horquilla usada al mejor precio del mercado. Realizamos una evaluación técnica completa y te entregamos una oferta justa. También aceptamos retoma como parte de pago para equipos nuevos, lo que te permite renovar tu flota con menor inversión.",
-      },
-      {
-        title: "Venta de usados certificados",
-        content:
-          "Todos nuestros equipos usados pasan por un proceso riguroso de inspección, mantención y certificación antes de ser comercializados. Reciben los repuestos necesarios, lubricantes nuevos y son testeados bajo carga. Incluyen garantía limitada y respaldo postventa.",
-      },
-      {
-        title: "Comercialización por consignación",
-        content:
-          "¿Tienes equipos que ya no usas? Te ayudamos a venderlos. Los exhibimos en nuestras sucursales, los promocionamos en nuestros canales digitales y los presentamos a nuestra cartera de clientes. Tú fijas el precio mínimo, nosotros gestionamos toda la operación.",
-      },
-    ],
-    benefits: [
-      { title: "Multimarca", description: "Todas las marcas" },
-      { title: "Testeados", description: "Inspección completa" },
-      { title: "Garantía", description: "Respaldo HELI Chile" },
-      { title: "Retoma", description: "Tu equipo como pie" },
     ],
   },
 ];

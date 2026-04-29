@@ -60,20 +60,21 @@ const equiposLinks = [
   { label: "Grúas GLP", href: "/productos?tipo=glp" },
   { label: "Grúas Hidrógeno", href: "/productos?tipo=hidrogeno" },
   { label: "Todos los equipos", href: "/productos" },
+  { label: "Catálogo PDF", href: "/catalogo" },
 ];
 
 const serviciosLinks = [
   { label: "Venta", href: "/servicios/venta" },
-  { label: "Arriendo", href: "/servicios/arriendo" },
   { label: "Servicio Técnico", href: "/servicios/servicio-tecnico" },
   { label: "Repuestos", href: "/servicios/repuestos" },
-  { label: "Equipos Usados", href: "/servicios/usados" },
 ];
 
 const empresaLinks = [
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Certificaciones", href: "/nosotros" },
-  { label: "Noticias", href: "/nosotros" },
+  { label: "Equipo y Vendedores", href: "/equipo" },
+  { label: "Noticias", href: "/noticias" },
+  { label: "Trabaja con nosotros", href: "/trabaja-con-nosotros" },
+  { label: "Información y denuncias (Ley Karin)", href: "/ley-karin" },
   { label: "Contacto", href: "/contacto" },
 ];
 
@@ -86,8 +87,8 @@ const contactInfo = [
   },
   {
     icon: Phone,
-    text: "+56 9 5818 7035",
-    href: "tel:+56958187035",
+    text: "+56 9 9320 9186",
+    href: "tel:+56993209186",
     external: false,
   },
   {
@@ -98,7 +99,7 @@ const contactInfo = [
   },
   {
     icon: Clock,
-    text: "Lun-Vie: 8:00 - 18:00 | Emergencias 24/7",
+    text: "Lun-Vie: 08:30 - 18:00 hrs",
     href: null,
     external: false,
   },
@@ -230,7 +231,7 @@ export default function Footer() {
             &copy; 2026 Helifork Lift. Todos los derechos reservados.
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-steel-600">
-            Helifork Lift — Venta y arriendo de grúas horquillas en Santiago y
+            Helifork Lift — Venta de grúas horquillas en Santiago y
             todo Chile. Servicio técnico, repuestos originales y capacitación
             para montacargas, apiladores y transpaletas.
           </p>

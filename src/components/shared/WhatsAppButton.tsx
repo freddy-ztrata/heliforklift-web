@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const WHATSAPP_URL =
-  "https://wa.me/56958187035?text=Hola%2C%20me%20interesa%20cotizar%20una%20gr%C3%BAa%20horquilla.%20%C2%BFPueden%20ayudarme%3F";
+  "https://wa.me/56993209186?text=Hola%2C%20me%20interesa%20cotizar%20una%20gr%C3%BAa%20horquilla.%20%C2%BFPueden%20ayudarme%3F";
 
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
