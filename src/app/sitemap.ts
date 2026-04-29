@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { allProducts } from "@/lib/data/all-products";
 import { news } from "@/lib/data/news";
 import { services } from "@/lib/data/services";
+import { productCategories } from "@/lib/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://heliforklift.cl";
@@ -41,5 +42,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...staticPages, ...servicePages, ...productPages, ...newsPages];
+  const categoryPages: MetadataRoute.Sitemap = productCategories.map((cat) => ({
+    url: `${baseUrl}/productos?categoria=${cat.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...categoryPages,
+    ...productPages,
+    ...newsPages,
+  ];
 }

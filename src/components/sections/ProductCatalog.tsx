@@ -94,21 +94,42 @@ function ProductCard({ product }: { product: FullProduct }) {
 
 interface ProductCatalogProps {
   defaultFuelType?: string;
+  defaultCategory?: string; // categorySlug, e.g. "transpaletas"
 }
 
-export default function ProductCatalog({ defaultFuelType }: ProductCatalogProps) {
+export default function ProductCatalog({
+  defaultFuelType,
+  defaultCategory,
+}: ProductCatalogProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tipoFromUrl = searchParams.get("tipo") || defaultFuelType || "todos";
+  const categoriaFromUrl = searchParams.get("categoria") || defaultCategory;
 
-  const [activeFuelType, setActiveFuelType] = useState(tipoFromUrl);
-  const [activeCategory, setActiveCategory] = useState("Todos");
+  // Initial category name (largo) derived from slug if present
+  const initialCategoryName = categoriaFromUrl
+    ? allProducts.find((p) => p.categorySlug === categoriaFromUrl)?.category ||
+      "Todos"
+    : "Todos";
 
-  // Sync state with URL changes (when user navigates back/forward or clicks a different ?tipo link)
+  const [activeFuelType, setActiveFuelType] = useState(
+    categoriaFromUrl ? "todos" : tipoFromUrl
+  );
+  const [activeCategory, setActiveCategory] = useState(initialCategoryName);
+
+  // Sync state with URL changes
   useEffect(() => {
-    setActiveFuelType(tipoFromUrl);
-    setActiveCategory("Todos");
-  }, [tipoFromUrl]);
+    if (categoriaFromUrl) {
+      const catName = allProducts.find(
+        (p) => p.categorySlug === categoriaFromUrl
+      )?.category;
+      setActiveFuelType("todos");
+      setActiveCategory(catName || "Todos");
+    } else {
+      setActiveFuelType(tipoFromUrl);
+      setActiveCategory("Todos");
+    }
+  }, [tipoFromUrl, categoriaFromUrl]);
 
   // Filter by fuel type first
   const fuelFiltered = useMemo(() => {
