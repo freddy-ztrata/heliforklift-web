@@ -13,6 +13,7 @@ const outerSpringConfig = { damping: 35, stiffness: 600, mass: 0.15 };
 export default function CustomCursor() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isOverForm, setIsOverForm] = useState(false);
 
   // Inner dot (faster)
   const cursorX = useMotionValue(-100);
@@ -43,9 +44,9 @@ export default function CustomCursor() {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Add/remove cursor-none class on body
+  // Add/remove cursor-none class on body — solo cuando NO esta sobre el form
   useEffect(() => {
-    if (isDesktop) {
+    if (isDesktop && !isOverForm) {
       document.body.classList.add("custom-cursor-active");
     } else {
       document.body.classList.remove("custom-cursor-active");
@@ -53,9 +54,9 @@ export default function CustomCursor() {
     return () => {
       document.body.classList.remove("custom-cursor-active");
     };
-  }, [isDesktop]);
+  }, [isDesktop, isOverForm]);
 
-  // Inject style for hiding default cursor
+  // Inject style for hiding default cursor — excluye el form HubSpot
   useEffect(() => {
     if (!isDesktop) return;
 
@@ -65,6 +66,24 @@ export default function CustomCursor() {
       .custom-cursor-active,
       .custom-cursor-active * {
         cursor: none !important;
+      }
+      /* Restaurar cursor nativo dentro del form HubSpot — siempre */
+      .hubspot-form-container,
+      .hubspot-form-container * {
+        cursor: auto !important;
+      }
+      .hubspot-form-container input,
+      .hubspot-form-container textarea {
+        cursor: text !important;
+      }
+      .hubspot-form-container button,
+      .hubspot-form-container [role="button"],
+      .hubspot-form-container label,
+      .hubspot-form-container select,
+      .hubspot-form-container input[type="submit"],
+      .hubspot-form-container input[type="checkbox"],
+      .hubspot-form-container input[type="radio"] {
+        cursor: pointer !important;
       }
     `;
     document.head.appendChild(style);
@@ -88,16 +107,26 @@ export default function CustomCursor() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [isDesktop, cursorX, cursorY]);
 
-  // Hover detection on interactive elements
+  // Hover detection on interactive elements + deteccion de form HubSpot
   useEffect(() => {
     if (!isDesktop) return;
 
     function handleMouseOver(e: MouseEvent) {
       const target = e.target as HTMLElement;
-      const interactive = target.closest(
-        'a, button, [data-cursor="pointer"], [role="button"], input, select, textarea, label'
-      );
-      setIsHovering(!!interactive);
+
+      // Si el mouse entra al form de HubSpot, desactivar cursor custom
+      const inHubspotForm = target.closest(".hubspot-form-container");
+      setIsOverForm(!!inHubspotForm);
+
+      // Hover state para escalar el cursor (solo si NO esta sobre el form)
+      if (!inHubspotForm) {
+        const interactive = target.closest(
+          'a, button, [data-cursor="pointer"], [role="button"], input, select, textarea, label'
+        );
+        setIsHovering(!!interactive);
+      } else {
+        setIsHovering(false);
+      }
     }
 
     document.addEventListener("mouseover", handleMouseOver, { passive: true });
@@ -136,8 +165,8 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovering ? 1.5 : 1,
-          opacity: isHovering ? 0.8 : 0.6,
+          scale: isOverForm ? 0 : isHovering ? 1.5 : 1,
+          opacity: isOverForm ? 0 : isHovering ? 0.8 : 0.6,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         aria-hidden="true"
@@ -155,7 +184,8 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          scale: isHovering ? 0.5 : 1,
+          scale: isOverForm ? 0 : isHovering ? 0.5 : 1,
+          opacity: isOverForm ? 0 : 1,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
         aria-hidden="true"

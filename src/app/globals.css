@@ -247,6 +247,23 @@ section:not(:first-child) {
 .hubspot-form-container {
   color: #fff;
   font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
+  background: rgba(17, 17, 24, 0.8);
+  border: 1px solid rgba(42, 42, 62, 0.5);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(8px);
+}
+
+@media (min-width: 640px) {
+  .hubspot-form-container {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .hubspot-form-container {
+    padding: 40px;
+  }
 }
 
 .hubspot-form-container form {
@@ -376,8 +393,8 @@ section:not(:first-child) {
   background: var(--steel-800) !important;
 }
 
-/* Chevron custom para selects */
-.hubspot-form-container select {
+/* Chevron custom para selects (excluyendo el selector de pais intl-tel-input) */
+.hubspot-form-container select:not(.iti__country-list):not([class*="iti"]):not([class*="country"]) {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239b9bae' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e") !important;
   background-repeat: no-repeat !important;
   background-position: right 14px center !important;
@@ -392,10 +409,106 @@ section:not(:first-child) {
   padding: 12px !important;
 }
 
+/* ---------- INTL-TEL-INPUT (selector de pais con bandera) ---------- */
+/* Resetea estilos del widget de telefono internacional */
+.hubspot-form-container .iti,
+.hubspot-form-container [class*="iti--"],
+.hubspot-form-container .iti__flag-container,
+.hubspot-form-container .iti__selected-flag,
+.hubspot-form-container .iti__country-list {
+  background: transparent !important;
+}
+
+/* Container del widget */
+.hubspot-form-container .iti {
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Boton/area que muestra la bandera + codigo pais */
+.hubspot-form-container .iti__selected-flag {
+  background: var(--steel-800) !important;
+  border-right: 1px solid var(--steel-700) !important;
+  padding: 0 8px 0 12px !important;
+  border-radius: 12px 0 0 12px !important;
+}
+
+.hubspot-form-container .iti__selected-flag:hover,
+.hubspot-form-container .iti__selected-flag:focus {
+  background: var(--steel-700) !important;
+}
+
+/* Banderas — restaurar imagenes del sprite de intl-tel-input */
+.hubspot-form-container .iti__flag {
+  background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags.png") !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+  background-size: auto !important;
+  width: 20px !important;
+  height: 15px !important;
+  display: inline-block !important;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hubspot-form-container .iti__flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags@2x.png") !important;
+  }
+}
+
+/* Arrow del dropdown de paises */
+.hubspot-form-container .iti__arrow {
+  border-top-color: var(--steel-400) !important;
+  margin-left: 6px !important;
+}
+
+.hubspot-form-container .iti__arrow--up {
+  border-bottom-color: var(--steel-400) !important;
+}
+
+/* Lista desplegable de paises */
+.hubspot-form-container .iti__country-list {
+  background: var(--steel-900) !important;
+  border: 1px solid var(--steel-700) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+  max-height: 240px !important;
+  overflow-y: auto !important;
+  z-index: 100 !important;
+}
+
+.hubspot-form-container .iti__country {
+  color: #fff !important;
+  padding: 8px 12px !important;
+  background: transparent !important;
+}
+
+.hubspot-form-container .iti__country:hover,
+.hubspot-form-container .iti__country.iti__highlight {
+  background: var(--steel-800) !important;
+}
+
+.hubspot-form-container .iti__country-name {
+  color: #fff !important;
+}
+
+.hubspot-form-container .iti__dial-code {
+  color: var(--steel-400) !important;
+}
+
+/* Input dentro del widget */
+.hubspot-form-container .iti input[type="tel"],
+.hubspot-form-container .iti input[type="text"] {
+  padding-left: 60px !important;
+}
+
+/* Divider entre flag y input */
+.hubspot-form-container .iti__divider {
+  border-bottom-color: var(--steel-700) !important;
+}
+
 /* ---------- RADIO BUTTONS (Plazo de inversión) ---------- */
-/* HubSpot envuelve los radios en <ul class="inputs-list"> */
-.hubspot-form-container ul[class*="inputs-list"],
-.hubspot-form-container ul.inputs-list {
+/* Solo aplica a UL/LI que contengan inputs type="radio" (excluye selectores de pais y otros) */
+.hubspot-form-container ul.inputs-list:has(input[type="radio"]) {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -405,22 +518,19 @@ section:not(:first-child) {
 }
 
 @media (min-width: 640px) {
-  .hubspot-form-container ul[class*="inputs-list"],
-  .hubspot-form-container ul.inputs-list {
+  .hubspot-form-container ul.inputs-list:has(input[type="radio"]) {
     grid-template-columns: 1fr 1fr !important;
   }
 }
 
-.hubspot-form-container ul[class*="inputs-list"] li,
-.hubspot-form-container ul.inputs-list li {
+.hubspot-form-container ul.inputs-list:has(input[type="radio"]) li {
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
 }
 
-/* Cada radio se convierte en una "card" */
-.hubspot-form-container ul[class*="inputs-list"] li label,
-.hubspot-form-container ul.inputs-list li label {
+/* Cada radio se convierte en una "card" — solo labels que envuelven type="radio" */
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"]) {
   display: flex !important;
   align-items: center !important;
   gap: 12px !important;
@@ -438,14 +548,13 @@ section:not(:first-child) {
   color: #fff !important;
 }
 
-.hubspot-form-container ul[class*="inputs-list"] li label:hover,
-.hubspot-form-container ul.inputs-list li label:hover {
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"]):hover {
   border-color: var(--steel-500) !important;
   background: rgba(26, 26, 46, 0.9) !important;
 }
 
-/* Ocultar el radio nativo */
-.hubspot-form-container input[type="radio"] {
+/* Ocultar SOLO los radios dentro de inputs-list cards (no afecta a otros radios del DOM) */
+.hubspot-form-container ul.inputs-list li label input[type="radio"] {
   position: absolute !important;
   opacity: 0 !important;
   pointer-events: none !important;
@@ -454,9 +563,8 @@ section:not(:first-child) {
   margin: 0 !important;
 }
 
-/* Indicador circular custom */
-.hubspot-form-container ul[class*="inputs-list"] li label::before,
-.hubspot-form-container ul.inputs-list li label::before {
+/* Indicador circular custom — solo en labels con radio */
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"])::before {
   content: '';
   width: 18px;
   height: 18px;
@@ -468,24 +576,20 @@ section:not(:first-child) {
   flex-shrink: 0;
 }
 
-/* Estado seleccionado (usa :has() — Chrome 105+, Safari 15.4+, Firefox 121+) */
-.hubspot-form-container ul[class*="inputs-list"] li label:has(input:checked),
-.hubspot-form-container ul.inputs-list li label:has(input:checked) {
+/* Estado seleccionado */
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"]:checked) {
   border-color: var(--heli-red) !important;
   background: rgba(206, 20, 45, 0.1) !important;
   box-shadow: 0 0 0 1px var(--heli-red), 0 0 20px rgba(206, 20, 45, 0.15) !important;
 }
 
-.hubspot-form-container ul[class*="inputs-list"] li label:has(input:checked)::before,
-.hubspot-form-container ul.inputs-list li label:has(input:checked)::before {
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"]:checked)::before {
   border-color: var(--heli-red);
   background: var(--heli-red);
   box-shadow: inset 0 0 0 3px var(--steel-900);
 }
 
-/* Mejora del texto dentro del label */
-.hubspot-form-container ul[class*="inputs-list"] li label > span,
-.hubspot-form-container ul.inputs-list li label > span {
+.hubspot-form-container ul.inputs-list li label:has(input[type="radio"]) > span {
   flex: 1;
   color: inherit;
 }
