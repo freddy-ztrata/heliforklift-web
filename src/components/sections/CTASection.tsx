@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Script from "next/script";
 import { motion } from "framer-motion";
 
 const TRUST_ELEMENTS = [
@@ -11,18 +10,70 @@ const TRUST_ELEMENTS = [
   { text: "Tus datos están seguros. No spam.", emoji: "🔒", href: null },
 ];
 
+const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
+const HUBSPOT_PORTAL_ID = "50182752";
+const HUBSPOT_FORM_ID = "15b3dd6b-0095-4c03-a306-3dde97e81456";
+
+declare global {
+  interface Window {
+    hbspt?: {
+      forms?: {
+        create: (config: {
+          region: string;
+          portalId: string;
+          formId: string;
+          target: string;
+        }) => void;
+      };
+    };
+  }
+}
+
 export default function CTASection() {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
-  // Re-trigger HubSpot form rendering on mount (handles SPA navigation)
+  // Renderiza el form de HubSpot. El embed v2 soporta múltiples renders
+  // por página y SPA navigation (a diferencia del embed "developer" que
+  // sólo escanea el DOM una vez al cargar).
   useEffect(() => {
     const container = formContainerRef.current;
     if (!container) return;
 
-    // If HubSpot script already loaded and form not yet rendered, ask it to scan
-    // @ts-expect-error - HubSpot global injected by their script
-    if (typeof window !== "undefined" && window.hbspt?.forms) {
-      // No-op: the data-attribute version auto-renders
+    // Asigna un ID único a este container (necesario para hbspt.forms.create)
+    const targetId = `hs-form-${Math.random().toString(36).slice(2, 11)}`;
+    container.id = targetId;
+
+    function renderForm() {
+      if (!window.hbspt?.forms?.create || !container) return;
+      container.innerHTML = ""; // Limpiar cualquier render previo
+      window.hbspt.forms.create({
+        region: "na1",
+        portalId: HUBSPOT_PORTAL_ID,
+        formId: HUBSPOT_FORM_ID,
+        target: `#${targetId}`,
+      });
+    }
+
+    // Si el script ya está cargado, renderiza inmediatamente
+    if (window.hbspt?.forms?.create) {
+      renderForm();
+      return;
+    }
+
+    // Si el script no existe en el DOM, inyectarlo
+    const existing = document.querySelector(`script[src="${HUBSPOT_V2_SCRIPT}"]`);
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = HUBSPOT_V2_SCRIPT;
+      script.async = true;
+      script.defer = true;
+      script.onload = renderForm;
+      document.body.appendChild(script);
+    } else {
+      // Script existe pero quizá aún cargando — esperar load
+      existing.addEventListener("load", renderForm, { once: true });
+      // Por si ya cargó pero sin disparar load (race condition)
+      setTimeout(renderForm, 100);
     }
   }, []);
 
@@ -111,21 +162,22 @@ export default function CTASection() {
           {/* Subtle glow behind form */}
           <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-b from-heli-red/10 via-transparent to-transparent opacity-60" />
 
-          {/* HubSpot Form Embed */}
-          <div className="relative" id="hubspot-form-container">
-            <Script
-              src="https://js.hsforms.net/forms/embed/developer/50182752.js"
-              strategy="afterInteractive"
-              defer
-            />
-            <div
-              ref={formContainerRef}
-              className="hs-form-html"
-              data-region="na1"
-              data-form-id="15b3dd6b-0095-4c03-a306-3dde97e81456"
-              data-portal-id="50182752"
-            />
-          </div>
+          {/* HubSpot Form Embed — populado por hbspt.forms.create en useEffect */}
+          <div
+            ref={formContainerRef}
+            className="hubspot-form-container relative"
+          />
+
+          {/* Fallback: mensaje mientras carga el form */}
+          <noscript>
+            <p className="text-center text-sm text-steel-400">
+              Para usar este formulario, habilita JavaScript o llámanos al{" "}
+              <a href="tel:+56993209186" className="text-heli-red hover:underline">
+                +56 9 9320 9186
+              </a>
+              .
+            </p>
+          </noscript>
         </motion.div>
 
         {/* Trust elements - bottom row */}
