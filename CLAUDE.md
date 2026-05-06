@@ -82,18 +82,24 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 - `/catalogo` — Landing por tipo de energía + CTA solicitar PDF por email
 - `/trabaja-con-nosotros` — Hero + 4 beneficios + CTA email a `contacto@heliforklift.cl`
 - `/ley-karin` — Información Ley 21.643, principios (confidencialidad, sin represalias, imparcialidad), canal de denuncias, link a Dirección del Trabajo
+- `/gracias` — Landing post-submit del form HubSpot. `robots: { index: false }`, excluida del sitemap. Hero con check + 3 cards "Próximos pasos" + 3 links exploración + CTA WhatsApp urgente.
 
-### Quote Form (CTASection.tsx)
+### Quote Form (CTASection.tsx) — HubSpot Embed
 
-The main conversion form. Fields ordered for B2B conversion optimization:
-1. Nombre + Teléfono (hook fields)
-2. **Plazo de inversión** — radio cards (NOT dropdown) with 4 options that segment leads visually: Próximos 30 días (urgent, red), 30-60 días (yellow), 60-90 días (sky), Sólo precios (gray). Each has icon + label + description.
-3. Tipo de servicio (CustomSelect dropdown) — opciones actualizadas sin "Arrendar"
-4. Empresa + RUT (auto-formatted Chilean RUT validation via `validateRut()` and `formatRut()`)
-5. Email personal + Email empresa (separate fields)
-6. Mensaje opcional
+El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`, form `15b3dd6b-0095-4c03-a306-3dde97e81456`).
 
-Validation: name + phone required, RUT/email validated only if present.
+**Implementación:**
+- `useEffect` inyecta `https://js.hsforms.net/forms/embed/v2.js` una sola vez globalmente
+- Cada instancia llama `window.hbspt.forms.create({ region, portalId, formId, target })` con un ID único en runtime (`hs-form-{random}`) — soporta múltiples renders por página y SPA navigation
+- Wrapper visual exterior: `motion.div` con borde + bg + padding (NO en `.hubspot-form-container` para evitar doble borde con el container interno de HubSpot)
+
+**⚠️ HubSpot renderiza dentro de un `<iframe>`** — el CSS de la página NO entra al iframe. Todos los estilos del form (inputs, botones, colores, radio cards) se configuran en **HubSpot > Marketing > Forms > tu form > Style and preview**. Aquí solo controlamos el wrapper exterior.
+
+**Post-submit redirect:** configurado en HubSpot a `https://heliforklift.cl/gracias`.
+
+**CustomCursor.tsx:** detecta cuando el mouse entra a `.hubspot-form-container` y oculta el cursor custom (scale 0, opacity 0) + restaura cursor nativo del browser dentro del form. Detección via `target.closest(".hubspot-form-container")` en `mouseover` handler.
+
+**Páginas que renderizan `<CTASection />`:** homepage, contacto, nosotros, productos (landing y filtered), productos/[slug], servicios (landing y [slug]), noticias (landing y [slug]), equipo.
 
 ### Contact Info (Updated)
 
@@ -136,7 +142,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - `/productos` has dynamic metadata via `generateMetadata()` based on `?tipo=` o `?categoria=` params
 - Product detail pages inject Product schema JSON-LD with specs and fuel type
 - Service detail pages have unique title without duplicating "| Helifork Lift" suffix (template adds it)
-- `sitemap.ts` generates 102 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias)
+- `sitemap.ts` generates 109 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias). `/gracias` excluida (es post-submit, `noindex`).
 
 ### Deployment (Dokploy)
 
