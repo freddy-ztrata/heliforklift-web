@@ -157,8 +157,11 @@ export default function CTASection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="relative mx-auto max-w-2xl"
+          className="relative mx-auto max-w-2xl rounded-2xl border border-steel-700/50 bg-steel-900/80 p-4 sm:p-6 md:p-10 backdrop-blur-sm"
         >
+          {/* Subtle glow behind form */}
+          <div className="pointer-events-none absolute -inset-px rounded-2xl bg-gradient-to-b from-heli-red/10 via-transparent to-transparent opacity-60" />
+
           {/* HubSpot Form Embed — populado por hbspt.forms.create en useEffect */}
           <div
             ref={formContainerRef}

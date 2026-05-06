@@ -247,23 +247,26 @@ section:not(:first-child) {
 .hubspot-form-container {
   color: #fff;
   font-family: var(--font-sans, "DM Sans", system-ui, sans-serif);
-  background: rgba(17, 17, 24, 0.8);
-  border: 1px solid rgba(42, 42, 62, 0.5);
-  border-radius: 16px;
-  padding: 16px;
-  backdrop-filter: blur(8px);
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
-@media (min-width: 640px) {
-  .hubspot-form-container {
-    padding: 24px;
-  }
-}
-
-@media (min-width: 768px) {
-  .hubspot-form-container {
-    padding: 40px;
-  }
+/* Cualquier wrapper que HubSpot inyecte adentro (forms-iframe-container, hbspt-form, etc.)
+   debe ser transparente y sin borde — el estilo viene del wrapper exterior de la pagina */
+.hubspot-form-container > div,
+.hubspot-form-container > form,
+.hubspot-form-container [class*="hbspt-form"],
+.hubspot-form-container [class*="hs-form-frame"],
+.hubspot-form-container [class*="forms-iframe"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 .hubspot-form-container form {
