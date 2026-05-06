@@ -450,24 +450,25 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots: dot sobre la pieza + pill al lado inmediato.
+  // Hotspots ajustados para la vista lateral del K2 Diesel
+  // (mastil izquierda alta, motor parte trasera derecha media-baja, rueda trasera derecha)
   const hotspots = [
     {
       label: "Mástil triple 4.7m",
-      dotX: "32%",
-      dotY: "35%",
-      pillSide: "left" as const,
+      dotX: "30%",
+      dotY: "32%",
+      pillSide: "right" as const,
     },
     {
       label: "Motor Diesel",
-      dotX: "82%",
+      dotX: "72%",
       dotY: "55%",
       pillSide: "right" as const,
     },
     {
       label: "Neumáticos macizos",
-      dotX: "45%",
-      dotY: "82%",
+      dotX: "55%",
+      dotY: "78%",
       pillSide: "right" as const,
     },
   ];
