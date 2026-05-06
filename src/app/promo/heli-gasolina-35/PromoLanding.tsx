@@ -442,33 +442,27 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots posicionados DIRECTAMENTE sobre la pieza que mencionan (vista lateral 3.5T).
-  // dotX/dotY: posicion del punto exactamente sobre la pieza fisica
-  // labelX/labelY: posicion del pill al costado, conectado por linea SVG
+  // Hotspots: dot sobre la pieza + pill al lado inmediato (no flotando lejos).
+  // pillSide define si el pill aparece a la izquierda o derecha del dot.
+  // Regla: si dot esta en mitad derecha de la imagen, pill va a la izquierda y viceversa.
   const hotspots = [
     {
-      // Columna del mastil (parte vertical izquierda alta)
       label: "Mástil triple 4.7m",
       dotX: "32%",
       dotY: "35%",
-      labelX: "10%",
-      labelY: "15%",
+      pillSide: "left" as const,
     },
     {
-      // Caparazón rojo del motor (parte trasera derecha)
       label: "Motor K25 Nissan",
       dotX: "82%",
       dotY: "55%",
-      labelX: "90%",
-      labelY: "38%",
+      pillSide: "right" as const,
     },
     {
-      // Rueda delantera/maciza (parte inferior izquierda)
       label: "Neumáticos macizos",
       dotX: "45%",
       dotY: "82%",
-      labelX: "12%",
-      labelY: "92%",
+      pillSide: "right" as const,
     },
   ];
 
@@ -528,82 +522,48 @@ function Showcase() {
               />
             </motion.div>
 
-            {/* SVG con lineas que conectan dots con pills */}
-            <svg
-              className="pointer-events-none absolute inset-0 z-10 hidden h-full w-full lg:block"
-              preserveAspectRatio="none"
-              viewBox="0 0 100 100"
-              aria-hidden
-            >
-              {hotspots.map((h, i) => (
-                <motion.line
-                  key={`line-${h.label}`}
-                  x1={parseFloat(h.dotX)}
-                  y1={parseFloat(h.dotY)}
-                  x2={parseFloat(h.labelX)}
-                  y2={parseFloat(h.labelY)}
-                  stroke="rgba(206, 20, 45, 0.5)"
-                  strokeWidth="0.15"
-                  strokeDasharray="0.5 0.5"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={
-                    isInView
-                      ? { pathLength: 1, opacity: 1 }
-                      : { pathLength: 0, opacity: 0 }
-                  }
-                  transition={{ delay: 0.6 + i * 0.2, duration: 0.8 }}
-                  vectorEffect="non-scaling-stroke"
-                />
-              ))}
-            </svg>
-
-            {/* Hotspots — dots sobre la maquina (en la pieza exacta) */}
+            {/* Hotspots — dot + pill juntos sobre la pieza */}
             {hotspots.map((h, i) => (
               <motion.div
-                key={`dot-${h.label}`}
+                key={`hotspot-${h.label}`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + i * 0.2, type: "spring" }}
-                className="group absolute z-20 hidden lg:block"
+                className={cn(
+                  "group absolute z-20 hidden lg:flex items-center gap-3",
+                  h.pillSide === "right" ? "flex-row" : "flex-row-reverse"
+                )}
                 style={{
                   left: h.dotX,
                   top: h.dotY,
-                  transform: "translate(-50%, -50%)",
+                  // Dot queda EN dotX/dotY; el pill se extiende al lado.
+                  transform:
+                    h.pillSide === "right"
+                      ? "translate(-8px, -50%)"
+                      : "translate(calc(-100% + 8px), -50%)",
                 }}
               >
-                <motion.div
-                  animate={{
-                    scale: [1, 2.2, 1],
-                    opacity: [0.6, 0, 0.6],
-                  }}
-                  transition={{
-                    duration: 2.2,
-                    repeat: Infinity,
-                    delay: i * 0.3,
-                  }}
-                  className="absolute inset-0 rounded-full bg-heli-red"
-                />
-                <div className="absolute -inset-3 rounded-full bg-heli-red/0 blur-md transition-all duration-300 group-hover:bg-heli-red/60" />
-                <div className="relative h-4 w-4 rounded-full bg-heli-red ring-2 ring-white/30 shadow-[0_0_15px_rgba(206,20,45,0.8)] transition-all duration-300 group-hover:scale-150 group-hover:ring-white/80 group-hover:shadow-[0_0_25px_rgba(206,20,45,1)]" />
-              </motion.div>
-            ))}
+                {/* Dot — clavado sobre la pieza */}
+                <div className="relative flex-shrink-0">
+                  <motion.div
+                    animate={{
+                      scale: [1, 2.2, 1],
+                      opacity: [0.6, 0, 0.6],
+                    }}
+                    transition={{
+                      duration: 2.2,
+                      repeat: Infinity,
+                      delay: i * 0.3,
+                    }}
+                    className="absolute inset-0 rounded-full bg-heli-red"
+                  />
+                  <div className="absolute -inset-3 rounded-full bg-heli-red/0 blur-md transition-all duration-300 group-hover:bg-heli-red/60" />
+                  <div className="relative h-4 w-4 rounded-full bg-heli-red ring-2 ring-white/30 shadow-[0_0_15px_rgba(206,20,45,0.8)] transition-all duration-300 group-hover:scale-150 group-hover:ring-white/80 group-hover:shadow-[0_0_25px_rgba(206,20,45,1)]" />
+                </div>
 
-            {/* Hotspots — pills/labels al costado */}
-            {hotspots.map((h, i) => (
-              <motion.div
-                key={`label-${h.label}`}
-                initial={{ opacity: 0, x: -10 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.7 + i * 0.2 }}
-                className="absolute z-20 hidden lg:block"
-                style={{
-                  left: h.labelX,
-                  top: h.labelY,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
+                {/* Pill — al lado inmediato del dot */}
                 <motion.div
-                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileHover={{ scale: 1.08 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   className="cursor-pointer rounded-full border border-heli-red/40 bg-steel-950/90 px-4 py-2 backdrop-blur transition-all hover:border-heli-red hover:bg-heli-red hover:shadow-[0_0_30px_rgba(206,20,45,0.6)]"
                 >
