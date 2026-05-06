@@ -106,6 +106,9 @@ export default function RootLayout({
       className={`${dmSans.variable} ${bebasNeue.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M9FW8BM3');` }} />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HLYKF62PW" />
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-3HLYKF62PW');` }} />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.svg" sizes="any" />
@@ -123,6 +126,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
       </head>
       <body className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
+        <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M9FW8BM3" height="0" width="0" style="display:none;visibility:hidden"></iframe>` }} />
         {children}
         <script
           type="application/ld+json"

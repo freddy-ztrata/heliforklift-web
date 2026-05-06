@@ -201,7 +201,7 @@ html {
 
 /* Product image — clean white bg on dark cards */
 .product-img-container {
-  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  background: #ffffff;
   border-radius: var(--radius-lg);
 }
 .product-img-container img {
