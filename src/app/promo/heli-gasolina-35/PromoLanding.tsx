@@ -442,10 +442,34 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
+  // Hotspots posicionados DIRECTAMENTE sobre la pieza que mencionan (vista lateral 3.5T).
+  // dotX/dotY: posicion del punto exactamente sobre la pieza fisica
+  // labelX/labelY: posicion del pill al costado, conectado por linea SVG
   const hotspots = [
-    { label: "Mástil triple 4.7m", side: "left", top: "12%" },
-    { label: "Motor K25 Nissan", side: "right", top: "45%" },
-    { label: "Neumáticos macizos", side: "left", top: "75%" },
+    {
+      // Columna del mastil (parte vertical izquierda alta)
+      label: "Mástil triple 4.7m",
+      dotX: "32%",
+      dotY: "35%",
+      labelX: "10%",
+      labelY: "15%",
+    },
+    {
+      // Caparazón rojo del motor (parte trasera derecha)
+      label: "Motor K25 Nissan",
+      dotX: "82%",
+      dotY: "55%",
+      labelX: "90%",
+      labelY: "38%",
+    },
+    {
+      // Rueda delantera/maciza (parte inferior izquierda)
+      label: "Neumáticos macizos",
+      dotX: "45%",
+      dotY: "82%",
+      labelX: "12%",
+      labelY: "92%",
+    },
   ];
 
   return (
@@ -504,41 +528,89 @@ function Showcase() {
               />
             </motion.div>
 
-            {/* Hotspots animados */}
+            {/* SVG con lineas que conectan dots con pills */}
+            <svg
+              className="pointer-events-none absolute inset-0 z-10 hidden h-full w-full lg:block"
+              preserveAspectRatio="none"
+              viewBox="0 0 100 100"
+              aria-hidden
+            >
+              {hotspots.map((h, i) => (
+                <motion.line
+                  key={`line-${h.label}`}
+                  x1={parseFloat(h.dotX)}
+                  y1={parseFloat(h.dotY)}
+                  x2={parseFloat(h.labelX)}
+                  y2={parseFloat(h.labelY)}
+                  stroke="rgba(206, 20, 45, 0.5)"
+                  strokeWidth="0.15"
+                  strokeDasharray="0.5 0.5"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={
+                    isInView
+                      ? { pathLength: 1, opacity: 1 }
+                      : { pathLength: 0, opacity: 0 }
+                  }
+                  transition={{ delay: 0.6 + i * 0.2, duration: 0.8 }}
+                  vectorEffect="non-scaling-stroke"
+                />
+              ))}
+            </svg>
+
+            {/* Hotspots — dots sobre la maquina (en la pieza exacta) */}
             {hotspots.map((h, i) => (
               <motion.div
-                key={h.label}
+                key={`dot-${h.label}`}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.5 + i * 0.2, type: "spring" }}
-                className={cn(
-                  "absolute hidden lg:flex items-center gap-2",
-                  h.side === "left"
-                    ? "left-2 sm:left-8 flex-row"
-                    : "right-2 sm:right-8 flex-row-reverse"
-                )}
-                style={{ top: h.top }}
+                className="group absolute z-20 hidden lg:block"
+                style={{
+                  left: h.dotX,
+                  top: h.dotY,
+                  transform: "translate(-50%, -50%)",
+                }}
               >
-                <div className="relative">
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.7, 0, 0.7],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                    className="absolute inset-0 rounded-full bg-heli-red"
-                  />
-                  <div className="relative h-3 w-3 rounded-full bg-heli-red ring-2 ring-white/20" />
-                </div>
-                <div className="rounded-full border border-heli-red/30 bg-steel-950/80 px-3 py-1.5 backdrop-blur">
-                  <span className="text-xs font-bold uppercase tracking-wider text-white">
+                <motion.div
+                  animate={{
+                    scale: [1, 2.2, 1],
+                    opacity: [0.6, 0, 0.6],
+                  }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    delay: i * 0.3,
+                  }}
+                  className="absolute inset-0 rounded-full bg-heli-red"
+                />
+                <div className="absolute -inset-3 rounded-full bg-heli-red/0 blur-md transition-all duration-300 group-hover:bg-heli-red/60" />
+                <div className="relative h-4 w-4 rounded-full bg-heli-red ring-2 ring-white/30 shadow-[0_0_15px_rgba(206,20,45,0.8)] transition-all duration-300 group-hover:scale-150 group-hover:ring-white/80 group-hover:shadow-[0_0_25px_rgba(206,20,45,1)]" />
+              </motion.div>
+            ))}
+
+            {/* Hotspots — pills/labels al costado */}
+            {hotspots.map((h, i) => (
+              <motion.div
+                key={`label-${h.label}`}
+                initial={{ opacity: 0, x: -10 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.7 + i * 0.2 }}
+                className="absolute z-20 hidden lg:block"
+                style={{
+                  left: h.labelX,
+                  top: h.labelY,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <motion.div
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className="cursor-pointer rounded-full border border-heli-red/40 bg-steel-950/90 px-4 py-2 backdrop-blur transition-all hover:border-heli-red hover:bg-heli-red hover:shadow-[0_0_30px_rgba(206,20,45,0.6)]"
+                >
+                  <span className="whitespace-nowrap text-xs font-bold uppercase tracking-wider text-white">
                     {h.label}
                   </span>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
