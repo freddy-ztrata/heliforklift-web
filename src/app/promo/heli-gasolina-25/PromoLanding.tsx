@@ -11,11 +11,9 @@ import {
   Move,
   Armchair,
   ShieldCheck,
-  Wrench,
   Truck,
   Phone,
   Mail,
-  MessageCircle,
   Check,
   Flame,
   Clock,
@@ -27,10 +25,6 @@ import {
 import { cn } from "@/lib/utils";
 
 const PRODUCT_IMAGE = "/assets/legacy/products/g3-series-2-3.5t-gas.jpg";
-const WHATSAPP_MESSAGE = encodeURIComponent(
-  "Hola, vi la oferta de la Grúa Horquilla HELI Gasolina 2.5 ton ($14.000.000 + IVA). Quiero más información."
-);
-const WHATSAPP_URL = `https://wa.me/56993209186?text=${WHATSAPP_MESSAGE}`;
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -143,16 +137,15 @@ function Hero() {
           className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-heli-red text-lg font-black text-white">
-              H
-            </div>
-            <div>
-              <p className="font-heading text-xl leading-none text-white">
-                HELI
-              </p>
-              <p className="text-[10px] uppercase tracking-widest text-steel-400">
-                Empower the world
-              </p>
+            <div className="rounded-lg bg-white p-2.5 shadow-[0_4px_20px_rgba(206,20,45,0.25)]">
+              <Image
+                src="/assets/legacy/logos/heli-chile-logo.png"
+                alt="HELI Forklift Chile"
+                width={120}
+                height={36}
+                priority
+                className="h-7 w-auto sm:h-8"
+              />
             </div>
           </div>
 
@@ -253,13 +246,11 @@ function Hero() {
                 <Zap className="relative h-4 w-4" />
               </a>
               <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="tel:+56993209186"
                 className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 bg-white/5 px-8 py-4 text-base font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:border-white/40 hover:bg-white/10"
               >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp directo
+                <Phone className="h-4 w-4" />
+                Llámanos
               </a>
             </motion.div>
 
@@ -285,15 +276,15 @@ function Hero() {
             {/* Glow detrás */}
             <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
 
-            {/* Imagen */}
-            <div className="relative h-full w-full">
+            {/* Imagen — mix-blend-mode: lighten elimina visualmente el fondo blanco */}
+            <div className="relative h-full w-full mix-blend-lighten">
               <Image
                 src={PRODUCT_IMAGE}
                 alt="Grúa Horquilla HELI Gasolina 2.5 toneladas"
                 fill
                 priority
                 quality={90}
-                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.3)]"
+                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
@@ -439,6 +430,143 @@ function FeaturesGrid() {
 }
 
 // ============================================================
+// SHOWCASE — vista grande de la maquina con hotspots
+// ============================================================
+function Showcase() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
+  const hotspots = [
+    { label: "Mástil triple 4.7m", side: "left", top: "12%" },
+    { label: "Motor K25 K-Nissan", side: "right", top: "45%" },
+    { label: "Neumáticos macizos", side: "left", top: "75%" },
+  ];
+
+  return (
+    <section
+      ref={ref}
+      className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-28"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(206,20,45,0.15),transparent_70%)]" />
+      <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-heli-red/15 blur-[150px]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
+            Tecnología HELI
+          </p>
+          <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,4rem)] leading-none text-white">
+            INGENIERÍA QUE
+            <br />
+            <span className="text-heli-red">NO PARA</span>
+          </h2>
+          <p className="mt-4 text-base text-steel-400">
+            Cada detalle pensado para operaciones intensivas. Confiabilidad probada en miles de unidades operando hoy en Chile.
+          </p>
+        </motion.div>
+
+        {/* Imagen central + hotspots */}
+        <motion.div
+          style={{ y: imageY }}
+          className="relative mt-10 flex items-center justify-center"
+        >
+          <div className="relative aspect-[4/3] w-full max-w-4xl">
+            {/* Glow detrás */}
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]"
+            />
+
+            {/* Imagen sin fondo via mix-blend */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative h-full w-full mix-blend-lighten"
+            >
+              <Image
+                src={PRODUCT_IMAGE}
+                alt="HELI Gasolina 2.5 toneladas vista lateral"
+                fill
+                quality={90}
+                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
+                sizes="(max-width: 1024px) 100vw, 80vw"
+              />
+            </motion.div>
+
+            {/* Hotspots animados */}
+            {hotspots.map((h, i) => (
+              <motion.div
+                key={h.label}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 0.5 + i * 0.2, type: "spring" }}
+                className={cn(
+                  "absolute hidden lg:flex items-center gap-2",
+                  h.side === "left" ? "left-2 sm:left-8 flex-row" : "right-2 sm:right-8 flex-row-reverse"
+                )}
+                style={{ top: h.top }}
+              >
+                <div className="relative">
+                  <motion.div
+                    animate={{ scale: [1, 1.5, 1], opacity: [0.7, 0, 0.7] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+                    className="absolute inset-0 rounded-full bg-heli-red"
+                  />
+                  <div className="relative h-3 w-3 rounded-full bg-heli-red ring-2 ring-white/20" />
+                </div>
+                <div className="rounded-full border border-heli-red/30 bg-steel-950/80 px-3 py-1.5 backdrop-blur">
+                  <span className="text-xs font-bold uppercase tracking-wider text-white">
+                    {h.label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Stats bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
+          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6"
+        >
+          {[
+            { value: "2.5T", label: "Capacidad" },
+            { value: "4.7m", label: "Altura mástil" },
+            { value: "K25", label: "Motor Nissan" },
+            { value: "180+", label: "Países" },
+          ].map((s) => (
+            <div
+              key={s.label}
+              className="rounded-2xl border border-white/[0.08] bg-steel-900/50 p-4 text-center backdrop-blur sm:p-6"
+            >
+              <p className="font-heading text-2xl text-heli-red sm:text-4xl">
+                {s.value}
+              </p>
+              <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-steel-400 sm:text-xs">
+                {s.label}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
 // BENEFITS — 3 grandes diferenciadores
 // ============================================================
 const benefits = [
@@ -543,8 +671,25 @@ function UseCases() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="bg-steel-950 py-20 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-24">
+      {/* Imagen decorativa de fondo a la derecha */}
+      <motion.div
+        initial={{ opacity: 0, x: 100 }}
+        animate={isInView ? { opacity: 0.3, x: 0 } : {}}
+        transition={{ duration: 1 }}
+        className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2 mix-blend-lighten lg:block"
+      >
+        <Image
+          src={PRODUCT_IMAGE}
+          alt=""
+          fill
+          quality={85}
+          className="object-contain"
+          aria-hidden
+        />
+      </motion.div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -573,7 +718,7 @@ function UseCases() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-steel-900 p-4"
+                className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-steel-900/80 backdrop-blur p-4"
               >
                 <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-heli-red/10">
                   <Check className="h-4 w-4 text-heli-red" />
@@ -831,13 +976,11 @@ function StickyMobileCTA() {
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden">
       <div className="flex items-center gap-3">
         <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="tel:+56993209186"
           className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 text-sm font-bold text-white"
         >
-          <MessageCircle className="h-4 w-4" />
-          WhatsApp
+          <Phone className="h-4 w-4" />
+          Llamar
         </a>
         <a
           href="#cotiza"
@@ -859,6 +1002,7 @@ export default function PromoLanding() {
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />
       <FeaturesGrid />
+      <Showcase />
       <Benefits />
       <UseCases />
       <ConversionForm />
