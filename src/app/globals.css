@@ -252,19 +252,24 @@ section:not(:first-child) {
   padding: 0;
 }
 
-/* Cualquier wrapper que HubSpot inyecte adentro (forms-iframe-container, hbspt-form, etc.)
-   debe ser transparente y sin borde — el estilo viene del wrapper exterior de la pagina */
+/* RESET de wrappers: matar cualquier borde/bg/padding del primer nivel
+   (donde HubSpot pone su container con borde) */
 .hubspot-form-container > div,
 .hubspot-form-container > form,
+.hubspot-form-container > div > div,
 .hubspot-form-container [class*="hbspt-form"],
 .hubspot-form-container [class*="hs-form-frame"],
-.hubspot-form-container [class*="forms-iframe"] {
+.hubspot-form-container [class*="forms-iframe"],
+.hubspot-form-container [class*="hsfc-Root"],
+.hubspot-form-container [class*="hsfc-Form"],
+.hubspot-form-container [class*="hsfc-Wrapper"] {
   background: transparent !important;
+  background-color: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
+  box-shadow: none !important;
   padding: 0 !important;
   margin: 0 !important;
-  box-shadow: none !important;
   width: 100% !important;
   max-width: 100% !important;
 }
