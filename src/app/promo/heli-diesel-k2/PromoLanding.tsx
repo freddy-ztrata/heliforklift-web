@@ -12,7 +12,6 @@ import {
   Armchair,
   ShieldCheck,
   Truck,
-  Phone,
   Mail,
   Check,
   Flame,
@@ -240,27 +239,20 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* CTAs principales */}
+            {/* CTA principal — solo formulario */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="mt-6 flex flex-col gap-3 sm:flex-row"
+              className="mt-6 flex"
             >
               <a
                 href="#cotiza"
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:shadow-[0_0_40px_rgba(206,20,45,0.7)] hover:-translate-y-0.5"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-10 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:shadow-[0_0_40px_rgba(206,20,45,0.7)] hover:-translate-y-0.5"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
                 <span className="relative">Solicitar cotización</span>
                 <Zap className="relative h-4 w-4" />
-              </a>
-              <a
-                href="tel:+56993209186"
-                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/20 bg-white/5 px-8 py-4 text-base font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:border-white/40 hover:bg-white/10"
-              >
-                <Phone className="h-4 w-4" />
-                Llámanos
               </a>
             </motion.div>
 
@@ -913,23 +905,8 @@ function ConversionForm() {
               ))}
             </div>
 
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <a
-                href="tel:+56993209186"
-                className="group flex items-center gap-3 rounded-xl border border-white/[0.08] bg-steel-900/50 p-4 backdrop-blur transition-all hover:border-heli-red/40 hover:bg-steel-900"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-heli-red/10 group-hover:bg-heli-red/20">
-                  <Phone className="h-5 w-5 text-heli-red-light" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
-                    Llámanos
-                  </p>
-                  <p className="text-sm font-bold text-white">
-                    +56 9 9320 9186
-                  </p>
-                </div>
-              </a>
+            {/* Email de contacto (sin telefono — el formulario es la unica via) */}
+            <div className="mt-8">
               <a
                 href="mailto:contacto@heliforklift.cl"
                 className="group flex items-center gap-3 rounded-xl border border-white/[0.08] bg-steel-900/50 p-4 backdrop-blur transition-all hover:border-heli-red/40 hover:bg-steel-900"
@@ -939,7 +916,7 @@ function ConversionForm() {
                 </div>
                 <div className="min-w-0">
                   <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
-                    Email
+                    Tambien puedes escribirnos a
                   </p>
                   <p className="truncate text-sm font-bold text-white">
                     contacto@heliforklift.cl
@@ -1022,22 +999,13 @@ function FooterMini() {
 function StickyMobileCTA() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden">
-      <div className="flex items-center gap-3">
-        <a
-          href="tel:+56993209186"
-          className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 text-sm font-bold text-white"
-        >
-          <Phone className="h-4 w-4" />
-          Llamar
-        </a>
-        <a
-          href="#cotiza"
-          className="flex h-12 flex-[1.5] items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
-        >
-          <Zap className="h-4 w-4" />
-          Cotizar ahora
-        </a>
-      </div>
+      <a
+        href="#cotiza"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
+      >
+        <Zap className="h-4 w-4" />
+        Cotizar ahora
+      </a>
     </div>
   );
 }
