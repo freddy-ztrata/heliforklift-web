@@ -442,9 +442,8 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots: dot sobre la pieza + pill al lado inmediato (no flotando lejos).
-  // pillSide define si el pill aparece a la izquierda o derecha del dot.
-  // Regla: si dot esta en mitad derecha de la imagen, pill va a la izquierda y viceversa.
+  // Hotspots: dot sobre la pieza fisica, pill SIEMPRE hacia el espacio vacio
+  // (no debe tapar la maquina). Vista lateral 3.5T.
   const hotspots = [
     {
       label: "Mástil triple 4.7m",
@@ -459,10 +458,11 @@ function Showcase() {
       pillSide: "right" as const,
     },
     {
+      // Pill a la izquierda para no tapar la maquina (rueda en mitad inferior)
       label: "Neumáticos macizos",
       dotX: "45%",
       dotY: "82%",
-      pillSide: "right" as const,
+      pillSide: "left" as const,
     },
   ];
 

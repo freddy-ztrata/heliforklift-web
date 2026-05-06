@@ -450,26 +450,29 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots ajustados para la vista lateral del K2 Diesel
-  // (mastil izquierda alta, motor parte trasera derecha media-baja, rueda trasera derecha)
+  // Hotspots: dot sobre la pieza fisica, pill SIEMPRE hacia el espacio vacio
+  // (no debe tapar la maquina). Vista lateral K2 Diesel.
   const hotspots = [
     {
+      // Mastil esta en la izquierda — pill va aun mas a la izquierda (espacio vacio)
       label: "Mástil triple 4.7m",
       dotX: "30%",
       dotY: "32%",
-      pillSide: "right" as const,
+      pillSide: "left" as const,
     },
     {
+      // Motor esta en la derecha — pill va aun mas a la derecha (espacio vacio)
       label: "Motor Diesel",
       dotX: "72%",
       dotY: "55%",
       pillSide: "right" as const,
     },
     {
+      // Rueda esta abajo central — pill va a la izquierda (espacio vacio izquierdo)
       label: "Neumáticos macizos",
       dotX: "55%",
       dotY: "78%",
-      pillSide: "right" as const,
+      pillSide: "left" as const,
     },
   ];
 
