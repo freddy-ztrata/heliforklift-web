@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const PRODUCT_IMAGE = "/assets/legacy/products/g3-series-2-3.5t-gas.jpg";
+const PRODUCT_IMAGE = "/assets/legacy/products/g3-series-2-3.5t-gas-nobg.png";
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -276,8 +276,7 @@ function Hero() {
             {/* Glow detrás */}
             <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
 
-            {/* Imagen — mix-blend-mode: lighten elimina visualmente el fondo blanco */}
-            <div className="relative h-full w-full mix-blend-lighten">
+            <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE}
                 alt="Grúa Horquilla HELI Gasolina 2.5 toneladas"
@@ -487,12 +486,12 @@ function Showcase() {
               className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]"
             />
 
-            {/* Imagen sin fondo via mix-blend */}
+            {/* Imagen del producto (PNG transparente) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-full w-full mix-blend-lighten"
+              className="relative h-full w-full "
             >
               <Image
                 src={PRODUCT_IMAGE}
@@ -677,7 +676,7 @@ function UseCases() {
         initial={{ opacity: 0, x: 100 }}
         animate={isInView ? { opacity: 0.3, x: 0 } : {}}
         transition={{ duration: 1 }}
-        className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2 mix-blend-lighten lg:block"
+        className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2  lg:block"
       >
         <Image
           src={PRODUCT_IMAGE}
