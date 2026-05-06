@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const PRODUCT_IMAGE_FRONT = "/assets/promo/heli-diesel-k2-front.png";
+const PRODUCT_IMAGE_FRONT = "/assets/promo/heli-diesel-k2-hero.png";
 const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-diesel-k2-side.png";
 
 // ============================================================
@@ -450,27 +450,28 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots: dot sobre la pieza fisica, pill SIEMPRE hacia el espacio vacio
-  // (no debe tapar la maquina). Vista lateral K2 Diesel.
+  // Hotspots ajustados a la imagen heli-diesel-k2-side.png:
+  // vista lateral 3/4 trasera con motor visible a la derecha, mastil al fondo
+  // izquierdo, ruedas inferiores. Coordenadas relativas al container 4:3.
   const hotspots = [
     {
-      // Mastil esta en la izquierda — pill va aun mas a la izquierda (espacio vacio)
+      // Columna vertical del mastil (parte izquierda media-alta)
       label: "Mástil triple 4.7m",
-      dotX: "30%",
-      dotY: "32%",
+      dotX: "38%",
+      dotY: "30%",
       pillSide: "left" as const,
     },
     {
-      // Motor esta en la derecha — pill va aun mas a la derecha (espacio vacio)
+      // Caparazon rojo del motor (parte trasera derecha — la mas visible)
       label: "Motor Diesel",
-      dotX: "72%",
-      dotY: "55%",
+      dotX: "78%",
+      dotY: "48%",
       pillSide: "right" as const,
     },
     {
-      // Rueda esta abajo central — pill va a la izquierda (espacio vacio izquierdo)
+      // Rueda trasera derecha (la grande visible abajo a la derecha)
       label: "Neumáticos macizos",
-      dotX: "55%",
+      dotX: "70%",
       dotY: "78%",
       pillSide: "left" as const,
     },
