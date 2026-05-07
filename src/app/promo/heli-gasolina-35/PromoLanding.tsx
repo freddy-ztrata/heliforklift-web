@@ -434,25 +434,28 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots: dot sobre la pieza fisica, pill SIEMPRE hacia el espacio vacio
-  // (no debe tapar la maquina). Vista lateral 3.5T.
+  // Hotspots ajustados a la imagen heli-gasolina-35-side.png.
+  // En esta vista la maquina ocupa la mitad-derecha del container.
+  // Dot SIEMPRE sobre la pieza fisica + pill hacia el espacio vacio (izquierda).
   const hotspots = [
     {
+      // Columna vertical del mastil — ubicada aprox en 50% (parte central-alta de la maquina)
       label: "Mástil triple 4.7m",
-      dotX: "32%",
-      dotY: "35%",
+      dotX: "50%",
+      dotY: "32%",
       pillSide: "left" as const,
     },
     {
+      // Caparazon rojo del motor (parte trasera derecha)
       label: "Motor K25 Nissan",
-      dotX: "82%",
+      dotX: "78%",
       dotY: "55%",
       pillSide: "right" as const,
     },
     {
-      // Pill a la izquierda para no tapar la maquina (rueda en mitad inferior)
+      // Rueda delantera macizo (parte inferior central-izquierda)
       label: "Neumáticos macizos",
-      dotX: "45%",
+      dotX: "55%",
       dotY: "82%",
       pillSide: "left" as const,
     },
