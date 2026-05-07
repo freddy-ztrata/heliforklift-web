@@ -171,7 +171,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - **Organization schema** JSON-LD (foundingDate 1958, address, contactPoint, sameAs)
 - **LocalBusiness schema** JSON-LD con `geo` (lat -33.3676, lng -70.7283 — Quilicura), `postalCode: "8710000"`, `openingHoursSpecification` estructurado (Lun-Vie 08:30-18:00), `priceRange: "$$$"`, `areaServed: Chile`
 - Teléfono actual: `+56-9-9320-9186` (NO usar el viejo `+56-9-5818-7035` que era de Mauricio Glaser)
-- GTM (`GTM-M9FW8BM3`) y GA4 (`G-3HLYKF62PW`) inyectados en `<head>`
+- Tracking inyectado en `<head>`: GTM (`GTM-M9FW8BM3`), GA4 (`G-3HLYKF62PW`), Meta Pixel (`1475698744101032`). Ver sección **Tracking & Analytics** abajo.
 - `<html lang="es">` (sitio mono-idioma, sin hreflang)
 
 **Page-level metadata:**
@@ -194,6 +194,44 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 **Robots (`robots.ts`):** `Allow: /`, `Disallow: /api/`, sitemap apunta a `/sitemap.xml`. Las páginas con `noindex` se manejan por metadata individual, no por robots.txt.
 
 **SEO Audit score:** ~95/100 después de aplicar fixes de teléfono/geo/postalCode/openingHours, h1 SEO en `/nosotros` (con `sr-only`), BreadcrumbList en pages detail, FAQ schema en productos, keywords arrays expandidos, e Image Sitemap.
+
+### Tracking & Analytics
+
+3 sistemas de tracking inyectados en `<head>` de `layout.tsx`:
+
+| Sistema | ID | Cobertura |
+|---|---|---|
+| Google Tag Manager | `GTM-M9FW8BM3` | Toda la web |
+| Google Analytics 4 | `G-3HLYKF62PW` | Toda la web (vía gtag) |
+| Meta Pixel | `1475698744101032` | Toda la web (PageView automático) |
+
+**Eventos custom de Meta Pixel** (diferenciar campañas Meta Ads por landing):
+
+`ViewContent` se dispara en cada PromoLanding con `useEffect` al montarse:
+
+| Landing | content_name | content_category |
+|---|---|---|
+| `/promo/heli-gasolina-25` | `promo_25t` | `gasolina` |
+| `/promo/heli-gasolina-35` | `promo_35t` | `gasolina` |
+| `/promo/heli-diesel-k2` | `promo_k2` | `diesel` |
+
+`Lead` se dispara en cada thank-you page (conversión principal optimizada en Meta Ads):
+
+| Thank-you | content_name | value (CLP) |
+|---|---|---|
+| `/promo/heli-gasolina-25/gracias` | `promo_25t` | 14.000.000 |
+| `/promo/heli-gasolina-35/gracias` | `promo_35t` | 18.000.000 |
+| `/promo/heli-diesel-k2/gracias` | `promo_k2` | 16.000.000 |
+| `/gracias` (form principal) | `form_principal` | (sin valor) |
+
+Implementación:
+- `PromoThankYou.tsx` (componente compartido) — tiene mapa `PROMO_TRACKING` con `contentName + value` por slug. Dispara `Lead` con `useEffect` basado en prop `productSlug`.
+- `MetaPixelLead.tsx` ([src/components/shared/](heliforklift-web/src/components/shared/MetaPixelLead.tsx)) — wrapper cliente reutilizable para disparar `Lead` desde Server Components (como `/gracias/page.tsx`).
+- Cada landing extiende `declare global { Window { fbq?: ... } }` para type safety sin `@ts-ignore`.
+
+**Custom Conversions en Meta** (configurar manualmente en Events Manager): "Lead - HELI 2.5T", "Lead - HELI 3.5T", "Lead - HELI K2", "Lead - Form Principal". Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
+
+**Conversions API (CAPI)**: pendiente de configurar en HubSpot → Settings → Integrations → Meta Ads para envío server-side de eventos `Lead` (recupera 25-40% de conversiones perdidas por iOS 14.5 ATT).
 
 ### Deployment (Dokploy)
 
