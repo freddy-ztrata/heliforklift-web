@@ -82,11 +82,40 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 - `/catalogo` — Landing por tipo de energía + CTA solicitar PDF por email
 - `/trabaja-con-nosotros` — Hero + 4 beneficios + CTA email a `contacto@heliforklift.cl`
 - `/ley-karin` — Información Ley 21.643, principios (confidencialidad, sin represalias, imparcialidad), canal de denuncias, link a Dirección del Trabajo
-- `/gracias` — Landing post-submit del form HubSpot. `robots: { index: false }`, excluida del sitemap. Hero con check + 3 cards "Próximos pasos" + 3 links exploración + CTA WhatsApp urgente.
+- `/gracias` — Landing post-submit del form HubSpot **principal** (CTASection). `robots: { index: false }`, excluida del sitemap. Hero con check + 3 cards "Próximos pasos" + 3 links exploración + CTA WhatsApp urgente.
+
+### Promo Landings (Meta Ads)
+
+**3 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
+
+| Ruta | Producto | Stock | Form ID HubSpot | Thank-you |
+|---|---|---|---|---|
+| `/promo/heli-gasolina-25` | HELI G3 Gasolina 2.5T | 10 unidades | `66a0f2cc-6e53-4755-ac9a-f07ba6732e2a` | `/promo/heli-gasolina-25/gracias` |
+| `/promo/heli-gasolina-35` | HELI G3 Gas-Gasolina 3.5T | 10 unidades | `2db82f7c-34a1-47f1-bc3f-fc91eec69fdd` | `/promo/heli-gasolina-35/gracias` |
+| `/promo/heli-diesel-k2` | HELI Diesel K2 (multi-tonelaje 2.5/3.0/3.5T) | 15 unidades | `8ae22a71-ea73-4cf7-8c57-634e768c0104` | `/promo/heli-diesel-k2/gracias` |
+
+**Estructura común** (cada `PromoLanding.tsx`):
+1. **Hero** — logo HELI blanco clickeable (link a `/`) + countdown 48hrs + título + specs grid + CTA "Cotizar ahora" + stock counter
+2. **FeaturesGrid** — 6 spec cards con animación scroll (motor, capacidad, neumáticos, mástil, desplazador, asiento)
+3. **Showcase** — imagen central grande (max-w-3xl, scale-110) + 2 cards laterales izquierda + 1 card destacada derecha (ANTES tenía hotspots con coords X/Y que nunca quedaban sobre la pieza real, fueron reemplazados por cards laterales)
+4. **Benefits** — 3 cards (4 en K2 que incluye garantía 1 año)
+5. **UseCases** — 6 industrias aplicables
+6. **ConversionForm** — copy de conversión + form HubSpot embebido (color wrapper `#0d0d18` para matchear con iframe)
+7. **FooterMini** — logo HELI blanco clickeable + email/teléfono
+8. **FloatingCTA** — botón "Cotizar ahora" que aparece tras scroll > 600px (mobile: full-width sticky bottom; desktop: pill flotante esquina inferior derecha con `animate-ping` rojo)
+
+**Shared component:** `src/app/promo/_shared/PromoThankYou.tsx` (carpeta privada con `_` que NO genera ruta) — recibe props `productName`, `productImage`, `productTagline`, `productSlug`. Usado en las 3 thank-you pages para tracking diferenciado por campaña (atributo `data-promo-thank-you={slug}` para Meta Pixel/GA4).
+
+**Imágenes en `public/assets/promo/`** (no en `legacy/products/`):
+- `heli-gasolina-35-front.png` + `heli-gasolina-35-side.png`
+- `heli-diesel-k2-front.png` + `heli-diesel-k2-side.png` + `heli-diesel-k2-hero.png`
+- 2.5T usa imágenes existentes en `legacy/products/g3-series-2-3.5t-gas-nobg.png`
+
+**URLs originales del cliente** (no usadas, archivadas) en `public/assets/Campañas/{1,2,3}/`.
 
 ### Quote Form (CTASection.tsx) — HubSpot Embed
 
-El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`, form `15b3dd6b-0095-4c03-a306-3dde97e81456`).
+El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`, form `15b3dd6b-0095-4c03-a306-3dde97e81456` — form **principal del sitio**, distinto de los forms de las 3 promo landings).
 
 **Implementación:**
 - `useEffect` inyecta `https://js.hsforms.net/forms/embed/v2.js` una sola vez globalmente
@@ -95,11 +124,11 @@ El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`
 
 **⚠️ HubSpot renderiza dentro de un `<iframe>`** — el CSS de la página NO entra al iframe. Todos los estilos del form (inputs, botones, colores, radio cards) se configuran en **HubSpot > Marketing > Forms > tu form > Style and preview**. Aquí solo controlamos el wrapper exterior.
 
-**Post-submit redirect:** configurado en HubSpot a `https://heliforklift.cl/gracias`.
+**Post-submit redirect:** configurado en HubSpot a `https://heliforklift.cl/gracias` (form principal) o `https://heliforklift.cl/promo/{slug}/gracias` (forms de promo landings).
 
 **CustomCursor.tsx:** detecta cuando el mouse entra a `.hubspot-form-container` y oculta el cursor custom (scale 0, opacity 0) + restaura cursor nativo del browser dentro del form. Detección via `target.closest(".hubspot-form-container")` en `mouseover` handler.
 
-**Páginas que renderizan `<CTASection />`:** homepage, contacto, nosotros, productos (landing y filtered), productos/[slug], servicios (landing y [slug]), noticias (landing y [slug]), equipo.
+**Páginas que renderizan `<CTASection />`:** homepage, contacto, nosotros, productos (landing y filtered), productos/[slug], servicios (landing y [slug]), noticias (landing y [slug]), equipo. Las **promo landings tienen su propio `ConversionForm` interno**, no usan CTASection.
 
 ### Contact Info (Updated)
 
@@ -137,12 +166,34 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 
 ### SEO
 
-- `layout.tsx`: Organization + LocalBusiness schema, `title.template: "%s | Helifork Lift"`, metadataBase
-- Each page defines `alternates: { canonical: "/path" }` (relative, resolved against metadataBase)
-- `/productos` has dynamic metadata via `generateMetadata()` based on `?tipo=` o `?categoria=` params
-- Product detail pages inject Product schema JSON-LD with specs and fuel type
-- Service detail pages have unique title without duplicating "| Helifork Lift" suffix (template adds it)
-- `sitemap.ts` generates 109 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias). `/gracias` excluida (es post-submit, `noindex`).
+**Layout-level (`layout.tsx`):**
+- Metadata global: `title.template: "%s | Helifork Lift"`, `metadataBase: https://heliforklift.cl`, robots `index: true, follow: true`
+- **Organization schema** JSON-LD (foundingDate 1958, address, contactPoint, sameAs)
+- **LocalBusiness schema** JSON-LD con `geo` (lat -33.3676, lng -70.7283 — Quilicura), `postalCode: "8710000"`, `openingHoursSpecification` estructurado (Lun-Vie 08:30-18:00), `priceRange: "$$$"`, `areaServed: Chile`
+- Teléfono actual: `+56-9-9320-9186` (NO usar el viejo `+56-9-5818-7035` que era de Mauricio Glaser)
+- GTM (`GTM-M9FW8BM3`) y GA4 (`G-3HLYKF62PW`) inyectados en `<head>`
+- `<html lang="es">` (sitio mono-idioma, sin hreflang)
+
+**Page-level metadata:**
+- Cada página define `alternates: { canonical: "/path" }` (relativo, resuelto contra metadataBase)
+- `/productos` tiene `generateMetadata()` dinámico según `?tipo=` o `?categoria=`
+- Páginas con keywords arrays: `/contacto`, `/equipo`, `/catalogo`, `/noticias`, `/servicios`, `/productos/[slug]` — keywords B2B chilenos optimizados
+- Open Graph: imagen global `/og-image.jpg` (1200x630) + dinámicas en pages detail (`product.image`, `service.image`, `news.image`)
+
+**Schemas JSON-LD por página detail:**
+- `/productos/[slug]`: **Product** (con `additionalProperty` para capacidad/motor/altura) + **BreadcrumbList** + **FAQPage** (5 preguntas dinámicas con respuestas adaptadas según `fuelType`)
+- `/servicios/[slug]`: **Service** (con `provider` Helifork Lift) + **BreadcrumbList**
+- `/noticias/[slug]`: **NewsArticle** (`datePublished`, `author`, `publisher`, `articleSection`) + **BreadcrumbList**
+
+**Sitemap (`sitemap.ts`):**
+- 109 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias)
+- **Image Sitemap activado**: cada `<url>` incluye `images: [absoluteImg(...)]` (homepage tiene 2: og-image + banner; productos/servicios/noticias/categorías tienen 1 cada uno)
+- Helper `absoluteImg()` convierte paths relativos a URLs absolutas
+- **NO incluidas:** `/gracias`, `/promo/*`, `/promo/*/gracias` (todas con `robots: { index: false }`)
+
+**Robots (`robots.ts`):** `Allow: /`, `Disallow: /api/`, sitemap apunta a `/sitemap.xml`. Las páginas con `noindex` se manejan por metadata individual, no por robots.txt.
+
+**SEO Audit score:** ~95/100 después de aplicar fixes de teléfono/geo/postalCode/openingHours, h1 SEO en `/nosotros` (con `sr-only`), BreadcrumbList en pages detail, FAQ schema en productos, keywords arrays expandidos, e Image Sitemap.
 
 ### Deployment (Dokploy)
 
