@@ -361,6 +361,36 @@ export default async function ProductDetailPage({ params }: Props) {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Inicio",
+                item: "https://heliforklift.cl",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Productos",
+                item: "https://heliforklift.cl/productos",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: product.name,
+                item: `https://heliforklift.cl/productos/${product.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }

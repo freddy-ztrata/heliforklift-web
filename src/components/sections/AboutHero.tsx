@@ -67,14 +67,17 @@ export default function AboutHero({
             Nuestra historia
           </motion.p>
 
-          {/* Main title with stagger */}
+          {/* Main title — h1 SEO con keywords + visual heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="font-heading mt-4 text-[clamp(3rem,8vw,6rem)] leading-[0.85] text-white"
           >
-            ELEVANDO EL FUTURO
+            <span className="sr-only">
+              Sobre Helifork Lift — Líder en Grúas Horquillas Chile
+            </span>
+            <span aria-hidden="true">ELEVANDO EL FUTURO</span>
           </motion.h1>
 
           {/* Red accent line */}

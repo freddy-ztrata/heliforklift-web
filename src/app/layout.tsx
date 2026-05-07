@@ -152,7 +152,7 @@ export default function RootLayout({
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+56-9-5818-7035",
+                  telephone: "+56-9-9320-9186",
                   contactType: "sales",
                   areaServed: "CL",
                   availableLanguage: "Spanish",
@@ -181,13 +181,31 @@ export default function RootLayout({
                 streetAddress: "Av. Américo Vespucio 1445",
                 addressLocality: "Quilicura",
                 addressRegion: "Región Metropolitana",
-                postalCode: "",
+                postalCode: "8710000",
                 addressCountry: "CL",
               },
-              telephone: "+56-9-5818-7035",
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: -33.3676,
+                longitude: -70.7283,
+              },
+              telephone: "+56-9-9320-9186",
               email: "contacto@heliforklift.cl",
               url: "https://heliforklift.cl",
-              openingHours: "Mo-Fr 08:00-18:00",
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                  ],
+                  opens: "08:30",
+                  closes: "18:00",
+                },
+              ],
               priceRange: "$$$",
               areaServed: {
                 "@type": "Country",

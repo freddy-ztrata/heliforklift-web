@@ -176,6 +176,73 @@ export default async function NewsDetailPage({ params }: Props) {
       </main>
       <Footer />
       <WhatsAppButton />
+
+      {/* Article schema (NewsArticle) */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            headline: item.title,
+            description: item.summary,
+            image: `https://heliforklift.cl${item.image}`,
+            datePublished: item.date,
+            dateModified: item.date,
+            author: {
+              "@type": "Organization",
+              name: "Helifork Lift",
+              url: "https://heliforklift.cl",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Helifork Lift",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.png",
+              },
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `https://heliforklift.cl/noticias/${slug}`,
+            },
+            articleSection: item.category,
+          }),
+        }}
+      />
+
+      {/* Breadcrumb schema */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Inicio",
+                item: "https://heliforklift.cl",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Noticias",
+                item: "https://heliforklift.cl/noticias",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: item.title,
+                item: `https://heliforklift.cl/noticias/${slug}`,
+              },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }

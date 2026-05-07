@@ -241,6 +241,61 @@ export default async function ServicioDetailPage({ params }: Props) {
       </main>
       <Footer />
       <WhatsAppButton />
+
+      {/* Service + Breadcrumb schemas */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: service.name,
+            description: service.description,
+            image: `https://heliforklift.cl${service.image}`,
+            provider: {
+              "@type": "Organization",
+              name: "Helifork Lift",
+              url: "https://heliforklift.cl",
+            },
+            areaServed: {
+              "@type": "Country",
+              name: "Chile",
+            },
+            url: `https://heliforklift.cl/servicios/${slug}`,
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Inicio",
+                item: "https://heliforklift.cl",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Servicios",
+                item: "https://heliforklift.cl/servicios",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: service.name,
+                item: `https://heliforklift.cl/servicios/${slug}`,
+              },
+            ],
+          }),
+        }}
+      />
     </>
   );
 }
