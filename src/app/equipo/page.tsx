@@ -25,14 +25,22 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Equipo y Vendedores — Helifork Lift",
+  title: "Equipo de Vendedores HELI Chile — Sucursales y Contacto",
   description:
-    "Conoce a nuestros ejecutivos de venta por zona en Chile, área de repuestos y servicio técnico, y nuestros puntos de venta en Santiago, Antofagasta y Copiapó.",
+    "Ejecutivos de venta especializados en grúas horquillas por zona en Chile. Equipo de repuestos originales, servicio técnico certificado y sucursales en Santiago, Antofagasta y Copiapó.",
+  keywords: [
+    "vendedores grúas horquillas Chile",
+    "ejecutivos HELI Chile",
+    "equipo Helifork Lift",
+    "repuestos HELI Chile",
+    "servicio técnico grúas horquillas",
+    "sucursales HELI Chile",
+  ],
   alternates: { canonical: "/equipo" },
   openGraph: {
-    title: "Equipo y Vendedores — Helifork Lift",
+    title: "Equipo de Vendedores HELI Chile",
     description:
-      "Vendedores por zona, repuestos, servicio técnico y puntos de venta en Chile.",
+      "Vendedores por zona, repuestos originales, servicio técnico certificado y sucursales en Santiago, Antofagasta y Copiapó.",
   },
 };
 

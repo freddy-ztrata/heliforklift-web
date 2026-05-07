@@ -18,14 +18,22 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Servicios — Venta, Servicio Técnico y Repuestos",
+  title: "Servicios HELI Chile — Venta, Servicio Técnico y Repuestos",
   description:
-    "Servicios completos para grúas horquillas: venta de equipos nuevos, servicio técnico, repuestos originales HELI. Cobertura en todo Chile.",
+    "Venta de grúas horquillas nuevas HELI, servicio técnico certificado por el fabricante y repuestos originales con cobertura nacional. Sucursales en Santiago, Antofagasta y Copiapó.",
+  keywords: [
+    "venta grúas horquillas Chile",
+    "servicio técnico grúas horquillas",
+    "repuestos HELI originales",
+    "mantención grúas horquillas Chile",
+    "técnicos certificados HELI",
+    "servicio postventa grúa horquilla",
+  ],
   alternates: { canonical: "/servicios" },
   openGraph: {
-    title: "Servicios — Venta, Servicio Técnico y Repuestos",
+    title: "Servicios HELI Chile — Venta, Servicio Técnico y Repuestos",
     description:
-      "Servicios completos para grúas horquillas: venta, servicio técnico y repuestos originales HELI en Chile.",
+      "Venta de equipos nuevos, servicio técnico certificado y repuestos originales con cobertura nacional. Más de 67 años de experiencia.",
   },
 };
 

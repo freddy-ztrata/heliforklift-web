@@ -19,10 +19,24 @@ import {
 const iconMap: Record<string, typeof Zap> = { Zap, Fuel, Flame, Atom };
 
 export const metadata: Metadata = {
-  title: "Catálogo de Equipos — Helifork Lift",
+  title: "Catálogo PDF Grúas Horquillas HELI — Descarga Gratis Chile",
   description:
-    "Descarga el catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y más. Fichas técnicas y especificaciones.",
+    "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y reach trucks. Fichas técnicas, especificaciones y precios. Descarga gratis.",
+  keywords: [
+    "catálogo grúas horquillas Chile",
+    "catálogo HELI PDF",
+    "ficha técnica grúa horquilla",
+    "grúa horquilla eléctrica catálogo",
+    "grúa horquilla diésel catálogo",
+    "transpaletas Chile catálogo",
+    "apiladores Chile catálogo",
+  ],
   alternates: { canonical: "/catalogo" },
+  openGraph: {
+    title: "Catálogo PDF de Grúas Horquillas HELI Chile",
+    description:
+      "Eléctricas, diésel, GLP, hidrógeno verde, transpaletas y apiladores. Fichas técnicas completas. Descarga gratis.",
+  },
 };
 
 export default function CatalogoPage() {

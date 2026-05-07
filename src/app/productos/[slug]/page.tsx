@@ -391,6 +391,72 @@ export default async function ProductDetailPage({ params }: Props) {
           }),
         }}
       />
+
+      {/* FAQ schema — preguntas frecuentes para rich snippets en SERPs */}
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: `¿Cuánta capacidad de carga tiene la ${product.name}?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `La ${product.name} tiene una capacidad de carga de ${product.capacityRange}. Es ideal para operaciones de logística, bodegas e industria que requieren mover cargas de este rango.`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: `¿Qué tipo de motor usa la ${product.name}?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `Esta grúa horquilla utiliza ${product.power} (tipo de energía: ${product.fuelType}). ${
+                    product.fuelType === "Electrica"
+                      ? "Apta para uso en interiores sin emisiones."
+                      : product.fuelType === "Hidrogeno"
+                      ? "Tecnología de hidrógeno verde con cero emisiones y recarga en 3 minutos."
+                      : product.fuelType === "Diesel"
+                      ? "Ideal para operaciones intensivas en exteriores con máxima potencia."
+                      : "Versátil para uso interior y exterior con menor costo operacional que diésel."
+                  }`,
+                },
+              },
+              {
+                "@type": "Question",
+                name: `¿La ${product.name} cuenta con servicio técnico en Chile?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Sí. Helifork Lift es distribuidor oficial HELI en Chile y cuenta con servicio técnico certificado, repuestos originales y respaldo nacional con sucursales en Santiago, Antofagasta y Copiapó. Garantía de 1 año de fábrica.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: `¿Cómo solicito una cotización por la ${product.name}?`,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: `Puedes cotizar la ${product.name} a través del formulario en heliforklift.cl/productos/${product.slug}, llamando al +56 9 9320 9186 o escribiendo a contacto@heliforklift.cl. Respondemos en menos de 2 horas hábiles.`,
+                },
+              },
+              ...(product.heightRange
+                ? [
+                    {
+                      "@type": "Question",
+                      name: `¿Cuál es la altura máxima de elevación de la ${product.name}?`,
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: `La ${product.name} tiene una altura de elevación de ${product.heightRange}, ideal para almacenamiento vertical en bodegas modernas y centros de distribución.`,
+                      },
+                    },
+                  ]
+                : []),
+            ],
+          }),
+        }}
+      />
     </>
   );
 }

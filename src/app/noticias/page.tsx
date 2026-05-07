@@ -10,14 +10,22 @@ import { news } from "@/lib/data/news";
 import { Calendar, ArrowRight, Tag } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Noticias y Novedades — Helifork Lift",
+  title: "Noticias HELI Chile — Industria de Grúas Horquillas y Logística",
   description:
-    "Últimas noticias, entregas, eventos y novedades de Helifork Lift. Sigue las novedades del sector de grúas horquillas en Chile.",
+    "Últimas noticias del sector de grúas horquillas en Chile: entregas, capacitaciones, eventos, tecnología hidrógeno verde y novedades de la industria logística. Blog oficial Helifork Lift.",
+  keywords: [
+    "noticias grúas horquillas Chile",
+    "blog logística Chile",
+    "industria montacargas Chile",
+    "novedades HELI Chile",
+    "tecnología grúas horquillas",
+    "hidrógeno verde logística",
+  ],
   alternates: { canonical: "/noticias" },
   openGraph: {
-    title: "Noticias y Novedades — Helifork Lift",
+    title: "Noticias HELI Chile — Industria de Grúas Horquillas y Logística",
     description:
-      "Entregas de equipos, participación en eventos y novedades tecnológicas del sector.",
+      "Entregas, eventos, capacitaciones, hidrógeno verde y novedades del sector de grúas horquillas en Chile.",
   },
 };
 

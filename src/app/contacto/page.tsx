@@ -20,14 +20,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contacto — Cotiza tu Grúa Horquilla",
+  title: "Contacto Helifork Lift — Cotiza tu Grúa Horquilla en Chile",
   description:
-    "Contáctanos para cotizar grúas horquillas, servicio técnico o repuestos. Respuesta en menos de 2 horas. Santiago, Antofagasta, Copiapó y todo Chile. +56 9 9320 9186.",
+    "Cotiza grúas horquillas HELI, servicio técnico y repuestos originales. Respuesta en menos de 2 horas hábiles. Sucursales en Santiago, Antofagasta y Copiapó. ☎ +56 9 9320 9186.",
+  keywords: [
+    "contacto Helifork Lift",
+    "cotizar grúa horquilla Chile",
+    "grúa horquilla Santiago",
+    "grúa horquilla Antofagasta",
+    "grúa horquilla Copiapó",
+    "venta grúa horquilla Chile",
+    "servicio técnico montacargas Chile",
+    "HELI Chile contacto",
+  ],
   alternates: { canonical: "/contacto" },
   openGraph: {
-    title: "Contacto — Cotiza tu Grúa Horquilla",
+    title: "Contacto — Cotiza tu Grúa Horquilla en Chile",
     description:
-      "Contáctanos para cotizar grúas horquillas. Respuesta en menos de 2 horas. Santiago, Antofagasta y todo Chile.",
+      "Respuesta en menos de 2 horas hábiles. Sucursales en Santiago, Antofagasta y Copiapó. Cotiza tu grúa horquilla HELI ahora.",
   },
 };
 
