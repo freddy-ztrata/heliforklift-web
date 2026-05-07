@@ -423,7 +423,8 @@ function FeaturesGrid() {
 }
 
 // ============================================================
-// SHOWCASE — vista lateral de la maquina con hotspots
+// SHOWCASE — imagen central + 3 spec cards laterales
+// (sin hotspots problematicos posicionados con coords)
 // ============================================================
 function Showcase() {
   const ref = useRef<HTMLDivElement>(null);
@@ -434,30 +435,21 @@ function Showcase() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
-  // Hotspots ajustados a la imagen heli-gasolina-35-side.png.
-  // La columna vertical del mastil (parte donde suben las horquillas) esta
-  // en la parte FRONTAL-IZQUIERDA de la maquina, no en el techo central.
-  const hotspots = [
+  const specs = [
     {
-      // Columna del mastil: parte vertical donde suben las horquillas (frontal izquierda)
-      label: "Mástil triple 4.7m",
-      dotX: "44%",
-      dotY: "50%",
-      pillSide: "left" as const,
+      icon: ArrowUpDown,
+      title: "Mástil triple 4.7m",
+      desc: "Mayor altura de elevación para optimizar tu operación en bodegas modernas.",
     },
     {
-      // Caparazon rojo del motor (parte trasera derecha)
-      label: "Motor K25 Nissan",
-      dotX: "78%",
-      dotY: "55%",
-      pillSide: "right" as const,
+      icon: Cog,
+      title: "Motor K25 Nissan",
+      desc: "Tecnología japonesa probada. Potente, confiable y de bajo consumo.",
     },
     {
-      // Rueda delantera macizo — visible al frente de la maquina, parte inferior central
-      label: "Neumáticos macizos",
-      dotX: "53%",
-      dotY: "75%",
-      pillSide: "left" as const,
+      icon: Disc3,
+      title: "Neumáticos macizos",
+      desc: "Mayor durabilidad. Sin pinchazos, sin tiempos muertos en operación.",
     },
   ];
 
@@ -489,83 +481,101 @@ function Showcase() {
           </p>
         </motion.div>
 
-        {/* Imagen central + hotspots — vista lateral */}
+        {/* Imagen central + cards laterales (3 col en desktop) */}
         <motion.div
           style={{ y: imageY }}
-          className="relative mt-10 flex items-center justify-center"
+          className="relative mt-12 grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-6"
         >
-          <div className="relative aspect-[4/3] w-full max-w-4xl">
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="relative h-full w-full"
-            >
-              <Image
-                src={PRODUCT_IMAGE_SIDE}
-                alt="HELI Gasolina 3.5 toneladas vista lateral"
-                fill
-                quality={90}
-                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
-                sizes="(max-width: 1024px) 100vw, 80vw"
-              />
-            </motion.div>
-
-            {/* Hotspots — dot + pill juntos sobre la pieza */}
-            {hotspots.map((h, i) => (
+          {/* Cards lateral izquierda (2 cards) — desktop */}
+          <div className="hidden flex-col gap-5 lg:col-span-3 lg:flex">
+            {specs.slice(0, 2).map((s, i) => (
               <motion.div
-                key={`hotspot-${h.label}`}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.5 + i * 0.2, type: "spring" }}
-                className={cn(
-                  "group absolute z-20 hidden lg:flex items-center gap-3",
-                  h.pillSide === "right" ? "flex-row" : "flex-row-reverse"
-                )}
-                style={{
-                  left: h.dotX,
-                  top: h.dotY,
-                  // Dot queda EN dotX/dotY; el pill se extiende al lado.
-                  transform:
-                    h.pillSide === "right"
-                      ? "translate(-8px, -50%)"
-                      : "translate(calc(-100% + 8px), -50%)",
-                }}
+                key={s.title}
+                initial={{ opacity: 0, x: -30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.15 }}
+                className="group rounded-2xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-5 backdrop-blur transition-all hover:border-heli-red/40 hover:shadow-[0_10px_40px_-10px_rgba(206,20,45,0.4)]"
               >
-                {/* Dot — clavado sobre la pieza */}
-                <div className="relative flex-shrink-0">
-                  <motion.div
-                    animate={{
-                      scale: [1, 2.2, 1],
-                      opacity: [0.6, 0, 0.6],
-                    }}
-                    transition={{
-                      duration: 2.2,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                    className="absolute inset-0 rounded-full bg-heli-red"
-                  />
-                  <div className="absolute -inset-3 rounded-full bg-heli-red/0 blur-md transition-all duration-300 group-hover:bg-heli-red/60" />
-                  <div className="relative h-4 w-4 rounded-full bg-heli-red ring-2 ring-white/30 shadow-[0_0_15px_rgba(206,20,45,0.8)] transition-all duration-300 group-hover:scale-150 group-hover:ring-white/80 group-hover:shadow-[0_0_25px_rgba(206,20,45,1)]" />
+                <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30 transition-all group-hover:bg-heli-red group-hover:ring-heli-red">
+                  <s.icon className="h-5 w-5 text-heli-red transition-colors group-hover:text-white" />
                 </div>
+                <h3 className="text-base font-bold text-white">{s.title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-steel-400">
+                  {s.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
 
-                {/* Pill — al lado inmediato del dot */}
+          {/* Imagen central */}
+          <div className="lg:col-span-6">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl">
+              <motion.div
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="relative h-full w-full"
+              >
+                <Image
+                  src={PRODUCT_IMAGE_SIDE}
+                  alt="HELI Gasolina 3.5 toneladas vista lateral"
+                  fill
+                  quality={90}
+                  className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Card lateral derecha (1 card grande) — desktop */}
+          <div className="hidden lg:col-span-3 lg:flex">
+            {(() => {
+              const SpecIcon = specs[2].icon;
+              return (
                 <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="cursor-pointer rounded-full border border-heli-red/40 bg-steel-950/90 px-4 py-2 backdrop-blur transition-all hover:border-heli-red hover:bg-heli-red hover:shadow-[0_0_30px_rgba(206,20,45,0.6)]"
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.6 }}
+                  className="group w-full rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/15 via-steel-900/80 to-steel-950/80 p-5 backdrop-blur transition-all hover:border-heli-red/60 hover:shadow-[0_10px_40px_-10px_rgba(206,20,45,0.6)]"
                 >
-                  <span className="whitespace-nowrap text-xs font-bold uppercase tracking-wider text-white">
-                    {h.label}
-                  </span>
+                  <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-heli-red/20 ring-1 ring-heli-red/40 transition-all group-hover:bg-heli-red">
+                    <SpecIcon className="h-5 w-5 text-heli-red transition-colors group-hover:text-white" />
+                  </div>
+                  <h3 className="text-base font-bold text-white">
+                    {specs[2].title}
+                  </h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-steel-300">
+                    {specs[2].desc}
+                  </p>
                 </motion.div>
+              );
+            })()}
+          </div>
+
+          {/* Cards en mobile/tablet — abajo de la imagen, grid horizontal */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:hidden">
+            {specs.map((s, i) => (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.3 + i * 0.1 }}
+                className="rounded-2xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-4 backdrop-blur"
+              >
+                <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30">
+                  <s.icon className="h-5 w-5 text-heli-red" />
+                </div>
+                <h3 className="text-sm font-bold text-white">{s.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-steel-400">
+                  {s.desc}
+                </p>
               </motion.div>
             ))}
           </div>
