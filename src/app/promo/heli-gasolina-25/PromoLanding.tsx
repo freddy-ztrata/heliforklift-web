@@ -503,20 +503,20 @@ function Showcase() {
             ))}
           </div>
 
-          {/* Imagen central */}
+          {/* Imagen central — agrandada */}
           <div className="lg:col-span-6">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-2xl">
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-3xl">
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]"
+                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[120px]"
               />
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative h-full w-full"
+                className="relative h-full w-full scale-110"
               >
                 <Image
                   src={PRODUCT_IMAGE}
@@ -524,7 +524,7 @@ function Showcase() {
                   fill
                   quality={90}
                   className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
                 />
               </motion.div>
             </div>
@@ -995,19 +995,61 @@ function FooterMini() {
 }
 
 // ============================================================
-// STICKY MOBILE CTA — siempre visible en mobile
+// FLOATING CTA — boton flotante que acompana al scroll
+// Aparece despues de pasar el hero. Mobile: full-width abajo. Desktop: pill flotante.
 // ============================================================
-function StickyMobileCTA() {
+function FloatingCTA() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsVisible(window.scrollY > 600);
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden">
-      <a
-        href="#cotiza"
-        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
+    <>
+      {/* Mobile: barra inferior full-width */}
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: isVisible ? 0 : 100 }}
+        transition={{ type: "spring", stiffness: 260, damping: 28 }}
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden"
       >
-        <Zap className="h-4 w-4" />
-        Cotizar ahora
-      </a>
-    </div>
+        <a
+          href="#cotiza"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
+        >
+          <Zap className="h-4 w-4" />
+          Cotizar ahora
+        </a>
+      </motion.div>
+
+      {/* Desktop: pill flotante esquina inferior derecha */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, y: 20 }}
+        animate={{
+          opacity: isVisible ? 1 : 0,
+          scale: isVisible ? 1 : 0.5,
+          y: isVisible ? 0 : 20,
+        }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
+        className="fixed bottom-6 right-6 z-50 hidden lg:block"
+      >
+        <a
+          href="#cotiza"
+          className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-heli-red px-7 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_8px_30px_rgba(206,20,45,0.5)] transition-all hover:shadow-[0_12px_40px_rgba(206,20,45,0.8)] hover:-translate-y-0.5 hover:scale-105"
+        >
+          <span className="absolute inset-0 animate-ping rounded-full bg-heli-red/40" />
+          <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
+          <Zap className="relative h-5 w-5" />
+          <span className="relative">Cotizar ahora</span>
+        </a>
+      </motion.div>
+    </>
   );
 }
 
@@ -1024,7 +1066,7 @@ export default function PromoLanding() {
       <UseCases />
       <ConversionForm />
       <FooterMini />
-      <StickyMobileCTA />
+      <FloatingCTA />
     </main>
   );
 }
