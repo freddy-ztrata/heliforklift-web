@@ -850,8 +850,8 @@ function ConversionForm() {
       <div className="absolute left-[-10%] top-[10%] h-[500px] w-[500px] rounded-full bg-heli-red/20 blur-[120px]" />
       <div className="absolute right-[-10%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-heli-yellow/10 blur-[120px]" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-12">
           {/* Left col — copy de conversión */}
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-heli-yellow/30 bg-heli-yellow/10 px-3 py-1.5">
@@ -922,14 +922,14 @@ function ConversionForm() {
             </div>
           </div>
 
-          {/* Right col — form */}
+          {/* Right col — form (mas ancho, menos padding interno para que el iframe respire) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-3xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-6 backdrop-blur-xl sm:p-8"
+            className="relative w-full rounded-3xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-4 backdrop-blur-xl sm:p-5"
           >
-            <div className="mb-5 flex items-center gap-3 border-b border-white/[0.08] pb-5">
+            <div className="mb-4 flex items-center gap-3 border-b border-white/[0.08] px-2 pb-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-heli-red text-white">
                 <Zap className="h-5 w-5" />
               </div>
@@ -943,7 +943,7 @@ function ConversionForm() {
               </div>
             </div>
 
-            <div ref={formContainerRef} className="hubspot-form-container" />
+            <div ref={formContainerRef} className="hubspot-form-container w-full" />
           </motion.div>
         </div>
       </div>
