@@ -936,12 +936,12 @@ function ConversionForm() {
             </div>
           </div>
 
-          {/* Right col — form (mas ancho, menos padding interno para que el iframe respire) */}
+          {/* Right col — form (color matcheado con el iframe de HubSpot) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative w-full rounded-3xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-4 backdrop-blur-xl sm:p-5"
+            className="relative w-full rounded-3xl border border-white/[0.08] bg-[#0d0d18] p-4 backdrop-blur-xl sm:p-5"
           >
             <div className="mb-4 flex items-center gap-3 border-b border-white/[0.08] px-2 pb-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-heli-red text-white">
