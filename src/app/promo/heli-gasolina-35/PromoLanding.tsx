@@ -453,10 +453,10 @@ function Showcase() {
       pillSide: "right" as const,
     },
     {
-      // Rueda delantera macizo (parte inferior central)
+      // Rueda delantera macizo — visible al frente de la maquina, parte inferior central
       label: "Neumáticos macizos",
-      dotX: "55%",
-      dotY: "82%",
+      dotX: "53%",
+      dotY: "75%",
       pillSide: "left" as const,
     },
   ];
