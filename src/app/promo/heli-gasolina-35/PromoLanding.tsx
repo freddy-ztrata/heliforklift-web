@@ -800,6 +800,11 @@ declare global {
         }) => void;
       };
     };
+    fbq?: (
+      action: "track" | "trackCustom",
+      eventName: string,
+      params?: Record<string, unknown>
+    ) => void;
   }
 }
 
@@ -1062,6 +1067,17 @@ function FloatingCTA() {
 // MAIN
 // ============================================================
 export default function PromoLanding() {
+  // Meta Pixel — disparar ViewContent custom al cargar la landing
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("trackCustom", "ViewContent", {
+        content_name: "promo_35t",
+        content_category: "gasolina",
+        content_ids: ["heli-gasolina-35"],
+      });
+    }
+  }, []);
+
   return (
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />

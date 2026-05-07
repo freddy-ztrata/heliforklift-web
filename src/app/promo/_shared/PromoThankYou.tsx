@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,6 +13,23 @@ import {
   Building2,
   ArrowRight,
 } from "lucide-react";
+
+declare global {
+  interface Window {
+    fbq?: (
+      action: "track" | "trackCustom",
+      eventName: string,
+      params?: Record<string, unknown>
+    ) => void;
+  }
+}
+
+// Mapeo de slugs a content_name + value estimado para Meta Pixel
+const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
+  "heli-gasolina-25": { contentName: "promo_25t", value: 14000000 },
+  "heli-gasolina-35": { contentName: "promo_35t", value: 18000000 },
+  "heli-diesel-k2": { contentName: "promo_k2", value: 16000000 },
+};
 
 interface PromoThankYouProps {
   /** Nombre del producto que el lead cotizó (para personalizar el mensaje) */
@@ -63,6 +81,21 @@ export default function PromoThankYou({
   productTagline,
   productSlug,
 }: PromoThankYouProps) {
+  // Meta Pixel — disparar Lead event al cargar la thank-you page
+  // Esto es la conversion principal que Meta usa para optimizar las campañas
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.fbq) return;
+    const tracking = PROMO_TRACKING[productSlug];
+    if (!tracking) return;
+    window.fbq("track", "Lead", {
+      content_name: tracking.contentName,
+      content_category: productSlug.includes("diesel") ? "diesel" : "gasolina",
+      content_ids: [productSlug],
+      value: tracking.value,
+      currency: "CLP",
+    });
+  }, [productSlug]);
+
   return (
     <main
       className="relative min-h-screen overflow-hidden bg-gradient-to-br from-steel-950 via-steel-900 to-steel-950"

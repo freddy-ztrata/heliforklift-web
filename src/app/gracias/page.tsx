@@ -4,6 +4,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/sections/Footer";
 import WhatsAppButton from "@/components/shared/WhatsAppButton";
 import ScrollProgress from "@/components/shared/ScrollProgress";
+import MetaPixelLead from "@/components/shared/MetaPixelLead";
 import {
   CheckCircle2,
   Clock,
@@ -79,6 +80,8 @@ const exploreLinks = [
 export default function GraciasPage() {
   return (
     <>
+      {/* Meta Pixel — disparar Lead event al cargar la thank-you page del form principal */}
+      <MetaPixelLead contentName="form_principal" contentCategory="general" />
       <ScrollProgress />
       <Navbar />
       <main className="pt-24">

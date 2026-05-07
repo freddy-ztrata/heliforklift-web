@@ -797,6 +797,11 @@ declare global {
         }) => void;
       };
     };
+    fbq?: (
+      action: "track" | "trackCustom",
+      eventName: string,
+      params?: Record<string, unknown>
+    ) => void;
   }
 }
 
@@ -1065,6 +1070,18 @@ function FloatingCTA() {
 // MAIN
 // ============================================================
 export default function PromoLanding() {
+  // Meta Pixel — disparar ViewContent custom al cargar la landing
+  // para diferenciar tracking por campaña en Meta Ads Manager
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("trackCustom", "ViewContent", {
+        content_name: "promo_25t",
+        content_category: "gasolina",
+        content_ids: ["heli-gasolina-25"],
+      });
+    }
+  }, []);
+
   return (
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />
