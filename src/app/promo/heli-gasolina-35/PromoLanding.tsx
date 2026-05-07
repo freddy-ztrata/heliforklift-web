@@ -435,14 +435,14 @@ function Showcase() {
   const imageY = useTransform(scrollYProgress, [0, 1], [80, -80]);
 
   // Hotspots ajustados a la imagen heli-gasolina-35-side.png.
-  // En esta vista la maquina ocupa la mitad-derecha del container.
-  // Dot SIEMPRE sobre la pieza fisica + pill hacia el espacio vacio (izquierda).
+  // La columna vertical del mastil (parte donde suben las horquillas) esta
+  // en la parte FRONTAL-IZQUIERDA de la maquina, no en el techo central.
   const hotspots = [
     {
-      // Columna vertical del mastil — ubicada aprox en 50% (parte central-alta de la maquina)
+      // Columna del mastil: parte vertical donde suben las horquillas (frontal izquierda)
       label: "Mástil triple 4.7m",
-      dotX: "50%",
-      dotY: "32%",
+      dotX: "44%",
+      dotY: "50%",
       pillSide: "left" as const,
     },
     {
@@ -453,7 +453,7 @@ function Showcase() {
       pillSide: "right" as const,
     },
     {
-      // Rueda delantera macizo (parte inferior central-izquierda)
+      // Rueda delantera macizo (parte inferior central)
       label: "Neumáticos macizos",
       dotX: "55%",
       dotY: "82%",
