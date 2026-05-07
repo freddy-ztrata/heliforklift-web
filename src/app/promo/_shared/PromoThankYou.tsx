@@ -88,16 +88,20 @@ export default function PromoThankYou({
           animate={{ y: 0, opacity: 1 }}
           className="mb-10 flex items-center justify-center sm:justify-start"
         >
-          <div className="rounded-lg bg-white p-2.5 shadow-[0_4px_20px_rgba(206,20,45,0.25)]">
+          <Link
+            href="/"
+            aria-label="Volver al inicio - HELI Chile"
+            className="inline-flex items-center transition-opacity hover:opacity-80"
+          >
             <Image
               src="/assets/legacy/logos/heli-chile-logo.png"
               alt="HELI Forklift Chile"
-              width={120}
-              height={36}
+              width={140}
+              height={42}
               priority
-              className="h-7 w-auto sm:h-8"
+              className="h-9 w-auto brightness-0 invert sm:h-10"
             />
-          </div>
+          </Link>
         </motion.div>
 
         {/* Hero — confirmación con producto */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import {
   Cog,
@@ -135,18 +136,20 @@ function Hero() {
           animate={{ y: 0, opacity: 1 }}
           className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-          <div className="flex items-center gap-3">
-            <div className="rounded-lg bg-white p-2.5 shadow-[0_4px_20px_rgba(206,20,45,0.25)]">
-              <Image
-                src="/assets/legacy/logos/heli-chile-logo.png"
-                alt="HELI Forklift Chile"
-                width={120}
-                height={36}
-                priority
-                className="h-7 w-auto sm:h-8"
-              />
-            </div>
-          </div>
+          <Link
+            href="/"
+            aria-label="Volver al inicio - HELI Chile"
+            className="inline-flex items-center transition-opacity hover:opacity-80"
+          >
+            <Image
+              src="/assets/legacy/logos/heli-chile-logo.png"
+              alt="HELI Forklift Chile"
+              width={140}
+              height={42}
+              priority
+              className="h-9 w-auto brightness-0 invert sm:h-10"
+            />
+          </Link>
 
           {/* Countdown */}
           <div className="flex items-center gap-3 rounded-full border border-heli-red/30 bg-heli-red/10 px-4 py-2 backdrop-blur">
@@ -957,15 +960,20 @@ function FooterMini() {
   return (
     <footer className="border-t border-white/[0.06] bg-steel-950 py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-heli-red text-sm font-black text-white">
-              H
-            </div>
-            <span className="text-sm font-bold text-white">
-              HELI Chile · Helifork Lift
-            </span>
-          </div>
+        <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-between">
+          <Link
+            href="/"
+            aria-label="Volver al inicio - HELI Chile"
+            className="inline-flex items-center transition-opacity hover:opacity-80"
+          >
+            <Image
+              src="/assets/legacy/logos/heli-chile-logo.png"
+              alt="HELI Forklift Chile"
+              width={120}
+              height={36}
+              className="h-8 w-auto brightness-0 invert"
+            />
+          </Link>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-steel-500">
             <a
               href="https://heliforklift.cl"
