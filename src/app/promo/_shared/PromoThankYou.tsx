@@ -29,6 +29,7 @@ const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
   "heli-gasolina-25": { contentName: "promo_25t", value: 14000000 },
   "heli-gasolina-35": { contentName: "promo_35t", value: 18000000 },
   "heli-diesel-k2": { contentName: "promo_k2", value: 16000000 },
+  "heli-diesel-k2-25t": { contentName: "promo_diesel_25t", value: 10800000 },
   "heli-transpaleta-cbd1520": {
     contentName: "promo_transpaleta_2t",
     value: 950000,
