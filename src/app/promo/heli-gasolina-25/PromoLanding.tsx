@@ -270,20 +270,18 @@ function Hero() {
             className="relative aspect-square w-full max-w-2xl justify-self-center lg:justify-self-end"
           >
             {/* Glow detrás */}
-            <div className="absolute inset-0 rounded-3xl bg-heli-red/30 blur-[100px]" />
+            <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
 
-            <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_80px_-20px_rgba(206,20,45,0.5)] ring-1 ring-heli-red/20">
+            <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE_HERO}
                 alt="Grúa Horquilla HELI Gasolina 2.5 toneladas"
                 fill
                 priority
                 quality={90}
-                className="object-cover"
+                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              {/* Subtle vignette para integrar con el fondo dark */}
-              <div className="absolute inset-0 bg-gradient-to-t from-steel-950/30 via-transparent to-transparent" />
             </div>
 
             {/* Badge flotante */}
@@ -511,28 +509,27 @@ function Showcase() {
 
           {/* Imagen central — agrandada */}
           <div className="lg:col-span-6">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-3xl">
+            <div className="relative mx-auto aspect-square w-full max-w-3xl">
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute inset-0 rounded-3xl bg-heli-red/30 blur-[120px]"
+                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[120px]"
               />
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_80px_-20px_rgba(206,20,45,0.5)] ring-1 ring-heli-red/20"
+                className="relative h-full w-full"
               >
                 <Image
                   src={PRODUCT_IMAGE_SIDE}
                   alt="HELI Gasolina 2.5 toneladas vista lateral"
                   fill
                   quality={90}
-                  className="object-cover"
+                  className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
                   sizes="(max-width: 1024px) 100vw, 60vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-steel-950/30 via-transparent to-transparent" />
               </motion.div>
             </div>
           </div>
