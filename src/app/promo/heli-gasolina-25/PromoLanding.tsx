@@ -24,7 +24,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const PRODUCT_IMAGE = "/assets/legacy/products/g3-series-2-3.5t-gas-nobg.png";
+const PRODUCT_IMAGE_HERO = "/assets/promo/heli-gasolina-25-hero.png";
+const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-gasolina-25-side.png";
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -269,18 +270,20 @@ function Hero() {
             className="relative aspect-square w-full max-w-2xl justify-self-center lg:justify-self-end"
           >
             {/* Glow detrás */}
-            <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
+            <div className="absolute inset-0 rounded-3xl bg-heli-red/30 blur-[100px]" />
 
-            <div className="relative h-full w-full">
+            <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_80px_-20px_rgba(206,20,45,0.5)] ring-1 ring-heli-red/20">
               <Image
-                src={PRODUCT_IMAGE}
+                src={PRODUCT_IMAGE_HERO}
                 alt="Grúa Horquilla HELI Gasolina 2.5 toneladas"
                 fill
                 priority
                 quality={90}
-                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
+              {/* Subtle vignette para integrar con el fondo dark */}
+              <div className="absolute inset-0 bg-gradient-to-t from-steel-950/30 via-transparent to-transparent" />
             </div>
 
             {/* Badge flotante */}
@@ -512,23 +515,24 @@ function Showcase() {
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[120px]"
+                className="absolute inset-0 rounded-3xl bg-heli-red/30 blur-[120px]"
               />
 
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative h-full w-full scale-110"
+                className="relative h-full w-full overflow-hidden rounded-3xl border border-white/10 shadow-[0_30px_80px_-20px_rgba(206,20,45,0.5)] ring-1 ring-heli-red/20"
               >
                 <Image
-                  src={PRODUCT_IMAGE}
+                  src={PRODUCT_IMAGE_SIDE}
                   alt="HELI Gasolina 2.5 toneladas vista lateral"
                   fill
                   quality={90}
-                  className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
+                  className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 60vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-steel-950/30 via-transparent to-transparent" />
               </motion.div>
             </div>
           </div>
@@ -717,23 +721,6 @@ function UseCases() {
 
   return (
     <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-24">
-      {/* Imagen decorativa de fondo a la derecha */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={isInView ? { opacity: 0.3, x: 0 } : {}}
-        transition={{ duration: 1 }}
-        className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2  lg:block"
-      >
-        <Image
-          src={PRODUCT_IMAGE}
-          alt=""
-          fill
-          quality={85}
-          className="object-contain"
-          aria-hidden
-        />
-      </motion.div>
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
