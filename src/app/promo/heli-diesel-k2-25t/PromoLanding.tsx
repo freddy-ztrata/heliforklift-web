@@ -777,24 +777,13 @@ function UseCases() {
 // ============================================================
 // FORM CTA
 // ============================================================
-const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
+const HUBSPOT_DEV_SCRIPT =
+  "https://js.hsforms.net/forms/embed/developer/50182752.js";
 const HUBSPOT_PORTAL_ID = "50182752";
-// IMPORTANTE: este formId es placeholder — reemplazar con el form ID real
-// que paid media cree en HubSpot para esta campana CPCD25-Q13K2 Diesel 2.5T
-const HUBSPOT_FORM_ID = "15b3dd6b-0095-4c03-a306-3dde97e81456";
+const HUBSPOT_FORM_ID = "cc1dd61c-972a-4ea8-aaac-d02b857a04d5";
 
 declare global {
   interface Window {
-    hbspt?: {
-      forms?: {
-        create: (config: {
-          region: string;
-          portalId: string;
-          formId: string;
-          target: string;
-        }) => void;
-      };
-    };
     fbq?: (
       action: "track" | "trackCustom",
       eventName: string,
@@ -810,38 +799,28 @@ function ConversionForm() {
     const container = formContainerRef.current;
     if (!container) return;
 
-    const targetId = `hs-form-promo-${Math.random().toString(36).slice(2, 11)}`;
-    container.id = targetId;
+    container.innerHTML = "";
 
-    function renderForm() {
-      if (!window.hbspt?.forms?.create || !container) return;
-      container.innerHTML = "";
-      window.hbspt.forms.create({
-        region: "na1",
-        portalId: HUBSPOT_PORTAL_ID,
-        formId: HUBSPOT_FORM_ID,
-        target: `#${targetId}`,
-      });
-    }
-
-    if (window.hbspt?.forms?.create) {
-      renderForm();
-      return;
-    }
+    const formDiv = document.createElement("div");
+    formDiv.className = "hs-form-html";
+    formDiv.setAttribute("data-region", "na1");
+    formDiv.setAttribute("data-form-id", HUBSPOT_FORM_ID);
+    formDiv.setAttribute("data-portal-id", HUBSPOT_PORTAL_ID);
+    container.appendChild(formDiv);
 
     const existing = document.querySelector(
-      `script[src="${HUBSPOT_V2_SCRIPT}"]`
+      `script[src="${HUBSPOT_DEV_SCRIPT}"]`
     );
     if (!existing) {
       const script = document.createElement("script");
-      script.src = HUBSPOT_V2_SCRIPT;
-      script.async = true;
+      script.src = HUBSPOT_DEV_SCRIPT;
       script.defer = true;
-      script.onload = renderForm;
       document.body.appendChild(script);
     } else {
-      existing.addEventListener("load", renderForm, { once: true });
-      setTimeout(renderForm, 100);
+      const w = window as unknown as {
+        HubSpotFormsEmbed?: { create?: () => void };
+      };
+      w.HubSpotFormsEmbed?.create?.();
     }
   }, []);
 
