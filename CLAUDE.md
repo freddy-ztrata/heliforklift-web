@@ -6,13 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 npm run dev          # Dev server (Turbopack)
-npm run build        # Production build (102 static pages, output: "standalone")
+npm run build        # Production build (~115 static pages, Turbopack, output: "standalone")
 npm run start        # Serve production build on port 3000
 npm run lint         # ESLint
 npx tsc --noEmit     # Type check without emitting
 ```
 
-**Known build issue:** `output: "standalone"` fails on the final copy step on Windows+OneDrive due to Sharp's `.node` binary file locking. Compilation and static page generation succeed — only the standalone bundling step errors. Does not affect `npm run dev` or Linux/Docker deployment.
+**Known build issue:** `output: "standalone"` fails on the final copy step on Windows+OneDrive due to Sharp's `.node` binary file locking. Compilation and static page generation succeed — only the standalone bundling step errors. Does not affect `npm run dev` or Linux/Docker deployment. Note: the Turbopack build does **not** print per-route bundle sizes (no "First Load JS" column).
+
+**Git on Windows + OneDrive:** `git status`/`commit` via git-bash intermittently fail with `fatal: mmap failed: Invalid argument` (mmap over the OneDrive-synced index). Use **PowerShell** for git index ops (`git status`, `git commit`, `git push`); native Windows git is stable. In PowerShell, here-string commit messages (`@'...'@`) break if the text contains double-quotes — write messages without `"`. A push "RemoteException" in PowerShell is just git's stderr progress — check `$LASTEXITCODE` (0 = OK).
 
 ## Architecture
 
@@ -86,13 +88,15 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 
 ### Promo Landings (Meta Ads)
 
-**3 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
+**5 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
 
 | Ruta | Producto | Stock | Form ID HubSpot | Thank-you |
 |---|---|---|---|---|
 | `/promo/heli-gasolina-25` | HELI G3 Gasolina 2.5T | 10 unidades | `66a0f2cc-6e53-4755-ac9a-f07ba6732e2a` | `/promo/heli-gasolina-25/gracias` |
 | `/promo/heli-gasolina-35` | HELI G3 Gas-Gasolina 3.5T | 10 unidades | `2db82f7c-34a1-47f1-bc3f-fc91eec69fdd` | `/promo/heli-gasolina-35/gracias` |
 | `/promo/heli-diesel-k2` | HELI Diesel K2 (multi-tonelaje 2.5/3.0/3.5T) | 15 unidades | `8ae22a71-ea73-4cf7-8c57-634e768c0104` | `/promo/heli-diesel-k2/gracias` |
+| `/promo/heli-diesel-k2-25t` | HELI CPCD25-Q13K2 Diesel 2.5T | 10 unidades | `cc1dd61c-972a-4ea8-aaac-d02b857a04d5` | `/promo/heli-diesel-k2-25t/gracias` |
+| `/promo/heli-transpaleta-cbd1520` | Transpaleta Eléctrica HELI CBD15/20 (2T) | — | `ba4815b5-e77a-4cc5-88be-bef4a91ecefd` | `/promo/heli-transpaleta-cbd1520/gracias` |
 
 **Estructura común** (cada `PromoLanding.tsx`):
 1. **Hero** — logo HELI blanco clickeable (link a `/`) + countdown 48hrs + título + specs grid + CTA "Cotizar ahora" + stock counter
@@ -104,18 +108,19 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 7. **FooterMini** — logo HELI blanco clickeable + email/teléfono
 8. **FloatingCTA** — botón "Cotizar ahora" que aparece tras scroll > 600px (mobile: full-width sticky bottom; desktop: pill flotante esquina inferior derecha con `animate-ping` rojo)
 
-**Shared component:** `src/app/promo/_shared/PromoThankYou.tsx` (carpeta privada con `_` que NO genera ruta) — recibe props `productName`, `productImage`, `productTagline`, `productSlug`. Usado en las 3 thank-you pages para tracking diferenciado por campaña (atributo `data-promo-thank-you={slug}` para Meta Pixel/GA4).
+**Shared component:** `src/app/promo/_shared/PromoThankYou.tsx` (carpeta privada con `_` que NO genera ruta) — recibe props `productName`, `productImage`, `productTagline`, `productSlug`. Usado en las 5 thank-you pages para tracking diferenciado por campaña (atributo `data-promo-thank-you={slug}` para Meta Pixel/GA4). El mapa `PROMO_TRACKING` dentro del componente tiene un entry (`contentName` + `value`) por slug — agregar uno nuevo al crear otra landing.
 
-**Imágenes en `public/assets/promo/`** (no en `legacy/products/`):
-- `heli-gasolina-35-front.png` + `heli-gasolina-35-side.png`
-- `heli-diesel-k2-front.png` + `heli-diesel-k2-side.png` + `heli-diesel-k2-hero.png`
-- 2.5T usa imágenes existentes en `legacy/products/g3-series-2-3.5t-gas-nobg.png`
+**Imágenes en `public/assets/promo/`** (no en `legacy/products/`), todas `.webp`:
+- `heli-gasolina-35-front.webp` + `heli-gasolina-35-side.webp`
+- `heli-diesel-k2-front.webp` + `heli-diesel-k2-side.webp` + `heli-diesel-k2-hero.webp`
+- `heli-diesel-k2-25t-hero.webp` + `-side.webp`; `heli-transpaleta-cbd1520-hero.webp` + `-side.webp`
+- 2.5T (gasolina) usa imágenes existentes en `legacy/products/g3-series-2-3.5t-gas-nobg.webp`
 
 **URLs originales del cliente** (no usadas, archivadas) en `public/assets/Campañas/{1,2,3}/`.
 
 ### Quote Form (CTASection.tsx) — HubSpot Embed
 
-El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`, form `15b3dd6b-0095-4c03-a306-3dde97e81456` — form **principal del sitio**, distinto de los forms de las 3 promo landings).
+El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`, form `15b3dd6b-0095-4c03-a306-3dde97e81456` — form **principal del sitio**, distinto de los forms de las 5 promo landings).
 
 **Implementación:**
 - `useEffect` inyecta `https://js.hsforms.net/forms/embed/v2.js` una sola vez globalmente
@@ -140,17 +145,19 @@ El form custom React fue **reemplazado por embed de HubSpot** (portal `50182752`
 
 ### Images
 
-All product/category images use `next/image` `<Image>` with `fill` + `sizes` for responsive srcset. Quality 75 for products, 80 for hero/landing. Formats: AVIF + WebP. `minimumCacheTTL: 30 days`.
+All product/category images use `next/image` `<Image>` with `fill` + `sizes` for responsive srcset. `next.config.ts`: served formats AVIF + WebP, `minimumCacheTTL: 30 days`.
 
-Product images in `public/assets/legacy/products/` (200+ files) have white/light backgrounds. Use `product-img-container` CSS class on container divs to provide matching light gradient bg. `FuelTypeLanding` and `ProductCategoriesGrid` use them as `object-cover`/`object-contain` con dark/light gradient overlay.
+**All source images are WebP** (`public/assets/**/*.webp`). The original jpg/png were converted with `sharp` (quality 85, dimensions preserved) and removed — there are **no jpg/png originals in the repo** anymore. To add a new image: convert it to `.webp` first (e.g. a one-off sharp script) and reference the `.webp` path. **Exception:** `public/og-image.jpg` stays JPG for social-card compatibility (some scrapers like LinkedIn don't render WebP OG images); regenerate it as a 1200×630 landscape card (see SEO below). The `Campañas/` folder under `public/assets/` holds untracked client source archives — leave it alone.
+
+Product images in `public/assets/legacy/products/` have white/light backgrounds. Use `product-img-container` CSS class on container divs to provide matching light gradient bg. `FuelTypeLanding` and `ProductCategoriesGrid` use them as `object-cover`/`object-contain` con dark/light gradient overlay. The hero background video (`public/assets/hero-video.mp4`, Git LFS) is recompressed H.264 720p ~7MB — keep it small if re-exported.
 
 News images in `public/assets/legacy/news/` (8 files) — descargadas directamente de `heliforklift.cl/wp-content/uploads/`.
 
 ### Git LFS Assets
 
 Both `*.mp4` and `*.pdf` are tracked via Git LFS (see `.gitattributes`):
-- `public/assets/hero-video.mp4` (99MB) — Hero background, uses `preload="metadata"` for fast load
-- `public/assets/legacy/datasheets/*.pdf` (45 files, ~480MB) — Datasheets scraped from heliforklift.cl
+- `public/assets/hero-video.mp4` (~7MB, recompressed H.264 720p) — Hero background, `preload="metadata"` + `poster`. (Was 103MB 1080p; the uncompressed original is kept outside the repo at `../hero heli.mp4`.)
+- `public/assets/legacy/datasheets/*.pdf` (46 files, ~490MB) — Datasheets scraped from heliforklift.cl + `manipuladores-telescopicos-serie-h.pdf` (folleto Serie H)
 
 After `git clone`, run `git lfs pull` to download. Linux build context for Docker copies all LFS-resolved files (~600MB transfer).
 
@@ -161,6 +168,8 @@ Footer columns:
 - **SERVICIOS:** Venta, Servicio Técnico, Repuestos (sin Arriendo ni Usados)
 - **EMPRESA:** Nosotros, Equipo y Vendedores, Noticias, **Trabaja con nosotros**, **Información y denuncias (Ley Karin)**, Contacto
 - **CONTACTO:** address + phone (`+56 9 9320 9186`) + email + horario
+
+Bottom bar carries a credit "Desarrollado y diseñado por **Agencia Digitals** · Agencia y consultora digital" linking to `https://www.digitals.cl`. Same credit is repeated in the `FooterMini` of the 5 promo landings and in `PromoThankYou.tsx` — keep all in sync if the wording/link changes.
 
 Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → Servicios → Noticias → Contacto.
 
@@ -173,12 +182,16 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - Teléfono actual: `+56-9-9320-9186` (NO usar el viejo `+56-9-5818-7035` que era de Mauricio Glaser)
 - Tracking inyectado en `<head>`: GTM (`GTM-M9FW8BM3`), GA4 (`G-3HLYKF62PW`), Meta Pixel (`1475698744101032`). Ver sección **Tracking & Analytics** abajo.
 - `<html lang="es">` (sitio mono-idioma, sin hreflang)
+- Title default keyword-first: "Grúas Horquillas HELI en Chile — Venta y Servicio Técnico"
+- **Google Search Console verification:** NO está activa por meta-tag (se removió el placeholder inválido). Hay un comentario en `layout.tsx` para pegar el código real si se quiere. El sitio se verifica/indexa por otro medio (DNS/GA/GTM) y el sitemap se descubre por robots.txt — el envío explícito en GSC es manual.
 
 **Page-level metadata:**
 - Cada página define `alternates: { canonical: "/path" }` (relativo, resuelto contra metadataBase)
 - `/productos` tiene `generateMetadata()` dinámico según `?tipo=` o `?categoria=`
+- **`/productos/[slug]` title condicional:** `isForklift = categorySlug.startsWith("gruas-")` → forklifts usan `"{name} — Grúa Horquilla {capacityRange}"`; el resto (telehandlers, porta-contenedores, tractores, etc.) usa `"{name} — {capacityRange}"` (sin el prefijo "Grúa Horquilla" que sería incorrecto/redundante)
 - Páginas con keywords arrays: `/contacto`, `/equipo`, `/catalogo`, `/noticias`, `/servicios`, `/productos/[slug]` — keywords B2B chilenos optimizados
-- Open Graph: imagen global `/og-image.jpg` (1200x630) + dinámicas en pages detail (`product.image`, `service.image`, `news.image`)
+- Open Graph: imagen global `/og-image.jpg` — **tarjeta de marca 1200×630 horizontal** (foto + headline en DM Sans bold, generada con sharp; **debe ser JPG**, no WebP, por compatibilidad social). Detail pages usan imágenes dinámicas WebP (`product.image`, `service.image`, `news.image`)
+- H1 keyword-rich con patrón `sr-only` (texto SEO oculto) + `aria-hidden` (texto visual) en `/nosotros` (AboutHero), `/servicios`, `/contacto`, `/equipo`
 
 **Schemas JSON-LD por página detail:**
 - `/productos/[slug]`: **Product** (con `additionalProperty` para capacidad/motor/altura) + **BreadcrumbList** + **FAQPage** (5 preguntas dinámicas con respuestas adaptadas según `fuelType`)
@@ -189,11 +202,12 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - 109 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias)
 - **Image Sitemap activado**: cada `<url>` incluye `images: [absoluteImg(...)]` (homepage tiene 2: og-image + banner; productos/servicios/noticias/categorías tienen 1 cada uno)
 - Helper `absoluteImg()` convierte paths relativos a URLs absolutas
+- `lastModified` usa una **fecha constante estable** (`new Date("2026-06-01...")`), no `new Date()` de build — evita un lastmod que cambia en cada deploy. Bump manual cuando cambie el catálogo. (Las noticias sí usan su fecha real `item.date`.)
 - **NO incluidas:** `/gracias`, `/promo/*`, `/promo/*/gracias` (todas con `robots: { index: false }`)
 
 **Robots (`robots.ts`):** `Allow: /`, `Disallow: /api/`, sitemap apunta a `/sitemap.xml`. Las páginas con `noindex` se manejan por metadata individual, no por robots.txt.
 
-**SEO Audit score:** ~95/100 después de aplicar fixes de teléfono/geo/postalCode/openingHours, h1 SEO en `/nosotros` (con `sr-only`), BreadcrumbList en pages detail, FAQ schema en productos, keywords arrays expandidos, e Image Sitemap.
+**SEO Audit score:** ~97/100 (estimación basada en código). Fixes aplicados: teléfono/geo/postalCode/openingHours, h1 `sr-only` en nosotros/servicios/contacto/equipo, BreadcrumbList en pages detail, FAQ schema en productos, keywords arrays, Image Sitemap, OG card 1200×630 JPG, title de productos condicional, sitemap lastModified estable. Pendiente (manual): enviar sitemap en Search Console. La performance la arrastraba el video del hero (ya recomprimido 103→7MB); ver `next.config.ts` AVIF/WebP. Brotli es config de Traefik/Dokploy (no del repo).
 
 ### Tracking & Analytics
 
@@ -214,6 +228,8 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-gasolina-25` | `promo_25t` | `gasolina` |
 | `/promo/heli-gasolina-35` | `promo_35t` | `gasolina` |
 | `/promo/heli-diesel-k2` | `promo_k2` | `diesel` |
+| `/promo/heli-diesel-k2-25t` | `promo_diesel_25t` | `diesel` |
+| `/promo/heli-transpaleta-cbd1520` | `promo_transpaleta_2t` | `transpaleta_electrica` |
 
 `Lead` se dispara en cada thank-you page (conversión principal optimizada en Meta Ads):
 
@@ -222,6 +238,8 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-gasolina-25/gracias` | `promo_25t` | 14.000.000 |
 | `/promo/heli-gasolina-35/gracias` | `promo_35t` | 18.000.000 |
 | `/promo/heli-diesel-k2/gracias` | `promo_k2` | 16.000.000 |
+| `/promo/heli-diesel-k2-25t/gracias` | `promo_diesel_25t` | 10.800.000 |
+| `/promo/heli-transpaleta-cbd1520/gracias` | `promo_transpaleta_2t` | 950.000 |
 | `/gracias` (form principal) | `form_principal` | (sin valor) |
 
 Implementación:
@@ -229,7 +247,7 @@ Implementación:
 - `MetaPixelLead.tsx` ([src/components/shared/](heliforklift-web/src/components/shared/MetaPixelLead.tsx)) — wrapper cliente reutilizable para disparar `Lead` desde Server Components (como `/gracias/page.tsx`).
 - Cada landing extiende `declare global { Window { fbq?: ... } }` para type safety sin `@ts-ignore`.
 
-**Custom Conversions en Meta** (configurar manualmente en Events Manager): "Lead - HELI 2.5T", "Lead - HELI 3.5T", "Lead - HELI K2", "Lead - Form Principal". Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
+**Custom Conversions en Meta** (configurar manualmente en Events Manager), una por `content_name`: `promo_25t`, `promo_35t`, `promo_k2`, `promo_diesel_25t`, `promo_transpaleta_2t`, `form_principal`. Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
 
 **Conversions API (CAPI)**: pendiente de configurar en HubSpot → Settings → Integrations → Meta Ads para envío server-side de eventos `Lead` (recupera 25-40% de conversiones perdidas por iOS 14.5 ATT).
 
@@ -245,7 +263,8 @@ Dokploy on AWS EC2 runs Docker. Multi-stage build with `node:20-alpine`. Require
 
 - All text in **Spanish (Chile)**, using "tú" (informal). Use proper accents (á, é, í, ó, ú, ñ).
 - Brand color: `--heli-red: #CE142D`. Accent: `--heli-yellow: #F5A623`
-- Font stack: DM Sans (body), Bebas Neue (headings via `.font-heading`), JetBrains Mono (data)
+- Font stack: DM Sans (body), Bebas Neue (headings via `.font-heading`), JetBrains Mono (data). **Self-hosted via `next/font/local`** — woff2 committed in `src/app/fonts/` (no build-time fetch to Google). DM Sans and JetBrains Mono are variable fonts (one woff2 each, `weight: "400 700"`); Bebas Neue is single-weight. CSS variables (`--font-dm-sans`, etc.) wired in `globals.css` are unchanged from the old `next/font/google` setup.
+- Favicon/icons in `src/app/` (App Router convention): `favicon.ico` + `icon.png` + `apple-icon.png` are the HELI mark (dark rounded square + red "H"), generated from `public/favicon.svg`. Do **not** reintroduce the default Next.js `favicon.ico` (the Vercel triangle Google was showing).
 - `cn()` utility from `@/lib/utils` for className merging (clsx + tailwind-merge)
 - Touch targets: minimum 44px via `@media (pointer: coarse)` in globals.css
 - `FuelTypeBadge` component for fuel type indicators: `sm` size (translucent, for cards), `md` size (solid bg, for detail pages)
