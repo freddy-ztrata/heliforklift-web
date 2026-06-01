@@ -235,6 +235,18 @@ export default function Footer() {
             todo Chile. Servicio técnico, repuestos originales y capacitación
             para montacargas, apiladores y transpaletas.
           </p>
+          <p className="mt-4 text-xs text-steel-600">
+            Desarrollado y diseñado por{" "}
+            <a
+              href="https://www.digitals.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-steel-400 transition-colors duration-200 hover:text-heli-red"
+            >
+              Agencia Digitals
+            </a>{" "}
+            · Agencia y consultora digital
+          </p>
         </div>
       </div>
     </footer>

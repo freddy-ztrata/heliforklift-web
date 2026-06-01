@@ -961,6 +961,18 @@ function FooterMini() {
             </a>
           </div>
         </div>
+        <p className="mt-6 text-center text-xs text-steel-600">
+          Desarrollado y diseñado por{" "}
+          <a
+            href="https://www.digitals.cl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-steel-400 transition-colors hover:text-white"
+          >
+            Agencia Digitals
+          </a>{" "}
+          · Agencia y consultora digital
+        </p>
       </div>
     </footer>
   );
