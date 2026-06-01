@@ -138,6 +138,12 @@ export const productGalleries: Record<string, string[]> = {
   "qyd80-150-tractor-electrico": [
     `${IMG}/qyd80-150-a2lig2-gallery-1.jpg`,
   ],
+
+  // === TELEHANDLERS ===
+  "manipulador-telescopico-serie-h": [
+    `${IMG}/telehandler-serie-h-2.jpg`,
+    `${IMG}/telehandler-serie-h-3.jpg`,
+  ],
 };
 
 /**

@@ -65,6 +65,9 @@ export const productDatasheets: Record<string, string> = {
 
   // ─── PLATFORMS ───
   "js07-plataforma-elevadora-tijera": `${DATASHEET_DIR}/js07.pdf`,
+
+  // ─── TELEHANDLERS ───
+  "manipulador-telescopico-serie-h": `${DATASHEET_DIR}/manipuladores-telescopicos-serie-h.pdf`,
 };
 
 /**

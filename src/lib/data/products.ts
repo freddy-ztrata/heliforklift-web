@@ -116,7 +116,7 @@ export const productCategories: ProductCategory[] = [
     slug: "manipuladores-telescopicos",
     description:
       "Alcance extendido y versatilidad para construccion y logistica.",
-    image: `${IMG}/telehandler-40h130-170s.jpg`,
+    image: `${IMG}/telehandler-serie-h-1.jpg`,
     productCount: 1,
   },
   {

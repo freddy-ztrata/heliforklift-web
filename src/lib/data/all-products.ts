@@ -1037,25 +1037,28 @@ export const reachTrucks: RawProduct[] = [
 // =============================================================================
 export const telehandlers: RawProduct[] = [
   {
-    id: "telehandler-40h130-170s",
-    name: "Manipulador Telescopico 40H130-170S",
-    model: "40H130-170S",
+    id: "telehandler-serie-h",
+    name: "Manipulador Telescopico Serie H",
+    model: "Serie H (35THCJ / 40THCJ / 50THCJ)",
     category: "Manipuladores Telescopicos",
     categorySlug: "manipuladores-telescopicos",
     type: "Manipulador Telescopico",
-    capacityRange: "4,000 kg",
-    heightRange: "Hasta 17,000 mm",
-    power: "Diesel",
-    image: `${IMG}/telehandler-40h130-170s.jpg`,
+    capacityRange: "3,500 - 5,000 kg",
+    heightRange: "9,000 - 17,000 mm",
+    power: "Diesel (Quanchai / Cummins, hasta 103 kW)",
+    image: `${IMG}/telehandler-serie-h-1.jpg`,
     features: [
-      "Brazo telescopico extensible",
-      "Alcance hasta 17m",
-      "Multiples accesorios",
-      "Para construccion y logistica",
+      "Capacidades de 3.5, 4 y 5 toneladas",
+      "Alcance frontal hasta 13 m y elevacion hasta 17 m",
+      "Transmision hidrostatica 4x4 con control antiatasco (DA)",
+      "Tres modos de direccion: 2 ruedas, 4 ruedas y diagonal (cangrejo)",
+      "Cabina FOPS/ROPS con joystick multifuncion",
+      "Nivelacion automatica de horquilla y parada por sobrecarga",
+      "Multiples accesorios: plumas de grua, cabrestante y cubo de carga",
     ],
     description:
-      "Manipulador telescopico 40H130-170S de 4 toneladas con alcance de hasta 17 metros. Versatil con multiples accesorios para construccion y logistica.",
-    slug: "manipulador-telescopico-40h130-170s",
+      "Manipulador telescopico HELI Serie H (camion todoterreno de alcance variable) disponible en capacidades de 3.5, 4 y 5 toneladas, con alturas de elevacion de 9, 12.5 y 17 metros y alcance frontal de hasta 13 metros. Transmision hidrostatica 4x4, motores diesel Quanchai o Cummins, tres modos de direccion y cabina FOPS/ROPS. Versatil para construccion, agro y logistica con plumas de grua, cabrestante, cubo de carga y horquilla intercambiables.",
+    slug: "manipulador-telescopico-serie-h",
   },
 ];
 
