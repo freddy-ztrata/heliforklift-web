@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-gasolina-35",
     images: [
       {
-        url: "/assets/promo/heli-gasolina-35-front.png",
+        url: "/assets/promo/heli-gasolina-35-front.webp",
         width: 1200,
         height: 630,
         alt: "Grúa Horquilla HELI Gasolina 3.5 toneladas",

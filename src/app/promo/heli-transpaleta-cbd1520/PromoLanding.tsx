@@ -26,8 +26,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const PRODUCT_IMAGE_HERO = "/assets/promo/heli-transpaleta-cbd1520-hero.png";
-const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-transpaleta-cbd1520-side.png";
+const PRODUCT_IMAGE_HERO = "/assets/promo/heli-transpaleta-cbd1520-hero.webp";
+const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-transpaleta-cbd1520-side.webp";
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -138,7 +138,7 @@ function Hero() {
             className="inline-flex items-center transition-opacity hover:opacity-80"
           >
             <Image
-              src="/assets/legacy/logos/heli-chile-logo.png"
+              src="/assets/legacy/logos/heli-chile-logo.webp"
               alt="HELI Forklift Chile"
               width={140}
               height={42}
@@ -937,7 +937,7 @@ function FooterMini() {
             className="inline-flex items-center transition-opacity hover:opacity-80"
           >
             <Image
-              src="/assets/legacy/logos/heli-chile-logo.png"
+              src="/assets/legacy/logos/heli-chile-logo.webp"
               alt="HELI Forklift Chile"
               width={120}
               height={36}

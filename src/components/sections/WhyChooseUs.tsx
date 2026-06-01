@@ -99,7 +99,7 @@ export default function WhyChooseUs() {
             className="relative hidden lg:flex items-end rounded-2xl overflow-hidden min-h-[520px]"
           >
             <Image
-              src="/assets/legacy/products/g-series-1-3.5t-electric.jpg"
+              src="/assets/legacy/products/g-series-1-3.5t-electric.webp"
               alt="Grúa horquilla HELI en operación"
               fill
               sizes="50vw"

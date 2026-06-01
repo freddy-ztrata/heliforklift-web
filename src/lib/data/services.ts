@@ -28,7 +28,7 @@ export const services: Service[] = [
     description:
       "Equipos nuevos HELI con tecnología de punta. Grúas eléctricas, combustión e hidrógeno verde con financiamiento flexible.",
     icon: "ShoppingCart",
-    image: "/assets/legacy/products/g-series-1-3.5t-electric.jpg",
+    image: "/assets/legacy/products/g-series-1-3.5t-electric.webp",
     heroSubtitle:
       "Equipos nuevos HELI directos del fabricante. Asesoría experta para encontrar la grúa perfecta para tu operación.",
     features: [
@@ -70,7 +70,7 @@ export const services: Service[] = [
     description:
       "Técnicos certificados y experimentados en todos los tipos de montacargas. Mantención preventiva y correctiva.",
     icon: "Wrench",
-    image: "/assets/legacy/products/k2-series-2-3.5t-combustion.jpg",
+    image: "/assets/legacy/products/k2-series-2-3.5t-combustion.webp",
     heroSubtitle:
       "Técnicos certificados HELI con cobertura nacional. Mantención preventiva, correctiva y emergencias 24/7 para mantener tu operación siempre activa.",
     features: [
@@ -112,7 +112,7 @@ export const services: Service[] = [
     description:
       "Stock permanente de repuestos originales HELI y lubricantes autorizados. Envío a todo Chile.",
     icon: "Cog",
-    image: "/assets/legacy/products/g3-series-5-10t-combustion.jpg",
+    image: "/assets/legacy/products/g3-series-5-10t-combustion.webp",
     heroSubtitle:
       "Repuestos originales HELI con disponibilidad inmediata. Mantén tu equipo operando con la garantía del fabricante.",
     features: [

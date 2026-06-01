@@ -137,7 +137,7 @@ export default function PromoThankYou({
             className="inline-flex items-center transition-opacity hover:opacity-80"
           >
             <Image
-              src="/assets/legacy/logos/heli-chile-logo.png"
+              src="/assets/legacy/logos/heli-chile-logo.webp"
               alt="HELI Forklift Chile"
               width={140}
               height={42}

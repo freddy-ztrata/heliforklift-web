@@ -14,7 +14,7 @@ export default function GraciasTranspaletaCBD1520Page() {
     <PromoThankYou
       productSlug="heli-transpaleta-cbd1520"
       productName="Transpaleta Eléctrica HELI CBD15/20 (2 toneladas)"
-      productImage="/assets/promo/heli-transpaleta-cbd1520-hero.png"
+      productImage="/assets/promo/heli-transpaleta-cbd1520-hero.webp"
       productTagline="Transpaleta · Litio 48V · 2 Tons"
     />
   );

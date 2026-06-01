@@ -14,7 +14,7 @@ export default function GraciasDieselK225tPage() {
     <PromoThankYou
       productSlug="heli-diesel-k2-25t"
       productName="Grúa Horquilla HELI CPCD25-Q13K2 Diesel (2.5 toneladas)"
-      productImage="/assets/promo/heli-diesel-k2-25t-hero.png"
+      productImage="/assets/promo/heli-diesel-k2-25t-hero.webp"
       productTagline="HELI CPCD25 · Diesel · 2.5 Tons"
     />
   );

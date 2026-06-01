@@ -145,7 +145,7 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/assets/legacy/banners/heli-fleet-delivery.jpg"
+          poster="/assets/legacy/banners/heli-fleet-delivery.webp"
           className="absolute inset-0 h-full w-full object-cover"
         >
           <source src="/assets/hero-video.mp4" type="video/mp4" />

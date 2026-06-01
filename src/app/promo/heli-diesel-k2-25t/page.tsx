@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-diesel-k2-25t",
     images: [
       {
-        url: "/assets/promo/heli-diesel-k2-25t-hero.png",
+        url: "/assets/promo/heli-diesel-k2-25t-hero.webp",
         width: 1200,
         height: 630,
         alt: "Grúa Horquilla HELI CPCD25-Q13K2 Diesel 2.5 toneladas",

@@ -14,7 +14,7 @@ export default function GraciasGasolina25Page() {
     <PromoThankYou
       productSlug="heli-gasolina-25"
       productName="Grúa Horquilla HELI Gasolina 2.5 Tons"
-      productImage="/assets/legacy/products/g3-series-2-3.5t-gas-nobg.png"
+      productImage="/assets/legacy/products/g3-series-2-3.5t-gas-nobg.webp"
       productTagline="HELI G3 · Gasolina 2.5T"
     />
   );

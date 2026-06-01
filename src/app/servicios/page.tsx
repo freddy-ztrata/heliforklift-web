@@ -46,11 +46,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 const serviceImages = [
-  "/assets/legacy/products/g-series-1-3.5t-electric.jpg",
-  "/assets/legacy/products/k2-series-2-3.5t-combustion.jpg",
-  "/assets/legacy/products/h3-series-1-3.5t-combustion.jpg",
-  "/assets/legacy/products/g3-series-4-5.5t-combustion.png",
-  "/assets/legacy/products/g2-series-6-10t-electric.png",
+  "/assets/legacy/products/g-series-1-3.5t-electric.webp",
+  "/assets/legacy/products/k2-series-2-3.5t-combustion.webp",
+  "/assets/legacy/products/h3-series-1-3.5t-combustion.webp",
+  "/assets/legacy/products/g3-series-4-5.5t-combustion.webp",
+  "/assets/legacy/products/g2-series-6-10t-electric.webp",
 ];
 
 export default function ServiciosPage() {

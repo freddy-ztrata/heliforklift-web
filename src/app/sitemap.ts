@@ -19,8 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
       images: [
-        absoluteImg("/og-image.jpg"),
-        absoluteImg("/assets/legacy/banners/heli-fleet-delivery.jpg"),
+        absoluteImg("/og-image.webp"),
+        absoluteImg("/assets/legacy/banners/heli-fleet-delivery.webp"),
       ],
     },
     {

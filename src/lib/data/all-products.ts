@@ -62,7 +62,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "1,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Electrica (Litio-ion 80V)",
-    image: `${IMG}/g-series-1-3.5t-electric.jpg`,
+    image: `${IMG}/g-series-1-3.5t-electric.webp`,
     features: [
       "Motor AC de alto rendimiento",
       "Bateria de litio integrada",
@@ -84,7 +84,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "1,500 - 2,000 kg",
     heightRange: "3,000 - 5,500 mm",
     power: "Electrica (Litio-ion 48V)",
-    image: `${IMG}/g-series-1.5-2t-electric.jpg`,
+    image: `${IMG}/g-series-1.5-2t-electric.webp`,
     features: [
       "Compacta y maniobrable",
       "Bateria de litio de carga rapida",
@@ -105,7 +105,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "1,250 - 1,500 kg",
     heightRange: "3,000 - 4,800 mm",
     power: "Electrica (Litio-ion 48V)",
-    image: `${IMG}/g-series-1.25-1.5t-electric.jpg`,
+    image: `${IMG}/g-series-1.25-1.5t-electric.webp`,
     features: [
       "Configuracion de 3 ruedas",
       "Radio de giro ultra reducido",
@@ -126,7 +126,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "1,300 - 1,500 kg",
     heightRange: "3,000 - 4,500 mm",
     power: "Electrica (Litio-ion 48V)",
-    image: `${IMG}/g2-series-1.3-1.5t-electric.png`,
+    image: `${IMG}/g2-series-1.3-1.5t-electric.webp`,
     features: [
       "Segunda generacion G2",
       "Mayor eficiencia energetica",
@@ -147,7 +147,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "4,000 - 5,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Electrica (Alto Voltaje 96V)",
-    image: `${IMG}/g2-series-4-5t-alto-voltaje.png`,
+    image: `${IMG}/g2-series-4-5t-alto-voltaje.webp`,
     features: [
       "Alto voltaje 96V",
       "Potencia equivalente a combustion",
@@ -168,7 +168,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "6,000 - 10,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Electrica (Alto Voltaje 96V)",
-    image: `${IMG}/g2-series-6-10t-electric.png`,
+    image: `${IMG}/g2-series-6-10t-electric.webp`,
     features: [
       "Gran tonelaje electrico",
       "Motor AC de alta potencia",
@@ -189,7 +189,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "6,000 - 7,000 kg",
     heightRange: "3,000 - 5,500 mm",
     power: "Electrica (Alto Voltaje 96V)",
-    image: `${IMG}/g3-series-6-7t-electric.png`,
+    image: `${IMG}/g3-series-6-7t-electric.webp`,
     features: [
       "Tercera generacion G3",
       "Tecnologia AC de ultima generacion",
@@ -210,7 +210,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "12,000 - 18,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Electrica (Alto Voltaje 360V)",
-    image: `${IMG}/g-series-12-18t-electric.png`,
+    image: `${IMG}/g-series-12-18t-electric.webp`,
     features: [
       "Ultra alto tonelaje electrico",
       "360V de potencia",
@@ -231,7 +231,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "800 - 1,200 kg",
     heightRange: "2,500 - 4,000 mm",
     power: "Electrica (Litio-ion 48V)",
-    image: `${IMG}/h4-series-0.8-1.2t-electric.png`,
+    image: `${IMG}/h4-series-0.8-1.2t-electric.webp`,
     features: [
       "Ultra compacta",
       "Para espacios muy reducidos",
@@ -252,7 +252,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "1,500 - 3,800 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Electrica (Litio-ion 80V)",
-    image: `${IMG}/h4-series-1.5-3.8t-electric.png`,
+    image: `${IMG}/h4-series-1.5-3.8t-electric.webp`,
     features: [
       "Serie H4 versatil",
       "Amplio rango de capacidades",
@@ -273,7 +273,7 @@ export const electricForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 5,000 mm",
     power: "Electrica (Antiexplosion)",
-    image: `${IMG}/h3-series-explosion-proof.png`,
+    image: `${IMG}/h3-series-explosion-proof.webp`,
     features: [
       "Certificacion antiexplosion",
       "Para ambientes peligrosos",
@@ -300,7 +300,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel / GLP",
-    image: `${IMG}/k2-series-2-3.5t-combustion.jpg`,
+    image: `${IMG}/k2-series-2-3.5t-combustion.webp`,
     features: [
       "Serie K2 de alta confiabilidad",
       "Motor Yanmar / Kubota",
@@ -321,7 +321,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel TIER 4/5",
-    image: `${IMG}/k2-series-2-3.5t-tier4.png`,
+    image: `${IMG}/k2-series-2-3.5t-tier4.webp`,
     features: [
       "Cumple norma TIER 4/5",
       "Menores emisiones",
@@ -342,7 +342,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel / GLP",
-    image: `${IMG}/g3-series-2-3.5t-gas.jpg`,
+    image: `${IMG}/g3-series-2-3.5t-gas.webp`,
     features: [
       "Tercera generacion G3",
       "Mayor confort del operador",
@@ -363,7 +363,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "4,000 - 5,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel",
-    image: `${IMG}/g3-series-4-5.5t-combustion.png`,
+    image: `${IMG}/g3-series-4-5.5t-combustion.webp`,
     features: [
       "Rango medio-alto de capacidad",
       "Motor diesel de alto torque",
@@ -384,7 +384,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "4,000 - 5,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "GLP (Gas Licuado)",
-    image: `${IMG}/g3-series-4-5t-gas.png`,
+    image: `${IMG}/g3-series-4-5t-gas.webp`,
     features: [
       "Motor a gas licuado",
       "Menores emisiones que diesel",
@@ -405,7 +405,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "5,000 - 10,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel",
-    image: `${IMG}/g3-series-5-10t-combustion.jpg`,
+    image: `${IMG}/g3-series-5-10t-combustion.webp`,
     features: [
       "Alta capacidad de carga",
       "Motor diesel de alto rendimiento",
@@ -426,7 +426,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "5,000 - 10,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel TIER V",
-    image: `${IMG}/g3-series-5-10t-tier5.png`,
+    image: `${IMG}/g3-series-5-10t-tier5.webp`,
     features: [
       "Cumple norma TIER V europea",
       "Filtro de particulas DPF",
@@ -447,7 +447,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel / GLP",
-    image: `${IMG}/h3-series-2-3.5t-combustion.png`,
+    image: `${IMG}/h3-series-2-3.5t-combustion.webp`,
     features: [
       "Serie H3 economica",
       "Vibracion reducida",
@@ -468,7 +468,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "1,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel / GLP",
-    image: `${IMG}/h3-series-1-3.5t-combustion.jpg`,
+    image: `${IMG}/h3-series-1-3.5t-combustion.webp`,
     features: [
       "Amplio rango de capacidades",
       "Motor confiable",
@@ -489,7 +489,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "12,000 - 13,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Diesel",
-    image: `${IMG}/ic-forklift-12-13.5t.png`,
+    image: `${IMG}/ic-forklift-12-13.5t.webp`,
     features: [
       "Alto tonelaje",
       "Chasis reforzado",
@@ -510,7 +510,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "15,000 - 16,000 kg",
     heightRange: "3,000 - 5,500 mm",
     power: "Diesel",
-    image: `${IMG}/ic-forklift-15-16t.jpg`,
+    image: `${IMG}/ic-forklift-15-16t.webp`,
     features: [
       "Gran capacidad de elevacion",
       "Estabilidad superior",
@@ -531,7 +531,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "20,000 - 25,000 kg",
     heightRange: "3,000 - 5,000 mm",
     power: "Diesel",
-    image: `${IMG}/ic-forklift-20-25t.png`,
+    image: `${IMG}/ic-forklift-20-25t.webp`,
     features: [
       "Muy alto tonelaje",
       "Cabina cerrada con A/C",
@@ -552,7 +552,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "28,000 - 32,000 kg",
     heightRange: "3,000 - 4,500 mm",
     power: "Diesel",
-    image: `${IMG}/ic-forklift-28-32t.png`,
+    image: `${IMG}/ic-forklift-28-32t.webp`,
     features: [
       "Ultra alto tonelaje",
       "Contrapeso masivo",
@@ -573,7 +573,7 @@ export const combustionForklifts: RawProduct[] = [
     capacityRange: "42,000 - 46,000 kg",
     heightRange: "2,500 - 4,000 mm",
     power: "Diesel",
-    image: `${IMG}/ic-forklift-42-46t.png`,
+    image: `${IMG}/ic-forklift-42-46t.webp`,
     features: [
       "Maximo tonelaje de la linea",
       "Motor Cummins de alto torque",
@@ -600,7 +600,7 @@ export const hydrogenForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Celda de Combustible H2",
-    image: `${IMG}/cpd20-25-hidrogeno.png`,
+    image: `${IMG}/cpd20-25-hidrogeno.webp`,
     features: [
       "Celda de combustible de hidrogeno",
       "Cero emisiones (solo agua)",
@@ -621,7 +621,7 @@ export const hydrogenForklifts: RawProduct[] = [
     capacityRange: "3,000 - 3,500 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Celda de Combustible H2",
-    image: `${IMG}/cpd30-35-hidrogeno.png`,
+    image: `${IMG}/cpd30-35-hidrogeno.webp`,
     features: [
       "Mayor capacidad de carga",
       "Tecnologia Fuel Cell avanzada",
@@ -642,7 +642,7 @@ export const hydrogenForklifts: RawProduct[] = [
     capacityRange: "4,000 - 5,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Celda de Combustible H2",
-    image: `${IMG}/cpd40-50-hidrogeno.png`,
+    image: `${IMG}/cpd40-50-hidrogeno.webp`,
     features: [
       "Alto tonelaje con hidrogeno",
       "Rendimiento similar a diesel",
@@ -663,7 +663,7 @@ export const hydrogenForklifts: RawProduct[] = [
     capacityRange: "6,000 - 10,000 kg",
     heightRange: "3,000 - 6,000 mm",
     power: "Celda de Combustible H2",
-    image: `${IMG}/cpd60-70-hidrogeno.png`,
+    image: `${IMG}/cpd60-70-hidrogeno.webp`,
     features: [
       "Gran tonelaje con hidrogeno",
       "Celda de combustible de alta potencia",
@@ -690,7 +690,7 @@ export const allTerrainForklifts: RawProduct[] = [
     capacityRange: "5,000 kg",
     heightRange: "3,000 - 5,500 mm",
     power: "Diesel 4x4",
-    image: `${IMG}/g3-5t-todo-terreno.jpg`,
+    image: `${IMG}/g3-5t-todo-terreno.webp`,
     features: [
       "Traccion 4x4",
       "Neumaticos todo terreno",
@@ -711,7 +711,7 @@ export const allTerrainForklifts: RawProduct[] = [
     capacityRange: "2,000 - 3,500 kg",
     heightRange: "3,000 - 5,000 mm",
     power: "Diesel 4x4",
-    image: `${IMG}/g3-series-todo-terreno.png`,
+    image: `${IMG}/g3-series-todo-terreno.webp`,
     features: [
       "Compacta todo terreno",
       "Traccion integral",
@@ -737,7 +737,7 @@ export const palletJacks: RawProduct[] = [
     type: "Transpaleta Electrica",
     capacityRange: "1,500 - 2,000 kg",
     power: "Electrica (Litio-ion 24V)",
-    image: `${IMG}/cbd15-20-transpaleta.png`,
+    image: `${IMG}/cbd15-20-transpaleta.webp`,
     features: [
       "Operacion de pie",
       "Bateria de litio",
@@ -757,7 +757,7 @@ export const palletJacks: RawProduct[] = [
     type: "Transpaleta Electrica",
     capacityRange: "2,000 - 2,500 kg",
     power: "Electrica (Litio-ion 24V)",
-    image: `${IMG}/cbd20-25-transpaleta.jpg`,
+    image: `${IMG}/cbd20-25-transpaleta.webp`,
     features: [
       "Mayor capacidad de carga",
       "Plataforma plegable",
@@ -777,7 +777,7 @@ export const palletJacks: RawProduct[] = [
     type: "Transpaleta Electrica",
     capacityRange: "1,600 - 2,000 kg",
     power: "Electrica (Litio-ion 24V)",
-    image: `${IMG}/ctd16-20-transpaleta.png`,
+    image: `${IMG}/ctd16-20-transpaleta.webp`,
     features: [
       "Diseno compacto",
       "Control de traccion",
@@ -797,7 +797,7 @@ export const palletJacks: RawProduct[] = [
     type: "Transpaleta Electrica",
     capacityRange: "1,600 kg",
     power: "Electrica (Litio-ion 24V)",
-    image: `${IMG}/ctd16-960h-transpaleta.png`,
+    image: `${IMG}/ctd16-960h-transpaleta.webp`,
     features: [
       "Horquilla corta 960mm",
       "Para pallets de media medida",
@@ -824,7 +824,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "1,500 kg",
     heightRange: "Hasta 3,000 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/ops15-order-picker.png`,
+    image: `${IMG}/ops15-order-picker.webp`,
     features: [
       "Preparacion de pedidos",
       "Plataforma elevable",
@@ -845,7 +845,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "500 kg",
     heightRange: "Hasta 2,500 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cbs05-apilador.jpg`,
+    image: `${IMG}/cbs05-apilador.webp`,
     features: [
       "Apilador ligero",
       "Para cargas pequenas",
@@ -866,7 +866,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "1,200 kg",
     heightRange: "Hasta 5,400 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cpd12-apilador-electric.png`,
+    image: `${IMG}/cpd12-apilador-electric.webp`,
     features: [
       "Apilamiento a gran altura",
       "Motor AC",
@@ -887,7 +887,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "1,600 kg",
     heightRange: "Hasta 5,600 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cpd16-apilador.jpg`,
+    image: `${IMG}/cpd16-apilador.webp`,
     features: [
       "Mayor capacidad",
       "Mastil retractil",
@@ -908,7 +908,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "600 kg",
     heightRange: "Hasta 3,000 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cdd06-apilador.jpg`,
+    image: `${IMG}/cdd06-apilador.webp`,
     features: [
       "Operacion peatonal",
       "Ultra compacto",
@@ -929,7 +929,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "1,500 kg",
     heightRange: "Hasta 5,500 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cdd15j-apilador.jpg`,
+    image: `${IMG}/cdd15j-apilador.webp`,
     features: [
       "Apilador versatil",
       "Mastil de alta elevacion",
@@ -950,7 +950,7 @@ export const stackers: RawProduct[] = [
     capacityRange: "1,600 - 2,000 kg",
     heightRange: "Hasta 6,000 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/cdd16-20jk-apilador.jpg`,
+    image: `${IMG}/cdd16-20jk-apilador.webp`,
     features: [
       "Alta capacidad",
       "Elevacion hasta 6m",
@@ -977,7 +977,7 @@ export const reachTrucks: RawProduct[] = [
     capacityRange: "1,500 - 2,000 kg",
     heightRange: "Hasta 12,000 mm",
     power: "Electrica (48V)",
-    image: `${IMG}/g-series-reach-truck.png`,
+    image: `${IMG}/g-series-reach-truck.webp`,
     features: [
       "Mastil retractil",
       "Hasta 12m de elevacion",
@@ -998,7 +998,7 @@ export const reachTrucks: RawProduct[] = [
     capacityRange: "1,600 - 2,000 kg",
     heightRange: "Hasta 12,500 mm",
     power: "Electrica (48V)",
-    image: `${IMG}/g2-series-reach-truck-1.6-2t.jpg`,
+    image: `${IMG}/g2-series-reach-truck-1.6-2t.webp`,
     features: [
       "Segunda generacion G2",
       "Pantalla a color HD",
@@ -1019,7 +1019,7 @@ export const reachTrucks: RawProduct[] = [
     capacityRange: "2,000 - 2,500 kg",
     heightRange: "Hasta 11,500 mm",
     power: "Electrica (48V)",
-    image: `${IMG}/g2-series-reach-truck-2-2.5t.jpg`,
+    image: `${IMG}/g2-series-reach-truck-2-2.5t.webp`,
     features: [
       "Mayor capacidad de carga",
       "Estabilidad mejorada",
@@ -1046,7 +1046,7 @@ export const telehandlers: RawProduct[] = [
     capacityRange: "3,500 - 5,000 kg",
     heightRange: "9,000 - 17,000 mm",
     power: "Diesel (Quanchai / Cummins, hasta 103 kW)",
-    image: `${IMG}/telehandler-serie-h-1.jpg`,
+    image: `${IMG}/telehandler-serie-h-1.webp`,
     features: [
       "Capacidades de 3.5, 4 y 5 toneladas",
       "Alcance frontal hasta 13 m y elevacion hasta 17 m",
@@ -1076,7 +1076,7 @@ export const containerHandlers: RawProduct[] = [
     capacityRange: "25,000 kg",
     heightRange: "Hasta 6,000 mm",
     power: "Diesel",
-    image: `${IMG}/cpcd250-porta-contenedor.png`,
+    image: `${IMG}/cpcd250-porta-contenedor.webp`,
     features: [
       "Manejo de contenedores llenos",
       "Spreader integrado",
@@ -1097,7 +1097,7 @@ export const containerHandlers: RawProduct[] = [
     capacityRange: "18,000 kg",
     heightRange: "Hasta 5,500 mm",
     power: "Diesel",
-    image: `${IMG}/container-handler-cpcd180ec.png`,
+    image: `${IMG}/container-handler-cpcd180ec.webp`,
     features: [
       "Manejo de contenedores vacios y semi-cargados",
       "Sistema hidraulico de alta presion",
@@ -1118,7 +1118,7 @@ export const containerHandlers: RawProduct[] = [
     capacityRange: "45,000 kg",
     heightRange: "Hasta 15,100 mm",
     power: "Diesel",
-    image: `${IMG}/reachstacker-rsh4527-31.jpeg`,
+    image: `${IMG}/reachstacker-rsh4527-31.webp`,
     features: [
       "Apilamiento de contenedores 5+1",
       "Brazo telescopico",
@@ -1139,7 +1139,7 @@ export const containerHandlers: RawProduct[] = [
     capacityRange: "45,000 kg",
     heightRange: "Hasta 18,200 mm",
     power: "Diesel",
-    image: `${IMG}/reachstacker-rsh4528-32-36.png`,
+    image: `${IMG}/reachstacker-rsh4528-32-36.webp`,
     features: [
       "Apilamiento de contenedores 6+1",
       "Mayor alcance lateral",
@@ -1165,7 +1165,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Electrico",
     capacityRange: "8,000 - 15,000 kg (arrastre)",
     power: "Electrica (80V)",
-    image: `${IMG}/qyd-tractor-electrico.jpg`,
+    image: `${IMG}/qyd-tractor-electrico.webp`,
     features: [
       "Gran capacidad de arrastre",
       "Motor electrico AC",
@@ -1185,7 +1185,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Electrico",
     capacityRange: "1,500 - 6,000 kg (arrastre)",
     power: "Electrica (48V)",
-    image: `${IMG}/qyd15-60s-tractor.jpg`,
+    image: `${IMG}/qyd15-60s-tractor.webp`,
     features: [
       "Serie G compacta",
       "Maniobrable",
@@ -1205,7 +1205,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Electrico",
     capacityRange: "2,000 - 4,500 kg (arrastre)",
     power: "Electrica (48V)",
-    image: `${IMG}/qyd20-30-45s-tractor.jpg`,
+    image: `${IMG}/qyd20-30-45s-tractor.webp`,
     features: [
       "Rango medio de arrastre",
       "Conduccion sentado",
@@ -1225,7 +1225,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Electrico",
     capacityRange: "2,000 - 7,000 kg (arrastre)",
     power: "Electrica (48V/80V)",
-    image: `${IMG}/qyd20-70-tractor.jpg`,
+    image: `${IMG}/qyd20-70-tractor.webp`,
     features: [
       "Versatilidad de arrastre",
       "Plataforma de operador amplia",
@@ -1245,7 +1245,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Electrico",
     capacityRange: "5,000 - 10,000 kg (arrastre)",
     power: "Electrica (80V)",
-    image: `${IMG}/qyd50-60-100-tractor.jpg`,
+    image: `${IMG}/qyd50-60-100-tractor.webp`,
     features: [
       "Alto arrastre electrico",
       "Motor AC potente",
@@ -1265,7 +1265,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Combustion",
     capacityRange: "3,500 - 5,000 kg (arrastre)",
     power: "Diesel / GLP",
-    image: `${IMG}/qycd35-50-tractor-combustion.jpg`,
+    image: `${IMG}/qycd35-50-tractor-combustion.webp`,
     features: [
       "Motor de combustion",
       "Para uso exterior",
@@ -1285,7 +1285,7 @@ export const towTractors: RawProduct[] = [
     type: "Tractor de Tiro Combustion",
     capacityRange: "2,000 - 3,000 kg (arrastre)",
     power: "Diesel / GLP",
-    image: `${IMG}/g2-series-qycd20-30-tractor.jpg`,
+    image: `${IMG}/g2-series-qycd20-30-tractor.webp`,
     features: [
       "Serie G2 combustion",
       "Compacto y potente",
@@ -1312,7 +1312,7 @@ export const platforms: RawProduct[] = [
     capacityRange: "230 kg (personas + herramientas)",
     heightRange: "Hasta 7,800 mm",
     power: "Electrica (24V)",
-    image: `${IMG}/platform-js07.jpg`,
+    image: `${IMG}/platform-js07.webp`,
     features: [
       "Tipo tijera electrica",
       "Para trabajo en altura",
@@ -1337,7 +1337,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo de grua",
     power: "Hidraulico",
-    image: `${IMG}/accessory-side-shifter.jpg`,
+    image: `${IMG}/accessory-side-shifter.webp`,
     features: [
       "Desplazamiento lateral de horquillas",
       "Posicionamiento preciso de carga",
@@ -1355,7 +1355,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Para gruas de alto tonelaje",
     power: "Hidraulico",
-    image: `${IMG}/accessory-side-shifter-lc.jpg`,
+    image: `${IMG}/accessory-side-shifter-lc.webp`,
     features: [
       "Para cargas pesadas",
       "Mayor recorrido lateral",
@@ -1373,7 +1373,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-fork-clamp.jpg`,
+    image: `${IMG}/accessory-fork-clamp.webp`,
     features: [
       "Sujecion de carga sin pallets",
       "Apertura ajustable",
@@ -1391,7 +1391,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-paper-roll-clamp.jpg`,
+    image: `${IMG}/accessory-paper-roll-clamp.webp`,
     features: [
       "Disenada para rollos de papel",
       "Presion regulable",
@@ -1410,7 +1410,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-block-clamp.jpg`,
+    image: `${IMG}/accessory-block-clamp.webp`,
     features: [
       "Para bloques de concreto",
       "Agarre multiple",
@@ -1428,7 +1428,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "1-4 tambores",
     power: "Hidraulico",
-    image: `${IMG}/accessory-drum-clamp.jpg`,
+    image: `${IMG}/accessory-drum-clamp.webp`,
     features: [
       "Manejo de tambores/barriles",
       "Simple o multiple",
@@ -1446,7 +1446,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "1-2 tambores",
     power: "Hidraulico",
-    image: `${IMG}/accessory-rotating-drum-clamp.jpg`,
+    image: `${IMG}/accessory-rotating-drum-clamp.webp`,
     features: [
       "Rotacion para vaciado",
       "Volcado controlado",
@@ -1464,7 +1464,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-foam-clamp.jpg`,
+    image: `${IMG}/accessory-foam-clamp.webp`,
     features: [
       "Para materiales blandos",
       "Presion suave regulable",
@@ -1482,7 +1482,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-tyre-clamp.jpg`,
+    image: `${IMG}/accessory-tyre-clamp.webp`,
     features: [
       "Para neumaticos y ruedas",
       "Agarre seguro",
@@ -1500,7 +1500,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-push-pull.jpg`,
+    image: `${IMG}/accessory-push-pull.webp`,
     features: [
       "Carga/descarga sin pallets",
       "Para slip sheets",
@@ -1518,7 +1518,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-bag-pusher.jpg`,
+    image: `${IMG}/accessory-bag-pusher.webp`,
     features: [
       "Para sacos y bolsas",
       "Descarga rapida",
@@ -1536,7 +1536,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-inverta-push.jpg`,
+    image: `${IMG}/accessory-inverta-push.webp`,
     features: [
       "Volteo y empuje combinado",
       "Para contenedores y bins",
@@ -1554,7 +1554,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-load-stabilizer.jpg`,
+    image: `${IMG}/accessory-load-stabilizer.webp`,
     features: [
       "Sujeta la carga desde arriba",
       "Evita caidas y deslizamientos",
@@ -1572,7 +1572,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-push-stabilizer.jpg`,
+    image: `${IMG}/accessory-push-stabilizer.webp`,
     features: [
       "Estabilizacion y empuje",
       "Doble funcion",
@@ -1590,7 +1590,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-load-extender.jpg`,
+    image: `${IMG}/accessory-load-extender.webp`,
     features: [
       "Extiende alcance de horquillas",
       "Para cargas largas",
@@ -1608,7 +1608,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-pallet-handler.jpg`,
+    image: `${IMG}/accessory-pallet-handler.webp`,
     features: [
       "Manejo doble de pallets",
       "Mayor productividad",
@@ -1626,7 +1626,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Hidraulico",
-    image: `${IMG}/accessory-turnaforks.jpg`,
+    image: `${IMG}/accessory-turnaforks.webp`,
     features: [
       "Rotacion de horquillas",
       "Para volcado de contenedores",
@@ -1644,7 +1644,7 @@ export const accessories: RawProduct[] = [
     type: "Accesorio",
     capacityRange: "Segun modelo",
     power: "Mecanico",
-    image: `${IMG}/accessory-sanitation-fork.jpg`,
+    image: `${IMG}/accessory-sanitation-fork.webp`,
     features: [
       "Acero inoxidable",
       "Industria alimenticia y farmaceutica",

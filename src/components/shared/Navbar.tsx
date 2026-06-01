@@ -62,7 +62,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="relative z-10 flex-shrink-0">
               <Image
-                src="/assets/legacy/logos/heli-chile-logo.png"
+                src="/assets/legacy/logos/heli-chile-logo.webp"
                 alt="HELI Chile - Grúas Horquillas"
                 width={140}
                 height={48}
@@ -182,7 +182,7 @@ export default function Navbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between p-6 border-b border-white/5">
                 <Image
-                  src="/assets/legacy/logos/heli-chile-logo.png"
+                  src="/assets/legacy/logos/heli-chile-logo.webp"
                   alt="HELI Chile"
                   width={120}
                   height={40}

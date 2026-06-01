@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-transpaleta-cbd1520",
     images: [
       {
-        url: "/assets/promo/heli-transpaleta-cbd1520-hero.png",
+        url: "/assets/promo/heli-transpaleta-cbd1520-hero.webp",
         width: 1200,
         height: 630,
         alt: "Transpaleta Eléctrica HELI CBD15/20 — 2 toneladas",

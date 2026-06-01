@@ -153,7 +153,7 @@ export default function Footer() {
         <div className="flex flex-col items-start gap-4 border-b border-steel-800 py-8 sm:py-12 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <Image
-              src="/assets/legacy/logos/heli-chile-logo.png"
+              src="/assets/legacy/logos/heli-chile-logo.webp"
               alt="Helifork Lift"
               width={160}
               height={48}

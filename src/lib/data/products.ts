@@ -50,7 +50,7 @@ export const productCategories: ProductCategory[] = [
     slug: "gruas-horquillas-electricas",
     description:
       "Energia limpia a bajo costo. Sin costos de mantenimiento. Eficiencia energetica superior.",
-    image: `${IMG}/g-series-1-3.5t-electric.jpg`,
+    image: `${IMG}/g-series-1-3.5t-electric.webp`,
     featured: true,
     productCount: electricForklifts.length,
   },
@@ -60,7 +60,7 @@ export const productCategories: ProductCategory[] = [
     slug: "gruas-horquillas-combustion",
     description:
       "Potencia y rendimiento para las operaciones mas exigentes. Diesel y GLP disponibles.",
-    image: `${IMG}/k2-series-2-3.5t-combustion.jpg`,
+    image: `${IMG}/k2-series-2-3.5t-combustion.webp`,
     featured: true,
     productCount: combustionForklifts.length,
   },
@@ -70,7 +70,7 @@ export const productCategories: ProductCategory[] = [
     slug: "gruas-hidrogeno-verde",
     description:
       "PIONEROS EN HIDROGENO VERDE -- Tecnologia de celda de combustible, cero emisiones.",
-    image: `${IMG}/cpd20-25-hidrogeno.png`,
+    image: `${IMG}/cpd20-25-hidrogeno.webp`,
     highlight: true,
     productCount: hydrogenForklifts.length,
   },
@@ -80,7 +80,7 @@ export const productCategories: ProductCategory[] = [
     slug: "gruas-horquillas-todo-terreno",
     description:
       "Disenadas para terrenos dificiles, construccion y operaciones en exteriores.",
-    image: `${IMG}/g3-5t-todo-terreno.jpg`,
+    image: `${IMG}/g3-5t-todo-terreno.webp`,
     productCount: 2,
   },
   {
@@ -89,7 +89,7 @@ export const productCategories: ProductCategory[] = [
     slug: "transpaletas",
     description:
       "Transpaletas electricas y manuales para movimiento eficiente de carga en bodega.",
-    image: `${IMG}/cbd20-25-transpaleta.jpg`,
+    image: `${IMG}/cbd20-25-transpaleta.webp`,
     productCount: palletJacks.length,
   },
   {
@@ -98,7 +98,7 @@ export const productCategories: ProductCategory[] = [
     slug: "apiladores",
     description:
       "Apiladores electricos para almacenamiento vertical eficiente y seguro.",
-    image: `${IMG}/cdd16-20jk-apilador.jpg`,
+    image: `${IMG}/cdd16-20jk-apilador.webp`,
     productCount: stackers.length,
   },
   {
@@ -107,7 +107,7 @@ export const productCategories: ProductCategory[] = [
     slug: "reach-truck",
     description:
       "Para pasillos angostos y maxima altura de almacenamiento en bodegas.",
-    image: `${IMG}/g-series-reach-truck.png`,
+    image: `${IMG}/g-series-reach-truck.webp`,
     productCount: reachTrucks.length,
   },
   {
@@ -116,7 +116,7 @@ export const productCategories: ProductCategory[] = [
     slug: "manipuladores-telescopicos",
     description:
       "Alcance extendido y versatilidad para construccion y logistica.",
-    image: `${IMG}/telehandler-serie-h-1.jpg`,
+    image: `${IMG}/telehandler-serie-h-1.webp`,
     productCount: 1,
   },
   {
@@ -125,7 +125,7 @@ export const productCategories: ProductCategory[] = [
     slug: "porta-contenedores",
     description:
       "Equipos de alto tonelaje para manejo de contenedores en puertos.",
-    image: `${IMG}/cpcd250-porta-contenedor.png`,
+    image: `${IMG}/cpcd250-porta-contenedor.webp`,
     productCount: containerHandlers.length,
   },
   {
@@ -134,7 +134,7 @@ export const productCategories: ProductCategory[] = [
     slug: "tractores-de-tiro",
     description:
       "Tractores electricos y de combustion para arrastre de cargas en planta.",
-    image: `${IMG}/qyd-tractor-electrico.jpg`,
+    image: `${IMG}/qyd-tractor-electrico.webp`,
     productCount: 7,
   },
   {
@@ -143,7 +143,7 @@ export const productCategories: ProductCategory[] = [
     slug: "plataformas-elevadoras",
     description:
       "Trabajo en altura seguro y eficiente para todo tipo de industrias.",
-    image: `${IMG}/platform-js07.jpg`,
+    image: `${IMG}/platform-js07.webp`,
     productCount: 1,
   },
   {
@@ -152,7 +152,7 @@ export const productCategories: ProductCategory[] = [
     slug: "accesorios",
     description:
       "Implementos y accesorios hidraulicos para maximizar la versatilidad de tu grua.",
-    image: `${IMG}/accessory-paper-roll-clamp.jpg`,
+    image: `${IMG}/accessory-paper-roll-clamp.webp`,
     productCount: 18,
   },
 ];
@@ -237,7 +237,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Energia limpia, cero emisiones y bajo costo operativo. Litio-ion de ultima generacion para operaciones en interiores y exteriores.",
     icon: "Zap",
-    image: `${IMG}/g-series-1-3.5t-electric.jpg`,
+    image: `${IMG}/g-series-1-3.5t-electric.webp`,
     color: "emerald",
     productCount: countByFuel("electrica"),
   },
@@ -248,7 +248,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Potencia y rendimiento para las operaciones mas exigentes. Motores certificados TIER IV/V con maxima eficiencia de combustible.",
     icon: "Fuel",
-    image: `${IMG}/g3-series-5-10t-combustion.jpg`,
+    image: `${IMG}/g3-series-5-10t-combustion.webp`,
     color: "amber",
     productCount: countByFuel("diesel"),
   },
@@ -259,7 +259,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Gas licuado de petroleo: menor costo que diesel, apta para uso interior/exterior. Ideal para operaciones mixtas.",
     icon: "Flame",
-    image: `${IMG}/g3-series-4-5t-gas.png`,
+    image: `${IMG}/g3-series-4-5t-gas.webp`,
     color: "sky",
     productCount: countByFuel("glp"),
   },
@@ -270,7 +270,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Tecnologia de celda de combustible: cero emisiones, recarga en 3 minutos y operacion continua 24/7. El futuro es hoy.",
     icon: "Atom",
-    image: `${IMG}/cpd40-50-hidrogeno.png`,
+    image: `${IMG}/cpd40-50-hidrogeno.webp`,
     color: "teal",
     productCount: countByFuel("hidrogeno"),
   },

@@ -200,7 +200,7 @@ export default async function NewsDetailPage({ params }: Props) {
               name: "Helifork Lift",
               logo: {
                 "@type": "ImageObject",
-                url: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.png",
+                url: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",
               },
             },
             mainEntityOfPage: {

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-diesel-k2",
     images: [
       {
-        url: "/assets/promo/heli-diesel-k2-front.png",
+        url: "/assets/promo/heli-diesel-k2-front.webp",
         width: 1200,
         height: 630,
         alt: "Grúa Horquilla HELI Diesel K2 — 2.5/3.0/3.5 toneladas",

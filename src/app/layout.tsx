@@ -1,25 +1,27 @@
 import type { Metadata } from "next";
-import { DM_Sans, Bebas_Neue, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+// Fonts self-hosted desde el repo (woff2 en ./fonts) — sin fetch a Google en build.
+// DM Sans y JetBrains Mono son fuentes variables (un archivo cubre 400-700).
+const dmSans = localFont({
+  src: "./fonts/dm-sans.woff2",
   variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400 700",
   display: "swap",
 });
 
-const bebasNeue = Bebas_Neue({
+const bebasNeue = localFont({
+  src: "./fonts/bebas-neue.woff2",
   variable: "--font-bebas-neue",
-  subsets: ["latin"],
   weight: "400",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const jetbrainsMono = localFont({
+  src: "./fonts/jetbrains-mono.woff2",
   variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: "400 700",
   display: "swap",
 });
 
@@ -73,7 +75,7 @@ export const metadata: Metadata = {
       "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales HELI. +67 años de experiencia. Cotiza hoy.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Helifork Lift — Grúas Horquillas Chile",
@@ -85,7 +87,7 @@ export const metadata: Metadata = {
     title: "Helifork Lift — Grúas Horquillas Chile",
     description:
       "Venta de grúas horquillas. Servicio técnico. Repuestos originales. Cotiza ahora.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.webp"],
   },
   alternates: {
     canonical: "/",
@@ -124,7 +126,7 @@ export default function RootLayout({
         />
         <link
           rel="preload"
-          href="/assets/legacy/banners/heli-fleet-delivery.jpg"
+          href="/assets/legacy/banners/heli-fleet-delivery.webp"
           as="image"
         />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
@@ -144,7 +146,7 @@ export default function RootLayout({
               name: "Helifork Lift",
               alternateName: "HELI Chile",
               url: "https://heliforklift.cl",
-              logo: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.png",
+              logo: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",
               description:
                 "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales.",
               foundingDate: "1958",
@@ -181,7 +183,7 @@ export default function RootLayout({
               "@type": "LocalBusiness",
               name: "Helifork Lift Santiago",
               image:
-                "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.png",
+                "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Av. Américo Vespucio 1445",
