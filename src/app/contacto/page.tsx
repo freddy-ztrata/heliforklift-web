@@ -58,7 +58,11 @@ export default function ContactoPage() {
                 Hablemos
               </p>
               <h1 className="font-heading mt-2 text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
-                CONTÁCTANOS
+                <span className="sr-only">
+                  Contacto Helifork Lift — Grúas Horquillas en Santiago y todo
+                  Chile
+                </span>
+                <span aria-hidden="true">CONTÁCTANOS</span>
               </h1>
               <p className="mx-auto mt-4 max-w-xl text-lg text-steel-400">
                 Respuesta garantizada en menos de 2 horas. Estamos listos para

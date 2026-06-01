@@ -729,7 +729,7 @@ function UseCases() {
       >
         <Image
           src={PRODUCT_IMAGE_FRONT}
-          alt=""
+          alt="Grúa Horquilla HELI G3 Gasolina 3.5T — vista frontal"
           fill
           quality={85}
           className="object-contain"

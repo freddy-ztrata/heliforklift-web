@@ -66,7 +66,11 @@ export default function ServiciosPage() {
               Nuestros servicios
             </p>
             <h1 className="font-heading mt-2 text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
-              ¿QUÉ HACEMOS POR TI?
+              <span className="sr-only">
+                Servicios para Grúas Horquillas HELI en Chile — Venta, Servicio
+                Técnico y Repuestos
+              </span>
+              <span aria-hidden="true">¿QUÉ HACEMOS POR TI?</span>
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-steel-400">
               Soluciones integrales en grúas horquillas para que tu operación
@@ -88,7 +92,7 @@ export default function ServiciosPage() {
                   <div className="absolute inset-0">
                     <Image
                       src={bgImage}
-                      alt=""
+                      alt={`${service.name} — Helifork Lift`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-30"

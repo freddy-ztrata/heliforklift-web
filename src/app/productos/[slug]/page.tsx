@@ -33,8 +33,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = allProducts.find((p) => p.slug === slug);
   if (!product) return { title: "Producto no encontrado" };
 
+  // Solo los montacargas son "Grúa Horquilla"; el resto (telehandlers, porta
+  // contenedores, tractores, etc.) usa su tipo/capacidad sin ese prefijo.
+  const isForklift = product.categorySlug.startsWith("gruas-");
+  const pageTitle = isForklift
+    ? `${product.name} — Grúa Horquilla ${product.capacityRange}`
+    : `${product.name} — ${product.capacityRange}`;
+
   return {
-    title: `${product.name} — Grúa Horquilla ${product.type}`,
+    title: pageTitle,
     description: `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta en Chile. Cotiza ahora.`,
     keywords: [
       product.name,
@@ -48,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ],
     alternates: { canonical: `/productos/${slug}` },
     openGraph: {
-      title: `${product.name} — Grúa Horquilla ${product.type}`,
+      title: pageTitle,
       description: `${product.type} con capacidad ${product.capacityRange}. Repuestos originales y servicio técnico.`,
       images: [{ url: product.image, width: 600, height: 600, alt: product.name }],
       type: "website",

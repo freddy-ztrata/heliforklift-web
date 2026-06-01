@@ -6,7 +6,9 @@ import { productCategories } from "@/lib/data/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://heliforklift.cl";
-  const now = new Date();
+  // Fecha de ultima actualizacion de contenido (estable entre builds; bump
+  // manual cuando cambie el catalogo). Evita un lastmod que cambia en cada deploy.
+  const now = new Date("2026-06-01T00:00:00Z");
 
   // Helper para construir URLs absolutas de imagenes
   const absoluteImg = (path: string) =>

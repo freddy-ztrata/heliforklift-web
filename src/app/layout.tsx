@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://heliforklift.cl"),
   title: {
     default:
-      "Helifork Lift — Grúas Horquillas Chile | Venta y Servicio Técnico",
+      "Grúas Horquillas HELI en Chile — Venta y Servicio Técnico",
     template: "%s | Helifork Lift",
   },
   description:
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
       "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales HELI. +67 años de experiencia. Cotiza hoy.",
     images: [
       {
-        url: "/og-image.webp",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Helifork Lift — Grúas Horquillas Chile",
@@ -87,14 +87,13 @@ export const metadata: Metadata = {
     title: "Helifork Lift — Grúas Horquillas Chile",
     description:
       "Venta de grúas horquillas. Servicio técnico. Repuestos originales. Cotiza ahora.",
-    images: ["/og-image.webp"],
+    images: ["/og-image.jpg"],
   },
   alternates: {
     canonical: "/",
   },
-  verification: {
-    google: "GOOGLE_VERIFICATION_CODE",
-  },
+  // Para verificar en Google Search Console, agregar aqui el codigo real:
+  // verification: { google: "tu-codigo-de-verificacion" },
 };
 
 export default function RootLayout({

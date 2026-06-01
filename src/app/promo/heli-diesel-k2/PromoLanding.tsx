@@ -742,7 +742,7 @@ function UseCases() {
       >
         <Image
           src={PRODUCT_IMAGE_FRONT}
-          alt=""
+          alt="Grúa Horquilla HELI Diesel K2 — vista frontal"
           fill
           quality={85}
           className="object-contain"
