@@ -222,8 +222,42 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
         className="absolute left-[-10%] bottom-[5%] h-[520px] w-[520px] rounded-full bg-heli-red-dark/30 blur-[120px]"
       />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-24 pb-10 sm:px-6 lg:px-8 lg:pt-28">
-        <div className="grid flex-1 grid-cols-1 items-center gap-10 lg:grid-cols-2">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 pb-10 sm:px-6 lg:px-8">
+        {/* Top bar — logo siempre visible + acciones */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="flex items-center justify-between"
+        >
+          <Link href="/" aria-label="HELI Chile" className="inline-flex items-center transition-opacity hover:opacity-80">
+            <Image
+              src="/assets/legacy/logos/heli-chile-logo.webp"
+              alt="HELI Forklift Chile"
+              width={150}
+              height={45}
+              priority
+              className="h-9 w-auto brightness-0 invert sm:h-11"
+            />
+          </Link>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href="tel:+56993209186"
+              className="hidden items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-heli-red/40 sm:inline-flex"
+            >
+              <Phone className="h-4 w-4 text-heli-red-light" />
+              {contact.mainPhone}
+            </a>
+            <button
+              onClick={scrollToQuote}
+              className="inline-flex items-center gap-2 rounded-full bg-heli-red px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
+            >
+              Cotizar
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </motion.div>
+
+        <div className="mt-6 grid flex-1 grid-cols-1 items-center gap-10 lg:mt-0 lg:grid-cols-2">
           {/* Texto */}
           <motion.div style={{ y: textY }} className="relative z-10">
             <motion.div
@@ -377,6 +411,84 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
 }
 
 // ============================================================
+// FLEET MARQUEE — la flota completa en movimiento (todos los tipos)
+// ============================================================
+const fleet = [
+  { img: "/assets/cotiza/fleet-electrica.webp", label: "Eléctrica", tag: "Litio-ion" },
+  { img: "/assets/promo/heli-diesel-k2-hero.webp", label: "Diésel K2", tag: "Combustión" },
+  { img: "/assets/cotiza/fleet-hidrogeno.webp", label: "Hidrógeno Verde", tag: "Cero emisiones" },
+  { img: "/assets/cotiza/fleet-reach.webp", label: "Reach Truck", tag: "Gran altura" },
+  { img: "/assets/cotiza/fleet-telescopico.webp", label: "Telescópico", tag: "Alcance" },
+  { img: "/assets/promo/heli-combustion-g3-hero.webp", label: "Combustión G3", tag: "5–10 ton" },
+  { img: "/assets/cotiza/fleet-todoterreno.webp", label: "Todo Terreno", tag: "Exteriores" },
+  { img: "/assets/promo/heli-h4-electrica-hero.webp", label: "Eléctrica H4", tag: "80V" },
+];
+
+function FleetCard({ item }: { item: (typeof fleet)[number] }) {
+  return (
+    <button
+      onClick={scrollToQuote}
+      className="group relative flex h-48 w-60 shrink-0 flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-steel-900/80 to-steel-950/80 p-4 text-left backdrop-blur transition-all hover:border-heli-red/50 hover:shadow-[0_15px_40px_-15px_rgba(206,20,45,0.5)] sm:w-72"
+    >
+      <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-heli-red/0 blur-3xl transition-all duration-500 group-hover:bg-heli-red/25" />
+      <div className="relative h-28 w-full">
+        <Image
+          src={item.img}
+          alt={`Grúa HELI ${item.label}`}
+          fill
+          className="object-contain transition-transform duration-500 group-hover:scale-105"
+          sizes="288px"
+        />
+      </div>
+      <div className="relative mt-auto flex items-center justify-between gap-2">
+        <span className="text-sm font-bold text-white">{item.label}</span>
+        <span className="rounded-full bg-heli-red/15 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-heli-red-light">
+          {item.tag}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function FleetMarquee() {
+  return (
+    <section className="relative overflow-hidden border-y border-white/[0.06] bg-gradient-to-b from-steel-900 via-steel-950 to-steel-900 py-14 sm:py-16">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(206,20,45,0.08),transparent_60%)]" />
+      <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
+          Una línea para cada operación
+        </p>
+        <h2 className="font-heading mt-2 text-[clamp(1.75rem,4.5vw,3rem)] leading-none text-white">
+          TODA LA FLOTA HELI, <span className="text-heli-red">EN UN SOLO LUGAR</span>
+        </h2>
+      </div>
+
+      <div className="relative mt-10 flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+        <motion.div
+          className="flex shrink-0 gap-5 pr-5"
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        >
+          {fleet.map((item, i) => (
+            <FleetCard key={`a-${i}`} item={item} />
+          ))}
+        </motion.div>
+        <motion.div
+          aria-hidden
+          className="flex shrink-0 gap-5 pr-5"
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        >
+          {fleet.map((item, i) => (
+            <FleetCard key={`b-${i}`} item={item} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
 // TRUST STRIP — stats animadas + certificaciones
 // ============================================================
 function TrustStrip() {
@@ -473,12 +585,12 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
               >
                 <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-heli-red/0 blur-3xl transition-all duration-500 group-hover:bg-heli-red/20" />
                 <div className="relative">
-                  <div className="relative mb-4 h-32 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent">
+                  <div className="relative mb-4 h-44 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent">
                     <Image
                       src={f.image}
                       alt={`Grúa ${f.name}`}
                       fill
-                      className="object-contain p-2"
+                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
@@ -1399,6 +1511,7 @@ export default function CotizaLanding() {
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <StickyHeader />
       <Hero onPickEnergy={pickEnergy} />
+      <FleetMarquee />
       <TrustStrip />
       <EnergyBento onPick={pickEnergy} />
       <Categories onPick={pickAndScroll} />
