@@ -86,6 +86,15 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 - `/ley-karin` — Información Ley 21.643, principios (confidencialidad, sin represalias, imparcialidad), canal de denuncias, link a Dirección del Trabajo
 - `/gracias` — Landing post-submit del form HubSpot **principal** (CTASection). `robots: { index: false }`, excluida del sitemap. Hero con check + 3 cards "Próximos pasos" + 3 links exploración + CTA WhatsApp urgente.
 
+### Brand Landing — Google Ads always-on (`/cotiza`)
+
+LP de marca completa para campañas **always-on de Google Ads** (NO Meta). `robots: { index: false }`, fuera del sitemap, sin navbar/footer del sitio. Representa toda la marca y todos los tipos de equipo. Archivos: [src/app/cotiza/](heliforklift-web/src/app/cotiza/) — `CotizaLanding.tsx` (client, todas las secciones), `page.tsx` (metadata), `gracias/` (`CotizaGracias.tsx` + `page.tsx`).
+
+- **Secciones:** StickyHeader (aparece tras scroll, logo + teléfono + Cotizar) → Hero (chips de energía clickeables) → TrustStrip (stats animadas con `CountUp` desde `company.stats` + certificaciones) → EnergyBento (4 tipos de energía desde `fuelTypeCategories`) → Categories (8 categorías de equipo) → WhyHeli (6 diferenciadores) → Services (3) → Process (3 pasos) → **Quoter** (form) → Coverage (sucursales desde `contact.locations`) → FAQ (acordeón) → FinalCTA → Footer → FloatingBar (móvil: Llamar + Cotizar).
+- **Datos reales:** importa `company`, `contact`, `certifications` de `company.ts` y `fuelTypeCategories` de `products.ts`. Mensajería de marca: "líder mundial" (frase aprobada por el cliente) + stats concretas (67+ años, 1.100+ equipos, 150+ países, 1.700+ modelos). **NO** usar "#1 mundial" (company.ts dice `globalRanking: 7` y la misión es entrar al Top 5).
+- **Form = MUESTRA.** El cotizador (`Quoter`) es solo UI: selector multi-máquina (chips) + datos. Al enviar hace `router.push("/cotiza/gracias")` con un spinner; **no** envía a ningún backend. El cliente lo reemplazará por HubSpot (embed o API). Las energy/category cards preseleccionan chips vía estado en el componente `CotizaLanding` y hacen scroll a `#cotiza`.
+- **Tracking:** la thank-you (`CotizaGracias`) dispara `fbq('track','Lead', {content_name:'cotiza_brand'})` y `dataLayer.push({event:'generate_lead'})` para Google Ads/GTM. La conversión de Google Ads se configura sobre `/cotiza/gracias` o el evento `generate_lead`.
+
 ### Promo Landings (Meta Ads)
 
 **7 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
