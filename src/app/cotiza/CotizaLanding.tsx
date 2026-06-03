@@ -546,76 +546,109 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const featured =
+    fuelTypeCategories.find((f) => f.id === "hidrogeno") ??
+    fuelTypeCategories[fuelTypeCategories.length - 1];
+  const rest = fuelTypeCategories.filter((f) => f.id !== featured.id);
+  const FeaturedIcon = energyIcons[featured.id] ?? Zap;
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(206,20,45,0.1),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(206,20,45,0.12),transparent_55%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="mx-auto max-w-3xl text-center"
+          className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
         >
-          <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
-            Toda la energía que necesitas
+          <div className="max-w-2xl">
+            <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
+              Toda la energía que necesitas
+            </p>
+            <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,3.75rem)] leading-none text-white">
+              ELIGE TU <span className="text-heli-red">FUENTE DE PODER</span>
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm text-steel-400">
+            Cuatro tecnologías para cada operación. Toca una y la sumamos a tu
+            cotización.
           </p>
-          <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,3.75rem)] leading-none text-white">
-            ELIGE TU FUENTE
-            <br />
-            <span className="text-heli-red">DE PODER</span>
-          </h2>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {fuelTypeCategories.map((f, i) => {
-            const Icon = energyIcons[f.id] ?? Zap;
-            return (
-              <motion.button
-                key={f.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
-                onClick={() => onPick(f.id)}
-                className={cn(
-                  "group relative overflow-hidden rounded-3xl border p-6 text-left transition-all",
-                  f.id === "hidrogeno"
-                    ? "border-heli-red/40 bg-gradient-to-br from-heli-red/15 via-steel-900 to-steel-950 hover:border-heli-red/60"
-                    : "border-white/[0.08] bg-gradient-to-br from-steel-900 to-steel-950 hover:border-heli-red/40"
-                )}
-              >
-                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-heli-red/0 blur-3xl transition-all duration-500 group-hover:bg-heli-red/20" />
-                <div className="relative">
-                  <div className="relative mb-4 h-44 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent">
+        <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
+          {/* Destacado — hidrógeno verde */}
+          <motion.button
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.6 }}
+            onClick={() => onPick(featured.id)}
+            className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-3xl border border-heli-red/40 bg-gradient-to-br from-heli-red/20 via-steel-900 to-steel-950 p-8 text-left transition-all hover:border-heli-red/60 sm:min-h-[440px]"
+          >
+            <div className="absolute right-[-15%] top-[-5%] h-[110%] w-[80%]">
+              <Image
+                src={featured.image}
+                alt={`Grúa ${featured.name}`}
+                fill
+                className="object-contain transition-transform duration-700 group-hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <span className="absolute left-8 top-8 inline-flex items-center gap-1.5 rounded-full bg-heli-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+              <Sparkles className="h-3 w-3" /> Pioneros en Chile
+            </span>
+            <div className="relative max-w-md">
+              <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-heli-red/20 ring-1 ring-heli-red/40">
+                <FeaturedIcon className="h-6 w-6 text-heli-red-light" />
+              </div>
+              <h3 className="font-heading text-3xl text-white sm:text-4xl">
+                {featured.name}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-steel-300">
+                {featured.description}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-heli-red-light">
+                Cotizar {featured.name}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </motion.button>
+
+          {/* Resto — filas compactas */}
+          <div className="flex flex-col gap-5">
+            {rest.map((f, i) => {
+              const Icon = energyIcons[f.id] ?? Zap;
+              return (
+                <motion.button
+                  key={f.id}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.15 + i * 0.1 }}
+                  onClick={() => onPick(f.id)}
+                  className="group flex flex-1 items-center gap-5 overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-r from-steel-900 to-steel-950 p-4 text-left transition-all hover:border-heli-red/40 hover:shadow-[0_15px_40px_-15px_rgba(206,20,45,0.4)] sm:p-5"
+                >
+                  <div className="relative h-24 w-32 flex-shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent sm:h-28 sm:w-40">
                     <Image
                       src={f.image}
                       alt={`Grúa ${f.name}`}
                       fill
-                      className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
+                      className="object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
+                      sizes="160px"
                     />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-heli-red/10 ring-1 ring-heli-red/30">
-                      <Icon className="h-5 w-5 text-heli-red" />
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <Icon className="h-4 w-4 flex-shrink-0 text-heli-red" />
+                      <h3 className="text-lg font-bold text-white">{f.name}</h3>
                     </div>
-                    <h3 className="text-lg font-bold text-white">{f.name}</h3>
-                    {f.id === "hidrogeno" && (
-                      <span className="ml-auto rounded-full bg-heli-red px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-                        Pioneros
-                      </span>
-                    )}
+                    <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-steel-400">
+                      {f.description}
+                    </p>
                   </div>
-                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-steel-400">
-                    {f.description}
-                  </p>
-                  <div className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-heli-red-light">
-                    Cotizar {f.name}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </motion.button>
-            );
-          })}
+                  <ArrowRight className="h-5 w-5 flex-shrink-0 text-steel-600 transition-all group-hover:translate-x-1 group-hover:text-heli-red-light" />
+                </motion.button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -651,27 +684,25 @@ function Categories({ onPick }: { onPick: (label: string) => void }) {
           </p>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
           {categoryCards.map((c, i) => (
             <motion.button
               key={c.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.06 }}
-              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: i * 0.05 }}
               onClick={() => onPick(c.label)}
-              className="group rounded-2xl border border-white/[0.08] bg-gradient-to-br from-steel-900 to-steel-950 p-5 text-left transition-all hover:border-heli-red/40 hover:shadow-[0_15px_40px_-15px_rgba(206,20,45,0.4)]"
+              title={c.desc}
+              className="group inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-steel-200 transition-all hover:-translate-y-0.5 hover:border-heli-red/50 hover:bg-heli-red/10 hover:text-white"
             >
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30 transition-all group-hover:bg-heli-red group-hover:ring-heli-red">
-                <c.icon className="h-6 w-6 text-heli-red transition-colors group-hover:text-white" />
-              </div>
-              <h3 className="mt-4 text-base font-bold text-white">{c.label}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-steel-400">
-                {c.desc}
-              </p>
+              <c.icon className="h-4 w-4 text-heli-red-light transition-transform group-hover:scale-110" />
+              {c.label}
             </motion.button>
           ))}
         </div>
+        <p className="mt-6 text-center text-sm text-steel-500">
+          Toca un equipo y lo agregamos automáticamente a tu cotización.
+        </p>
       </div>
     </section>
   );
@@ -718,41 +749,54 @@ function WhyHeli() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-28">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-8" ref={ref}>
+        {/* Columna izquierda — sticky */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="mx-auto max-w-3xl text-center"
+          className="lg:sticky lg:top-24 lg:self-start"
         >
           <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
             ¿Por qué HELI?
           </p>
           <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,3.5rem)] leading-none text-white">
-            LA DECISIÓN INTELIGENTE
+            LA DECISIÓN
+            <br />
+            INTELIGENTE
             <br />
             <span className="text-heli-yellow">PARA TU OPERACIÓN</span>
           </h2>
+          <p className="mt-5 max-w-sm text-base text-steel-400">
+            Más que vender grúas: te entregamos respaldo, servicio y la
+            tranquilidad de trabajar con el líder mundial en montacargas.
+          </p>
+          <button
+            onClick={scrollToQuote}
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-heli-red px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
+          >
+            Cotizar ahora
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </motion.div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Columna derecha — filas con divisores */}
+        <div className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
           {whyCards.map((c, i) => (
             <motion.div
               key={c.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-steel-900 to-steel-950 p-7 transition-all hover:border-heli-red/40 hover:shadow-[0_20px_60px_-15px_rgba(206,20,45,0.4)]"
+              initial={{ opacity: 0, x: 30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.08 }}
+              className="group flex items-start gap-5 py-6"
             >
-              <div className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-heli-red/0 blur-3xl transition-all duration-500 group-hover:bg-heli-red/20" />
-              <div className="relative">
-                <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30 transition-all group-hover:bg-heli-red group-hover:ring-heli-red">
-                  <c.icon className="h-7 w-7 text-heli-red transition-colors group-hover:text-white" />
-                </div>
-                <h3 className="mt-5 text-xl font-bold text-white">{c.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-steel-400">
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30 transition-all group-hover:bg-heli-red group-hover:ring-heli-red">
+                <c.icon className="h-6 w-6 text-heli-red transition-colors group-hover:text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">{c.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-steel-400">
                   {c.desc}
                 </p>
               </div>
@@ -790,7 +834,8 @@ function Services() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-24">
+    <section className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(206,20,45,0.08),transparent_55%)]" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -807,17 +852,22 @@ function Services() {
           </h2>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 border-t border-white/[0.1] md:grid-cols-3 md:divide-x md:divide-white/[0.1]">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.12 }}
-              className="relative overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-steel-900 to-steel-950 p-8"
+              className="group border-b border-white/[0.1] py-8 md:border-b-0 md:px-8 md:first:pl-0 md:last:pr-0"
             >
-              <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-heli-red/10 ring-1 ring-heli-red/30">
-                <s.icon className="h-7 w-7 text-heli-red" />
+              <div className="flex items-center justify-between">
+                <span className="font-heading text-5xl text-heli-red/30 transition-colors group-hover:text-heli-red/60">
+                  0{i + 1}
+                </span>
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-heli-red/10 ring-1 ring-heli-red/30">
+                  <s.icon className="h-6 w-6 text-heli-red" />
+                </div>
               </div>
               <h3 className="mt-5 text-xl font-bold text-white">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-steel-400">
@@ -872,24 +922,71 @@ function Process() {
           </h2>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.n}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.12 }}
-              className="relative rounded-3xl border border-white/[0.08] bg-steel-900/50 p-8 backdrop-blur"
-            >
-              <span className="font-heading text-5xl text-heli-red/30">
-                {s.n}
-              </span>
-              <h3 className="mt-3 text-xl font-bold text-white">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-steel-400">
-                {s.desc}
-              </p>
-            </motion.div>
-          ))}
+        <div className="relative mt-16">
+          {/* Línea conectora (desktop) */}
+          <div className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-heli-red/50 to-transparent md:block" />
+          {/* Línea conectora (mobile, vertical) */}
+          <div className="absolute bottom-7 left-7 top-7 w-px bg-gradient-to-b from-heli-red/50 to-transparent md:hidden" />
+
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.n}
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.15 }}
+                className="relative flex gap-5 md:block"
+              >
+                <div className="relative z-10 flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-heli-red font-heading text-2xl text-white shadow-[0_0_24px_rgba(206,20,45,0.5)] ring-4 ring-steel-950">
+                  {s.n}
+                </div>
+                <div className="md:mt-6">
+                  <h3 className="text-xl font-bold text-white">{s.title}</h3>
+                  <p className="mt-2 max-w-xs text-sm leading-relaxed text-steel-400">
+                    {s.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// CTA BANNER — franja roja para romper el ritmo entre secciones
+// ============================================================
+function CTABanner() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-dark py-14">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.12)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      <div className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 text-center sm:px-6 md:flex-row md:justify-between md:text-left lg:px-8">
+        <div>
+          <h2 className="font-heading text-[clamp(1.75rem,4vw,3rem)] leading-none text-white">
+            ¿NECESITAS TU EQUIPO AHORA?
+          </h2>
+          <p className="mt-2 text-base text-white/85">
+            Cotiza hoy y te respondemos en menos de 2 horas hábiles.
+          </p>
+        </div>
+        <div className="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
+          <button
+            onClick={scrollToQuote}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-heli-red shadow-lg transition-all hover:-translate-y-0.5"
+          >
+            <Send className="h-4 w-4" />
+            Cotizar ahora
+          </button>
+          <a
+            href="tel:+56993209186"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white/10"
+          >
+            <Phone className="h-4 w-4" />
+            {contact.mainPhone}
+          </a>
         </div>
       </div>
     </section>
@@ -1514,8 +1611,9 @@ export default function CotizaLanding() {
       <FleetMarquee />
       <TrustStrip />
       <EnergyBento onPick={pickEnergy} />
-      <Categories onPick={pickAndScroll} />
       <WhyHeli />
+      <CTABanner />
+      <Categories onPick={pickAndScroll} />
       <Services />
       <Process />
       <Quoter selected={selected} toggle={toggle} />
