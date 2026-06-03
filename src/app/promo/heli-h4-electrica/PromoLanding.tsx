@@ -673,10 +673,10 @@ const benefits = [
   },
   {
     icon: Cog,
-    title: "Servicio y repuestos garantizados",
-    desc: "Respaldo y soporte técnico a nivel nacional. Sucursales y socios estratégicos en todo Chile.",
-    stat: "1 año",
-    statLabel: "de garantía",
+    title: "Bajo costo operacional",
+    desc: "Eficiencia en consumo y mantención: la energía eléctrica y la batería de litio reducen tu gasto por hora frente a una grúa de combustión.",
+    stat: "Mínimo",
+    statLabel: "costo operativo",
   },
   {
     icon: Truck,
