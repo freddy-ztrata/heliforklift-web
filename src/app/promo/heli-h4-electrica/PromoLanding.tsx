@@ -185,7 +185,7 @@ function Hero() {
         {/* Main hero content */}
         <div className="mt-8 grid flex-1 grid-cols-1 items-center gap-8 lg:mt-0 lg:grid-cols-2">
           {/* Texto */}
-          <motion.div style={{ y: textY }} className="relative z-10">
+          <motion.div style={{ y: textY }} className="relative z-10 order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -307,7 +307,7 @@ function Hero() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative aspect-square w-full max-w-2xl justify-self-center lg:justify-self-end"
+            className="relative order-1 aspect-square w-full max-w-[17rem] justify-self-center sm:max-w-sm lg:order-2 lg:max-w-2xl lg:justify-self-end"
           >
             <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
 
