@@ -37,6 +37,7 @@ const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
   "heli-diesel-k2-25t": { contentName: "promo_diesel_25t", value: 0 },
   "heli-transpaleta-cbd1520": { contentName: "promo_transpaleta_2t", value: 0 },
   "heli-combustion-g3": { contentName: "promo_combustion_g3", value: 0 },
+  "heli-h4-electrica": { contentName: "promo_h4_electrica", value: 0 },
 };
 
 interface PromoThankYouProps {
@@ -100,7 +101,9 @@ export default function PromoThankYou({
         ? "diesel"
         : productSlug.includes("transpaleta")
           ? "transpaleta_electrica"
-          : "gasolina";
+          : productSlug.includes("electrica")
+            ? "electrica"
+            : "gasolina";
     window.fbq("track", "Lead", {
       content_name: tracking.contentName,
       content_category: category,

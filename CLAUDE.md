@@ -88,7 +88,7 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 
 ### Promo Landings (Meta Ads)
 
-**6 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
+**7 landing pages independientes** sin navbar/footer principal (cero distracciones), `robots: { index: false }`, NO incluidas en sitemap, NO linkeadas desde el sitio. Diseñadas para campañas pagadas en Meta Ads.
 
 | Ruta | Producto | Stock | Form ID HubSpot | Thank-you |
 |---|---|---|---|---|
@@ -98,6 +98,7 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 | `/promo/heli-diesel-k2-25t` | HELI CPCD25-Q13K2 Diesel 2.5T | 10 unidades | `cc1dd61c-972a-4ea8-aaac-d02b857a04d5` | `/promo/heli-diesel-k2-25t/gracias` |
 | `/promo/heli-transpaleta-cbd1520` | Transpaleta Eléctrica HELI CBD15/20 (2T) | — | `ba4815b5-e77a-4cc5-88be-bef4a91ecefd` | `/promo/heli-transpaleta-cbd1520/gracias` |
 | `/promo/heli-combustion-g3` | HELI Combustión G3 (5 TON + 7&10 TON Diesel) | 12 unidades | ⚠️ `8ae22a71-...` (K2, **provisional** — falta Form ID nuevo) | `/promo/heli-combustion-g3/gracias` |
+| `/promo/heli-h4-electrica` | HELI Eléctrica H4 (Litio-ion 80V, 2.5-3.5T) | 12 unidades | ⚠️ `8ae22a71-...` (K2, **provisional** — falta Form ID nuevo) | `/promo/heli-h4-electrica/gracias` |
 
 **Estructura común** (cada `PromoLanding.tsx`):
 1. **Hero** — logo HELI blanco clickeable (link a `/`) + countdown 48hrs + título + specs grid + CTA "Cotizar ahora" + stock counter
@@ -109,14 +110,16 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 7. **FooterMini** — logo HELI blanco clickeable + email/teléfono
 8. **FloatingCTA** — botón "Cotizar ahora" que aparece tras scroll > 600px (mobile: full-width sticky bottom; desktop: pill flotante esquina inferior derecha con `animate-ping` rojo)
 
-**Shared component:** `src/app/promo/_shared/PromoThankYou.tsx` (carpeta privada con `_` que NO genera ruta) — recibe props `productName`, `productImage`, `productTagline`, `productSlug`. Usado en las 6 thank-you pages para tracking diferenciado por campaña (atributo `data-promo-thank-you={slug}` para Meta Pixel/GA4). El mapa `PROMO_TRACKING` dentro del componente tiene un entry (`contentName` + `value`) por slug — agregar uno nuevo al crear otra landing. **`value: 0` en TODAS las landings** dispara el evento `Lead` SIN `value`/`currency` (Meta optimiza por volumen de leads, no por valor monetario — los leads son cotizaciones, no compras). La detección de `content_category` mapea slugs con `diesel` **o `combustion`** → `"diesel"`.
+**Shared component:** `src/app/promo/_shared/PromoThankYou.tsx` (carpeta privada con `_` que NO genera ruta) — recibe props `productName`, `productImage`, `productTagline`, `productSlug`. Usado en las 7 thank-you pages para tracking diferenciado por campaña (atributo `data-promo-thank-you={slug}` para Meta Pixel/GA4). El mapa `PROMO_TRACKING` dentro del componente tiene un entry (`contentName` + `value`) por slug — agregar uno nuevo al crear otra landing. **`value: 0` en TODAS las landings** dispara el evento `Lead` SIN `value`/`currency` (Meta optimiza por volumen de leads, no por valor monetario — los leads son cotizaciones, no compras). La detección de `content_category` mapea slugs: `diesel`/`combustion` → `"diesel"`, `transpaleta` → `"transpaleta_electrica"`, `electrica` → `"electrica"`, resto → `"gasolina"`.
 
 **Imágenes en `public/assets/promo/`** (no en `legacy/products/`), todas `.webp`:
 - `heli-gasolina-35-front.webp` + `heli-gasolina-35-side.webp`
 - `heli-diesel-k2-front.webp` + `heli-diesel-k2-side.webp` + `heli-diesel-k2-hero.webp`
 - `heli-diesel-k2-25t-hero.webp` + `-side.webp`; `heli-transpaleta-cbd1520-hero.webp` + `-side.webp`
-- `heli-combustion-g3-hero.webp` (modelo 70 / 7&10 TON, fondo recortado vía flood-fill sharp desde `legacy/products/g3-series-5-10t-combustion.webp` que venía con fondo blanco) + `heli-combustion-g3-side.webp` (modelo 55 / 5 TON, re-encode de `g3-series-4-5.5t-combustion.webp` que ya era transparente)
+- `heli-combustion-g3-hero.webp` (modelo 70 / 7&10 TON, fondo recortado vía flood-fill sharp **lossless** desde `legacy/products/g3-series-5-10t-combustion.webp` que venía con fondo blanco) + `heli-combustion-g3-side.webp` (modelo 55 / 5 TON, re-encode lossless de `g3-series-4-5.5t-combustion.webp`)
+- `heli-h4-electrica-hero.webp` + `heli-h4-electrica-side.webp` (re-encode **lossless** de `legacy/products/h4-series-1-5-3-8-ton-gallery-{1,2}.webp` que ya eran transparentes; el side es la vista con el cargador de litio)
 - 2.5T (gasolina) usa imágenes existentes en `legacy/products/g3-series-2-3.5t-gas-nobg.webp`
+- **Nota cutout:** exportar siempre los recortes con `webp({ lossless: true, alphaQuality: 100 })`. El WebP lossy con alpha hace que el optimizador de Next (al re-encodear a AVIF) "filtre" de vuelta el fondo blanco → halo/recuadro visible. Lossless lo evita.
 
 **URLs originales del cliente** (no usadas, archivadas) en `public/assets/Campañas/{1,2,3}/`.
 
@@ -233,6 +236,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-diesel-k2-25t` | `promo_diesel_25t` | `diesel` |
 | `/promo/heli-transpaleta-cbd1520` | `promo_transpaleta_2t` | `transpaleta_electrica` |
 | `/promo/heli-combustion-g3` | `promo_combustion_g3` | `diesel` |
+| `/promo/heli-h4-electrica` | `promo_h4_electrica` | `electrica` |
 
 `Lead` se dispara en cada thank-you page (conversión principal optimizada en Meta Ads). **Todas las landings disparan `Lead` SIN `value`/`currency`** (decisión intencional: los leads son cotizaciones, no compras, así que se optimiza por VOLUMEN de leads, no por valor monetario). En `PROMO_TRACKING` esto se controla con `value: 0` en cada entry; el `useEffect` omite `value`/`currency` cuando `value === 0`.
 
@@ -244,6 +248,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-diesel-k2-25t/gracias` | `promo_diesel_25t` | (sin valor) |
 | `/promo/heli-transpaleta-cbd1520/gracias` | `promo_transpaleta_2t` | (sin valor) |
 | `/promo/heli-combustion-g3/gracias` | `promo_combustion_g3` | (sin valor) |
+| `/promo/heli-h4-electrica/gracias` | `promo_h4_electrica` | (sin valor) |
 | `/gracias` (form principal) | `form_principal` | (sin valor) |
 
 Implementación:
@@ -251,7 +256,7 @@ Implementación:
 - `MetaPixelLead.tsx` ([src/components/shared/](heliforklift-web/src/components/shared/MetaPixelLead.tsx)) — wrapper cliente reutilizable para disparar `Lead` desde Server Components (como `/gracias/page.tsx`).
 - Cada landing extiende `declare global { Window { fbq?: ... } }` para type safety sin `@ts-ignore`.
 
-**Custom Conversions en Meta** (configurar manualmente en Events Manager), una por `content_name`: `promo_25t`, `promo_35t`, `promo_k2`, `promo_diesel_25t`, `promo_transpaleta_2t`, `promo_combustion_g3`, `form_principal`. Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
+**Custom Conversions en Meta** (configurar manualmente en Events Manager), una por `content_name`: `promo_25t`, `promo_35t`, `promo_k2`, `promo_diesel_25t`, `promo_transpaleta_2t`, `promo_combustion_g3`, `promo_h4_electrica`, `form_principal`. Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
 
 **Conversions API (CAPI)**: pendiente de configurar en HubSpot → Settings → Integrations → Meta Ads para envío server-side de eventos `Lead` (recupera 25-40% de conversiones perdidas por iOS 14.5 ATT).
 
