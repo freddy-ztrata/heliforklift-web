@@ -24,16 +24,19 @@ declare global {
   }
 }
 
-// Mapeo de slugs a content_name + value estimado para Meta Pixel
+// Mapeo de slugs a content_name para Meta Pixel.
+// `value: 0` en TODAS las landings => se dispara Lead SIN value/currency: Meta
+// optimiza por VOLUMEN de leads, no por valor monetario. Decisión intencional:
+// los leads son cotizaciones, no compras, así que asignar el precio de la máquina
+// inflaría el valor de conversión. Si en el futuro se quiere optimización por valor,
+// usar un valor ESPERADO (precio × tasa de cierre), no el precio de lista.
 const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
-  "heli-gasolina-25": { contentName: "promo_25t", value: 14000000 },
-  "heli-gasolina-35": { contentName: "promo_35t", value: 18000000 },
-  "heli-diesel-k2": { contentName: "promo_k2", value: 16000000 },
-  "heli-diesel-k2-25t": { contentName: "promo_diesel_25t", value: 10800000 },
-  "heli-transpaleta-cbd1520": {
-    contentName: "promo_transpaleta_2t",
-    value: 950000,
-  },
+  "heli-gasolina-25": { contentName: "promo_25t", value: 0 },
+  "heli-gasolina-35": { contentName: "promo_35t", value: 0 },
+  "heli-diesel-k2": { contentName: "promo_k2", value: 0 },
+  "heli-diesel-k2-25t": { contentName: "promo_diesel_25t", value: 0 },
+  "heli-transpaleta-cbd1520": { contentName: "promo_transpaleta_2t", value: 0 },
+  "heli-combustion-g3": { contentName: "promo_combustion_g3", value: 0 },
 };
 
 interface PromoThankYouProps {
@@ -92,17 +95,21 @@ export default function PromoThankYou({
     if (typeof window === "undefined" || !window.fbq) return;
     const tracking = PROMO_TRACKING[productSlug];
     if (!tracking) return;
-    const category = productSlug.includes("diesel")
-      ? "diesel"
-      : productSlug.includes("transpaleta")
-        ? "transpaleta_electrica"
-        : "gasolina";
+    const category =
+      productSlug.includes("diesel") || productSlug.includes("combustion")
+        ? "diesel"
+        : productSlug.includes("transpaleta")
+          ? "transpaleta_electrica"
+          : "gasolina";
     window.fbq("track", "Lead", {
       content_name: tracking.contentName,
       content_category: category,
       content_ids: [productSlug],
-      value: tracking.value,
-      currency: "CLP",
+      // Solo enviamos value/currency si hay un valor estimado (> 0).
+      // Si value === 0, Meta optimiza por volumen de leads, no por valor.
+      ...(tracking.value > 0
+        ? { value: tracking.value, currency: "CLP" }
+        : {}),
     });
   }, [productSlug]);
 
