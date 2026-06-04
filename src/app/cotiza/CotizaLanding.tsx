@@ -656,6 +656,194 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
 }
 
 // ============================================================
+// FEATURED OFFERS — 3 promociones destacadas (filas showcase)
+// ============================================================
+const featuredOffers = [
+  {
+    href: "/promo/heli-transpaleta-cbd1520",
+    icon: Truck,
+    eyebrow: "Transpaleta eléctrica",
+    name: "HELI CBD15/20",
+    tagline: "Movimiento ágil de pallets en bodega, retail y logística interior.",
+    image: "/assets/promo/heli-transpaleta-cbd1520-hero.webp",
+    offer: "100% eléctrica · hasta 2 toneladas",
+    specs: [
+      "Capacidad hasta 2.000 kg",
+      "Eléctrica, de bajo mantenimiento",
+      "Compacta y maniobrable",
+    ],
+  },
+  {
+    href: "/promo/heli-combustion-g3",
+    icon: Wrench,
+    eyebrow: "Grúas combustión Serie G3",
+    name: "Diésel 5 · 7 · 10 TON",
+    tagline: "Potencia y robustez para las operaciones industriales más exigentes.",
+    image: "/assets/promo/heli-combustion-g3-hero.webp",
+    offer: "Kit de mantención por cada 1.000 hrs incluido",
+    specs: [
+      "De 5 a 10 toneladas",
+      "Motor diésel de alto rendimiento",
+      "Estructura reforzada",
+    ],
+  },
+  {
+    href: "/promo/heli-h4-electrica",
+    icon: Battery,
+    eyebrow: "Grúa eléctrica Serie H4",
+    name: "Litio-ion 80V · 2.5–3.5 TON",
+    tagline: "Cero emisiones, silenciosa y lista para operar en múltiples turnos.",
+    image: "/assets/promo/heli-h4-electrica-hero.webp",
+    offer: "12 cuotas al precio de contado",
+    specs: [
+      "2.5 a 3.5 toneladas",
+      "Batería litio-ion 80V",
+      "Carga rápida oportunista",
+    ],
+  },
+];
+
+function OfferRow({
+  offer,
+  index,
+}: {
+  offer: (typeof featuredOffers)[number];
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const reversed = index % 2 === 1;
+  const Icon = offer.icon;
+
+  return (
+    <div
+      ref={ref}
+      className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12"
+    >
+      {/* Imagen */}
+      <motion.div
+        initial={{ opacity: 0, x: reversed ? 40 : -40 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className={cn("relative", reversed && "lg:order-2")}
+      >
+        <Link
+          href={offer.href}
+          className="group relative block aspect-[4/3] w-full"
+          aria-label={`Ver promoción ${offer.name}`}
+        >
+          <motion.div
+            animate={{ scale: [1, 1.06, 1] }}
+            transition={{ duration: 5, repeat: Infinity }}
+            className="absolute inset-0 rounded-full bg-heli-red/25 blur-[110px]"
+          />
+          <Image
+            src={offer.image}
+            alt={`Grúa HELI ${offer.name}`}
+            fill
+            className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.45)] transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+          {/* Badge de oferta flotante */}
+          <motion.div
+            initial={{ scale: 0, rotate: -6 }}
+            animate={inView ? { scale: 1, rotate: -4 } : {}}
+            transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+            className="absolute left-2 top-2 max-w-[15rem] rounded-2xl border border-heli-yellow/40 bg-steel-950/90 px-4 py-2.5 backdrop-blur"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-widest text-heli-yellow">
+              Oferta
+            </p>
+            <p className="text-sm font-bold leading-tight text-white">
+              {offer.offer}
+            </p>
+          </motion.div>
+        </Link>
+      </motion.div>
+
+      {/* Contenido */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.15 }}
+        className={cn(reversed && "lg:order-1")}
+      >
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
+          <Icon className="h-4 w-4 text-heli-red-light" />
+          <span className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
+            {offer.eyebrow}
+          </span>
+        </div>
+        <h3 className="font-heading mt-4 text-[clamp(2rem,4.5vw,3.5rem)] leading-none text-white">
+          {offer.name}
+        </h3>
+        <p className="mt-4 max-w-md text-base leading-relaxed text-steel-300">
+          {offer.tagline}
+        </p>
+        <ul className="mt-5 space-y-2.5">
+          {offer.specs.map((s) => (
+            <li key={s} className="flex items-center gap-3">
+              <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-heli-red/10 ring-1 ring-heli-red/30">
+                <Check className="h-3.5 w-3.5 text-heli-red-light" />
+              </span>
+              <span className="text-sm text-steel-200">{s}</span>
+            </li>
+          ))}
+        </ul>
+        <Link
+          href={offer.href}
+          className="group mt-7 inline-flex items-center gap-2 rounded-full bg-heli-red px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
+        >
+          Ver promoción
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </motion.div>
+    </div>
+  );
+}
+
+function FeaturedOffers() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-28">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(206,20,45,0.12),transparent_60%)]" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="mx-auto max-w-3xl text-center"
+        >
+          <div className="inline-flex items-center gap-2 rounded-full border border-heli-yellow/30 bg-heli-yellow/10 px-3 py-1.5">
+            <Sparkles className="h-3.5 w-3.5 text-heli-yellow" />
+            <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
+              Promociones activas
+            </span>
+          </div>
+          <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,3.75rem)] leading-none text-white">
+            OFERTAS QUE NO
+            <br />
+            <span className="text-heli-red">PUEDES DEJAR PASAR</span>
+          </h2>
+          <p className="mt-4 text-base text-steel-400">
+            Equipos seleccionados con condiciones especiales por tiempo limitado.
+            Toca cada uno para ver el detalle.
+          </p>
+        </motion.div>
+
+        <div className="mt-16 space-y-20 sm:space-y-24">
+          {featuredOffers.map((o, i) => (
+            <OfferRow key={o.href} offer={o} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
 // CATEGORIES — el resto de la línea
 // ============================================================
 function Categories({ onPick }: { onPick: (label: string) => void }) {
@@ -1611,6 +1799,7 @@ export default function CotizaLanding() {
       <FleetMarquee />
       <TrustStrip />
       <EnergyBento onPick={pickEnergy} />
+      <FeaturedOffers />
       <WhyHeli />
       <CTABanner />
       <Categories onPick={pickAndScroll} />
