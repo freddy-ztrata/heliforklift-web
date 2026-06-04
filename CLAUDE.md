@@ -108,7 +108,7 @@ LP de marca completa para campañas **always-on de Google Ads** (NO Meta). `robo
 | `/promo/heli-diesel-k2-25t` | HELI CPCD25-Q13K2 Diesel 2.5T | 10 unidades | `cc1dd61c-972a-4ea8-aaac-d02b857a04d5` | `/promo/heli-diesel-k2-25t/gracias` |
 | `/promo/heli-transpaleta-cbd1520` | Transpaleta Eléctrica HELI CBD15/20 (2T) | — | `ba4815b5-e77a-4cc5-88be-bef4a91ecefd` | `/promo/heli-transpaleta-cbd1520/gracias` |
 | `/promo/heli-combustion-g3` | HELI Combustión G3 (5 TON + 7&10 TON Diesel) | 12 unidades | `89548006-48d3-4313-9301-dc0adbd35a2c` (embed developer) | `/promo/heli-combustion-g3/gracias` |
-| `/promo/heli-h4-electrica` | HELI Eléctrica H4 (Litio-ion 80V, 2.5-3.5T) | 12 unidades | ⚠️ `8ae22a71-...` (K2, **provisional** — falta Form ID nuevo) | `/promo/heli-h4-electrica/gracias` |
+| `/promo/heli-h4-electrica` | HELI Eléctrica H4 (Litio-ion 80V, 2.5-3.5T) | 12 unidades | `22d1b041-5bd4-42d2-aae5-de428f4c2f43` (embed developer) | `/promo/heli-h4-electrica/gracias` |
 
 **Estructura común** (cada `PromoLanding.tsx`):
 1. **Hero** — logo HELI blanco clickeable (link a `/`) + countdown 48hrs + título + specs grid + CTA "Cotizar ahora" + stock counter

@@ -828,24 +828,12 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
-const HUBSPOT_PORTAL_ID = "50182752";
-// TODO: reemplazar por el Form ID nuevo de HubSpot para la campaña Eléctrica H4.
-// Provisional: se usa el Form ID de la landing K2 mientras se crea el form definitivo.
-const HUBSPOT_FORM_ID = "8ae22a71-ea73-4cf7-8c57-634e768c0104";
+// Embed "developer" de HubSpot — auto-renderiza el div .hs-form-html.
+const HUBSPOT_EMBED_SRC =
+  "https://js.hsforms.net/forms/embed/developer/50182752.js";
 
 declare global {
   interface Window {
-    hbspt?: {
-      forms?: {
-        create: (config: {
-          region: string;
-          portalId: string;
-          formId: string;
-          target: string;
-        }) => void;
-      };
-    };
     fbq?: (
       action: "track" | "trackCustom",
       eventName: string,
@@ -855,45 +843,12 @@ declare global {
 }
 
 function ConversionForm() {
-  const formContainerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const container = formContainerRef.current;
-    if (!container) return;
-
-    const targetId = `hs-form-promo-${Math.random().toString(36).slice(2, 11)}`;
-    container.id = targetId;
-
-    function renderForm() {
-      if (!window.hbspt?.forms?.create || !container) return;
-      container.innerHTML = "";
-      window.hbspt.forms.create({
-        region: "na1",
-        portalId: HUBSPOT_PORTAL_ID,
-        formId: HUBSPOT_FORM_ID,
-        target: `#${targetId}`,
-      });
-    }
-
-    if (window.hbspt?.forms?.create) {
-      renderForm();
-      return;
-    }
-
-    const existing = document.querySelector(
-      `script[src="${HUBSPOT_V2_SCRIPT}"]`
-    );
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = HUBSPOT_V2_SCRIPT;
-      script.async = true;
-      script.defer = true;
-      script.onload = renderForm;
-      document.body.appendChild(script);
-    } else {
-      existing.addEventListener("load", renderForm, { once: true });
-      setTimeout(renderForm, 100);
-    }
+    if (document.querySelector(`script[src="${HUBSPOT_EMBED_SRC}"]`)) return;
+    const s = document.createElement("script");
+    s.src = HUBSPOT_EMBED_SRC;
+    s.defer = true;
+    document.body.appendChild(s);
   }, []);
 
   return (
@@ -1000,7 +955,14 @@ function ConversionForm() {
               </div>
             </div>
 
-            <div ref={formContainerRef} className="hubspot-form-container w-full" />
+            <div className="hubspot-form-container w-full">
+              <div
+                className="hs-form-html"
+                data-region="na1"
+                data-form-id="22d1b041-5bd4-42d2-aae5-de428f4c2f43"
+                data-portal-id="50182752"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
