@@ -12,8 +12,6 @@ import {
   useInView,
 } from "framer-motion";
 import {
-  Phone,
-  MessageCircle,
   ArrowRight,
   Check,
   ChevronDown,
@@ -48,8 +46,6 @@ import { company, contact, certifications } from "@/lib/data/company";
 import { fuelTypeCategories } from "@/lib/data/products";
 
 const HERO_IMAGE = "/assets/promo/heli-diesel-k2-hero.webp";
-const WHATSAPP_BASE =
-  "https://wa.me/56993209186?text=Hola,%20quiero%20cotizar%20una%20gr%C3%BAa%20horquilla%20HELI";
 
 // ============================================================
 // COUNT-UP — contador animado al entrar en viewport
@@ -178,22 +174,13 @@ function StickyHeader() {
             className="h-8 w-auto brightness-0 invert"
           />
         </Link>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href="tel:+56993209186"
-            className="hidden items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-heli-red/40 sm:inline-flex"
-          >
-            <Phone className="h-4 w-4 text-heli-red-light" />
-            {contact.mainPhone}
-          </a>
-          <button
-            onClick={scrollToQuote}
-            className="inline-flex items-center gap-2 rounded-full bg-heli-red px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
-          >
-            Cotizar
-            <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
+        <button
+          onClick={scrollToQuote}
+          className="inline-flex items-center gap-2 rounded-full bg-heli-red px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
+        >
+          Cotizar
+          <ArrowRight className="h-4 w-4" />
+        </button>
       </div>
     </motion.header>
   );
@@ -246,22 +233,13 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
               className="h-9 w-auto brightness-0 invert sm:h-11"
             />
           </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href="tel:+56993209186"
-              className="hidden items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-heli-red/40 sm:inline-flex"
-            >
-              <Phone className="h-4 w-4 text-heli-red-light" />
-              {contact.mainPhone}
-            </a>
-            <button
-              onClick={scrollToQuote}
-              className="inline-flex items-center gap-2 rounded-full bg-heli-red px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
-            >
-              Cotizar
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          </div>
+          <button
+            onClick={scrollToQuote}
+            className="inline-flex items-center gap-2 rounded-full bg-heli-red px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
+          >
+            Cotizar
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </motion.div>
 
         <div className="mt-6 grid flex-1 grid-cols-1 items-center gap-10 lg:mt-0 lg:grid-cols-2">
@@ -313,23 +291,16 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="mt-7 flex flex-col gap-3 sm:flex-row"
+              className="mt-7 flex"
             >
               <button
                 onClick={scrollToQuote}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-9 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-10 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
                 <span className="relative">Cotiza tu equipo</span>
                 <ArrowRight className="relative h-4 w-4" />
               </button>
-              <a
-                href="tel:+56993209186"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-9 py-4 text-base font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:border-heli-red/40 hover:bg-white/[0.08]"
-              >
-                <Phone className="h-4 w-4 text-heli-red-light" />
-                Llamar ahora
-              </a>
             </motion.div>
 
             {/* Trust chips */}
@@ -1172,22 +1143,13 @@ function CTABanner() {
             Cotiza hoy y te respondemos en menos de 2 horas hábiles.
           </p>
         </div>
-        <div className="flex flex-shrink-0 flex-col gap-3 sm:flex-row">
-          <button
-            onClick={scrollToQuote}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-heli-red shadow-lg transition-all hover:-translate-y-0.5"
-          >
-            <Send className="h-4 w-4" />
-            Cotizar ahora
-          </button>
-          <a
-            href="tel:+56993209186"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-white/10"
-          >
-            <Phone className="h-4 w-4" />
-            {contact.mainPhone}
-          </a>
-        </div>
+        <button
+          onClick={scrollToQuote}
+          className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-full bg-white px-9 py-4 text-sm font-bold uppercase tracking-wider text-heli-red shadow-lg transition-all hover:-translate-y-0.5"
+        >
+          <Send className="h-4 w-4" />
+          Cotizar ahora
+        </button>
       </div>
     </section>
   );
@@ -1262,39 +1224,6 @@ function Quoter({
               ))}
             </div>
 
-            {/* Contacto directo */}
-            <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <a
-                href="tel:+56993209186"
-                className="group flex items-center gap-3 rounded-xl border border-white/[0.08] bg-steel-900/50 p-4 backdrop-blur transition-all hover:border-heli-red/40"
-              >
-                <Phone className="h-5 w-5 text-heli-red-light" />
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
-                    Llámanos
-                  </p>
-                  <p className="truncate text-sm font-bold text-white">
-                    {contact.mainPhone}
-                  </p>
-                </div>
-              </a>
-              <a
-                href={WHATSAPP_BASE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 rounded-xl border border-white/[0.08] bg-steel-900/50 p-4 backdrop-blur transition-all hover:border-heli-red/40"
-              >
-                <MessageCircle className="h-5 w-5 text-heli-red-light" />
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
-                    WhatsApp
-                  </p>
-                  <p className="truncate text-sm font-bold text-white">
-                    Escríbenos ahora
-                  </p>
-                </div>
-              </a>
-            </div>
           </div>
 
           {/* FORM */}
@@ -1505,13 +1434,13 @@ function Coverage() {
               Sucursales propias y socios estratégicos de Arica a Puerto Varas.
               Venta, servicio técnico y repuestos donde nos necesites.
             </p>
-            <a
-              href="tel:+56993209186"
+            <button
+              onClick={scrollToQuote}
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-heli-red px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5"
             >
-              <Phone className="h-4 w-4" />
-              {contact.mainPhone}
-            </a>
+              Cotiza tu equipo
+              <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -1672,22 +1601,15 @@ function FinalCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mt-8 flex justify-center"
         >
           <button
             onClick={scrollToQuote}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-heli-red px-9 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-heli-red px-10 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
           >
             Cotizar ahora
             <ArrowRight className="h-4 w-4" />
           </button>
-          <a
-            href="tel:+56993209186"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-9 py-4 text-base font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:border-heli-red/40"
-          >
-            <Phone className="h-4 w-4 text-heli-red-light" />
-            {contact.mainPhone}
-          </a>
         </motion.div>
       </div>
     </section>
@@ -1763,18 +1685,11 @@ function FloatingBar() {
       initial={{ y: 100 }}
       animate={{ y: show ? 0 : 100 }}
       transition={{ type: "spring", stiffness: 260, damping: 28 }}
-      className="fixed inset-x-0 bottom-0 z-50 flex gap-2 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-white/[0.08] bg-steel-950/95 p-3 backdrop-blur-xl lg:hidden"
     >
-      <a
-        href="tel:+56993209186"
-        className="flex h-12 flex-1 items-center justify-center gap-2 rounded-xl border border-white/15 text-sm font-bold uppercase tracking-wider text-white"
-      >
-        <Phone className="h-4 w-4 text-heli-red-light" />
-        Llamar
-      </a>
       <button
         onClick={scrollToQuote}
-        className="flex h-12 flex-[1.4] items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
+        className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
       >
         <Send className="h-4 w-4" />
         Cotizar ahora
