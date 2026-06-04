@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   motion,
   AnimatePresence,
@@ -38,7 +37,6 @@ import {
   Maximize2,
   MoveVertical,
   Send,
-  Loader2,
   Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -87,37 +85,11 @@ function CountUp({
   );
 }
 
-// ============================================================
-// MÁQUINAS — opciones del cotizador
-// ============================================================
-const MACHINE_OPTIONS = [
-  "Grúa Eléctrica",
-  "Grúa Diésel",
-  "Grúa a Gas (GLP)",
-  "Grúa Hidrógeno Verde",
-  "Transpaleta",
-  "Apilador",
-  "Reach Truck",
-  "Todo Terreno",
-  "Manipulador Telescópico",
-  "Porta Contenedores",
-  "Tractor de Tiro",
-  "Plataforma Elevadora",
-  "Accesorios",
-];
-
 const energyIcons: Record<string, typeof Zap> = {
   electrica: Battery,
   diesel: Fuel,
   glp: Flame,
   hidrogeno: Atom,
-};
-// Energía -> etiqueta del cotizador a preseleccionar
-const energyToMachine: Record<string, string> = {
-  electrica: "Grúa Eléctrica",
-  diesel: "Grúa Diésel",
-  glp: "Grúa a Gas (GLP)",
-  hidrogeno: "Grúa Hidrógeno Verde",
 };
 // Imágenes TRANSPARENTES por tipo (las de fuelTypeCategories tienen fondo blanco)
 const energyImg: Record<string, string> = {
@@ -1156,27 +1128,20 @@ function CTABanner() {
 }
 
 // ============================================================
-// QUOTER — formulario de cotización (DEMO de UI; reemplazar por HubSpot)
+// QUOTER — formulario de cotización (embed HubSpot)
 // ============================================================
-function Quoter({
-  selected,
-  toggle,
-}: {
-  selected: string[];
-  toggle: (label: string) => void;
-}) {
-  const router = useRouter();
-  const [submitting, setSubmitting] = useState(false);
+const HUBSPOT_EMBED_SRC =
+  "https://js.hsforms.net/forms/embed/developer/50182752.js";
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // === FORM DE MUESTRA ===
-    // Esta es solo la UI. La integración real se hará en HubSpot
-    // (embed o API). Por ahora redirige a la página de gracias para
-    // validar el flujo y el tracking de conversión.
-    setSubmitting(true);
-    setTimeout(() => router.push("/cotiza/gracias"), 700);
-  }
+function Quoter() {
+  useEffect(() => {
+    // El script "developer" de HubSpot auto-renderiza los div .hs-form-html.
+    if (document.querySelector(`script[src="${HUBSPOT_EMBED_SRC}"]`)) return;
+    const s = document.createElement("script");
+    s.src = HUBSPOT_EMBED_SRC;
+    s.defer = true;
+    document.body.appendChild(s);
+  }, []);
 
   return (
     <section
@@ -1202,7 +1167,7 @@ function Quoter({
               <span className="text-heli-red">COTIZACIÓN</span>
             </h2>
             <p className="mt-5 text-base leading-relaxed text-steel-300">
-              Selecciona uno o más equipos, déjanos tus datos y te contactamos
+              Déjanos tus datos y cuéntanos qué equipo necesitas. Te contactamos
               en menos de{" "}
               <strong className="text-white">2 horas hábiles</strong> con una
               propuesta a medida.
@@ -1223,10 +1188,9 @@ function Quoter({
                 </div>
               ))}
             </div>
-
           </div>
 
-          {/* FORM */}
+          {/* FORM — embed HubSpot */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1247,162 +1211,18 @@ function Quoter({
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Selector de máquinas */}
-              <div>
-                <label className="mb-2 block text-xs font-bold uppercase tracking-widest text-steel-400">
-                  ¿Qué equipo te interesa?{" "}
-                  <span className="text-steel-600">(elige uno o más)</span>
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {MACHINE_OPTIONS.map((m) => {
-                    const active = selected.includes(m);
-                    return (
-                      <button
-                        key={m}
-                        type="button"
-                        onClick={() => toggle(m)}
-                        aria-pressed={active}
-                        className={cn(
-                          "rounded-full border px-3.5 py-2 text-xs font-semibold transition-all",
-                          active
-                            ? "border-heli-red bg-heli-red text-white shadow-[0_0_16px_rgba(206,20,45,0.5)]"
-                            : "border-white/15 bg-white/[0.03] text-steel-300 hover:border-heli-red/40 hover:text-white"
-                        )}
-                      >
-                        {active && <Check className="mr-1 inline h-3 w-3" />}
-                        {m}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Datos */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field label="Nombre" name="nombre" placeholder="Tu nombre" required />
-                <Field label="Empresa" name="empresa" placeholder="Tu empresa" />
-                <Field
-                  label="Email"
-                  name="email"
-                  type="email"
-                  placeholder="tu@empresa.cl"
-                  required
-                />
-                <Field
-                  label="Teléfono"
-                  name="telefono"
-                  type="tel"
-                  placeholder="+56 9 ..."
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field label="Región / Comuna" name="region" placeholder="Ej: Santiago" />
-                <div>
-                  <label
-                    htmlFor="capacidad"
-                    className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-steel-400"
-                  >
-                    Capacidad estimada
-                  </label>
-                  <select
-                    id="capacidad"
-                    name="capacidad"
-                    className="w-full rounded-xl border border-white/15 bg-steel-950/60 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-heli-red"
-                    defaultValue=""
-                  >
-                    <option value="" disabled>
-                      Selecciona…
-                    </option>
-                    <option>Hasta 1.5 ton</option>
-                    <option>1.5 – 3.5 ton</option>
-                    <option>3.5 – 5 ton</option>
-                    <option>5 – 10 ton</option>
-                    <option>Más de 10 ton</option>
-                    <option>No estoy seguro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="mensaje"
-                  className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-steel-400"
-                >
-                  Cuéntanos sobre tu operación
-                </label>
-                <textarea
-                  id="mensaje"
-                  name="mensaje"
-                  rows={3}
-                  placeholder="Tipo de carga, turnos, interior/exterior, etc."
-                  className="w-full resize-none rounded-xl border border-white/15 bg-steel-950/60 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-steel-600 focus:border-heli-red"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={submitting}
-                className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-8 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)] disabled:cursor-not-allowed disabled:opacity-70"
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
-                    Enviando…
-                  </>
-                ) : (
-                  <>
-                    Solicitar cotización
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </>
-                )}
-              </button>
-
-              <p className="text-center text-[11px] leading-relaxed text-steel-500">
-                Al enviar aceptas ser contactado por HELI Chile. Tus datos se
-                usan solo para gestionar tu cotización.
-              </p>
-            </form>
+            <div className="hubspot-form-container w-full">
+              <div
+                className="hs-form-html"
+                data-region="na1"
+                data-form-id="d9974614-f923-4712-b337-79132d6705e5"
+                data-portal-id="50182752"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
-  );
-}
-
-function Field({
-  label,
-  name,
-  type = "text",
-  placeholder,
-  required,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-}) {
-  return (
-    <div>
-      <label
-        htmlFor={name}
-        className="mb-1.5 block text-xs font-bold uppercase tracking-widest text-steel-400"
-      >
-        {label}
-        {required && <span className="ml-0.5 text-heli-red">*</span>}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        className="w-full rounded-xl border border-white/15 bg-steel-950/60 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-steel-600 focus:border-heli-red"
-      />
-    </div>
   );
 }
 
@@ -1702,37 +1522,23 @@ function FloatingBar() {
 // MAIN
 // ============================================================
 export default function CotizaLanding() {
-  const [selected, setSelected] = useState<string[]>([]);
-
-  function toggle(label: string) {
-    setSelected((prev) =>
-      prev.includes(label) ? prev.filter((x) => x !== label) : [...prev, label]
-    );
-  }
-
-  function pickAndScroll(label: string) {
-    setSelected((prev) => (prev.includes(label) ? prev : [...prev, label]));
-    scrollToQuote();
-  }
-
-  function pickEnergy(slug: string) {
-    pickAndScroll(energyToMachine[slug] ?? "Grúa Eléctrica");
-  }
+  // Todos los CTA / cards llevan al formulario (embed HubSpot) en #cotiza.
+  const goQuote = () => scrollToQuote();
 
   return (
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <StickyHeader />
-      <Hero onPickEnergy={pickEnergy} />
+      <Hero onPickEnergy={goQuote} />
       <FleetMarquee />
       <TrustStrip />
-      <EnergyBento onPick={pickEnergy} />
-      <FeaturedOffers onPick={pickAndScroll} />
+      <EnergyBento onPick={goQuote} />
+      <FeaturedOffers onPick={goQuote} />
       <WhyHeli />
       <CTABanner />
-      <Categories onPick={pickAndScroll} />
+      <Categories onPick={goQuote} />
       <Services />
       <Process />
-      <Quoter selected={selected} toggle={toggle} />
+      <Quoter />
       <Coverage />
       <FAQ />
       <FinalCTA />
