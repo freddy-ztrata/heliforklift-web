@@ -123,6 +123,13 @@ const energyToMachine: Record<string, string> = {
   glp: "Grúa a Gas (GLP)",
   hidrogeno: "Grúa Hidrógeno Verde",
 };
+// Imágenes TRANSPARENTES por tipo (las de fuelTypeCategories tienen fondo blanco)
+const energyImg: Record<string, string> = {
+  electrica: "/assets/cotiza/fleet-electrica.webp",
+  diesel: "/assets/promo/heli-combustion-g3-hero.webp",
+  glp: "/assets/legacy/products/g3-series-2-3.5t-gas-nobg.webp",
+  hidrogeno: "/assets/cotiza/fleet-hidrogeno.webp",
+};
 
 const categoryCards = [
   { label: "Transpaleta", icon: Truck, desc: "Eléctricas y manuales para bodega." },
@@ -582,21 +589,24 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6 }}
             onClick={() => onPick(featured.id)}
-            className="group relative flex min-h-[360px] flex-col justify-end overflow-hidden rounded-3xl border border-heli-red/40 bg-gradient-to-br from-heli-red/20 via-steel-900 to-steel-950 p-8 text-left transition-all hover:border-heli-red/60 sm:min-h-[440px]"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-heli-red/40 bg-gradient-to-br from-heli-red/20 via-steel-900 to-steel-950 text-left transition-all hover:border-heli-red/60"
           >
-            <div className="absolute right-[-15%] top-[-5%] h-[110%] w-[80%]">
+            {/* Imagen contenida arriba */}
+            <div className="relative h-56 w-full overflow-hidden sm:h-72">
+              <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-heli-red/30 blur-[90px]" />
               <Image
-                src={featured.image}
+                src={energyImg[featured.id] ?? featured.image}
                 alt={`Grúa ${featured.name}`}
                 fill
-                className="object-contain transition-transform duration-700 group-hover:scale-105"
+                className="object-contain p-6 transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
+              <span className="absolute left-6 top-6 inline-flex items-center gap-1.5 rounded-full bg-heli-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+                <Sparkles className="h-3 w-3" /> Pioneros en Chile
+              </span>
             </div>
-            <span className="absolute left-8 top-8 inline-flex items-center gap-1.5 rounded-full bg-heli-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-              <Sparkles className="h-3 w-3" /> Pioneros en Chile
-            </span>
-            <div className="relative max-w-md">
+            {/* Contenido abajo */}
+            <div className="relative flex flex-1 flex-col p-8 pt-0">
               <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-heli-red/20 ring-1 ring-heli-red/40">
                 <FeaturedIcon className="h-6 w-6 text-heli-red-light" />
               </div>
@@ -628,7 +638,7 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
                 >
                   <div className="relative h-24 w-32 flex-shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.06] to-transparent sm:h-28 sm:w-40">
                     <Image
-                      src={f.image}
+                      src={energyImg[f.id] ?? f.image}
                       alt={`Grúa ${f.name}`}
                       fill
                       className="object-contain p-1.5 transition-transform duration-500 group-hover:scale-105"
