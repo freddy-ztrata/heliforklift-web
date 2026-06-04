@@ -660,7 +660,7 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
 // ============================================================
 const featuredOffers = [
   {
-    href: "/promo/heli-transpaleta-cbd1520",
+    machine: "Transpaleta",
     icon: Truck,
     eyebrow: "Transpaleta eléctrica",
     name: "HELI CBD15/20",
@@ -674,7 +674,7 @@ const featuredOffers = [
     ],
   },
   {
-    href: "/promo/heli-combustion-g3",
+    machine: "Grúa Diésel",
     icon: Wrench,
     eyebrow: "Grúas combustión Serie G3",
     name: "Diésel 5 · 7 · 10 TON",
@@ -688,7 +688,7 @@ const featuredOffers = [
     ],
   },
   {
-    href: "/promo/heli-h4-electrica",
+    machine: "Grúa Eléctrica",
     icon: Battery,
     eyebrow: "Grúa eléctrica Serie H4",
     name: "Litio-ion 80V · 2.5–3.5 TON",
@@ -706,9 +706,11 @@ const featuredOffers = [
 function OfferRow({
   offer,
   index,
+  onPick,
 }: {
   offer: (typeof featuredOffers)[number];
   index: number;
+  onPick: (label: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -727,10 +729,10 @@ function OfferRow({
         transition={{ duration: 0.6 }}
         className={cn("relative", reversed && "lg:order-2")}
       >
-        <Link
-          href={offer.href}
+        <button
+          onClick={() => onPick(offer.machine)}
           className="group relative block aspect-[4/3] w-full"
-          aria-label={`Ver promoción ${offer.name}`}
+          aria-label={`Cotizar ${offer.name}`}
         >
           <motion.div
             animate={{ scale: [1, 1.06, 1] }}
@@ -749,7 +751,7 @@ function OfferRow({
             initial={{ scale: 0, rotate: -6 }}
             animate={inView ? { scale: 1, rotate: -4 } : {}}
             transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-            className="absolute left-2 top-2 max-w-[15rem] rounded-2xl border border-heli-yellow/40 bg-steel-950/90 px-4 py-2.5 backdrop-blur"
+            className="absolute left-2 top-2 max-w-[15rem] rounded-2xl border border-heli-yellow/40 bg-steel-950/90 px-4 py-2.5 text-left backdrop-blur"
           >
             <p className="text-[10px] font-bold uppercase tracking-widest text-heli-yellow">
               Oferta
@@ -758,7 +760,7 @@ function OfferRow({
               {offer.offer}
             </p>
           </motion.div>
-        </Link>
+        </button>
       </motion.div>
 
       {/* Contenido */}
@@ -790,19 +792,19 @@ function OfferRow({
             </li>
           ))}
         </ul>
-        <Link
-          href={offer.href}
+        <button
+          onClick={() => onPick(offer.machine)}
           className="group mt-7 inline-flex items-center gap-2 rounded-full bg-heli-red px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
         >
-          Ver promoción
+          Cotizar este equipo
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+        </button>
       </motion.div>
     </div>
   );
 }
 
-function FeaturedOffers() {
+function FeaturedOffers({ onPick }: { onPick: (label: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -835,7 +837,7 @@ function FeaturedOffers() {
 
         <div className="mt-16 space-y-20 sm:space-y-24">
           {featuredOffers.map((o, i) => (
-            <OfferRow key={o.href} offer={o} index={i} />
+            <OfferRow key={o.machine} offer={o} index={i} onPick={onPick} />
           ))}
         </div>
       </div>
@@ -1799,7 +1801,7 @@ export default function CotizaLanding() {
       <FleetMarquee />
       <TrustStrip />
       <EnergyBento onPick={pickEnergy} />
-      <FeaturedOffers />
+      <FeaturedOffers onPick={pickAndScroll} />
       <WhyHeli />
       <CTABanner />
       <Categories onPick={pickAndScroll} />
