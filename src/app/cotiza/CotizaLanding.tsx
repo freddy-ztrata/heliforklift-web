@@ -1522,6 +1522,16 @@ function FloatingBar() {
 // MAIN
 // ============================================================
 export default function CotizaLanding() {
+  // Meta Pixel — ViewContent al cargar la landing de marca (Google Ads).
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.fbq) {
+      window.fbq("trackCustom", "ViewContent", {
+        content_name: "cotiza_brand",
+        content_category: "general",
+      });
+    }
+  }, []);
+
   // Todos los CTA / cards llevan al formulario (embed HubSpot) en #cotiza.
   const goQuote = () => scrollToQuote();
 
