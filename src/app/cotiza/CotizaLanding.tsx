@@ -214,7 +214,7 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
           </button>
         </motion.div>
 
-        <div className="mt-6 grid flex-1 grid-cols-1 items-center gap-10 lg:mt-0 lg:grid-cols-2">
+        <div className="mt-6 grid flex-1 grid-cols-1 items-center gap-8 lg:mt-0 lg:grid-cols-[1fr_1.2fr]">
           {/* Texto */}
           <motion.div style={{ y: textY }} className="relative z-10 order-2 lg:order-1">
             <motion.div
@@ -301,7 +301,7 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 aspect-[16/10] w-full max-w-xl justify-self-center sm:max-w-2xl lg:order-2 lg:max-w-2xl lg:justify-self-end"
+            className="relative order-1 aspect-[29/10] w-full max-w-xl justify-self-center sm:max-w-2xl lg:order-2 lg:max-w-none lg:justify-self-end"
           >
             <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
             <div className="relative h-full w-full">
@@ -1400,7 +1400,7 @@ function FinalCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto mb-8 aspect-[16/9] w-full max-w-3xl"
+          className="relative mx-auto mb-8 aspect-[22/10] w-full max-w-3xl"
         >
           <Image
             src="/assets/cotiza/fleet-lineup.webp"
