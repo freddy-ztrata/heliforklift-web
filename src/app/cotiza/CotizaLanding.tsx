@@ -43,7 +43,7 @@ import { cn } from "@/lib/utils";
 import { company, contact, certifications } from "@/lib/data/company";
 import { fuelTypeCategories } from "@/lib/data/products";
 
-const HERO_IMAGE = "/assets/promo/heli-diesel-k2-hero.webp";
+const HERO_IMAGE = "/assets/cotiza/hero-fleet.webp";
 
 // ============================================================
 // COUNT-UP — contador animado al entrar en viewport
@@ -301,13 +301,13 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 aspect-square w-full max-w-[17rem] justify-self-center sm:max-w-sm lg:order-2 lg:max-w-2xl lg:justify-self-end"
+            className="relative order-1 aspect-[16/10] w-full max-w-xl justify-self-center sm:max-w-2xl lg:order-2 lg:max-w-2xl lg:justify-self-end"
           >
             <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
             <div className="relative h-full w-full">
               <Image
                 src={HERO_IMAGE}
-                alt="Grúa Horquilla HELI"
+                alt="Flota HELI: grúas horquilla eléctricas, diésel, gas, hidrógeno y manipulador telescópico"
                 fill
                 priority
                 quality={90}
@@ -1395,6 +1395,21 @@ function FinalCTA() {
     <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-28">
       <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-heli-red/15 blur-[150px]" />
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto mb-8 aspect-[16/9] w-full max-w-3xl"
+        >
+          <Image
+            src="/assets/cotiza/fleet-lineup.webp"
+            alt="Flota HELI: manipulador telescópico y grúas horquilla"
+            fill
+            className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.4)]"
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
+        </motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
