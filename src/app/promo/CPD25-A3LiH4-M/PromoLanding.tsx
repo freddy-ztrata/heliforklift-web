@@ -1098,7 +1098,7 @@ export default function PromoLanding() {
       window.fbq("trackCustom", "ViewContent", {
         content_name: "promo_h4_electrica_25t",
         content_category: "electrica",
-        content_ids: ["heli-h4-electrica-25t"],
+        content_ids: ["CPD25-A3LiH4-M"],
       });
     }
   }, []);
