@@ -220,6 +220,21 @@ function Hero() {
               <span className="text-heli-yellow">SERIE H4 · 2.5T</span>
             </motion.h1>
 
+            {/* Modelo — nombre de la máquina */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/[0.12] bg-white/[0.04] px-3 py-1.5 backdrop-blur"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
+                Modelo
+              </span>
+              <span className="font-mono text-sm font-bold tracking-wider text-white">
+                CPD25-A3LiH4-M
+              </span>
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
