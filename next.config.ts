@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
+  // Landing estática de campaña (HTML en public/CPD25-A3LiH4-M/).
+  // Sirve el index.html con URL limpia /CPD25-A3LiH4-M (sin /index.html).
+  rewrites: async () => [
+    {
+      source: "/CPD25-A3LiH4-M",
+      destination: "/CPD25-A3LiH4-M/index.html",
+    },
+  ],
 };
 
 export default nextConfig;
