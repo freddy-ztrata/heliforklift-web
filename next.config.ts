@@ -25,12 +25,19 @@ const nextConfig: NextConfig = {
       ],
     },
   ],
-  // Landing estática de campaña (HTML en public/CPD25-A3LiH4-M/).
-  // Sirve el index.html con URL limpia /CPD25-A3LiH4-M (sin /index.html).
-  rewrites: async () => [
+  // La landing CPD25-A3LiH4-M ahora vive como promo Next en
+  // /promo/heli-h4-electrica-25t. Redirigimos la URL antigua para no
+  // romper enlaces/campañas que apunten a /CPD25-A3LiH4-M.
+  redirects: async () => [
     {
       source: "/CPD25-A3LiH4-M",
-      destination: "/CPD25-A3LiH4-M/index.html",
+      destination: "/promo/heli-h4-electrica-25t",
+      permanent: false,
+    },
+    {
+      source: "/CPD25-A3LiH4-M/:path*",
+      destination: "/promo/heli-h4-electrica-25t",
+      permanent: false,
     },
   ],
 };

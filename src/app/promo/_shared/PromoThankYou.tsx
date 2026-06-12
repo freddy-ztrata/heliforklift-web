@@ -38,6 +38,7 @@ const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
   "heli-transpaleta-cbd1520": { contentName: "promo_transpaleta_2t", value: 0 },
   "heli-combustion-g3": { contentName: "promo_combustion_g3", value: 0 },
   "heli-h4-electrica": { contentName: "promo_h4_electrica", value: 0 },
+  "heli-h4-electrica-25t": { contentName: "promo_h4_electrica_25t", value: 0 },
 };
 
 interface PromoThankYouProps {
