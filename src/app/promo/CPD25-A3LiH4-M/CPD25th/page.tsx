@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "¡Gracias! — Cotización HELI Eléctrica H4 2.5T recibida",
   description:
     "Recibimos tu solicitud de cotización por la HELI Eléctrica Serie H4 2.5T (CPD25-A3LiH4-M). Un ejecutivo te contactará en menos de 2 horas hábiles.",
-  alternates: { canonical: "/promo/CPD25-A3LiH4-M/gracias" },
+  alternates: { canonical: "/promo/CPD25-A3LiH4-M/CPD25th" },
   robots: { index: false, follow: false },
 };
 
