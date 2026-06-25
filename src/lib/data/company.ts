@@ -92,10 +92,10 @@ export const teamByBranch: BranchTeam[] = [
     address: "Calle 9 425, Galpón 27, Agpia II, Antofagasta",
     contacts: [
       {
-        name: "Sebastián Araya",
-        role: "Ventas",
-        email: "sebastian@heliforklift.cl",
-        phone: "+56 9 6122 3038",
+        name: "Claudia Henríquez",
+        role: "Gerente Comercial",
+        email: "chenriquez@heliforklift.cl",
+        phone: "+56 9 5818 7035",
       },
       {
         name: "Paola Ortiz",
@@ -110,10 +110,11 @@ export const teamByBranch: BranchTeam[] = [
     address: "Av. Américo Vespucio 1445, Quilicura",
     contacts: [
       {
-        name: "Claudia Henríquez",
-        role: "Gerente Comercial",
-        email: "chenriquez@heliforklift.cl",
-        phone: "+56 9 5818 7035",
+        name: "Eyleen Gallegos",
+        role: "Ventas",
+        email: "egallegos@heliforklift.cl",
+        phone: "+56 9 7804 4267",
+        zone: "Copiapó, Atacama",
       },
       {
         name: "Mirtha Suárez",
@@ -184,9 +185,9 @@ export const strategicPartners: StrategicPartner[] = [
     address: "Megacentro Copiapó, bodega 15, Panamericana Norte 185",
     city: "Copiapó",
     region: "Atacama",
-    contactName: "Claudia Henríquez",
-    contactEmail: "chenriquez@heliforklift.cl",
-    contactPhone: "+56 9 5818 7035",
+    contactName: "Eyleen Gallegos",
+    contactEmail: "egallegos@heliforklift.cl",
+    contactPhone: "+56 9 7804 4267",
     isOwn: true,
   },
   {
