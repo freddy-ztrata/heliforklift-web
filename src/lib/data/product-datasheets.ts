@@ -25,7 +25,7 @@ export const productDatasheets: Record<string, string> = {
   "k2-series-combustion-2-3.5-ton": `${DATASHEET_DIR}/k2-series-2-0-3-5-ton.pdf`,
   "k2-series-combustion-tier4-5-2-3.5-ton": `${DATASHEET_DIR}/k2-series-2-0-3-5-ton-2.pdf`,
   "g3-series-combustion-4-5.5-ton": `${DATASHEET_DIR}/g3-series-4-0-5-0-ton.pdf`,
-  "g3-series-gas-4-5-ton": `${DATASHEET_DIR}/g3-series-4-5-ton-2.pdf`,
+  "g3-series-electrica-4-5-ton": `${DATASHEET_DIR}/g3-series-4-5-ton-2.pdf`,
   "g3-series-combustion-5-10-ton": `${DATASHEET_DIR}/g3-series-5-0-10-tons.pdf`,
   "g3-series-combustion-tier5-5-10-ton": `${DATASHEET_DIR}/2-0-3-5-tons.pdf`,
   "h3-series-combustion-1-3.5-ton": `${DATASHEET_DIR}/h3-series-1-3-5-ton.pdf`,

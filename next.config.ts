@@ -34,6 +34,14 @@ const nextConfig: NextConfig = {
       destination: "/promo/CPD25-A3LiH4-M",
       permanent: false,
     },
+    // La G3 4-5 TON estaba mal clasificada como Gas (GLP): la maquina es
+    // electrica (CPD40-50-GD3). Cambio el slug y redirijo la URL antigua,
+    // que estaba indexada en el sitemap.
+    {
+      source: "/productos/g3-series-gas-4-5-ton",
+      destination: "/productos/g3-series-electrica-4-5-ton",
+      permanent: true,
+    },
   ],
 };
 

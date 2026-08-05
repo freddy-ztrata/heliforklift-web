@@ -180,6 +180,27 @@ export const electricForklifts: RawProduct[] = [
     slug: "g2-series-electrica-6-10-ton",
   },
   {
+    id: "g3-series-4-5t-electric",
+    name: "G3 Series 4-5 TON Electrica",
+    model: "CPD40-50-GD3",
+    category: "Gruas Electricas",
+    categorySlug: "gruas-horquillas-electricas",
+    type: "Electrica",
+    capacityRange: "4,000 - 5,000 kg",
+    heightRange: "3,000 - 6,000 mm",
+    power: "Electrica (Alto Voltaje 80V)",
+    image: `${IMG}/g3-series-electric-4-5t.webp`,
+    features: [
+      "Tercera generacion G3",
+      "Motor AC sin mantenimiento",
+      "Cero emisiones para uso interior/exterior",
+      "Rendimiento equivalente a combustion",
+    ],
+    description:
+      "Grua electrica Serie G3 de 4 a 5 toneladas. Tecnologia de tercera generacion con cero emisiones y desempeno comparable a un equipo de combustion en operaciones de mediana capacidad.",
+    slug: "g3-series-electrica-4-5-ton",
+  },
+  {
     id: "g3-series-6-7t-electric",
     name: "G3 Series 6-7 TON Electrica",
     model: "CPD60-70-GD3",
@@ -373,27 +394,6 @@ export const combustionForklifts: RawProduct[] = [
     description:
       "Grua de combustion Serie G3 de 4 a 5.5 toneladas. Ideal para operaciones que requieren mayor capacidad de carga en ambientes industriales.",
     slug: "g3-series-combustion-4-5.5-ton",
-  },
-  {
-    id: "g3-series-4-5t-gas",
-    name: "G3 Series 4-5 TON Gas",
-    model: "CPQD40-50-GD3",
-    category: "Gruas Combustion",
-    categorySlug: "gruas-horquillas-combustion",
-    type: "Combustion",
-    capacityRange: "4,000 - 5,000 kg",
-    heightRange: "3,000 - 6,000 mm",
-    power: "GLP (Gas Licuado)",
-    image: `${IMG}/g3-series-4-5t-gas.webp`,
-    features: [
-      "Motor a gas licuado",
-      "Menores emisiones que diesel",
-      "Uso interior/exterior",
-      "Menor costo de combustible",
-    ],
-    description:
-      "Grua a gas licuado Serie G3 de 4 a 5 toneladas. Opcion mas limpia que el diesel para operaciones de mediana capacidad.",
-    slug: "g3-series-gas-4-5-ton",
   },
   {
     id: "g3-series-5-10t-combustion",

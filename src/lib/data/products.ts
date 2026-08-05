@@ -259,7 +259,7 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     description:
       "Gas licuado de petroleo: menor costo que diesel, apta para uso interior/exterior. Ideal para operaciones mixtas.",
     icon: "Flame",
-    image: `${IMG}/g3-series-4-5t-gas.webp`,
+    image: `${IMG}/g3-series-2-3.5t-gas.webp`,
     color: "sky",
     productCount: countByFuel("glp"),
   },

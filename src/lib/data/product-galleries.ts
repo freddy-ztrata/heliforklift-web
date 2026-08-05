@@ -66,7 +66,7 @@ export const productGalleries: Record<string, string[]> = {
   "g3-series-combustion-4-5.5-ton": [
     `${IMG}/g3-series-4-0-5-0-ton-gallery-1.webp`,
   ],
-  "g3-series-combustion-gas-4-5-ton": [
+  "g3-series-electrica-4-5-ton": [
     `${IMG}/g3-series-4-5-ton-2-gallery-1.webp`,
     `${IMG}/g3-series-4-5-ton-2-gallery-2.webp`,
     `${IMG}/g3-series-4-5-ton-2-gallery-3.webp`,
