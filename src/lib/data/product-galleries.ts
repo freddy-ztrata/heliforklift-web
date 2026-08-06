@@ -28,7 +28,7 @@ export const productGalleries: Record<string, string[]> = {
     `${IMG}/h4-series-1-5-3-8-ton-gallery-1.webp`,
     `${IMG}/h4-series-1-5-3-8-ton-gallery-2.webp`,
   ],
-  "g2-series-electrica-4-5-ton-alto-voltaje": [
+  "g2-series-electrica-alto-voltaje-4-5-ton": [
     `${IMG}/g2-series-4-5-ton-grua-de-alto-voltaje-gallery-1.webp`,
   ],
   "g3-series-electrica-6-7-ton": [
@@ -41,13 +41,13 @@ export const productGalleries: Record<string, string[]> = {
   "g-series-electrica-12-18-ton": [
     `${IMG}/g-series-12-18-tons-gallery-1.webp`,
   ],
-  "h3-series-electrica-antiexplosion-2-3.5-ton": [
+  "h3-series-electrica-explosion-proof": [
     `${IMG}/h3-series-2-3-5-ton-grua-de-bateria-a-prueba-de-explosiones-gallery-1.webp`,
     `${IMG}/h3-series-2-3-5-ton-grua-de-bateria-a-prueba-de-explosiones-gallery-2.webp`,
   ],
 
   // === COMBUSTION FORKLIFTS ===
-  "g3-series-combustion-gas-2-3.5-ton": [
+  "g3-series-combustion-2-3.5-ton": [
     `${IMG}/g3-series-2-0-3-5-ton-gallery-1.webp`,
   ],
   "h3-series-combustion-2-3.5-ton": [
@@ -57,7 +57,7 @@ export const productGalleries: Record<string, string[]> = {
     `${IMG}/k2-series-2-0-3-5-ton-gallery-1.webp`,
     `${IMG}/k2-series-2-0-3-5-ton-gallery-2.webp`,
   ],
-  "k2-series-combustion-tier-4-5-2-3.5-ton": [
+  "k2-series-combustion-tier4-5-2-3.5-ton": [
     `${IMG}/k2-series-2-0-3-5-ton-2-gallery-1.webp`,
     `${IMG}/k2-series-2-0-3-5-ton-2-gallery-2.webp`,
     `${IMG}/k2-series-2-0-3-5-ton-2-gallery-3.webp`,
@@ -74,7 +74,7 @@ export const productGalleries: Record<string, string[]> = {
   "g3-series-combustion-5-10-ton": [
     `${IMG}/g3-series-5-0-10-tons-gallery-1.webp`,
   ],
-  "g3-series-combustion-tier-v-5-10-ton": [
+  "g3-series-combustion-tier5-5-10-ton": [
     `${IMG}/2-0-3-5-tons-gallery-1.webp`,
     `${IMG}/2-0-3-5-tons-gallery-2.webp`,
   ],
@@ -110,7 +110,7 @@ export const productGalleries: Record<string, string[]> = {
     `${IMG}/cbd15-20-a-blih-gallery-1.webp`,
     `${IMG}/cbd15-20-a-blih-gallery-2.webp`,
   ],
-  "ctd16-960h-transpaleta": [
+  "ctd16-960h-transpaleta-electrica": [
     `${IMG}/ctd16-960h-gallery-1.webp`,
     `${IMG}/ctd16-960h-gallery-2.webp`,
   ],
@@ -130,7 +130,7 @@ export const productGalleries: Record<string, string[]> = {
   "g-series-reach-truck-1.5-2-ton": [
     `${IMG}/g-series-1-5-2-0-ton-cpdsr15-18-gallery-1.webp`,
   ],
-  "g2-reach-truck-1.6-2-ton": [
+  "g2-series-reach-truck-1.6-2-ton": [
     `${IMG}/g2-series-1-6-2-ton-modelo-cqd16-20-gallery-1.webp`,
   ],
 
