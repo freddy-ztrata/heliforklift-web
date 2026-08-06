@@ -192,12 +192,12 @@ export default async function NewsDetailPage({ params }: Props) {
             dateModified: item.date,
             author: {
               "@type": "Organization",
-              name: "Helifork Lift",
+              name: "Heli Forklift",
               url: "https://heliforklift.cl",
             },
             publisher: {
               "@type": "Organization",
-              name: "Helifork Lift",
+              name: "Heli Forklift",
               logo: {
                 "@type": "ImageObject",
                 url: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",

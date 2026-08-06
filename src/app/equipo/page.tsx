@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   keywords: [
     "vendedores grúas horquillas Chile",
     "ejecutivos HELI Chile",
-    "equipo Helifork Lift",
+    "equipo Heli Forklift",
     "repuestos HELI Chile",
     "servicio técnico grúas horquillas",
     "sucursales HELI Chile",
@@ -56,7 +56,7 @@ export default function EquipoPage() {
           <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="font-heading text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
               <span className="sr-only">
-                Equipo y Vendedores Helifork Lift — Grúas Horquillas HELI en
+                Equipo y Vendedores Heli Forklift — Grúas Horquillas HELI en
                 Chile
               </span>
               <span aria-hidden="true">NUESTRO EQUIPO</span>

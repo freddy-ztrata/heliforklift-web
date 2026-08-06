@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: service.description,
     alternates: { canonical: `/servicios/${slug}` },
     openGraph: {
-      title: `${service.name} — Helifork Lift Chile`,
+      title: `${service.name} — Heli Forklift Chile`,
       description: service.description,
       images: [{ url: service.image }],
     },
@@ -141,7 +141,7 @@ export default async function ServicioDetailPage({ params }: Props) {
               <div className="relative aspect-[4/3] product-img-container p-4 sm:p-8">
                 <Image
                   src={service.image}
-                  alt={`${service.name} — Helifork Lift Chile`}
+                  alt={`${service.name} — Heli Forklift Chile`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-contain p-4 sm:p-8"
@@ -255,7 +255,7 @@ export default async function ServicioDetailPage({ params }: Props) {
             image: `https://heliforklift.cl${service.image}`,
             provider: {
               "@type": "Organization",
-              name: "Helifork Lift",
+              name: "Heli Forklift",
               url: "https://heliforklift.cl",
             },
             areaServed: {

@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Trabaja con Nosotros — Únete a Helifork Lift",
+  title: "Trabaja con Nosotros — Únete a Heli Forklift",
   description:
-    "Forma parte del equipo de Helifork Lift, líder mundial en grúas horquillas. Oportunidades de carrera, capacitación HELI y desarrollo profesional en Chile.",
+    "Forma parte del equipo de Heli Forklift, líder mundial en grúas horquillas. Oportunidades de carrera, capacitación HELI y desarrollo profesional en Chile.",
   alternates: { canonical: "/trabaja-con-nosotros" },
   openGraph: {
-    title: "Trabaja con Nosotros — Helifork Lift",
+    title: "Trabaja con Nosotros — Heli Forklift",
     description:
       "Únete a un equipo apasionado por la innovación y la excelencia en el sector de grúas horquillas.",
   },
@@ -71,7 +71,7 @@ export default function TrabajaConNosotrosPage() {
               TRABAJA CON NOSOTROS
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-steel-300">
-              Heliforklift Chile, líder mundial en la fabricación de grúas
+              Heli Forklift Chile, líder mundial en la fabricación de grúas
               horquillas, te invita a formar parte de nuestro equipo.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function TrabajaConNosotrosPage() {
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <p className="text-sm font-medium uppercase tracking-widest text-steel-400">
-              Por qué Helifork Lift
+              Por qué Heli Forklift
             </p>
             <h2 className="font-heading mt-2 text-[clamp(2rem,5vw,3.5rem)] leading-none text-white">
               LO QUE OFRECEMOS

@@ -1,5 +1,5 @@
 export const company = {
-  name: "Helifork Lift",
+  name: "Heli Forklift",
   legalName: "HELI Chile",
   brand: "HELI",
   tagline: "ELEVANDO EL FUTURO",

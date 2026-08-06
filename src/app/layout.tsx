@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   title: {
     default:
       "Grúas Horquillas HELI en Chile — Venta y Servicio Técnico",
-    template: "%s | Helifork Lift",
+    template: "%s | Heli Forklift",
   },
   description:
     "Venta de grúas horquillas en Santiago y todo Chile. Grúas eléctricas, diésel y GLP. Servicio técnico, repuestos originales HELI. +67 años de experiencia, +1100 equipos vendidos. Cotiza ahora.",
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     "grúa horquilla precio Chile",
     "equipos de bodega Chile",
   ],
-  authors: [{ name: "Helifork Lift" }],
-  creator: "Helifork Lift",
-  publisher: "Helifork Lift",
+  authors: [{ name: "Heli Forklift" }],
+  creator: "Heli Forklift",
+  publisher: "Heli Forklift",
   robots: {
     index: true,
     follow: true,
@@ -68,9 +68,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CL",
     url: "https://heliforklift.cl",
-    siteName: "Helifork Lift",
+    siteName: "Heli Forklift",
     title:
-      "Helifork Lift — Grúas Horquillas Chile | Venta y Servicio Técnico",
+      "Heli Forklift — Grúas Horquillas Chile | Venta y Servicio Técnico",
     description:
       "Especialistas en grúas horquillas en Chile. Venta, servicio técnico y repuestos originales HELI. +67 años de experiencia. Cotiza hoy.",
     images: [
@@ -78,13 +78,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Helifork Lift — Grúas Horquillas Chile",
+        alt: "Heli Forklift — Grúas Horquillas Chile",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Helifork Lift — Grúas Horquillas Chile",
+    title: "Heli Forklift — Grúas Horquillas Chile",
     description:
       "Venta de grúas horquillas. Servicio técnico. Repuestos originales. Cotiza ahora.",
     images: ["/og-image.jpg"],
@@ -142,7 +142,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Helifork Lift",
+              name: "Heli Forklift",
               alternateName: "HELI Chile",
               url: "https://heliforklift.cl",
               logo: "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",
@@ -180,7 +180,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
-              name: "Helifork Lift Santiago",
+              name: "Heli Forklift Santiago",
               image:
                 "https://heliforklift.cl/assets/legacy/logos/heli-chile-logo.webp",
               address: {

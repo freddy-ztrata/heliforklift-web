@@ -20,11 +20,11 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Contacto Helifork Lift — Cotiza tu Grúa Horquilla en Chile",
+  title: "Contacto Heli Forklift — Cotiza tu Grúa Horquilla en Chile",
   description:
     "Cotiza grúas horquillas HELI, servicio técnico y repuestos originales. Respuesta en menos de 2 horas hábiles. Sucursales en Santiago, Antofagasta y Copiapó. ☎ +56 9 9320 9186.",
   keywords: [
-    "contacto Helifork Lift",
+    "contacto Heli Forklift",
     "cotizar grúa horquilla Chile",
     "grúa horquilla Santiago",
     "grúa horquilla Antofagasta",
@@ -59,7 +59,7 @@ export default function ContactoPage() {
               </p>
               <h1 className="font-heading mt-2 text-[clamp(2.5rem,6vw,5rem)] leading-none text-white">
                 <span className="sr-only">
-                  Contacto Helifork Lift — Grúas Horquillas en Santiago y todo
+                  Contacto Heli Forklift — Grúas Horquillas en Santiago y todo
                   Chile
                 </span>
                 <span aria-hidden="true">CONTÁCTANOS</span>
@@ -131,7 +131,7 @@ export default function ContactoPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ubicación Helifork Lift Santiago"
+                title="Ubicación Heli Forklift Santiago"
               />
             </div>
 

@@ -75,7 +75,7 @@ export default function AboutHero({
             className="font-heading mt-4 text-[clamp(3rem,8vw,6rem)] leading-[0.85] text-white"
           >
             <span className="sr-only">
-              Sobre Helifork Lift — Líder en Grúas Horquillas Chile
+              Sobre Heli Forklift — Líder en Grúas Horquillas Chile
             </span>
             <span aria-hidden="true">ELEVANDO EL FUTURO</span>
           </motion.h1>

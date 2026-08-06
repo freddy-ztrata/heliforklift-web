@@ -154,7 +154,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             <Image
               src="/assets/legacy/logos/heli-chile-logo.webp"
-              alt="Helifork Lift"
+              alt="Heli Forklift"
               width={160}
               height={48}
               className="h-auto w-[160px] brightness-0 invert"
@@ -228,10 +228,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-steel-800 py-8 text-center">
           <p className="text-sm text-steel-500">
-            &copy; 2026 Helifork Lift. Todos los derechos reservados.
+            &copy; 2026 Heli Forklift. Todos los derechos reservados.
           </p>
           <p className="mx-auto mt-3 max-w-3xl text-xs leading-relaxed text-steel-600">
-            Helifork Lift — Venta de grúas horquillas en Santiago y
+            Heli Forklift — Venta de grúas horquillas en Santiago y
             todo Chile. Servicio técnico, repuestos originales y capacitación
             para montacargas, apiladores y transpaletas.
           </p>

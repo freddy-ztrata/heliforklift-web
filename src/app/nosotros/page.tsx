@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Conoce la historia de HELI: +67 años fabricando grúas horquillas de clase mundial. Presentes en +150 países, Nº7 mundial, +1700 modelos. Distribuidor oficial en Chile.",
   alternates: { canonical: "/nosotros" },
   openGraph: {
-    title: "Sobre Helifork Lift — Nuestra Historia",
+    title: "Sobre Heli Forklift — Nuestra Historia",
     description:
       "+67 años de experiencia en grúas horquillas. Distribuidor oficial HELI en Chile.",
   },

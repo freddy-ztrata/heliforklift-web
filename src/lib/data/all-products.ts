@@ -1,5 +1,5 @@
 // =============================================================================
-// ALL PRODUCTS DATABASE — Helifork Lift (HELI Chile)
+// ALL PRODUCTS DATABASE — Heli Forklift (HELI Chile)
 // Comprehensive product catalog with real specs and image paths.
 // =============================================================================
 

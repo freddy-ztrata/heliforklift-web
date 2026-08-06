@@ -18,7 +18,7 @@ npx tsc --noEmit     # Type check without emitting
 
 ## Architecture
 
-**Helifork Lift** — commercial website for HELI Chile (forklift distributor). Next.js 16 App Router with `output: "standalone"` for Docker deployment.
+**Heli Forklift** — commercial website for HELI Chile (forklift distributor). Next.js 16 App Router with `output: "standalone"` for Docker deployment.
 
 ### Next.js 16 — Read the Docs First
 
@@ -191,7 +191,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 ### SEO
 
 **Layout-level (`layout.tsx`):**
-- Metadata global: `title.template: "%s | Helifork Lift"`, `metadataBase: https://heliforklift.cl`, robots `index: true, follow: true`
+- Metadata global: `title.template: "%s | Heli Forklift"`, `metadataBase: https://heliforklift.cl`, robots `index: true, follow: true`
 - **Organization schema** JSON-LD (foundingDate 1958, address, contactPoint, sameAs)
 - **LocalBusiness schema** JSON-LD con `geo` (lat -33.3676, lng -70.7283 — Quilicura), `postalCode: "8710000"`, `openingHoursSpecification` estructurado (Lun-Vie 08:30-18:00), `priceRange: "$$$"`, `areaServed: Chile`
 - Teléfono actual: `+56-9-9320-9186` (NO usar el viejo `+56-9-5818-7035` que era de Mauricio Glaser)
@@ -210,7 +210,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 
 **Schemas JSON-LD por página detail:**
 - `/productos/[slug]`: **Product** (con `additionalProperty` para capacidad/motor/altura) + **BreadcrumbList** + **FAQPage** (5 preguntas dinámicas con respuestas adaptadas según `fuelType`)
-- `/servicios/[slug]`: **Service** (con `provider` Helifork Lift) + **BreadcrumbList**
+- `/servicios/[slug]`: **Service** (con `provider` Heli Forklift) + **BreadcrumbList**
 - `/noticias/[slug]`: **NewsArticle** (`datePublished`, `author`, `publisher`, `articleSection`) + **BreadcrumbList**
 
 **Sitemap (`sitemap.ts`):**

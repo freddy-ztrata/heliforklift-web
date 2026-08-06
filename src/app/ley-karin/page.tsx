@@ -15,7 +15,7 @@ import {
 export const metadata: Metadata = {
   title: "Información y Denuncias — Ley Karin",
   description:
-    "Canal de información y denuncias en cumplimiento de la Ley Karin (Ley 21.643). Helifork Lift mantiene un entorno laboral seguro, libre de acoso y violencia.",
+    "Canal de información y denuncias en cumplimiento de la Ley Karin (Ley 21.643). Heli Forklift mantiene un entorno laboral seguro, libre de acoso y violencia.",
   alternates: { canonical: "/ley-karin" },
   robots: { index: true, follow: true },
 };
@@ -64,7 +64,7 @@ export default function LeyKarinPage() {
               Ley Karin · Ley 21.643
             </p>
             <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-steel-300">
-              En Helifork Lift estamos comprometidos con un entorno laboral
+              En Heli Forklift estamos comprometidos con un entorno laboral
               seguro, respetuoso y libre de acoso laboral, sexual y violencia
               en el trabajo.
             </p>
@@ -93,7 +93,7 @@ export default function LeyKarinPage() {
               accesible para todos los trabajadores y trabajadoras.
             </p>
             <p>
-              En Helifork Lift cumplimos con esta normativa y ponemos a
+              En Heli Forklift cumplimos con esta normativa y ponemos a
               disposición de nuestro equipo y de cualquier persona vinculada a
               la empresa los medios para reportar situaciones que afecten la
               dignidad e integridad en el trabajo.

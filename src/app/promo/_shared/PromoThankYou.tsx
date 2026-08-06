@@ -311,7 +311,7 @@ export default function PromoThankYou({
               Volver a heliforklift.cl
             </Link>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-steel-500">
-              <span>HELI Chile · Helifork Lift</span>
+              <span>HELI Chile · Heli Forklift</span>
               <span className="hidden sm:inline">·</span>
               <a
                 href="mailto:contacto@heliforklift.cl"

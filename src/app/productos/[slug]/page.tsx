@@ -336,7 +336,7 @@ export default async function ProductDetailPage({ params }: Props) {
               url: `https://heliforklift.cl/productos/${product.slug}`,
               seller: {
                 "@type": "Organization",
-                name: "Helifork Lift",
+                name: "Heli Forklift",
               },
             },
             additionalProperty: [
@@ -437,7 +437,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 name: `¿La ${product.name} cuenta con servicio técnico en Chile?`,
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Sí. Helifork Lift es distribuidor oficial HELI en Chile y cuenta con servicio técnico certificado, repuestos originales y respaldo nacional con sucursales en Santiago, Antofagasta y Copiapó. Garantía de 1 año de fábrica.",
+                  text: "Sí. Heli Forklift es distribuidor oficial HELI en Chile y cuenta con servicio técnico certificado, repuestos originales y respaldo nacional con sucursales en Santiago, Antofagasta y Copiapó. Garantía de 1 año de fábrica.",
                 },
               },
               {

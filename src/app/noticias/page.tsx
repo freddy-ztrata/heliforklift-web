@@ -12,7 +12,7 @@ import { Calendar, ArrowRight, Tag } from "lucide-react";
 export const metadata: Metadata = {
   title: "Noticias HELI Chile — Industria de Grúas Horquillas y Logística",
   description:
-    "Últimas noticias del sector de grúas horquillas en Chile: entregas, capacitaciones, eventos, tecnología hidrógeno verde y novedades de la industria logística. Blog oficial Helifork Lift.",
+    "Últimas noticias del sector de grúas horquillas en Chile: entregas, capacitaciones, eventos, tecnología hidrógeno verde y novedades de la industria logística. Blog oficial Heli Forklift.",
   keywords: [
     "noticias grúas horquillas Chile",
     "blog logística Chile",

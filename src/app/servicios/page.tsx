@@ -92,7 +92,7 @@ export default function ServiciosPage() {
                   <div className="absolute inset-0">
                     <Image
                       src={bgImage}
-                      alt={`${service.name} — Helifork Lift`}
+                      alt={`${service.name} — Heli Forklift`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-30"

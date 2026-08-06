@@ -19,11 +19,11 @@ import {
 export const metadata: Metadata = {
   title: "¡Gracias por contactarnos! — Tu solicitud fue recibida",
   description:
-    "Recibimos tu solicitud de cotización. Un ejecutivo de Helifork Lift te contactará en menos de 24 horas hábiles con toda la información que necesitas.",
+    "Recibimos tu solicitud de cotización. Un ejecutivo de Heli Forklift te contactará en menos de 24 horas hábiles con toda la información que necesitas.",
   alternates: { canonical: "/gracias" },
   robots: { index: false, follow: true },
   openGraph: {
-    title: "¡Gracias! — Helifork Lift",
+    title: "¡Gracias! — Heli Forklift",
     description:
       "Recibimos tu solicitud. Te contactaremos en menos de 24 horas hábiles.",
   },
@@ -72,7 +72,7 @@ const exploreLinks = [
   {
     href: "/nosotros",
     icon: CheckCircle2,
-    title: "Sobre Helifork Lift",
+    title: "Sobre Heli Forklift",
     description: "12 años en Chile, +67 años de trayectoria mundial",
   },
 ];
