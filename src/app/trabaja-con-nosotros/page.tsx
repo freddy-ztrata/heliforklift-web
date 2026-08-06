@@ -128,9 +128,9 @@ export default function TrabajaConNosotrosPage() {
               <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
                 <a
                   href="mailto:postulaciones@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
-                  className="inline-flex items-center gap-2 sm:gap-2.5 text-[clamp(0.95rem,4vw,1.75rem)] font-bold text-heli-red-light transition-colors hover:text-white break-words"
+                  className="inline-flex items-center gap-2 sm:gap-2.5 text-[clamp(0.95rem,4vw,1.375rem)] font-bold text-heli-red-light transition-colors hover:text-white break-words"
                 >
-                  <Mail className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
+                  <Mail className="h-5 w-5 shrink-0" />
                   postulaciones@heliforklift.cl
                 </a>
                 <span
