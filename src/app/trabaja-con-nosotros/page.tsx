@@ -9,6 +9,7 @@ import {
   Heart,
   TrendingUp,
   Mail,
+  Phone,
   ArrowRight,
 } from "lucide-react";
 
@@ -119,14 +120,35 @@ export default function TrabajaConNosotrosPage() {
                 ¿INTERESADO EN POSTULAR?
               </h2>
               <p className="mt-4 max-w-xl text-base sm:text-lg text-steel-300">
-                Envíanos tu currículum a nuestro correo de contacto e indícanos
-                el área en la que te gustaría trabajar. Revisamos cada
+                Envíanos tu currículum a nuestro correo de postulaciones e
+                indícanos el área en la que te gustaría trabajar. Revisamos cada
                 postulación con atención.
               </p>
 
+              <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:gap-6">
+                <a
+                  href="mailto:postulaciones@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
+                  className="inline-flex items-center gap-2 sm:gap-2.5 text-[clamp(0.95rem,4vw,1.75rem)] font-bold text-heli-red-light transition-colors hover:text-white break-words"
+                >
+                  <Mail className="h-5 w-5 shrink-0 sm:h-6 sm:w-6" />
+                  postulaciones@heliforklift.cl
+                </a>
+                <span
+                  aria-hidden="true"
+                  className="hidden h-8 w-px bg-steel-700 sm:block"
+                />
+                <a
+                  href="tel:+56961908569"
+                  className="inline-flex items-center gap-2.5 text-lg sm:text-xl font-semibold text-white transition-colors hover:text-heli-red-light"
+                >
+                  <Phone className="h-5 w-5 shrink-0" />
+                  +56 9 6190 8569
+                </a>
+              </div>
+
               <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                 <a
-                  href="mailto:contacto@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
+                  href="mailto:postulaciones@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
                   className="glow-red inline-flex items-center justify-center gap-2 rounded-xl bg-heli-red px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold uppercase tracking-wider text-white transition-all hover:bg-heli-red-dark hover:scale-[1.02]"
                 >
                   ENVIAR CV
@@ -139,16 +161,6 @@ export default function TrabajaConNosotrosPage() {
                   +56 9 9320 9186
                 </a>
               </div>
-
-              <p className="mt-6 text-xs text-steel-500">
-                Email:{" "}
-                <a
-                  href="mailto:contacto@heliforklift.cl"
-                  className="text-heli-red-light hover:underline"
-                >
-                  contacto@heliforklift.cl
-                </a>
-              </p>
             </div>
           </div>
         </section>

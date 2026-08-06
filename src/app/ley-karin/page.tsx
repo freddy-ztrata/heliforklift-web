@@ -160,22 +160,14 @@ export default function LeyKarinPage() {
                     Email para denuncias
                   </p>
                   <a
-                    href="mailto:denuncias@heliforklift.cl?subject=Denuncia%20Ley%20Karin"
-                    className="inline-flex items-center gap-2 text-base sm:text-lg font-semibold text-heli-red-light hover:text-white transition-colors"
+                    href="mailto:informacionydenuncias@heliforklift.cl?subject=Denuncia%20Ley%20Karin"
+                    className="inline-flex items-center gap-2 text-[15px] sm:text-lg font-semibold text-heli-red-light hover:text-white transition-colors break-words"
                   >
-                    <Mail className="h-5 w-5" />
-                    denuncias@heliforklift.cl
+                    <Mail className="h-5 w-5 shrink-0" />
+                    <span>
+                      informacionydenuncias<wbr />@heliforklift.cl
+                    </span>
                   </a>
-                  <p className="text-xs text-steel-500">
-                    Si este correo no se encuentra disponible, también puedes
-                    escribir a{" "}
-                    <a
-                      href="mailto:contacto@heliforklift.cl"
-                      className="text-heli-red-light hover:underline"
-                    >
-                      contacto@heliforklift.cl
-                    </a>
-                  </p>
                 </div>
 
                 <div className="mt-6">
