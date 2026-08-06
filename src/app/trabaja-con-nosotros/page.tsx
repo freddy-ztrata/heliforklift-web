@@ -146,21 +146,13 @@ export default function TrabajaConNosotrosPage() {
                 </a>
               </div>
 
-              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <a
-                  href="mailto:postulaciones@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
-                  className="glow-red inline-flex items-center justify-center gap-2 rounded-xl bg-heli-red px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold uppercase tracking-wider text-white transition-all hover:bg-heli-red-dark hover:scale-[1.02]"
-                >
-                  ENVIAR CV
-                  <ArrowRight className="h-5 w-5" />
-                </a>
-                <a
-                  href="tel:+56993209186"
-                  className="inline-flex items-center justify-center rounded-xl border border-steel-600 px-6 sm:px-8 py-3.5 sm:py-4 text-base font-medium text-white transition-all hover:border-white hover:bg-white/5"
-                >
-                  +56 9 9320 9186
-                </a>
-              </div>
+              <a
+                href="mailto:postulaciones@heliforklift.cl?subject=Postulación%20-%20Trabaja%20con%20nosotros"
+                className="glow-red mt-8 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-heli-red px-6 sm:px-8 py-3.5 sm:py-4 text-base font-bold uppercase tracking-wider text-white transition-all hover:bg-heli-red-dark hover:scale-[1.02] sm:w-auto"
+              >
+                ENVIAR CV
+                <ArrowRight className="h-5 w-5" />
+              </a>
             </div>
           </div>
         </section>
