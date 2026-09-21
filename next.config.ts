@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import legacyRedirects from "./legacy-redirects";
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -29,6 +30,14 @@ const nextConfig: NextConfig = {
   // /promo/CPD25-A3LiH4-M. Redirigimos la URL estática antigua (raíz) para
   // no romper enlaces/campañas que apunten a /CPD25-A3LiH4-M.
   redirects: async () => [
+    // Canonicalizacion de host: www -> apex. Sin esto el sitio responde 200
+    // en los dos hosts y Google rastrea y duplica todo el catalogo.
+    {
+      source: "/:path*",
+      has: [{ type: "host", value: "www.heliforklift.cl" }],
+      destination: "https://heliforklift.cl/:path*",
+      permanent: true,
+    },
     {
       source: "/CPD25-A3LiH4-M",
       destination: "/promo/CPD25-A3LiH4-M",
@@ -42,6 +51,9 @@ const nextConfig: NextConfig = {
       destination: "/productos/g3-series-electrica-4-5-ton",
       permanent: true,
     },
+    // Rescate del sitio WordPress anterior. Va al final para que cualquier
+    // regla especifica de arriba gane sobre los comodines de /equipos.
+    ...legacyRedirects,
   ],
 };
 
