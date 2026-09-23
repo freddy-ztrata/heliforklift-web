@@ -23,6 +23,7 @@ import {
   BatteryCharging,
   Leaf,
 } from "lucide-react";
+import HapeeForm from "@/components/shared/HapeeForm";
 
 const PRODUCT_IMAGE_HERO = "/assets/promo/heli-h4-electrica-hero.webp";
 const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-h4-electrica-side.webp"; // con cargador de litio
@@ -850,19 +851,11 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-// Embed "developer" de HubSpot — auto-renderiza el div .hs-form-html.
-const HUBSPOT_EMBED_SRC =
-  "https://js.hsforms.net/forms/embed/developer/50182752.js";
+// Formulario de Hapee "Promo Eléctrica H4 2.5T (CPD25) — HELI". Redirige a
+// /promo/CPD25-A3LiH4-M/CPD25th, donde se dispara el Lead del Pixel.
+const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia-8";
 
 function ConversionForm() {
-  useEffect(() => {
-    if (document.querySelector(`script[src="${HUBSPOT_EMBED_SRC}"]`)) return;
-    const s = document.createElement("script");
-    s.src = HUBSPOT_EMBED_SRC;
-    s.defer = true;
-    document.body.appendChild(s);
-  }, []);
-
   return (
     <section
       id="cotiza"
@@ -944,7 +937,7 @@ function ConversionForm() {
             </div>
           </div>
 
-          {/* Right col — form (color matcheado con el iframe de HubSpot) */}
+          {/* Right col — form (tarjeta oscura, mismo tono que el form de Hapee) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -965,14 +958,7 @@ function ConversionForm() {
               </div>
             </div>
 
-            <div className="hubspot-form-container w-full">
-              <div
-                className="hs-form-html"
-                data-region="na1"
-                data-form-id="e19ca18d-27eb-4d74-a89d-33ad0f855afe"
-                data-portal-id="50182752"
-              />
-            </div>
+            <HapeeForm formId={HAPEE_FORM_ID} className="hapee-form-container w-full" />
           </motion.div>
         </div>
       </div>
