@@ -43,6 +43,7 @@ import { cn } from "@/lib/utils";
 import { company, contact, certifications } from "@/lib/data/company";
 import { fuelTypeCategories } from "@/lib/data/products";
 import HapeeForm from "@/components/shared/HapeeForm";
+import { scrollToSection } from "@/lib/scroll-to-section";
 
 const HERO_IMAGE = "/assets/cotiza/hero-fleet.webp";
 
@@ -115,7 +116,9 @@ const categoryCards = [
 // HELPERS de scroll
 // ============================================================
 function scrollToQuote() {
-  document.getElementById("cotiza")?.scrollIntoView({ behavior: "smooth" });
+  // No un scrollIntoView directo: con el render diferido de las secciones se
+  // quedaba ~2000px corto en celular. Ver src/lib/scroll-to-section.ts.
+  scrollToSection("cotiza");
 }
 
 // ============================================================

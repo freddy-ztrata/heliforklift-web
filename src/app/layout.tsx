@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { META_PIXEL_ID } from "@/lib/meta/config";
+import SectionLinkScroll from "@/components/shared/SectionLinkScroll";
 
 // Fonts self-hosted desde el repo (woff2 en ./fonts) — sin fetch a Google en build.
 // DM Sans y JetBrains Mono son fuentes variables (un archivo cubre 400-700).
@@ -136,6 +137,7 @@ export default function RootLayout({
         {/* Meta Pixel noscript fallback */}
         <noscript dangerouslySetInnerHTML={{ __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1" alt="" />` }} />
         {children}
+        <SectionLinkScroll />
         <script
           type="application/ld+json"
           suppressHydrationWarning

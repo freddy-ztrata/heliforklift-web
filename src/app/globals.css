@@ -218,6 +218,11 @@ section:not(:first-child) {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
+/* Apagado al ir a una seccion con un CTA: con las alturas estimadas el scroll
+   calcula mal el destino. Ver src/lib/scroll-to-section.ts. */
+html.cv-off section {
+  content-visibility: visible;
+}
 
 /* Dot grid background pattern */
 .bg-dot-pattern {
