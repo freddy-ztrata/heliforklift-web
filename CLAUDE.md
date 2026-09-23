@@ -195,7 +195,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - **Organization schema** JSON-LD (foundingDate 1958, address, contactPoint, sameAs)
 - **LocalBusiness schema** JSON-LD con `geo` (lat -33.3676, lng -70.7283 — Quilicura), `postalCode: "8710000"`, `openingHoursSpecification` estructurado (Lun-Vie 08:30-18:00), `priceRange: "$$$"`, `areaServed: Chile`
 - Teléfono actual: `+56-9-9320-9186` (NO usar el viejo `+56-9-5818-7035` que era de Mauricio Glaser)
-- Tracking inyectado en `<head>`: GTM (`GTM-M9FW8BM3`), GA4 (`G-3HLYKF62PW`), Meta Pixel (`1475698744101032`). Ver sección **Tracking & Analytics** abajo.
+- Tracking inyectado en `<head>`: GTM (`GTM-M9FW8BM3`), GA4 (`G-3HLYKF62PW`), Meta Pixel (`1577006250866960`, desde `src/lib/meta/config.ts`). Ver sección **Tracking & Analytics** abajo.
 - `<html lang="es">` (sitio mono-idioma, sin hreflang)
 - Title default keyword-first: "Grúas Horquillas HELI en Chile — Venta y Servicio Técnico"
 - **Google Search Console verification:** NO está activa por meta-tag (se removió el placeholder inválido). Hay un comentario en `layout.tsx` para pegar el código real si se quiere. El sitio se verifica/indexa por otro medio (DNS/GA/GTM) y el sitemap se descubre por robots.txt — el envío explícito en GSC es manual.
@@ -232,7 +232,10 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 |---|---|---|
 | Google Tag Manager | `GTM-M9FW8BM3` | Toda la web |
 | Google Analytics 4 | `G-3HLYKF62PW` | Toda la web (vía gtag) |
-| Meta Pixel | `1475698744101032` | Toda la web (PageView automático) |
+| Meta Pixel | `1577006250866960` | Toda la web (PageView automático) |
+| Meta Conversions API | mismo Pixel, server-side | Evento `Lead` en todas las thank-you pages |
+
+**Pixel ID:** vive como constante en [src/lib/meta/config.ts](heliforklift-web/src/lib/meta/config.ts), **no** como variable de entorno. Es público (viaja en el HTML) y una `NEXT_PUBLIC_*` se congelaría en build-time, lo que rompe con Docker/Dokploy si no se pasa como build arg. El Pixel anterior era `1475698744101032` (reemplazado, ya no aparece en el código).
 
 **Eventos custom de Meta Pixel** (diferenciar campañas Meta Ads por landing):
 
@@ -264,11 +267,35 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 Implementación:
 - `PromoThankYou.tsx` (componente compartido) — tiene mapa `PROMO_TRACKING` con `contentName + value` por slug. Dispara `Lead` con `useEffect` basado en prop `productSlug`.
 - `MetaPixelLead.tsx` ([src/components/shared/](heliforklift-web/src/components/shared/MetaPixelLead.tsx)) — wrapper cliente reutilizable para disparar `Lead` desde Server Components (como `/gracias/page.tsx`).
-- Cada landing extiende `declare global { Window { fbq?: ... } }` para type safety sin `@ts-ignore`.
+- `window.fbq` se declara **una sola vez** en [src/types/meta.d.ts](heliforklift-web/src/types/meta.d.ts). Antes cada componente lo declaraba por su cuenta; al agregar el 4º parámetro (`options.eventID`, necesario para deduplicar) esas firmas entraban en conflicto. **No volver a declararlo en ningún otro archivo.**
 
 **Custom Conversions en Meta** (configurar manualmente en Events Manager), una por `content_name`: `promo_25t`, `promo_35t`, `promo_k2`, `promo_diesel_25t`, `promo_transpaleta_2t`, `promo_combustion_g3`, `promo_h4_electrica`, `form_principal`. Cada una con regla `Event=Lead AND content_name=<value>` o `URL contains <path>`.
 
-**Conversions API (CAPI)**: pendiente de configurar en HubSpot → Settings → Integrations → Meta Ads para envío server-side de eventos `Lead` (recupera 25-40% de conversiones perdidas por iOS 14.5 ATT).
+### Conversions API (CAPI)
+
+Implementada **nativamente en el repo** (no vía HubSpot, que está siendo removido). Recupera las conversiones que pierde el Pixel por bloqueadores, ITP de Safari e iOS 14.5 ATT.
+
+| Archivo | Rol |
+|---|---|
+| [src/lib/meta/config.ts](heliforklift-web/src/lib/meta/config.ts) | Pixel ID + versión de Graph API |
+| [src/lib/meta/capi.ts](heliforklift-web/src/lib/meta/capi.ts) | **Solo servidor.** Normaliza + hashea SHA-256 y envía a Graph API |
+| [src/app/api/meta/capi/route.ts](heliforklift-web/src/app/api/meta/capi/route.ts) | `POST /api/meta/capi` — relay con allowlist de eventos y validación de origen. `runtime = "nodejs"` (necesita `crypto`) |
+| [src/lib/meta/track.ts](heliforklift-web/src/lib/meta/track.ts) | Cliente: `trackMetaEvent()` genera `event_id`, dispara Pixel y replica por CAPI |
+| [src/types/meta.d.ts](heliforklift-web/src/types/meta.d.ts) | Declaración **única** de `window.fbq` / `dataLayer` / `hbspt` |
+
+**Deduplicación:** cada evento genera un UUID que va como `eventID` en `fbq()` **y** como `event_id` en la llamada server-side. Meta une ambas señales y cuenta **una sola** conversión.
+
+⚠️ **Ningún otro sistema debe disparar estos eventos de Meta.** Si Hapee (o GTM) manda su propio `Lead` con un ID distinto, no hay deduplicación posible y Meta cuenta el doble de conversiones.
+
+**Variable de entorno (Dokploy → servicio → Environment):**
+
+```
+META_CAPI_ACCESS_TOKEN=<token del Events Manager>
+```
+
+Es runtime puro, no build arg. Sin ella, CAPI no envía (falla en silencio y se loguea); el Pixel del navegador sigue funcionando. Plantilla en `.env.example`; el valor real en `.env.local` (gitignored, con `!.env.example` como excepción).
+
+**Match quality:** `userDataFromUrl()` lee `email`, `telefono`, `nombre`, `comuna`, `region` del query string de la thank-you page — pensado para que Hapee los pase en el redirect post-submit. Se hashean **en el servidor**, nunca viajan en claro hacia Meta. Los teléfonos se normalizan al formato chileno (`56` + 9 dígitos) antes de hashear; saltarse esa normalización hace que el hash no calce con el de Meta.
 
 ### Deployment (Dokploy)
 

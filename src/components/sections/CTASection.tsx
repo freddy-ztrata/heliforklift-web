@@ -14,21 +14,6 @@ const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
 const HUBSPOT_PORTAL_ID = "50182752";
 const HUBSPOT_FORM_ID = "15b3dd6b-0095-4c03-a306-3dde97e81456";
 
-declare global {
-  interface Window {
-    hbspt?: {
-      forms?: {
-        create: (config: {
-          region: string;
-          portalId: string;
-          formId: string;
-          target: string;
-        }) => void;
-      };
-    };
-  }
-}
-
 export default function CTASection() {
   const formContainerRef = useRef<HTMLDivElement>(null);
 

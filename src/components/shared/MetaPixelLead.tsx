@@ -1,16 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-declare global {
-  interface Window {
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
+import { trackMetaEvent, userDataFromUrl } from "@/lib/meta/track";
 
 interface MetaPixelLeadProps {
   /** Identificador del formulario/landing para diferenciar campañas en Meta Ads */
@@ -22,21 +14,33 @@ interface MetaPixelLeadProps {
 }
 
 /**
- * Componente cliente que dispara el evento Meta Pixel "Lead" al montarse.
- * Usar en paginas /gracias para registrar conversiones diferenciadas por
- * landing/campaña en Meta Ads Manager.
+ * Dispara el evento "Lead" al montarse, por Pixel y por Conversions API con el
+ * mismo `event_id` (Meta deduplica y cuenta una sola conversión).
+ *
+ * Usar en páginas /gracias. Si el formulario vive en Hapee y redirige acá
+ * pasando email/teléfono por query string, se toman para mejorar el match
+ * quality — ver `userDataFromUrl`.
  */
 export default function MetaPixelLead({
   contentName,
   contentCategory = "general",
   value,
 }: MetaPixelLeadProps) {
+  // React 18+ monta dos veces en dev con StrictMode: sin esto se envía duplicado.
+  const fired = useRef(false);
+
   useEffect(() => {
-    if (typeof window === "undefined" || !window.fbq) return;
-    window.fbq("track", "Lead", {
-      content_name: contentName,
-      content_category: contentCategory,
-      ...(value !== undefined ? { value, currency: "CLP" } : {}),
+    if (fired.current) return;
+    fired.current = true;
+
+    void trackMetaEvent({
+      eventName: "Lead",
+      customData: {
+        content_name: contentName,
+        content_category: contentCategory,
+        ...(value !== undefined ? { value, currency: "CLP" } : {}),
+      },
+      userData: userDataFromUrl(),
     });
   }, [contentName, contentCategory, value]);
 

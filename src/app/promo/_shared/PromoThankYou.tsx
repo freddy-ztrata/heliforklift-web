@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -14,15 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-declare global {
-  interface Window {
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
+import { trackMetaEvent, userDataFromUrl } from "@/lib/meta/track";
 
 // Mapeo de slugs a content_name para Meta Pixel.
 // `value: 0` en TODAS las landings => se dispara Lead SIN value/currency: Meta
@@ -91,12 +83,18 @@ export default function PromoThankYou({
   productTagline,
   productSlug,
 }: PromoThankYouProps) {
-  // Meta Pixel — disparar Lead event al cargar la thank-you page
-  // Esto es la conversion principal que Meta usa para optimizar las campañas
+  // React 18+ monta dos veces en dev con StrictMode: sin esto se envía duplicado.
+  const fired = useRef(false);
+
+  // Conversión principal: se envía por Pixel Y por Conversions API con el mismo
+  // event_id. Meta une ambas señales y cuenta un solo Lead, pero si el Pixel del
+  // navegador fue bloqueado, la señal del servidor llega igual.
   useEffect(() => {
-    if (typeof window === "undefined" || !window.fbq) return;
+    if (fired.current) return;
     const tracking = PROMO_TRACKING[productSlug];
     if (!tracking) return;
+    fired.current = true;
+
     const category =
       productSlug.includes("diesel") || productSlug.includes("combustion")
         ? "diesel"
@@ -105,15 +103,23 @@ export default function PromoThankYou({
           : productSlug.includes("electrica")
             ? "electrica"
             : "gasolina";
-    window.fbq("track", "Lead", {
-      content_name: tracking.contentName,
-      content_category: category,
-      content_ids: [productSlug],
-      // Solo enviamos value/currency si hay un valor estimado (> 0).
-      // Si value === 0, Meta optimiza por volumen de leads, no por valor.
-      ...(tracking.value > 0
-        ? { value: tracking.value, currency: "CLP" }
-        : {}),
+
+    void trackMetaEvent({
+      eventName: "Lead",
+      customData: {
+        content_name: tracking.contentName,
+        content_category: category,
+        content_ids: [productSlug],
+        // Solo enviamos value/currency si hay un valor estimado (> 0).
+        // Si value === 0, Meta optimiza por volumen de leads, no por valor.
+        ...(tracking.value > 0
+          ? { value: tracking.value, currency: "CLP" }
+          : {}),
+      },
+      // Si Hapee redirige acá pasando los datos por query string, se usan para
+      // subir el match quality (se hashean en el servidor, nunca viajan en claro
+      // hacia Meta desde el navegador).
+      userData: userDataFromUrl(),
     });
   }, [productSlug]);
 

@@ -801,26 +801,6 @@ const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
 const HUBSPOT_PORTAL_ID = "50182752";
 const HUBSPOT_FORM_ID = "8ae22a71-ea73-4cf7-8c57-634e768c0104";
 
-declare global {
-  interface Window {
-    hbspt?: {
-      forms?: {
-        create: (config: {
-          region: string;
-          portalId: string;
-          formId: string;
-          target: string;
-        }) => void;
-      };
-    };
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
-
 function ConversionForm() {
   const formContainerRef = useRef<HTMLDivElement>(null);
 

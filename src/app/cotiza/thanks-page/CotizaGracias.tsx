@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -16,16 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-declare global {
-  interface Window {
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-    dataLayer?: Record<string, unknown>[];
-  }
-}
+import { trackMetaEvent, userDataFromUrl } from "@/lib/meta/track";
 
 const nextSteps = [
   {
@@ -61,13 +52,24 @@ const trustBadges = [
 ];
 
 export default function CotizaGracias() {
-  // Conversión: dispara Lead (Meta) y un evento dataLayer (GTM/Google Ads).
+  // React 18+ monta dos veces en dev con StrictMode: sin esto se envía duplicado.
+  const fired = useRef(false);
+
+  // Conversión: Lead a Meta (Pixel + CAPI deduplicados) y evento dataLayer
+  // para GTM/Google Ads — esta landing es de Google Ads, no de Meta.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.fbq?.("track", "Lead", {
-      content_name: "cotiza_brand",
-      content_category: "general",
+    if (fired.current) return;
+    fired.current = true;
+
+    void trackMetaEvent({
+      eventName: "Lead",
+      customData: {
+        content_name: "cotiza_brand",
+        content_category: "general",
+      },
+      userData: userDataFromUrl(),
     });
+
     window.dataLayer?.push({ event: "generate_lead", lead_source: "cotiza_lp" });
   }, []);
 

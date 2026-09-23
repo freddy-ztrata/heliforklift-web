@@ -854,16 +854,6 @@ function UseCases() {
 const HUBSPOT_EMBED_SRC =
   "https://js.hsforms.net/forms/embed/developer/50182752.js";
 
-declare global {
-  interface Window {
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
-
 function ConversionForm() {
   useEffect(() => {
     if (document.querySelector(`script[src="${HUBSPOT_EMBED_SRC}"]`)) return;

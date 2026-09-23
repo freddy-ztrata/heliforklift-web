@@ -771,16 +771,6 @@ const HUBSPOT_DEV_SCRIPT =
 const HUBSPOT_PORTAL_ID = "50182752";
 const HUBSPOT_FORM_ID = "ba4815b5-e77a-4cc5-88be-bef4a91ecefd";
 
-declare global {
-  interface Window {
-    fbq?: (
-      action: "track" | "trackCustom",
-      eventName: string,
-      params?: Record<string, unknown>
-    ) => void;
-  }
-}
-
 function ConversionForm() {
   const formContainerRef = useRef<HTMLDivElement>(null);
 
