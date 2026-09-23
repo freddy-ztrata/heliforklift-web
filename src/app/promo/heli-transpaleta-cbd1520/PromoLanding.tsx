@@ -25,6 +25,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import HapeeForm from "@/components/shared/HapeeForm";
 
 const PRODUCT_IMAGE_HERO = "/assets/promo/heli-transpaleta-cbd1520-hero.webp";
 const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-transpaleta-cbd1520-side.webp";
@@ -766,43 +767,11 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-const HUBSPOT_DEV_SCRIPT =
-  "https://js.hsforms.net/forms/embed/developer/50182752.js";
-const HUBSPOT_PORTAL_ID = "50182752";
-const HUBSPOT_FORM_ID = "ba4815b5-e77a-4cc5-88be-bef4a91ecefd";
+// Formulario de Hapee "Promo Transpaleta CBD15/20 — HELI". Redirige a /promo/heli-transpaleta-cbd1520/gracias,
+// donde se dispara el Lead del Pixel.
+const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia";
 
 function ConversionForm() {
-  const formContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = formContainerRef.current;
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    const formDiv = document.createElement("div");
-    formDiv.className = "hs-form-html";
-    formDiv.setAttribute("data-region", "na1");
-    formDiv.setAttribute("data-form-id", HUBSPOT_FORM_ID);
-    formDiv.setAttribute("data-portal-id", HUBSPOT_PORTAL_ID);
-    container.appendChild(formDiv);
-
-    const existing = document.querySelector(
-      `script[src="${HUBSPOT_DEV_SCRIPT}"]`
-    );
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = HUBSPOT_DEV_SCRIPT;
-      script.defer = true;
-      document.body.appendChild(script);
-    } else {
-      const w = window as unknown as {
-        HubSpotFormsEmbed?: { create?: () => void };
-      };
-      w.HubSpotFormsEmbed?.create?.();
-    }
-  }, []);
-
   return (
     <section
       id="cotiza"
@@ -905,7 +874,7 @@ function ConversionForm() {
               </div>
             </div>
 
-            <div ref={formContainerRef} className="hubspot-form-container w-full" />
+            <HapeeForm formId={HAPEE_FORM_ID} className="hapee-form-container w-full" />
           </motion.div>
         </div>
       </div>

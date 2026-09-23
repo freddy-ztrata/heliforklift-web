@@ -23,6 +23,7 @@ import {
   Building2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import HapeeForm from "@/components/shared/HapeeForm";
 
 const PRODUCT_IMAGE_FRONT = "/assets/promo/heli-gasolina-35-front.webp";
 const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-gasolina-35-side.webp";
@@ -784,52 +785,11 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-const HUBSPOT_V2_SCRIPT = "https://js.hsforms.net/forms/embed/v2.js";
-const HUBSPOT_PORTAL_ID = "50182752";
-const HUBSPOT_FORM_ID = "2db82f7c-34a1-47f1-bc3f-fc91eec69fdd";
+// Formulario de Hapee "Promo Gasolina 3.5T — HELI". Redirige a /promo/heli-gasolina-35/gracias,
+// donde se dispara el Lead del Pixel.
+const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia-6";
 
 function ConversionForm() {
-  const formContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = formContainerRef.current;
-    if (!container) return;
-
-    const targetId = `hs-form-promo-${Math.random().toString(36).slice(2, 11)}`;
-    container.id = targetId;
-
-    function renderForm() {
-      if (!window.hbspt?.forms?.create || !container) return;
-      container.innerHTML = "";
-      window.hbspt.forms.create({
-        region: "na1",
-        portalId: HUBSPOT_PORTAL_ID,
-        formId: HUBSPOT_FORM_ID,
-        target: `#${targetId}`,
-      });
-    }
-
-    if (window.hbspt?.forms?.create) {
-      renderForm();
-      return;
-    }
-
-    const existing = document.querySelector(
-      `script[src="${HUBSPOT_V2_SCRIPT}"]`
-    );
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = HUBSPOT_V2_SCRIPT;
-      script.async = true;
-      script.defer = true;
-      script.onload = renderForm;
-      document.body.appendChild(script);
-    } else {
-      existing.addEventListener("load", renderForm, { once: true });
-      setTimeout(renderForm, 100);
-    }
-  }, []);
-
   return (
     <section
       id="cotiza"
@@ -910,7 +870,7 @@ function ConversionForm() {
             </div>
           </div>
 
-          {/* Right col — form (color matcheado con el iframe de HubSpot) */}
+          {/* Right col — form (tarjeta oscura, mismo tono que el form de Hapee) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -931,7 +891,7 @@ function ConversionForm() {
               </div>
             </div>
 
-            <div ref={formContainerRef} className="hubspot-form-container w-full" />
+            <HapeeForm formId={HAPEE_FORM_ID} className="hapee-form-container w-full" />
           </motion.div>
         </div>
       </div>

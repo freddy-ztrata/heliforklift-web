@@ -18,18 +18,6 @@ declare global {
     ) => void;
 
     dataLayer?: Record<string, unknown>[];
-
-    /** Embed de HubSpot — se elimina al terminar la migración a Hapee. */
-    hbspt?: {
-      forms?: {
-        create: (config: {
-          region: string;
-          portalId: string;
-          formId: string;
-          target: string;
-        }) => void;
-      };
-    };
   }
 }
 

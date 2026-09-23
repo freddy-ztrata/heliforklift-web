@@ -234,6 +234,24 @@ section:not(:first-child) {
 }
 
 /* ========================================
+   HAPEE FORM — Container Wrapper
+   El form se renderiza dentro de un <iframe> de Hapee (otro origen): sus
+   estilos se configuran en el editor de Hapee. Aca solo el wrapper exterior.
+   ======================================== */
+
+.hapee-form-container {
+  width: 100%;
+  max-width: 100%;
+}
+
+.hapee-form-container iframe {
+  width: 100% !important;
+  border: 0 !important;
+  display: block;
+  background: transparent;
+}
+
+/* ========================================
    HUBSPOT FORM — Container Wrapper
    El form se renderiza DENTRO de un <iframe> que es inaccesible desde aqui.
    Todos los estilos del form (inputs, botones, colores) se configuran en
