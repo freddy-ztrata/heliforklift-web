@@ -42,6 +42,7 @@ import {
 import { cn } from "@/lib/utils";
 import { company, contact, certifications } from "@/lib/data/company";
 import { fuelTypeCategories } from "@/lib/data/products";
+import HapeeForm from "@/components/shared/HapeeForm";
 
 const HERO_IMAGE = "/assets/cotiza/hero-fleet.webp";
 
@@ -1128,21 +1129,14 @@ function CTABanner() {
 }
 
 // ============================================================
-// QUOTER — formulario de cotización (embed HubSpot)
+// QUOTER — formulario de cotización (embed Hapee)
 // ============================================================
-const HUBSPOT_EMBED_SRC =
-  "https://js.hsforms.net/forms/embed/developer/50182752.js";
+// Formulario de Hapee "Cotiza Google Ads — HELI". Redirige a /cotiza/thanks-page
+// (NO /cotiza/gracias: esa carpeta quedó vacía y da 404), donde se disparan el
+// Lead de Meta y el generate_lead de Google Ads.
+const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia-9";
 
 function Quoter() {
-  useEffect(() => {
-    // El script "developer" de HubSpot auto-renderiza los div .hs-form-html.
-    if (document.querySelector(`script[src="${HUBSPOT_EMBED_SRC}"]`)) return;
-    const s = document.createElement("script");
-    s.src = HUBSPOT_EMBED_SRC;
-    s.defer = true;
-    document.body.appendChild(s);
-  }, []);
-
   return (
     <section
       id="cotiza"
@@ -1190,7 +1184,7 @@ function Quoter() {
             </div>
           </div>
 
-          {/* FORM — embed HubSpot */}
+          {/* FORM — embed Hapee */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1211,14 +1205,7 @@ function Quoter() {
               </div>
             </div>
 
-            <div className="hubspot-form-container w-full">
-              <div
-                className="hs-form-html"
-                data-region="na1"
-                data-form-id="d9974614-f923-4712-b337-79132d6705e5"
-                data-portal-id="50182752"
-              />
-            </div>
+            <HapeeForm formId={HAPEE_FORM_ID} className="hapee-form-container w-full" />
           </motion.div>
         </div>
       </div>
@@ -1547,7 +1534,7 @@ export default function CotizaLanding() {
     }
   }, []);
 
-  // Todos los CTA / cards llevan al formulario (embed HubSpot) en #cotiza.
+  // Todos los CTA / cards llevan al formulario (embed Hapee) en #cotiza.
   const goQuote = () => scrollToQuote();
 
   return (

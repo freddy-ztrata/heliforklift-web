@@ -250,36 +250,3 @@ section:not(:first-child) {
   display: block;
   background: transparent;
 }
-
-/* ========================================
-   HUBSPOT FORM — Container Wrapper
-   El form se renderiza DENTRO de un <iframe> que es inaccesible desde aqui.
-   Todos los estilos del form (inputs, botones, colores) se configuran en
-   HubSpot > Editor de Estilos. Aqui solo controlamos el wrapper exterior.
-   ======================================== */
-
-.hubspot-form-container {
-  width: 100%;
-  max-width: 100%;
-  background: transparent;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
-/* El iframe de HubSpot ocupa el ancho completo */
-.hubspot-form-container iframe {
-  width: 100% !important;
-  border: 0 !important;
-  display: block;
-}
-
-/* Wrapper interno hs-form-frame */
-.hubspot-form-container .hs-form-frame,
-.hubspot-form-container [class*="hs-form-frame"] {
-  width: 100% !important;
-  background: transparent !important;
-  border: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
