@@ -35,11 +35,6 @@ export const productDatasheets: Record<string, string> = {
   "grua-combustion-28-32-ton": `${DATASHEET_DIR}/28-32-ton.pdf`,
   "grua-combustion-42-46-ton": `${DATASHEET_DIR}/42-46-ton.pdf`,
 
-  // ─── HYDROGEN ───
-  "cpd20-30-hidrogeno-2-3-ton": `${DATASHEET_DIR}/3-3-5-ton-pneumatic.pdf`,
-  "cpd30-35-hidrogeno-3-3.5-ton": `${DATASHEET_DIR}/2-3-ton-cushion.pdf`,
-  "cpd40-50-hidrogeno-4-5-ton": `${DATASHEET_DIR}/4-5-ton-pneumatic.pdf`,
-
   // ─── ALL TERRAIN ───
   "g3-todo-terreno-5-ton": `${DATASHEET_DIR}/serie-g3-5t.pdf`,
   "g3-series-todo-terreno-2-3.5-ton": `${DATASHEET_DIR}/g3-series-todo-terreno.pdf`,

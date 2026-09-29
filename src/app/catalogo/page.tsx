@@ -21,7 +21,7 @@ const iconMap: Record<string, typeof Zap> = { Zap, Fuel, Flame, Atom };
 export const metadata: Metadata = {
   title: "Catálogo PDF Grúas Horquillas HELI — Descarga Gratis Chile",
   description:
-    "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores y reach trucks. Fichas técnicas, especificaciones y precios. Descarga gratis.",
+    "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, transpaletas, apiladores y reach trucks. Fichas técnicas, especificaciones y precios. Descarga gratis.",
   keywords: [
     "catálogo grúas horquillas Chile",
     "catálogo HELI PDF",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Catálogo PDF de Grúas Horquillas HELI Chile",
     description:
-      "Eléctricas, diésel, GLP, hidrógeno verde, transpaletas y apiladores. Fichas técnicas completas. Descarga gratis.",
+      "Eléctricas, diésel, GLP, transpaletas y apiladores. Fichas técnicas completas. Descarga gratis.",
   },
 };
 

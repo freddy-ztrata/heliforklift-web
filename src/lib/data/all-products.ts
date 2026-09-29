@@ -8,7 +8,6 @@ export type FuelType =
   | "Diesel"
   | "GLP"
   | "Diesel / GLP"
-  | "Hidrogeno"
   | "N/A";
 
 /** Raw product definition — fuelType is derived automatically */
@@ -36,7 +35,6 @@ export interface FullProduct extends RawProduct {
 /** Derive a normalized fuel type from the `power` field */
 export function deriveFuelType(power: string): FuelType {
   if (power.startsWith("Electrica")) return "Electrica";
-  if (power === "Celda de Combustible H2") return "Hidrogeno";
   if (power === "GLP (Gas Licuado)") return "GLP";
   if (power.includes("Diesel") && power.includes("GLP")) return "Diesel / GLP";
   if (power.startsWith("Diesel") || power.includes("Diesel")) return "Diesel";
@@ -587,97 +585,7 @@ export const combustionForklifts: RawProduct[] = [
 ];
 
 // =============================================================================
-// 3. GRUAS HIDROGENO VERDE (Hydrogen Fuel Cell Forklifts)
-// =============================================================================
-export const hydrogenForklifts: RawProduct[] = [
-  {
-    id: "cpd20-25-hidrogeno",
-    name: "CPD20/25/30 Hidrogeno 2-3 TON",
-    model: "CPD20-30-FC",
-    category: "Gruas Hidrogeno Verde",
-    categorySlug: "gruas-hidrogeno-verde",
-    type: "Hidrogeno Verde",
-    capacityRange: "2,000 - 3,000 kg",
-    heightRange: "3,000 - 6,000 mm",
-    power: "Celda de Combustible H2",
-    image: `${IMG}/cpd20-25-hidrogeno.webp`,
-    features: [
-      "Celda de combustible de hidrogeno",
-      "Cero emisiones (solo agua)",
-      "Recarga en 3 minutos",
-      "Operacion continua 24/7",
-    ],
-    description:
-      "Grua de hidrogeno verde de 2 a 3 toneladas. Tecnologia de celda de combustible con recarga ultra rapida y cero emisiones contaminantes.",
-    slug: "cpd20-30-hidrogeno-2-3-ton",
-  },
-  {
-    id: "cpd30-35-hidrogeno",
-    name: "CPD30/35 Hidrogeno 3-3.5 TON",
-    model: "CPD30-35-FC",
-    category: "Gruas Hidrogeno Verde",
-    categorySlug: "gruas-hidrogeno-verde",
-    type: "Hidrogeno Verde",
-    capacityRange: "3,000 - 3,500 kg",
-    heightRange: "3,000 - 6,000 mm",
-    power: "Celda de Combustible H2",
-    image: `${IMG}/cpd30-35-hidrogeno.webp`,
-    features: [
-      "Mayor capacidad de carga",
-      "Tecnologia Fuel Cell avanzada",
-      "Sin necesidad de sala de carga",
-      "Huella de carbono cero",
-    ],
-    description:
-      "Grua de hidrogeno verde de 3 a 3.5 toneladas. Ideal para operaciones de alta intensidad que requieren cero emisiones y recarga instantanea.",
-    slug: "cpd30-35-hidrogeno-3-3.5-ton",
-  },
-  {
-    id: "cpd40-50-hidrogeno",
-    name: "CPD40/50 Hidrogeno 4-5 TON",
-    model: "CPD40-50-FC",
-    category: "Gruas Hidrogeno Verde",
-    categorySlug: "gruas-hidrogeno-verde",
-    type: "Hidrogeno Verde",
-    capacityRange: "4,000 - 5,000 kg",
-    heightRange: "3,000 - 6,000 mm",
-    power: "Celda de Combustible H2",
-    image: `${IMG}/cpd40-50-hidrogeno.webp`,
-    features: [
-      "Alto tonelaje con hidrogeno",
-      "Rendimiento similar a diesel",
-      "Sistema de almacenamiento seguro",
-      "Monitoreo remoto",
-    ],
-    description:
-      "Grua de hidrogeno verde de 4 a 5 toneladas. Potencia comparable a los equipos diesel con los beneficios del hidrogeno verde.",
-    slug: "cpd40-50-hidrogeno-4-5-ton",
-  },
-  {
-    id: "cpd60-70-hidrogeno",
-    name: "CPD60/70 Hidrogeno 6-10 TON",
-    model: "CPD60-100-FC",
-    category: "Gruas Hidrogeno Verde",
-    categorySlug: "gruas-hidrogeno-verde",
-    type: "Hidrogeno Verde",
-    capacityRange: "6,000 - 10,000 kg",
-    heightRange: "3,000 - 6,000 mm",
-    power: "Celda de Combustible H2",
-    image: `${IMG}/cpd60-70-hidrogeno.webp`,
-    features: [
-      "Gran tonelaje con hidrogeno",
-      "Celda de combustible de alta potencia",
-      "Para operaciones industriales pesadas",
-      "Liderazgo en sostenibilidad",
-    ],
-    description:
-      "Grua de hidrogeno verde de 6 a 10 toneladas. La mayor capacidad disponible en tecnologia Fuel Cell para operaciones industriales pesadas y sostenibles.",
-    slug: "cpd60-70-hidrogeno-6-10-ton",
-  },
-];
-
-// =============================================================================
-// 4. GRUAS TODO TERRENO (All Terrain Forklifts)
+// 3. GRUAS TODO TERRENO (All Terrain Forklifts)
 // =============================================================================
 export const allTerrainForklifts: RawProduct[] = [
   {
@@ -725,7 +633,7 @@ export const allTerrainForklifts: RawProduct[] = [
 ];
 
 // =============================================================================
-// 5. TRANSPALETAS (Pallet Jacks)
+// 4. TRANSPALETAS (Pallet Jacks)
 // =============================================================================
 export const palletJacks: RawProduct[] = [
   {
@@ -811,7 +719,7 @@ export const palletJacks: RawProduct[] = [
 ];
 
 // =============================================================================
-// 6. APILADORES (Stackers)
+// 5. APILADORES (Stackers)
 // =============================================================================
 export const stackers: RawProduct[] = [
   {
@@ -964,7 +872,7 @@ export const stackers: RawProduct[] = [
 ];
 
 // =============================================================================
-// 7. REACH TRUCK
+// 6. REACH TRUCK
 // =============================================================================
 export const reachTrucks: RawProduct[] = [
   {
@@ -1033,7 +941,7 @@ export const reachTrucks: RawProduct[] = [
 ];
 
 // =============================================================================
-// 8. MANIPULADORES TELESCOPICOS (Telehandlers)
+// 7. MANIPULADORES TELESCOPICOS (Telehandlers)
 // =============================================================================
 export const telehandlers: RawProduct[] = [
   {
@@ -1063,7 +971,7 @@ export const telehandlers: RawProduct[] = [
 ];
 
 // =============================================================================
-// 9. PORTA CONTENEDORES (Container Handlers & Reachstackers)
+// 8. PORTA CONTENEDORES (Container Handlers & Reachstackers)
 // =============================================================================
 export const containerHandlers: RawProduct[] = [
   {
@@ -1153,7 +1061,7 @@ export const containerHandlers: RawProduct[] = [
 ];
 
 // =============================================================================
-// 10. TRACTORES DE TIRO (Tow Tractors)
+// 9. TRACTORES DE TIRO (Tow Tractors)
 // =============================================================================
 export const towTractors: RawProduct[] = [
   {
@@ -1299,7 +1207,7 @@ export const towTractors: RawProduct[] = [
 ];
 
 // =============================================================================
-// 11. PLATAFORMAS ELEVADORAS (Aerial Work Platforms)
+// 10. PLATAFORMAS ELEVADORAS (Aerial Work Platforms)
 // =============================================================================
 export const platforms: RawProduct[] = [
   {
@@ -1326,7 +1234,7 @@ export const platforms: RawProduct[] = [
 ];
 
 // =============================================================================
-// 12. ACCESORIOS (Accessories / Attachments)
+// 11. ACCESORIOS (Accessories / Attachments)
 // =============================================================================
 export const accessories: RawProduct[] = [
   {
@@ -1663,7 +1571,6 @@ export const accessories: RawProduct[] = [
 export const allProducts: FullProduct[] = [
   ...electricForklifts,
   ...combustionForklifts,
-  ...hydrogenForklifts,
   ...allTerrainForklifts,
   ...palletJacks,
   ...stackers,

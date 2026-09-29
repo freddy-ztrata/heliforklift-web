@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, Fuel, Flame, Atom } from "lucide-react";
+import { Zap, Fuel, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { allProducts, type FullProduct } from "@/lib/data/all-products";
 import { deriveFuelType, getFuelTypeName } from "@/lib/data/products";
@@ -16,7 +16,6 @@ const fuelFilters = [
   { slug: "electrica", label: "Electrica", icon: Zap, color: "emerald" },
   { slug: "diesel", label: "Diesel", icon: Fuel, color: "amber" },
   { slug: "glp", label: "Gas (GLP)", icon: Flame, color: "sky" },
-  { slug: "hidrogeno", label: "Hidrogeno", icon: Atom, color: "teal" },
 ] as const;
 
 function matchesFuelFilter(product: FullProduct, tipo: string): boolean {
@@ -27,8 +26,6 @@ function matchesFuelFilter(product: FullProduct, tipo: string): boolean {
       return product.fuelType === "Diesel" || product.fuelType === "Diesel / GLP";
     case "glp":
       return product.fuelType === "GLP" || product.fuelType === "Diesel / GLP";
-    case "hidrogeno":
-      return product.fuelType === "Hidrogeno";
     default:
       return true;
   }

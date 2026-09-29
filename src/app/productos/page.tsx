@@ -17,7 +17,7 @@ type Props = {
   searchParams: Promise<{ tipo?: string; categoria?: string }>;
 };
 
-const VALID_TIPOS = ["electrica", "diesel", "glp", "hidrogeno", "todos"];
+const VALID_TIPOS = ["electrica", "diesel", "glp", "todos"];
 const VALID_CATEGORIAS = productCategories.map((c) => c.slug);
 
 export async function generateMetadata({
@@ -58,12 +58,12 @@ export async function generateMetadata({
   return {
     title: "Equipos y Grúas Horquillas — Catálogo Completo",
     description:
-      "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores, reach truck, todoterreno, manipuladores telescópicos, porta contenedores, tractores de tiro, plataformas elevadoras y accesorios.",
+      "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, transpaletas, apiladores, reach truck, todoterreno, manipuladores telescópicos, porta contenedores, tractores de tiro, plataformas elevadoras y accesorios.",
     alternates: { canonical: "/productos" },
     openGraph: {
       title: "Equipos y Grúas Horquillas — Catálogo Completo",
       description:
-        "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, hidrógeno verde, transpaletas, apiladores, reach truck y más.",
+        "Catálogo completo de grúas horquillas HELI: eléctricas, diésel, GLP, transpaletas, apiladores, reach truck y más.",
     },
   };
 }

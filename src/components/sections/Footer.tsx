@@ -58,7 +58,6 @@ const equiposLinks = [
   { label: "Grúas Eléctricas", href: "/productos?tipo=electrica" },
   { label: "Grúas Diésel", href: "/productos?tipo=diesel" },
   { label: "Grúas GLP", href: "/productos?tipo=glp" },
-  { label: "Grúas Hidrógeno", href: "/productos?tipo=hidrogeno" },
   { label: "Todos los equipos", href: "/productos" },
   { label: "Catálogo PDF", href: "/catalogo" },
 ];

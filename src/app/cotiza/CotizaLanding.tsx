@@ -29,7 +29,6 @@ import {
   Battery,
   Fuel,
   Flame,
-  Atom,
   Container,
   Mountain,
   Layers,
@@ -91,14 +90,12 @@ const energyIcons: Record<string, typeof Zap> = {
   electrica: Battery,
   diesel: Fuel,
   glp: Flame,
-  hidrogeno: Atom,
 };
 // Imágenes TRANSPARENTES por tipo (las de fuelTypeCategories tienen fondo blanco)
 const energyImg: Record<string, string> = {
   electrica: "/assets/cotiza/fleet-electrica.webp",
   diesel: "/assets/promo/heli-combustion-g3-hero.webp",
   glp: "/assets/legacy/products/g3-series-2-3.5t-gas-nobg.webp",
-  hidrogeno: "/assets/cotiza/fleet-hidrogeno.webp",
 };
 
 const categoryCards = [
@@ -255,7 +252,7 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
               transition={{ delay: 0.3 }}
               className="mt-5 max-w-xl text-base leading-relaxed text-steel-300 sm:text-lg"
             >
-              Eléctricas, diésel, gas e hidrógeno verde. Líder mundial en
+              Eléctricas, diésel y gas. Líder mundial en
               montacargas con{" "}
               <strong className="text-white">+67 años de experiencia</strong> y
               respaldo técnico en todo Chile. Cuéntanos qué necesitas y te
@@ -311,7 +308,7 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
             <div className="relative h-full w-full">
               <Image
                 src={HERO_IMAGE}
-                alt="Flota HELI: grúas horquilla eléctricas, diésel, gas, hidrógeno y manipulador telescópico"
+                alt="Flota HELI: grúas horquilla eléctricas, diésel, gas y manipulador telescópico"
                 fill
                 priority
                 quality={90}
@@ -370,7 +367,6 @@ function Hero({ onPickEnergy }: { onPickEnergy: (slug: string) => void }) {
 const fleet = [
   { img: "/assets/cotiza/fleet-electrica.webp", label: "Eléctrica", tag: "Litio-ion" },
   { img: "/assets/promo/heli-diesel-k2-hero.webp", label: "Diésel K2", tag: "Combustión" },
-  { img: "/assets/cotiza/fleet-hidrogeno.webp", label: "Hidrógeno Verde", tag: "Cero emisiones" },
   { img: "/assets/cotiza/fleet-reach.webp", label: "Reach Truck", tag: "Gran altura" },
   { img: "/assets/cotiza/fleet-telescopico.webp", label: "Telescópico", tag: "Alcance" },
   { img: "/assets/promo/heli-combustion-g3-hero.webp", label: "Combustión G3", tag: "5–10 ton" },
@@ -494,15 +490,15 @@ function TrustStrip() {
 }
 
 // ============================================================
-// ENERGY BENTO — 4 tipos de energía
+// ENERGY BENTO — 3 tipos de energía
 // ============================================================
 function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   const featured =
-    fuelTypeCategories.find((f) => f.id === "hidrogeno") ??
-    fuelTypeCategories[fuelTypeCategories.length - 1];
+    fuelTypeCategories.find((f) => f.id === "electrica") ??
+    fuelTypeCategories[0];
   const rest = fuelTypeCategories.filter((f) => f.id !== featured.id);
   const FeaturedIcon = energyIcons[featured.id] ?? Zap;
 
@@ -524,13 +520,13 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
             </h2>
           </div>
           <p className="max-w-sm text-sm text-steel-400">
-            Cuatro tecnologías para cada operación. Toca una y la sumamos a tu
+            Tres tecnologías para cada operación. Toca una y la sumamos a tu
             cotización.
           </p>
         </motion.div>
 
         <div className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {/* Destacado — hidrógeno verde */}
+          {/* Destacado — eléctricas */}
           <motion.button
             initial={{ opacity: 0, scale: 0.97 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -549,7 +545,7 @@ function EnergyBento({ onPick }: { onPick: (slug: string) => void }) {
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <span className="absolute left-6 top-6 inline-flex items-center gap-1.5 rounded-full bg-heli-red px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                <Sparkles className="h-3 w-3" /> Pioneros en Chile
+                <Sparkles className="h-3 w-3" /> La más elegida
               </span>
             </div>
             {/* Contenido abajo */}
@@ -1301,7 +1297,7 @@ const faqs = [
   },
   {
     q: "¿Qué tipo de energía me conviene?",
-    a: "Depende de tu operación: eléctricas (litio-ion) para interiores y bajo costo operativo, diésel para trabajo pesado en exteriores, gas (GLP) para uso mixto e hidrógeno verde para operación continua sin emisiones. En la cotización te asesoramos según tu carga, turnos y entorno.",
+    a: "Depende de tu operación: eléctricas (litio-ion) para interiores y bajo costo operativo, diésel para trabajo pesado en exteriores y gas (GLP) para uso mixto. En la cotización te asesoramos según tu carga, turnos y entorno.",
   },
   {
     q: "¿Cuánto tardan en responder?",

@@ -84,20 +84,6 @@ export const productGalleries: Record<string, string[]> = {
     `${IMG}/h3-series-1-3-5-ton-gallery-3.webp`,
   ],
 
-  // === HYDROGEN ===
-  "cpd20-30-hidrogeno-2-3-ton": [
-    `${IMG}/3-3-5-ton-pneumatic-gallery-1.webp`,
-  ],
-  "cpd30-35-hidrogeno-3-3.5-ton": [
-    `${IMG}/2-3-ton-cushion-gallery-1.webp`,
-  ],
-  "cpd40-50-hidrogeno-4-5-ton": [
-    `${IMG}/4-5-ton-pneumatic-gallery-1.webp`,
-  ],
-  "cpd60-70-hidrogeno-6-10-ton": [
-    `${IMG}/6-10-ton-pneumatic-gallery-1.webp`,
-  ],
-
   // === ALL TERRAIN ===
   "g3-series-todo-terreno-2-3.5-ton": [
     `${IMG}/g3-series-todo-terreno-gallery-1.webp`,

@@ -82,7 +82,7 @@ const legacy: LegacyRedirect[] = [
   rule("/equipos/apiladores/:path*", "/productos?categoria=apiladores"),
   rule("/equipos/gruas-combustion/:path*", "/productos?categoria=gruas-horquillas-combustion"),
   rule("/equipos/gruas-electricas/:path*", "/productos?categoria=gruas-horquillas-electricas"),
-  rule("/equipos/gruas-hidrogeno/:path*", "/productos?categoria=gruas-hidrogeno-verde"),
+  rule("/equipos/gruas-hidrogeno/:path*", "/productos"),
   rule("/equipos/gruas-todo-terreno/:path*", "/productos?categoria=gruas-horquillas-todo-terreno"),
   rule("/equipos/manipuladores-telescopicos/:path*", "/productos?categoria=manipuladores-telescopicos"),
   rule("/equipos/plataformas-elevadoras/:path*", "/productos?categoria=plataformas-elevadoras"),

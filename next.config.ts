@@ -51,6 +51,19 @@ const nextConfig: NextConfig = {
       destination: "/productos/g3-series-electrica-4-5-ton",
       permanent: true,
     },
+    // La linea de hidrogeno verde se dio de baja del catalogo (sep 2026).
+    // Las cuatro fichas estaban indexadas y en el sitemap, asi que van con 301
+    // al catalogo en vez de quedar en 404.
+    ...[
+      "cpd20-30-hidrogeno-2-3-ton",
+      "cpd30-35-hidrogeno-3-3.5-ton",
+      "cpd40-50-hidrogeno-4-5-ton",
+      "cpd60-70-hidrogeno-6-10-ton",
+    ].map((slug) => ({
+      source: `/productos/${slug}`,
+      destination: "/productos",
+      permanent: true,
+    })),
     // Rescate del sitio WordPress anterior. Va al final para que cualquier
     // regla especifica de arriba gane sobre los comodines de /equipos.
     ...legacyRedirects,

@@ -26,7 +26,7 @@ export const services: Service[] = [
     slug: "venta",
     name: "Venta de Grúas Horquillas",
     description:
-      "Equipos nuevos HELI con tecnología de punta. Grúas eléctricas, combustión e hidrógeno verde con financiamiento flexible.",
+      "Equipos nuevos HELI con tecnología de punta. Grúas eléctricas y de combustión con financiamiento flexible.",
     icon: "ShoppingCart",
     image: "/assets/legacy/products/g-series-1-3.5t-electric.webp",
     heroSubtitle:
@@ -43,7 +43,7 @@ export const services: Service[] = [
       {
         title: "Equipos para cada necesidad",
         content:
-          "Ofrecemos la línea completa de grúas horquillas HELI: eléctricas para operaciones internas con cero emisiones, combustión para trabajos exigentes en exteriores, hidrógeno verde para empresas comprometidas con la sostenibilidad, y equipos especializados como reach trucks, transpaletas, apiladores y manipuladores telescópicos. Capacidades desde 800 kg hasta 46 toneladas.",
+          "Ofrecemos la línea completa de grúas horquillas HELI: eléctricas para operaciones internas con cero emisiones, combustión para trabajos exigentes en exteriores, y equipos especializados como reach trucks, transpaletas, apiladores y manipuladores telescópicos. Capacidades desde 800 kg hasta 46 toneladas.",
       },
       {
         title: "Financiamiento a tu medida",

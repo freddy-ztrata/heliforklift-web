@@ -116,11 +116,6 @@ export default async function ProductDetailPage({ params }: Props) {
                 images={galleryImages}
                 productName={product.name}
               />
-              {product.type === "Hidrógeno Verde" && (
-                <div className="absolute left-4 top-4 z-10 rounded-full bg-green-500/20 px-4 py-1 text-sm font-semibold text-green-400">
-                  HIDRÓGENO VERDE
-                </div>
-              )}
             </div>
 
             {/* Info */}
@@ -424,8 +419,6 @@ export default async function ProductDetailPage({ params }: Props) {
                   text: `Esta grúa horquilla utiliza ${product.power} (tipo de energía: ${product.fuelType}). ${
                     product.fuelType === "Electrica"
                       ? "Apta para uso en interiores sin emisiones."
-                      : product.fuelType === "Hidrogeno"
-                      ? "Tecnología de hidrógeno verde con cero emisiones y recarga en 3 minutos."
                       : product.fuelType === "Diesel"
                       ? "Ideal para operaciones intensivas en exteriores con máxima potencia."
                       : "Versátil para uso interior y exterior con menor costo operacional que diésel."

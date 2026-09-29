@@ -1,4 +1,4 @@
-import { Zap, Fuel, Flame, Atom } from "lucide-react";
+import { Zap, Fuel, Flame } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FuelType } from "@/lib/data/all-products";
 
@@ -34,12 +34,6 @@ const config: Record<
     icon: Flame,
     sm: "bg-sky-500/20 text-sky-400 border-sky-500/40",
     md: "bg-sky-500 text-white",
-  },
-  Hidrogeno: {
-    label: "Hidrógeno Verde",
-    icon: Atom,
-    sm: "bg-teal-500/20 text-teal-400 border-teal-500/40",
-    md: "bg-teal-500 text-white",
   },
 };
 

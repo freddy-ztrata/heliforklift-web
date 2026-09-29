@@ -75,7 +75,7 @@ export default function ProductCategoriesGrid() {
                   quality={80}
                 />
 
-                {/* Badge highlight (Hidrogeno) */}
+                {/* Badge highlight */}
                 {cat.highlight && (
                   <div className="absolute right-3 top-3 z-10 rounded-full bg-heli-red px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-lg">
                     Innovación

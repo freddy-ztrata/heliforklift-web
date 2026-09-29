@@ -40,10 +40,10 @@ Uses `@import "tailwindcss"` syntax with `@theme inline` in `globals.css`. Theme
 
 `src/lib/data/` is the single source of truth for all content:
 
-- **`all-products.ts`** — 76 products across 12 categories. Defines `RawProduct` (without fuelType) and `FullProduct` (with fuelType). Individual category arrays (`electricForklifts`, `combustionForklifts`, etc.) are `RawProduct[]`. Exported `allProducts` is `FullProduct[]` mapped via `deriveFuelType()` from each product's `power` field.
+- **`all-products.ts`** — 72 products across 11 categories. Defines `RawProduct` (without fuelType) and `FullProduct` (with fuelType). Individual category arrays (`electricForklifts`, `combustionForklifts`, etc.) are `RawProduct[]`. Exported `allProducts` is `FullProduct[]` mapped via `deriveFuelType()` from each product's `power` field.
 - **`products.ts`** — re-exports from all-products. Adds:
-  - `productCategories[]` — 12 categorías de tipo de equipo (Transpaletas, Apiladores, Reach Truck, Todo Terreno, Manipuladores Telescópicos, Porta Contenedores, Tractores de Tiro, Plataformas Elevadoras, Accesorios + 3 fuel-type-as-category entries)
-  - `fuelTypeCategories` — 4 fuel types with counts
+  - `productCategories[]` — 11 categorías de tipo de equipo (Transpaletas, Apiladores, Reach Truck, Todo Terreno, Manipuladores Telescópicos, Porta Contenedores, Tractores de Tiro, Plataformas Elevadoras, Accesorios + 2 fuel-type-as-category entries)
+  - `fuelTypeCategories` — 3 fuel types with counts
   - `featuredProducts`, `getProductsByFuelType()`, `getCategoryProducts()`, `getFuelTypeName()`
 - **`product-galleries.ts`** — maps product slugs to gallery image path arrays. Pattern: `{slug}-gallery-{n}.{ext}`
 - **`company.ts`** — Contact info, locations (Santiago/Antofagasta/Copiapó), stats, certifications. Plus:
@@ -54,6 +54,10 @@ Uses `@import "tailwindcss"` syntax with `@theme inline` in `globals.css`. Theme
 - **`services.ts`** — 3 servicios: Venta, Servicio Técnico, Repuestos (Arriendo y Usados fueron removidos por solicitud del cliente)
 - **`news.ts`** — 8 noticias scrapeadas de heliforklift.cl/noticias/ con título, fecha ISO + label, summary, content multi-párrafo (separado por `\n\n`), imagen local, categoría
 
+### Línea de hidrógeno (dada de baja — sep 2026)
+
+La línea **Grúas Hidrógeno Verde** (4 equipos CPD20/25, CPD30/35, CPD40/50, CPD60/70) se retiró del catálogo por decisión comercial: no se promociona más y no se lista en el sitio. Se eliminaron los productos, la categoría, el tipo de energía `Hidrogeno` y sus galerías/fichas. Las 4 URLs de producto estaban indexadas, así que `next.config.ts` las redirige con 301 a `/productos`. El equipo sigue existiendo en el CRM de Hapee (`CPDF30-HIDRO`, con stock), y quedan menciones editoriales de hidrógeno en `/nosotros` (hito 2020) y en la noticia de MODEX 2022 — son históricas, no oferta comercial. **No reintroducir hidrógeno en catálogo ni en piezas publicitarias.**
+
 ### Fuel Type System
 
 Every product has a `fuelType: FuelType` field derived from `power`:
@@ -61,7 +65,6 @@ Every product has a `fuelType: FuelType` field derived from `power`:
 - `"Diesel"` — power starts with "Diesel" (without GLP)
 - `"Diesel / GLP"` — power contains both
 - `"GLP"` — power is "GLP (Gas Licuado)"
-- `"Hidrogeno"` — power is "Celda de Combustible H2"
 - `"N/A"` — accessories (Hidraulico, Mecanico)
 
 Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Accessories (`"N/A"`) only show in "Todos" with no badge.
@@ -69,8 +72,8 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 ### Page Structure
 
 - `/` — Homepage: Hero (video bg) → TrustBar (marquee) → ProductShowcase (bento, links to filtered catalog by fuel type) → Services → WhyChooseUs → HowItWorks → CTASection
-- `/productos` — **Landing**: `FuelTypeLanding` bento (4 energy types) **+ `ProductCategoriesGrid`** (12 cards de tipo de equipo). No `?tipo=` ni `?categoria=` muestra landing.
-- `/productos?tipo=electrica|diesel|glp|hidrogeno|todos` — **Filtered catalog** por tipo de energía
+- `/productos` — **Landing**: `FuelTypeLanding` bento (3 energy types) **+ `ProductCategoriesGrid`** (11 cards de tipo de equipo). No `?tipo=` ni `?categoria=` muestra landing.
+- `/productos?tipo=electrica|diesel|glp|todos` — **Filtered catalog** por tipo de energía
 - `/productos?categoria={categorySlug}` — **Filtered catalog** por categoría de equipo (transpaletas, apiladores, reach-truck, etc.)
 - `ProductCatalog` con dual filters (fuel type pills + category tabs). URL sync via `router.replace` y `useEffect`. Acepta `defaultFuelType` y `defaultCategory` props.
 - `/productos/[slug]` — Product detail con `ProductGallery`, specs, `FuelTypeBadge`, related products, Product schema JSON-LD. SSG via `generateStaticParams()`.
@@ -90,11 +93,11 @@ Products with `"Diesel / GLP"` appear in both Diesel and GLP filtered views. Acc
 
 LP de marca completa para campañas **always-on de Google Ads** (NO Meta). `robots: { index: false }`, fuera del sitemap, sin navbar/footer del sitio. Representa toda la marca y todos los tipos de equipo. Archivos: [src/app/cotiza/](heliforklift-web/src/app/cotiza/) — `CotizaLanding.tsx` (client, todas las secciones), `page.tsx` (metadata), `thanks-page/` (`CotizaGracias.tsx` + `page.tsx`). ⚠️ La carpeta `gracias/` quedó **vacía** tras el rename (su ruta da 404) — el redirect del form HubSpot debe apuntar a `/cotiza/thanks-page`, NO a `/cotiza/gracias`.
 
-- **Secciones (cada una con layout DISTINTO para no repetir el patrón de "tarjetas/calugas"):** StickyHeader → Hero (top bar con logo HELI siempre visible + chips de energía + 1 máquina) → **FleetMarquee** (marquee infinito a todo el ancho, 8 máquinas) → TrustStrip (stats animadas `CountUp` + chips de certificación) → **EnergyBento** (bento asimétrico: hidrógeno destacado grande + 3 filas compactas) → **FeaturedOffers** (3 filas showcase alternadas que destacan 3 productos: transpaleta CBD15/20, combustión G3, H4 eléctrica; los CTA **NO** navegan a las promo landings — preseleccionan el equipo en el cotizador y hacen scroll a `#cotiza` vía `pickAndScroll`) → **WhyHeli** (split editorial: heading sticky izq + filas con divisores, sin tarjetas) → **CTABanner** (franja roja full-width que rompe el ritmo) → **Categories** (nube de chips/pills, no tarjetas) → **Services** (3 columnas editoriales con números 01/02/03 + divisores verticales) → **Process** (línea de tiempo horizontal con nodos conectados) → **Quoter** (form) → Coverage (split + tiles de sucursales) → FAQ (acordeón) → FinalCTA → Footer → FloatingBar (móvil). Fondos alternados (steel-950 / gradiente / radial / rojo) para variar el ritmo.
+- **Secciones (cada una con layout DISTINTO para no repetir el patrón de "tarjetas/calugas"):** StickyHeader → Hero (top bar con logo HELI siempre visible + chips de energía + 1 máquina) → **FleetMarquee** (marquee infinito a todo el ancho, 8 máquinas) → TrustStrip (stats animadas `CountUp` + chips de certificación) → **EnergyBento** (bento asimétrico: eléctricas destacadas grande + 2 filas compactas) → **FeaturedOffers** (3 filas showcase alternadas que destacan 3 productos: transpaleta CBD15/20, combustión G3, H4 eléctrica; los CTA **NO** navegan a las promo landings — preseleccionan el equipo en el cotizador y hacen scroll a `#cotiza` vía `pickAndScroll`) → **WhyHeli** (split editorial: heading sticky izq + filas con divisores, sin tarjetas) → **CTABanner** (franja roja full-width que rompe el ritmo) → **Categories** (nube de chips/pills, no tarjetas) → **Services** (3 columnas editoriales con números 01/02/03 + divisores verticales) → **Process** (línea de tiempo horizontal con nodos conectados) → **Quoter** (form) → Coverage (split + tiles de sucursales) → FAQ (acordeón) → FinalCTA → Footer → FloatingBar (móvil). Fondos alternados (steel-950 / gradiente / radial / rojo) para variar el ritmo.
 - **Datos reales:** importa `company`, `contact`, `certifications` de `company.ts` y `fuelTypeCategories` de `products.ts`. Mensajería de marca: "líder mundial" (frase aprobada por el cliente) + stats concretas (67+ años, 1.100+ equipos, 150+ países, 1.700+ modelos). **NO** usar "#1 mundial" (company.ts dice `globalRanking: 7` y la misión es entrar al Top 5).
 - **Form = embed de HubSpot** (formato "developer"). El cotizador (`Quoter`) inyecta `https://js.hsforms.net/forms/embed/developer/50182752.js` (defer, una vez) y renderiza `<div class="hs-form-html" data-region="na1" data-form-id="d9974614-f923-4712-b337-79132d6705e5" data-portal-id="50182752">` — el script auto-renderiza ese div. **Distinto del v2.js** que usa `CTASection`. El estilo del form y el redirect post-submit (a `/cotiza/thanks-page` para disparar la conversión) se configuran en HubSpot. Todos los CTA/cards de la LP solo hacen scroll a `#cotiza` (vía `goQuote`); ya **no** hay selector de chips ni preselección.
 - **Tracking:** la landing (`CotizaLanding`) dispara `fbq('trackCustom','ViewContent', {content_name:'cotiza_brand'})` al montarse; la thank-you (`CotizaGracias`) dispara `fbq('track','Lead', {content_name:'cotiza_brand'})` y `dataLayer.push({event:'generate_lead'})` para Google Ads/GTM. La conversión de Google Ads se configura sobre `/cotiza/thanks-page` o el evento `generate_lead`. ⚠️ El `Lead` solo se dispara si el form de HubSpot **redirige** a la thank-you (no si muestra mensaje inline).
-- **Imágenes del fleet:** `public/assets/cotiza/fleet-{electrica,hidrogeno,reach,telescopico,todoterreno}.webp` — recortadas (flood-fill lossless) desde renders oficiales en `legacy/products/`. El marquee combina estas + las promo transparentes (`heli-diesel-k2-hero`, `heli-combustion-g3-hero`, `heli-h4-electrica-hero`).
+- **Imágenes del fleet:** `public/assets/cotiza/fleet-{electrica,reach,telescopico,todoterreno}.webp` — recortadas (flood-fill lossless) desde renders oficiales en `legacy/products/`. El marquee combina estas + las promo transparentes (`heli-diesel-k2-hero`, `heli-combustion-g3-hero`, `heli-h4-electrica-hero`).
 
 ### Promo Landings (Meta Ads)
 
@@ -179,7 +182,7 @@ After `git clone`, run `git lfs pull` to download. Linux build context for Docke
 ### Footer Links
 
 Footer columns:
-- **EQUIPOS:** 4 fuel types + Todos los equipos + Catálogo PDF
+- **EQUIPOS:** 3 fuel types + Todos los equipos + Catálogo PDF
 - **SERVICIOS:** Venta, Servicio Técnico, Repuestos (sin Arriendo ni Usados)
 - **EMPRESA:** Nosotros, Equipo y Vendedores, Noticias, **Trabaja con nosotros**, **Información y denuncias (Ley Karin)**, Contacto
 - **CONTACTO:** address + phone (`+56 9 9320 9186`) + email + horario
@@ -214,7 +217,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 - `/noticias/[slug]`: **NewsArticle** (`datePublished`, `author`, `publisher`, `articleSection`) + **BreadcrumbList**
 
 **Sitemap (`sitemap.ts`):**
-- 109 URLs (10 estáticas + 3 servicios + 12 categorías + 76 productos + 8 noticias)
+- 104 URLs (10 estáticas + 3 servicios + 11 categorías + 72 productos + 8 noticias)
 - **Image Sitemap activado**: cada `<url>` incluye `images: [absoluteImg(...)]` (homepage tiene 2: og-image + banner; productos/servicios/noticias/categorías tienen 1 cada uno)
 - Helper `absoluteImg()` convierte paths relativos a URLs absolutas
 - `lastModified` usa una **fecha constante estable** (`new Date("2026-06-01...")`), no `new Date()` de build — evita un lastmod que cambia en cada deploy. Bump manual cuando cambie el catálogo. (Las noticias sí usan su fecha real `item.date`.)

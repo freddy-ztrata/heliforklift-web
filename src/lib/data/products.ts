@@ -3,7 +3,6 @@ import {
   deriveFuelType,
   electricForklifts,
   combustionForklifts,
-  hydrogenForklifts,
   reachTrucks,
   palletJacks,
   stackers,
@@ -63,16 +62,6 @@ export const productCategories: ProductCategory[] = [
     image: `${IMG}/k2-series-2-3.5t-combustion.webp`,
     featured: true,
     productCount: combustionForklifts.length,
-  },
-  {
-    id: "gruas-hidrogeno",
-    name: "Gruas Hidrogeno Verde",
-    slug: "gruas-hidrogeno-verde",
-    description:
-      "PIONEROS EN HIDROGENO VERDE -- Tecnologia de celda de combustible, cero emisiones.",
-    image: `${IMG}/cpd20-25-hidrogeno.webp`,
-    highlight: true,
-    productCount: hydrogenForklifts.length,
   },
   {
     id: "gruas-todo-terreno",
@@ -182,7 +171,7 @@ const featuredIds = [
   "g-series-1-3.5t-electric",     // Electric -- G Series flagship
   "k2-series-2-3.5t-combustion",  // Combustion -- K2 Series
   "g3-series-5-10t-combustion",   // Combustion -- heavy duty
-  "cpd20-25-hidrogeno",           // Hydrogen -- flagship green tech
+  "cbd15-20-transpaleta",         // Transpaleta -- la que se esta promocionando
 ];
 export const featuredProducts: Product[] = featuredIds
   .map((id) => allProducts.find((p) => p.id === id))
@@ -221,8 +210,6 @@ function countByFuel(slug: string): number {
         return p.fuelType === "Diesel" || p.fuelType === "Diesel / GLP";
       case "glp":
         return p.fuelType === "GLP" || p.fuelType === "Diesel / GLP";
-      case "hidrogeno":
-        return p.fuelType === "Hidrogeno";
       default:
         return false;
     }
@@ -263,17 +250,6 @@ export const fuelTypeCategories: (FuelTypeCategory & { productCount: number })[]
     color: "sky",
     productCount: countByFuel("glp"),
   },
-  {
-    id: "hidrogeno",
-    name: "Hidrogeno Verde",
-    slug: "hidrogeno",
-    description:
-      "Tecnologia de celda de combustible: cero emisiones, recarga en 3 minutos y operacion continua 24/7. El futuro es hoy.",
-    icon: "Atom",
-    image: `${IMG}/cpd40-50-hidrogeno.webp`,
-    color: "teal",
-    productCount: countByFuel("hidrogeno"),
-  },
 ];
 
 /** Filter products by fuel type slug */
@@ -286,8 +262,6 @@ export function getProductsByFuelType(tipo: string): FullProduct[] {
         return p.fuelType === "Diesel" || p.fuelType === "Diesel / GLP";
       case "glp":
         return p.fuelType === "GLP" || p.fuelType === "Diesel / GLP";
-      case "hidrogeno":
-        return p.fuelType === "Hidrogeno";
       default:
         return true;
     }
@@ -300,7 +274,6 @@ export function getFuelTypeName(slug: string): string {
     electrica: "Eléctricas",
     diesel: "Diésel",
     glp: "Gas (GLP)",
-    hidrogeno: "Hidrógeno Verde",
   };
   return map[slug] || "Todos";
 }

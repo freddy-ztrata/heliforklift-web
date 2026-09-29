@@ -21,8 +21,6 @@ function getCategoryHref(categoryId: string): string {
       return "/productos?tipo=electrica";
     case "gruas-combustion":
       return "/productos?tipo=diesel";
-    case "gruas-hidrogeno":
-      return "/productos?tipo=hidrogeno";
     default:
       return "/productos?tipo=todos";
   }
