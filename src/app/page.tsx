@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Navbar from "@/components/shared/Navbar";
 import Hero from "@/components/sections/Hero";
 import Footer from "@/components/sections/Footer";
-import TrustBar from "@/components/sections/TrustBar";
 import ProductShowcase from "@/components/sections/ProductShowcase";
 
 const Services = dynamic(() => import("@/components/sections/Services"));
@@ -23,7 +22,6 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <TrustBar />
         <ProductShowcase />
         <Services />
         <WhyChooseUs />
