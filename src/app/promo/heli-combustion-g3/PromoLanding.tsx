@@ -26,6 +26,7 @@ import HapeeForm from "@/components/shared/HapeeForm";
 
 const PRODUCT_IMAGE_HERO = "/assets/promo/heli-combustion-g3-hero.webp"; // Serie 7 & 10 TON (modelo 70)
 const PRODUCT_IMAGE_55 = "/assets/promo/heli-combustion-g3-side.webp"; // Serie 5 TON (modelo 55)
+const GAS_MODEL_IMAGE = "/assets/promo/heli-gasolina-25-hero.webp"; // G3 gasolina 2,5 t
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -362,6 +363,102 @@ function Hero() {
             <span className="text-xl">↓</span>
           </motion.div>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// DESTACADO — CPQYD25-RC6RG3 gasolina, primer bloque bajo el hero
+// ============================================================
+const gasModelSpecs = [
+  { label: "Capacidad", value: "2,5 t" },
+  { label: "Motor", value: "Nissan GK25" },
+  { label: "Mástil", value: "4.700 mm" },
+  { label: "Primera cuota", value: "A 90 días" },
+];
+
+function FeaturedGasModel() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section
+      ref={ref}
+      className="relative overflow-hidden border-y border-heli-yellow/25 bg-gradient-to-br from-heli-yellow/10 via-steel-950 to-steel-900 py-16 sm:py-20"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,rgba(245,166,35,0.14),transparent_55%)]" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="relative order-1 mx-auto aspect-square w-full max-w-md lg:order-none"
+          >
+            <div className="absolute inset-0 rounded-full bg-heli-yellow/20 blur-[90px]" />
+            <Image
+              src={GAS_MODEL_IMAGE}
+              alt="Grúa horquilla HELI gasolina CPQYD25-RC6RG3 de 2,5 toneladas"
+              fill
+              quality={90}
+              className="object-contain drop-shadow-[0_24px_40px_rgba(206,20,45,0.35)]"
+              sizes="(max-width: 1024px) 100vw, 40vw"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-heli-yellow/40 bg-heli-yellow/15 px-3 py-1.5">
+              <Fuel className="h-3.5 w-3.5 text-heli-yellow" />
+              <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
+                Destacado · Gas / Bencina
+              </span>
+            </div>
+
+            <p className="mt-4 text-xs font-bold uppercase tracking-widest text-steel-400">
+              Modelo
+            </p>
+            <h2 className="font-heading mt-1 text-[clamp(2.2rem,5vw,4rem)] leading-none text-white">
+              CPQYD25-RC6RG3
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-steel-300">
+              Grúa horquilla HELI a gasolina de{" "}
+              <strong className="text-white">2,5 toneladas</strong>, con motor{" "}
+              <strong className="text-white">Nissan GK25</strong> y mástil de{" "}
+              <strong className="text-white">4.700 mm</strong>. Primera cuota a{" "}
+              <strong className="text-white">90 días</strong>.
+            </p>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {gasModelSpecs.map((spec) => (
+                <div
+                  key={spec.label}
+                  className="rounded-2xl border border-white/[0.08] bg-steel-950/70 p-4"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
+                    {spec.label}
+                  </p>
+                  <p className="mt-1 text-base font-bold text-white sm:text-lg">
+                    {spec.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#cotiza"
+              className="group relative mt-6 inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
+              <span className="relative">Cotizar CPQYD25-RC6RG3</span>
+              <Zap className="relative h-4 w-4" />
+            </a>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1060,6 +1157,7 @@ export default function PromoLanding() {
   return (
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />
+      <FeaturedGasModel />
       <FeaturesGrid />
       <TwoModels />
       <Benefits />

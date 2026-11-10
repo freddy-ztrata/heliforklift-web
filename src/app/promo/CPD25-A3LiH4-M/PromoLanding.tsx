@@ -14,9 +14,9 @@ import {
   Mail,
   Check,
   Flame,
-  Clock,
+  CalendarDays,
   Zap,
-  Percent,
+  Banknote,
   Award,
   Building2,
   Battery,
@@ -28,91 +28,25 @@ import HapeeForm from "@/components/shared/HapeeForm";
 const PRODUCT_IMAGE_HERO = "/assets/promo/heli-h4-electrica-hero.webp";
 const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-h4-electrica-side.webp"; // con cargador de litio
 
-// Fin de la oferta: 15 de julio de 2026 (o hasta agotar stock).
-const OFFER_DEADLINE = "2026-07-15T23:59:59";
+const OFFER_PRICE = "$17.990.000";
+const OFFER_STOCK = "10 unidades o hasta agotar stock";
+const OFFER_VALIDITY = "válido del 01 al 30 de noviembre";
 
 // ============================================================
-// COUNTDOWN — sentido de urgencia (hacia el 15 de julio)
-// ============================================================
-function useCountdown(target: string) {
-  const [time, setTime] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-
-  useEffect(() => {
-    const targetTime = new Date(target).getTime();
-
-    const tick = () => {
-      const diff = targetTime - new Date().getTime();
-      if (diff <= 0) {
-        setTime({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        return;
-      }
-      setTime({
-        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((diff / (1000 * 60)) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    };
-
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, [target]);
-
-  return time;
-}
-
-// ============================================================
-// STOCK COUNTER — visualización de escasez (15 unidades)
-// ============================================================
-function StockCounter() {
-  const totalStock = 15;
-  const remainingStock = 15;
-
-  return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex flex-wrap justify-center gap-1">
-        {Array.from({ length: totalStock }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.04 }}
-            className={
-              i < remainingStock
-                ? "h-2 w-5 rounded-full bg-heli-red shadow-[0_0_12px_rgba(206,20,45,0.6)] transition-all"
-                : "h-2 w-5 rounded-full bg-steel-700 transition-all"
-            }
-          />
-        ))}
-      </div>
-      <p className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
-        Solo {remainingStock} unidades con -30% de descuento
-      </p>
-    </div>
-  );
-}
-
-// ============================================================
-// OFFER STRIP — gancho principal: -30% de descuento
+// OFFER STRIP — precio, stock y vigencia de noviembre
 // ============================================================
 function OfferStrip() {
   return (
     <div className="flex items-center gap-3 rounded-2xl border border-heli-yellow/30 bg-gradient-to-r from-heli-yellow/15 via-heli-yellow/5 to-transparent p-4 backdrop-blur">
       <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-heli-yellow/20 ring-1 ring-heli-yellow/40">
-        <Percent className="h-6 w-6 text-heli-yellow" />
+        <Banknote className="h-6 w-6 text-heli-yellow" />
       </div>
       <div>
         <p className="font-heading text-lg leading-none text-white sm:text-xl">
-          30% DE DESCUENTO
+          {OFFER_PRICE} <span className="text-base text-heli-yellow">+ IVA</span>
         </p>
         <p className="mt-1 text-xs text-steel-300">
-          En tu grúa eléctrica H4 2.5T · hasta el 15 de julio o agotar stock
+          {OFFER_STOCK} · {OFFER_VALIDITY}
         </p>
       </div>
     </div>
@@ -132,8 +66,6 @@ function Hero() {
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
-  const countdown = useCountdown(OFFER_DEADLINE);
-
   return (
     <section
       ref={heroRef}
@@ -152,7 +84,7 @@ function Hero() {
       />
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
-        {/* Top bar — logo + countdown */}
+        {/* Top bar — logo + vigencia (sin contador) */}
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -174,19 +106,10 @@ function Hero() {
           </Link>
 
           <div className="flex items-center gap-3 rounded-full border border-heli-red/30 bg-heli-red/10 px-4 py-2 backdrop-blur">
-            <Clock className="h-4 w-4 text-heli-red-light" />
+            <CalendarDays className="h-4 w-4 text-heli-red-light" />
             <span className="text-xs font-bold uppercase tracking-wider text-white">
-              Oferta termina el 15 jul
+              Válido del 01 al 30 de noviembre
             </span>
-            <div className="flex items-center gap-1 font-mono text-sm font-bold text-heli-red-light">
-              <span>{String(countdown.days).padStart(2, "0")}d</span>
-              <span>:</span>
-              <span>{String(countdown.hours).padStart(2, "0")}h</span>
-              <span>:</span>
-              <span>{String(countdown.minutes).padStart(2, "0")}m</span>
-              <span>:</span>
-              <span>{String(countdown.seconds).padStart(2, "0")}s</span>
-            </div>
           </div>
         </motion.div>
 
@@ -202,7 +125,7 @@ function Hero() {
             >
               <Flame className="h-3.5 w-3.5 text-heli-yellow" />
               <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
-                Oferta especial · -30% de descuento
+                Oferta noviembre · {OFFER_PRICE} + IVA
               </span>
             </motion.div>
 
@@ -289,7 +212,7 @@ function Hero() {
               </div>
             </motion.div>
 
-            {/* Offer strip — -30% */}
+            {/* Offer strip — precio de noviembre */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -311,20 +234,19 @@ function Hero() {
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-10 py-4 text-base font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:shadow-[0_0_40px_rgba(206,20,45,0.7)] hover:-translate-y-0.5"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
-                <span className="relative">Cotizar con -30%</span>
+                <span className="relative">Cotizar a {OFFER_PRICE} + IVA</span>
                 <Zap className="relative h-4 w-4" />
               </a>
             </motion.div>
 
-            {/* Stock counter */}
-            <motion.div
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="mt-6"
+              className="mt-4 text-xs font-bold uppercase tracking-widest text-heli-red-light"
             >
-              <StockCounter />
-            </motion.div>
+              {OFFER_STOCK} · {OFFER_VALIDITY}
+            </motion.p>
           </motion.div>
 
           {/* Imagen */}
@@ -355,13 +277,18 @@ function Hero() {
               transition={{ delay: 1, type: "spring", stiffness: 200 }}
               className="absolute right-0 top-4 sm:right-4 sm:top-8"
             >
-              <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-heli-red text-white shadow-2xl sm:h-32 sm:w-32">
-                <Percent className="h-5 w-5 sm:h-6 sm:w-6" />
-                <span className="font-heading text-2xl leading-none sm:text-3xl">
-                  -30%
+              <div className="flex h-28 w-28 flex-col items-center justify-center rounded-full bg-heli-red px-2 text-center text-white shadow-2xl sm:h-36 sm:w-36">
+                <span className="text-[9px] font-bold uppercase tracking-widest sm:text-[10px]">
+                  Noviembre
                 </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-                  Descuento
+                <span className="font-heading mt-1 text-sm leading-none sm:text-lg">
+                  {OFFER_PRICE}
+                </span>
+                <span className="mt-1 text-[10px] font-bold uppercase tracking-wider">
+                  + IVA
+                </span>
+                <span className="mt-1 text-[8px] font-semibold uppercase leading-tight tracking-wide text-white/90 sm:text-[9px]">
+                  10 un. · 01 al 30
                 </span>
               </div>
             </motion.div>
@@ -677,15 +604,15 @@ function Showcase() {
 }
 
 // ============================================================
-// BENEFITS — 4 grandes diferenciadores (incluye -30%)
+// BENEFITS — 4 grandes diferenciadores (precio de noviembre)
 // ============================================================
 const benefits = [
   {
-    icon: Percent,
-    title: "30% de descuento",
-    desc: "Aprovecha el 30% de descuento sobre el valor de lista en tu grúa eléctrica H4 2.5T. Oferta válida hasta el 15 de julio o hasta agotar stock.",
-    stat: "-30%",
-    statLabel: "hasta el 15 jul",
+    icon: Banknote,
+    title: "$17.990.000 + IVA",
+    desc: "Precio promocional de tu grúa eléctrica H4 2.5T. 10 unidades o hasta agotar stock. Válido del 01 al 30 de noviembre.",
+    stat: "01–30",
+    statLabel: "noviembre",
   },
   {
     icon: ShieldCheck,
@@ -704,9 +631,9 @@ const benefits = [
   {
     icon: Truck,
     title: "Entrega inmediata",
-    desc: "Stock disponible en Chile para entrega rápida. Solo 15 unidades con esta oferta — no esperes meses como con otras marcas.",
-    stat: "Stock",
-    statLabel: "disponible en Chile",
+    desc: "Stock disponible en Chile para entrega rápida. 10 unidades o hasta agotar stock, válido del 01 al 30 de noviembre.",
+    stat: "10 un.",
+    statLabel: "o hasta agotar stock",
   },
 ];
 
@@ -871,7 +798,7 @@ function ConversionForm() {
             <div className="inline-flex items-center gap-2 rounded-full border border-heli-yellow/30 bg-heli-yellow/10 px-3 py-1.5">
               <Flame className="h-3.5 w-3.5 text-heli-yellow" />
               <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
-                Aprovecha esta oferta especial
+                Válido del 01 al 30 de noviembre
               </span>
             </div>
 
@@ -882,17 +809,18 @@ function ConversionForm() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-steel-300">
-              Cotiza hoy tu grúa eléctrica HELI Serie H4 2.5T con{" "}
-              <strong className="text-white">30% de descuento</strong>. Completa
-              el formulario y te contactamos en menos de{" "}
+              Cotiza hoy tu grúa eléctrica HELI Serie H4 2.5T a{" "}
+              <strong className="text-white">{OFFER_PRICE} + IVA</strong>.{" "}
+              {OFFER_STOCK}, {OFFER_VALIDITY}. Completa el formulario y te
+              contactamos en menos de{" "}
               <strong className="text-white">2 horas hábiles</strong>.
             </p>
 
             <div className="mt-6 space-y-3">
               {[
                 {
-                  icon: Percent,
-                  text: "30% de descuento hasta el 15 de julio",
+                  icon: Banknote,
+                  text: `${OFFER_PRICE} + IVA · ${OFFER_STOCK} · ${OFFER_VALIDITY}`,
                 },
                 {
                   icon: Zap,
@@ -1050,7 +978,7 @@ function FloatingCTA() {
           className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-heli-red text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_20px_rgba(206,20,45,0.4)]"
         >
           <Zap className="h-4 w-4" />
-          Cotizar con -30%
+          Cotizar a {OFFER_PRICE} + IVA
         </a>
       </motion.div>
 
@@ -1072,7 +1000,7 @@ function FloatingCTA() {
           <span className="absolute inset-0 animate-ping rounded-full bg-heli-red/40" />
           <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
           <Zap className="relative h-5 w-5" />
-          <span className="relative">Cotizar con -30%</span>
+          <span className="relative">Cotizar a {OFFER_PRICE} + IVA</span>
         </a>
       </motion.div>
     </>

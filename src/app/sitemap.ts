@@ -84,11 +84,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Productos: cada uno con su imagen principal en el sitemap (Image Sitemap)
   const productPages: MetadataRoute.Sitemap = allProducts.map((product) => ({
     url: `${baseUrl}/productos/${product.slug}`,
-    lastModified: now,
+    lastModified:
+      product.slug === "k2-series-combustion-2-3.5-ton"
+        ? new Date("2026-11-01T00:00:00Z")
+        : now,
     changeFrequency: "monthly" as const,
     priority: 0.7,
     images: [absoluteImg(product.image)],
   }));
+
+  // Promos indexables de la grilla de noviembre 2026. El resto de /promo/*
+  // y todas las páginas de gracias siguen fuera del sitemap.
+  const indexedPromoPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/promo/CPD25-A3LiH4-M`,
+      lastModified: new Date("2026-11-01T00:00:00Z"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [absoluteImg("/assets/promo/heli-h4-electrica-hero.webp")],
+    },
+    {
+      url: `${baseUrl}/promo/heli-combustion-g3`,
+      lastModified: new Date("2026-11-01T00:00:00Z"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [absoluteImg("/assets/promo/heli-combustion-g3-hero.webp")],
+    },
+  ];
 
   // Servicios: con imagen
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
@@ -121,6 +143,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...servicePages,
     ...categoryPages,
     ...productPages,
+    ...indexedPromoPages,
     ...newsPages,
   ];
 }
