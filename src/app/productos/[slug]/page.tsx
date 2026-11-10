@@ -23,6 +23,9 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { contact } from "@/lib/data/company";
+import K2LowCostPromo from "./K2LowCostPromo";
+
+const K2_PROMO_SLUG = "k2-series-combustion-2-3.5-ton";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,9 +43,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${product.name} — Grúa Horquilla ${product.capacityRange}`
     : `${product.name} — ${product.capacityRange}`;
 
+  const description = `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta en Chile. Cotiza ahora.${
+    slug === K2_PROMO_SLUG
+      ? " Promo Low Cost: CPCD25-Q13K2 a $12.500.000 + IVA y CPCD30-Q13K2 a $13.490.000 + IVA, con financiamiento Progreso, tasa especial y primera cuota en 2027."
+      : ""
+  }`;
+
   return {
     title: pageTitle,
-    description: `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta en Chile. Cotiza ahora.`,
+    description,
     keywords: [
       product.name,
       `grúa horquilla ${product.type.toLowerCase()}`,
@@ -54,9 +63,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "arriendo grúa horquilla",
     ],
     alternates: { canonical: `/productos/${slug}` },
+    ...(slug === K2_PROMO_SLUG
+      ? { robots: { index: true, follow: true } }
+      : {}),
     openGraph: {
       title: pageTitle,
-      description: `${product.type} con capacidad ${product.capacityRange}. Repuestos originales y servicio técnico.`,
+      description: `${product.type} con capacidad ${product.capacityRange}. Repuestos originales y servicio técnico.${
+        slug === K2_PROMO_SLUG
+          ? " Promo Low Cost K2: CPCD25-Q13K2 a $12.500.000 + IVA y CPCD30-Q13K2 a $13.490.000 + IVA."
+          : ""
+      }`,
       images: [{ url: product.image, width: 600, height: 600, alt: product.name }],
       type: "website",
     },
@@ -89,6 +105,7 @@ export default async function ProductDetailPage({ params }: Props) {
       <ScrollProgress />
       <Navbar />
       <main className="pt-24">
+        {slug === K2_PROMO_SLUG && <K2LowCostPromo />}
         {/* Breadcrumb */}
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-2 text-sm text-steel-400">

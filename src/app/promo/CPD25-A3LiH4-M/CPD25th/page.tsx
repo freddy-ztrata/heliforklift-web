@@ -15,7 +15,7 @@ export default function GraciasH4Electrica25tPage() {
       productSlug="CPD25-A3LiH4-M"
       productName="Grúa Horquilla Eléctrica HELI Serie H4 2.5T (CPD25-A3LiH4-M)"
       productImage="/assets/promo/heli-h4-electrica-hero.webp"
-      productTagline="HELI H4 · Eléctrica 2.5T · -30% de descuento"
+      productTagline="HELI H4 · Eléctrica 2.5T · $17.990.000 + IVA"
     />
   );
 }
