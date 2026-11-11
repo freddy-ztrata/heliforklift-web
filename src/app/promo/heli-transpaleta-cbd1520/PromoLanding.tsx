@@ -219,7 +219,7 @@ function Hero() {
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="font-heading text-[clamp(2.5rem,5vw,4rem)] leading-none text-white">
-                  $950.000
+                  $990.000
                 </span>
                 <span className="text-base font-bold text-steel-300">
                   + IVA
