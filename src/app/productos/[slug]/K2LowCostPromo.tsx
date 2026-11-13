@@ -13,7 +13,7 @@ const models = [
   {
     code: "CPCD25-Q13K2",
     capacity: "2,5 t",
-    price: "$12.500.000",
+    price: "$11.490.000",
     // Mismo recorte de la promo 2.5T. En el archivo la calcomanía dice 30;
     // no hay un render K2 marcado 25 en el repo.
     image: "/assets/promo/heli-diesel-k2-25t-hero.webp",
@@ -21,7 +21,7 @@ const models = [
   {
     code: "CPCD30-Q13K2",
     capacity: "3,0 t",
-    price: "$13.490.000",
+    price: "$12.490.000",
     // Recorte con calcomanía 30. El hero frontal de la serie trae un 35.
     image: "/assets/promo/heli-diesel-k2-side.webp",
   },

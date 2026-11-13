@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const description = `${product.name}: ${product.description || product.type + " con capacidad " + product.capacityRange}. Venta en Chile. Cotiza ahora.${
     slug === K2_PROMO_SLUG
-      ? " Promo Low Cost: CPCD25-Q13K2 a $12.500.000 + IVA y CPCD30-Q13K2 a $13.490.000 + IVA, con financiamiento Progreso, tasa especial y primera cuota en 2027."
+      ? " Promo Low Cost: CPCD25-Q13K2 a $11.490.000 + IVA y CPCD30-Q13K2 a $12.490.000 + IVA, con financiamiento Progreso, tasa especial y primera cuota en 2027."
       : ""
   }`;
 
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: pageTitle,
       description: `${product.type} con capacidad ${product.capacityRange}. Repuestos originales y servicio técnico.${
         slug === K2_PROMO_SLUG
-          ? " Promo Low Cost K2: CPCD25-Q13K2 a $12.500.000 + IVA y CPCD30-Q13K2 a $13.490.000 + IVA."
+          ? " Promo Low Cost K2: CPCD25-Q13K2 a $11.490.000 + IVA y CPCD30-Q13K2 a $12.490.000 + IVA."
           : ""
       }`,
       images: [{ url: product.image, width: 600, height: 600, alt: product.name }],
