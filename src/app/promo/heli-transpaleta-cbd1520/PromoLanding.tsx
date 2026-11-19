@@ -225,6 +225,9 @@ function Hero() {
                   + IVA
                 </span>
               </div>
+              <span className="text-xs text-steel-400">
+                Stock disponible para entrega inmediata · Chile
+              </span>
               <span className="text-xs leading-relaxed text-steel-300">
                 El precio aplica con entrega en la sucursal HELI Santiago. El
                 envío a regiones tiene otro valor.

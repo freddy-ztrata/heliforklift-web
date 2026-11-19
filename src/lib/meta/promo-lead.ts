@@ -7,9 +7,13 @@ import { trackMetaEvent, userDataFromUrl, type MetaUserData } from "./track";
  *
  * Se dispara al montar el componente, así que corre igual si la URL trae
  * UTM, fbclid u otros parámetros. Meta recibe el Lead por Pixel y por CAPI
- * con el mismo eventID. GA4 recibe `generate_lead` directo por gtag (el
- * contenedor GTM no decide si el evento sale). `heli_lead` queda en el
- * dataLayer para Google Ads / GTM, con el mismo form_id, slug y modelo.
+ * con el mismo eventID. GA4 recibe `generate_lead` una sola vez, por
+ * gtag('event'): el snippet directo de G-3HLYKF62PW lo procesa. GTM
+ * (GTM-M9FW8BM3) también carga esa etiqueta, pero sus eventos de formulario
+ * son dg_envio_* por URL; no hay activador para generate_lead, así que un
+ * push {event:'generate_lead'} no llega a GA4 y no se envía.
+ * `heli_lead` queda en el dataLayer para Google Ads / GTM, con form_id,
+ * slug y modelo.
  *
  * La conversión de Google Ads (gtag `conversion`) solo se envía si existen
  * NEXT_PUBLIC_GADS_ID y NEXT_PUBLIC_GADS_LEAD_LABEL. Sin ellas no se llama
@@ -60,9 +64,10 @@ export function firePromoLead({
 
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ event: "heli_lead", ...payload });
-  // Mismo nombre que ya usa /cotiza/thanks-page, para que GA4/GTM lo vean
-  // aunque el disparador de GTM no sea una URL exacta.
-  window.dataLayer.push({ event: "generate_lead", ...payload });
+  // Una sola vez. gtag.js (G-3HLYKF62PW en el layout) envía el hit. No se
+  // hace dataLayer.push({event:'generate_lead'}): GTM no tiene activador
+  // para ese nombre, así que ese push no llegaría a GA4 y, si alguien lo
+  // agrega después, se contaría dos veces junto con este gtag.
   window.gtag?.("event", "generate_lead", payload);
 
   const gadsId = process.env.NEXT_PUBLIC_GADS_ID;
