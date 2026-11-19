@@ -15,7 +15,21 @@ import {
 } from "lucide-react";
 import HapeeForm from "@/components/shared/HapeeForm";
 
-const PRODUCT_IMAGE = "/assets/legacy/products/cdd15j-apilador.webp";
+const PRODUCT_IMAGE_HERO = "/assets/promo/heli-apilador-cdd15j-hero.webp";
+const GALLERY = [
+  {
+    src: "/assets/promo/heli-apilador-cdd15j-lateral.webp",
+    alt: "Apilador eléctrico HELI CDD15J-LI, vista lateral",
+  },
+  {
+    src: "/assets/promo/heli-apilador-cdd15j-frontal.webp",
+    alt: "Apilador eléctrico HELI CDD15J-LI, vista frontal",
+  },
+  {
+    src: "/assets/promo/heli-apilador-cdd15j-bodega.webp",
+    alt: "Apilador eléctrico HELI CDD15J-LI en bodega",
+  },
+] as const;
 
 const DELIVERY_NOTE =
   "El precio aplica con entrega en la sucursal HELI Santiago. El envío a regiones tiene otro valor.";
@@ -147,17 +161,17 @@ function Hero() {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 aspect-square w-full max-w-[17rem] justify-self-center sm:max-w-sm lg:order-2 lg:max-w-xl lg:justify-self-end"
+            className="relative order-1 aspect-[5/6] w-[min(72vw,16rem)] justify-self-center sm:w-[min(60vw,20rem)] lg:order-2 lg:w-full lg:max-w-md lg:justify-self-end"
           >
-            <div className="relative h-full w-full overflow-hidden rounded-3xl bg-white">
+            <div className="relative h-full w-full overflow-hidden rounded-3xl">
               <Image
-                src={PRODUCT_IMAGE}
-                alt="Apilador eléctrico HELI CDD15J-LI"
+                src={PRODUCT_IMAGE_HERO}
+                alt="Apilador eléctrico HELI CDD15J-LI, vista 3/4 en bodega"
                 fill
                 priority
                 quality={90}
-                className="object-contain p-6"
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-contain object-center"
+                sizes="(max-width: 1024px) 72vw, 28rem"
               />
             </div>
           </motion.div>
@@ -238,6 +252,30 @@ function FeaturesGrid() {
             </motion.div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function Gallery() {
+  return (
+    <section aria-label="Fotos del apilador eléctrico HELI CDD15J-LI" className="bg-steel-950 py-8 sm:py-12">
+      <div className="mx-auto flex max-w-7xl snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:px-6 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-8">
+        {GALLERY.map((shot) => (
+          <div
+            key={shot.src}
+            className="relative aspect-[5/6] w-[78vw] max-w-sm shrink-0 snap-center overflow-hidden rounded-3xl lg:w-full lg:max-w-none"
+          >
+            <Image
+              src={shot.src}
+              alt={shot.alt}
+              fill
+              quality={85}
+              className="object-contain object-center"
+              sizes="(max-width: 1024px) 78vw, 30vw"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -406,6 +444,7 @@ export default function PromoLanding() {
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />
       <FeaturesGrid />
+      <Gallery />
       <ConversionForm />
       <FooterMini />
       <FloatingCTA />
