@@ -14,7 +14,7 @@ export default function GraciasApiladorCdd15jPage() {
     <PromoThankYou
       productSlug="heli-apilador-cdd15j"
       productName="Apilador eléctrico HELI CDD15J-LI"
-      productImage="/assets/legacy/products/cdd15j-apilador.webp"
+      productImage="/assets/promo/heli-apilador-cdd15j-hero.webp"
       productTagline="CDD15J-LI · 1.500 kg · $1.990.000 + IVA"
     />
   );

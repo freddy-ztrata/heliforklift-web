@@ -15,10 +15,10 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-apilador-cdd15j",
     images: [
       {
-        url: "/assets/legacy/products/cdd15j-apilador.webp",
-        width: 1200,
-        height: 630,
-        alt: "Apilador eléctrico HELI CDD15J-LI",
+        url: "/assets/promo/heli-apilador-cdd15j-hero.webp",
+        width: 1500,
+        height: 1800,
+        alt: "Apilador eléctrico HELI CDD15J-LI, vista 3/4 en bodega",
       },
     ],
   },
