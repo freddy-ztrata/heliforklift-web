@@ -201,7 +201,7 @@ function Hero() {
             >
               Grúa horquilla HELI Serie K2{" "}
               <strong className="text-white">CPCD25-Q13K2</strong> de{" "}
-              <strong className="text-white">3,5 toneladas</strong>. Motor{" "}
+              <strong className="text-white">2,5 toneladas (2.500 kg)</strong>. Motor{" "}
               <strong className="text-white">Quanchai</strong> con transmisión{" "}
               <strong className="text-white">powershift</strong>, altura de{" "}
               <strong className="text-white">4.700 mm</strong> y bajo consumo
@@ -224,7 +224,9 @@ function Hero() {
                   </p>
                   <span className="text-base font-bold text-steel-300">+ IVA</span>
                 </div>
-                <p className="mt-2 text-sm text-steel-300">Capacidad 3,5 t</p>
+                <p className="mt-2 text-sm text-steel-300">
+                  Capacidad 2,5 toneladas (2.500 kg)
+                </p>
               </div>
               <div className="mt-3 rounded-2xl border border-heli-yellow/30 bg-heli-yellow/10 p-4 backdrop-blur">
                 <p className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
@@ -277,7 +279,7 @@ function Hero() {
             <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE_FRONT}
-                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD25-Q13K2 — 3,5 toneladas"
+                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD25-Q13K2 — 2,5 toneladas (2.500 kg)"
                 fill
                 priority
                 quality={90}
@@ -342,8 +344,8 @@ const features = [
   },
   {
     icon: Weight,
-    title: "Capacidad 3,5 t",
-    desc: "Grúa horquilla CPCD25-Q13K2 de 3,5 toneladas.",
+    title: "Capacidad 2,5 toneladas",
+    desc: "Grúa horquilla CPCD25-Q13K2 de 2,5 toneladas (2.500 kg).",
   },
   {
     icon: Disc3,
@@ -593,7 +595,7 @@ function Showcase() {
           className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6"
         >
           {[
-            { value: "3,5 t", label: "Capacidad" },
+            { value: "2.500 kg", label: "Capacidad" },
             { value: "4.700", label: "Altura mm" },
             { value: "Quanchai", label: "Motor" },
             { value: "180+", label: "Países" },
@@ -760,7 +762,7 @@ function UseCases() {
               <span className="text-heli-red">INDUSTRIA</span>
             </h2>
             <p className="mt-4 text-base text-steel-400">
-              La grúa horquilla HELI Diesel Serie K2 CPCD25-Q13K2 de 3,5 t
+              La grúa horquilla HELI Diesel Serie K2 CPCD25-Q13K2 de 2,5 toneladas (2.500 kg)
               está pensada para operaciones que requieren rendimiento
               sostenido y bajo consumo de combustible.
             </p>

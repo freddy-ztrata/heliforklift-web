@@ -141,7 +141,7 @@ function Hero() {
             >
               <Flame className="h-3.5 w-3.5 text-heli-yellow" />
               <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
-                CPCD30-Q13K2 · 3,5 toneladas
+                CPCD30-Q13K2 · 3 toneladas (3.000 kg)
               </span>
             </motion.div>
 
@@ -168,7 +168,7 @@ function Hero() {
             >
               Grúa horquilla HELI Serie K2{" "}
               <strong className="text-white">CPCD30-Q13K2</strong> de{" "}
-              <strong className="text-white">3,5 toneladas</strong>. Motor{" "}
+              <strong className="text-white">3 toneladas (3.000 kg)</strong>. Motor{" "}
               <strong className="text-white">Quanchai</strong> con transmisión{" "}
               <strong className="text-white">powershift</strong>, altura de{" "}
               <strong className="text-white">4.700 mm</strong> y bajo consumo
@@ -191,7 +191,9 @@ function Hero() {
                   </p>
                   <span className="text-base font-bold text-steel-300">+ IVA</span>
                 </div>
-                <p className="mt-2 text-sm text-steel-300">Capacidad 3,5 t</p>
+                <p className="mt-2 text-sm text-steel-300">
+                  Capacidad 3 toneladas (3.000 kg)
+                </p>
               </div>
               <div className="mt-3 rounded-2xl border border-heli-yellow/30 bg-heli-yellow/10 p-4 backdrop-blur">
                 <p className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
@@ -235,7 +237,7 @@ function Hero() {
             <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE_FRONT}
-                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD30-Q13K2 — 3,5 toneladas"
+                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD30-Q13K2 — 3 toneladas (3.000 kg)"
                 fill
                 priority
                 quality={90}
@@ -252,10 +254,10 @@ function Hero() {
             >
               <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-heli-red text-white shadow-2xl sm:h-32 sm:w-32">
                 <span className="font-heading text-2xl leading-none sm:text-3xl">
-                  3,5 t
+                  3 t
                 </span>
                 <span className="mt-1 text-center text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-                  CPCD30
+                  3.000 kg
                 </span>
               </div>
             </motion.div>
@@ -296,8 +298,8 @@ const features = [
   },
   {
     icon: Weight,
-    title: "Capacidad 3,5 t",
-    desc: "Grúa horquilla CPCD30-Q13K2 de 3,5 toneladas.",
+    title: "Capacidad 3 toneladas",
+    desc: "Grúa horquilla CPCD30-Q13K2 de 3 toneladas (3.000 kg).",
   },
   {
     icon: Disc3,
@@ -547,7 +549,7 @@ function Showcase() {
           className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6"
         >
           {[
-            { value: "3,5 t", label: "Capacidad" },
+            { value: "3.000 kg", label: "Capacidad" },
             { value: "4.700", label: "Altura mm" },
             { value: "Quanchai", label: "Motor" },
             { value: "180+", label: "Países" },
@@ -714,7 +716,7 @@ function UseCases() {
               <span className="text-heli-red">INDUSTRIA</span>
             </h2>
             <p className="mt-4 text-base text-steel-400">
-              La grúa horquilla HELI Diesel Serie K2 CPCD30-Q13K2 de 3,5 t
+              La grúa horquilla HELI Diesel Serie K2 CPCD30-Q13K2 de 3 toneladas (3.000 kg)
               está pensada para operaciones que requieren rendimiento
               sostenido y bajo consumo de combustible.
             </p>
@@ -776,7 +778,7 @@ function ConversionForm() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-steel-300">
-              Cotiza el CPCD30-Q13K2 de 3,5 t a{" "}
+              Cotiza el CPCD30-Q13K2 de 3 toneladas (3.000 kg) a{" "}
               <strong className="text-white">$12.490.000 + IVA</strong>.
               Alianza con Progreso: tasa especial y primera cuota en 2027.
               Completa el formulario y te contactamos en menos de{" "}
