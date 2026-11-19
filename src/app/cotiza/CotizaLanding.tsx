@@ -1526,7 +1526,7 @@ export default function CotizaLanding() {
   // Meta Pixel — ViewContent al cargar la landing de marca (Google Ads).
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "cotiza_brand",
         content_category: "general",
       });

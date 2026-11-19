@@ -184,13 +184,13 @@ function Hero() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="font-heading mt-4 text-[clamp(2.5rem,7vw,5.5rem)] font-black leading-[0.9] tracking-tight text-white"
             >
-              GRÚAS HORQUILLA
+              GRÚA HORQUILLA
               <br />
               <span className="bg-gradient-to-r from-heli-red-light via-heli-red to-heli-red-dark bg-clip-text text-transparent">
-                HELI DIESEL
+                HELI DIESEL K2
               </span>
               <br />
-              <span className="text-heli-yellow">SERIE K2</span>
+              <span className="text-heli-yellow">CPCD25-Q13K2</span>
             </motion.h1>
 
             <motion.p
@@ -199,47 +199,40 @@ function Hero() {
               transition={{ delay: 0.4 }}
               className="mt-5 max-w-xl text-base leading-relaxed text-steel-300 sm:text-lg"
             >
-              Máxima productividad, menor costo operativo y la confiabilidad
-              que tu operación necesita. Disponibles en{" "}
-              <strong className="text-white">2.5, 3.0 y 3.5 toneladas</strong>{" "}
-              para adaptarse a cualquier carga.
+              Grúa horquilla HELI Serie K2{" "}
+              <strong className="text-white">CPCD25-Q13K2</strong> de{" "}
+              <strong className="text-white">3,5 toneladas</strong>. Motor{" "}
+              <strong className="text-white">Quanchai</strong> con transmisión{" "}
+              <strong className="text-white">powershift</strong>, altura de{" "}
+              <strong className="text-white">4.700 mm</strong> y bajo consumo
+              de combustible.
             </motion.p>
 
-            {/* Tonelajes disponibles */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-6"
+              className="mt-6 max-w-md"
             >
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-heli-red-light">
-                Capacidades disponibles
-              </p>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-4 backdrop-blur">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    2.5
+              <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-5 backdrop-blur">
+                <p className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
+                  Precio
+                </p>
+                <div className="mt-1 flex items-baseline gap-2">
+                  <p className="font-heading text-[clamp(2.2rem,5vw,3.4rem)] leading-none text-white">
+                    $11.490.000
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
+                  <span className="text-base font-bold text-steel-300">+ IVA</span>
                 </div>
-                <div className="rounded-2xl border border-heli-red/40 bg-gradient-to-br from-heli-red/30 via-heli-red/15 to-transparent p-4 backdrop-blur ring-1 ring-heli-red/30">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    3.0
-                  </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-4 backdrop-blur">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    3.5
-                  </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
-                </div>
+                <p className="mt-2 text-sm text-steel-300">Capacidad 3,5 t</p>
+              </div>
+              <div className="mt-3 rounded-2xl border border-heli-yellow/30 bg-heli-yellow/10 p-4 backdrop-blur">
+                <p className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
+                  Alianza con Progreso
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-white">
+                  Tasa especial y primera cuota en 2027.
+                </p>
               </div>
             </motion.div>
 
@@ -284,7 +277,7 @@ function Hero() {
             <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE_FRONT}
-                alt="Grúa Horquilla HELI Diesel Serie K2 — 2.5/3.0/3.5 toneladas"
+                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD25-Q13K2 — 3,5 toneladas"
                 fill
                 priority
                 quality={90}
@@ -344,13 +337,13 @@ function Hero() {
 const features = [
   {
     icon: Fuel,
-    title: "Motor Diesel",
-    desc: "Potencia y eficiencia para trabajo pesado. Tecnología robusta probada en operaciones intensivas.",
+    title: "Motor Quanchai",
+    desc: "Transmisión powershift y bajo consumo de combustible.",
   },
   {
     icon: Weight,
-    title: "2.5 / 3.0 / 3.5 Tons",
-    desc: "Tres capacidades disponibles para adaptarse a cualquier necesidad de carga.",
+    title: "Capacidad 3,5 t",
+    desc: "Grúa horquilla CPCD25-Q13K2 de 3,5 toneladas.",
   },
   {
     icon: Disc3,
@@ -359,8 +352,8 @@ const features = [
   },
   {
     icon: ArrowUpDown,
-    title: "Mástil triple 4.7 m",
-    desc: "Mayor altura de elevación para optimizar tu operación en bodegas y centros de distribución.",
+    title: "Altura 4.700 mm",
+    desc: "Mástil de 4.700 mm para la operación en bodega.",
   },
   {
     icon: Move,
@@ -449,13 +442,13 @@ function Showcase() {
   const specs = [
     {
       icon: ArrowUpDown,
-      title: "Mástil triple 4.7m",
-      desc: "Mayor altura de elevación para optimizar tu operación en bodegas modernas.",
+      title: "Altura 4.700 mm",
+      desc: "Mástil de 4.700 mm para optimizar tu operación en bodegas.",
     },
     {
       icon: Fuel,
-      title: "Motor Diesel",
-      desc: "Potencia y eficiencia para trabajo pesado. Tecnología robusta probada.",
+      title: "Motor Quanchai",
+      desc: "Transmisión powershift y bajo consumo de combustible.",
     },
     {
       icon: Disc3,
@@ -535,7 +528,7 @@ function Showcase() {
               >
                 <Image
                   src={PRODUCT_IMAGE_SIDE}
-                  alt="HELI Diesel Serie K2 vista lateral"
+                  alt="HELI Diesel Serie K2 CPCD25-Q13K2 vista lateral"
                   fill
                   quality={90}
                   className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
@@ -600,9 +593,9 @@ function Showcase() {
           className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6"
         >
           {[
-            { value: "3.5T", label: "Capacidad max" },
-            { value: "4.7m", label: "Altura mástil" },
-            { value: "Diesel", label: "Tipo motor" },
+            { value: "3,5 t", label: "Capacidad" },
+            { value: "4.700", label: "Altura mm" },
+            { value: "Quanchai", label: "Motor" },
             { value: "180+", label: "Países" },
           ].map((s) => (
             <div
@@ -743,7 +736,7 @@ function UseCases() {
       >
         <Image
           src={PRODUCT_IMAGE_FRONT}
-          alt="Grúa Horquilla HELI Diesel K2 — vista frontal"
+          alt="Grúa Horquilla HELI Diesel K2 CPCD25-Q13K2 — vista frontal"
           fill
           quality={85}
           className="object-contain"
@@ -767,9 +760,9 @@ function UseCases() {
               <span className="text-heli-red">INDUSTRIA</span>
             </h2>
             <p className="mt-4 text-base text-steel-400">
-              Las HELI Diesel Serie K2 son la solución versátil para
-              operaciones que requieren rendimiento sostenido, máxima carga
-              y bajo costo operativo. Disponibles en 3 capacidades.
+              La grúa horquilla HELI Diesel Serie K2 CPCD25-Q13K2 de 3,5 t
+              está pensada para operaciones que requieren rendimiento
+              sostenido y bajo consumo de combustible.
             </p>
           </div>
 
@@ -830,9 +823,11 @@ function ConversionForm() {
 
             <p className="mt-5 text-base leading-relaxed text-steel-300">
               Solo <strong className="text-white">15 unidades disponibles</strong>{" "}
-              de la nueva serie K2. Cuando se acaben, cambian las condiciones
-              y disponibilidad. Completa el formulario y te contactamos en
-              menos de <strong className="text-white">2 horas hábiles</strong>.
+              del CPCD25-Q13K2, a{" "}
+              <strong className="text-white">$11.490.000 + IVA</strong>.
+              Alianza con Progreso: tasa especial y primera cuota en 2027.
+              Completa el formulario y te contactamos en menos de{" "}
+              <strong className="text-white">2 horas hábiles</strong>.
             </p>
 
             <div className="mt-6 space-y-3">
@@ -1034,7 +1029,7 @@ export default function PromoLanding() {
   // Meta Pixel — disparar ViewContent custom al cargar la landing
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "promo_k2",
         content_category: "diesel",
         content_ids: ["heli-diesel-k2"],

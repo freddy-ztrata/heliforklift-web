@@ -1014,7 +1014,7 @@ export default function PromoLanding() {
   // Meta Pixel — disparar ViewContent custom al cargar la landing
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "promo_h4_electrica_25t",
         content_category: "electrica",
         content_ids: ["CPD25-A3LiH4-M"],

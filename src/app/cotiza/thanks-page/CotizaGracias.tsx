@@ -16,7 +16,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import { trackMetaEvent, userDataFromUrl } from "@/lib/meta/track";
+import { firePromoLead } from "@/lib/meta/promo-lead";
 
 const nextSteps = [
   {
@@ -61,16 +61,13 @@ export default function CotizaGracias() {
     if (fired.current) return;
     fired.current = true;
 
-    void trackMetaEvent({
-      eventName: "Lead",
-      customData: {
-        content_name: "cotiza_brand",
-        content_category: "general",
-      },
-      userData: userDataFromUrl(),
+    firePromoLead({
+      contentName: "cotiza_brand",
+      contentCategory: "general",
+      formId: "137",
+      slug: "cotiza",
+      model: "Cotiza Google Ads",
     });
-
-    window.dataLayer?.push({ event: "generate_lead", lead_source: "cotiza_lp" });
   }, []);
 
   return (

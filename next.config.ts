@@ -43,6 +43,29 @@ const nextConfig: NextConfig = {
       destination: "/promo/CPD25-A3LiH4-M",
       permanent: false,
     },
+    // Campañas noviembre 2026: una máquina por landing. Las URLs viejas
+    // que mezclaban o duplicaban el mismo equipo redirigen a la que queda.
+    // statusCode 301 (y no permanent: true, que en Next responde 308).
+    {
+      source: "/promo/heli-diesel-k2-25t",
+      destination: "/promo/heli-diesel-k2",
+      statusCode: 301,
+    },
+    {
+      source: "/promo/heli-diesel-k2-25t/gracias",
+      destination: "/promo/heli-diesel-k2/gracias",
+      statusCode: 301,
+    },
+    {
+      source: "/promo/heli-gasolina-25",
+      destination: "/promo/heli-combustion-g3",
+      statusCode: 301,
+    },
+    {
+      source: "/promo/heli-gasolina-25/gracias",
+      destination: "/promo/heli-combustion-g3/gracias",
+      statusCode: 301,
+    },
     // La G3 4-5 TON estaba mal clasificada como Gas (GLP): la maquina es
     // electrica (CPD40-50-GD3). Cambio el slug y redirijo la URL antigua,
     // que estaba indexada en el sitemap.

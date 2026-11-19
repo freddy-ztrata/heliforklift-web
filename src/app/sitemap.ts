@@ -105,10 +105,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/promo/heli-combustion-g3`,
-      lastModified: new Date("2026-11-01T00:00:00Z"),
+      lastModified: new Date("2026-11-19T00:00:00Z"),
       changeFrequency: "monthly",
       priority: 0.8,
-      images: [absoluteImg("/assets/promo/heli-combustion-g3-hero.webp")],
+      images: [absoluteImg("/assets/promo/heli-gasolina-25-hero.webp")],
     },
   ];
 

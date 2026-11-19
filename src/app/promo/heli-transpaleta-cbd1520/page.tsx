@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import PromoLanding from "./PromoLanding";
 
 export const metadata: Metadata = {
-  title: "Transpaleta Eléctrica HELI 2 Toneladas — Oferta Limitada $990.000 + IVA",
+  title: "Transpaleta Eléctrica HELI CBD20-BLIH — $990.000 + IVA",
   description:
-    "Transpaleta Eléctrica HELI CBD15/20 de 2 toneladas con batería de litio 48V/20Ah, controlador Smart y horquillas de 1150 x 685 mm. La más potente del mercado. Oferta especial $990.000 + IVA. Stock disponible para entrega inmediata en Chile.",
+    "Transpaleta eléctrica HELI CBD20-BLIH de 2 toneladas (2.000 kg) con batería Litio-ion 24V. $990.000 + IVA. El precio aplica con entrega en la sucursal HELI Santiago. El envío a regiones tiene otro valor.",
   alternates: { canonical: "/promo/heli-transpaleta-cbd1520" },
   robots: { index: false, follow: true },
   openGraph: {
-    title: "Transpaleta HELI 2 Tons · $990.000 + IVA — Oferta Limitada",
+    title: "Transpaleta HELI CBD20-BLIH · $990.000 + IVA",
     description:
-      "Batería de litio 48V/20Ah, controlador Smart, horquillas 1150 x 685 mm. La más potente del mercado.",
+      "Litio-ion 24V, 2 toneladas. El precio aplica con entrega en la sucursal HELI Santiago. El envío a regiones tiene otro valor.",
     type: "website",
     url: "https://heliforklift.cl/promo/heli-transpaleta-cbd1520",
     images: [
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
         url: "/assets/promo/heli-transpaleta-cbd1520-hero.webp",
         width: 1200,
         height: 630,
-        alt: "Transpaleta Eléctrica HELI CBD15/20 — 2 toneladas",
+        alt: "Transpaleta eléctrica HELI CBD20-BLIH — 2 toneladas",
       },
     ],
   },

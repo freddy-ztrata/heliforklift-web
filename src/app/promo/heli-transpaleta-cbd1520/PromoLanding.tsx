@@ -175,7 +175,7 @@ function Hero() {
             >
               <Battery className="h-3.5 w-3.5 text-emerald-400" />
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">
-                Litio 48V · La más potente del mercado
+                CBD20-BLIH · Litio-ion 24V
               </span>
             </motion.div>
 
@@ -191,7 +191,7 @@ function Hero() {
                 ELÉCTRICA HELI
               </span>
               <br />
-              <span className="text-heli-yellow">2 TONS</span>
+              <span className="text-heli-yellow">CBD20-BLIH</span>
             </motion.h1>
 
             <motion.p
@@ -227,6 +227,10 @@ function Hero() {
               </div>
               <span className="text-xs text-steel-400">
                 Stock disponible para entrega inmediata · Chile
+              </span>
+              <span className="text-xs leading-relaxed text-steel-300">
+                El precio aplica con entrega en la sucursal HELI Santiago. El
+                envío a regiones tiene otro valor.
               </span>
             </motion.div>
 
@@ -271,7 +275,7 @@ function Hero() {
             <div className="relative h-full w-full">
               <Image
                 src={PRODUCT_IMAGE_HERO}
-                alt="Transpaleta Eléctrica HELI CBD15/20 — 2 toneladas"
+                alt="Transpaleta eléctrica HELI CBD20-BLIH — 2 toneladas"
                 fill
                 priority
                 quality={90}
@@ -293,7 +297,7 @@ function Hero() {
                   LITIO
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-                  48V · 20Ah
+                  Litio-ion 24V
                 </span>
               </div>
             </motion.div>
@@ -334,8 +338,8 @@ const features = [
   },
   {
     icon: BatteryCharging,
-    title: "Batería de litio 48V/20Ah",
-    desc: "Alta autonomía y carga rápida. Sin mantenimiento como las baterías de plomo-ácido.",
+    title: "Litio-ion 24V",
+    desc: "Batería de litio y carga rápida.",
   },
   {
     icon: Ruler,
@@ -434,8 +438,8 @@ function Showcase() {
   const specs = [
     {
       icon: BatteryCharging,
-      title: "Litio 48V / 20Ah",
-      desc: "Carga rápida sin memoria. Hasta 8 horas de operación continua sin recarga.",
+      title: "Litio-ion 24V",
+      desc: "Batería de litio y carga rápida.",
     },
     {
       icon: Cpu,
@@ -520,7 +524,7 @@ function Showcase() {
               >
                 <Image
                   src={PRODUCT_IMAGE_SIDE}
-                  alt="Transpaleta Eléctrica HELI CBD15/20 vista lateral"
+                  alt="Transpaleta eléctrica HELI CBD20-BLIH vista lateral"
                   fill
                   quality={90}
                   className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
@@ -586,7 +590,7 @@ function Showcase() {
         >
           {[
             { value: "2T", label: "Capacidad" },
-            { value: "48V", label: "Batería litio" },
+            { value: "24V", label: "Litio-ion" },
             { value: "1150mm", label: "Horquillas" },
             { value: "180+", label: "Países" },
           ].map((s) => (
@@ -736,7 +740,7 @@ function UseCases() {
               <span className="text-heli-red">OPERACIÓN</span>
             </h2>
             <p className="mt-4 text-base text-steel-400">
-              La Transpaleta Eléctrica HELI CBD15/20 es la solución silenciosa,
+              La transpaleta eléctrica HELI CBD20-BLIH es la solución silenciosa,
               limpia y eficiente para mover pallets en cualquier ambiente —
               desde tiendas hasta bodegas industriales.
             </p>
@@ -767,7 +771,7 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-// Formulario de Hapee "Promo Transpaleta CBD15/20 — HELI". Redirige a /promo/heli-transpaleta-cbd1520/gracias,
+// Formulario de Hapee 128. Redirige a /promo/heli-transpaleta-cbd1520/gracias,
 // donde se dispara el Lead del Pixel.
 const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia";
 
@@ -1002,7 +1006,7 @@ export default function PromoLanding() {
   // Meta Pixel — disparar ViewContent custom al cargar la landing
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "promo_transpaleta_2t",
         content_category: "transpaleta_electrica",
         content_ids: ["heli-transpaleta-cbd1520"],
