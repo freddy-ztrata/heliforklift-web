@@ -14,23 +14,92 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import { trackMetaEvent, userDataFromUrl } from "@/lib/meta/track";
+import { firePromoLead } from "@/lib/meta/promo-lead";
 
-// Mapeo de slugs a content_name para Meta Pixel.
-// `value: 0` en TODAS las landings => se dispara Lead SIN value/currency: Meta
-// optimiza por VOLUMEN de leads, no por valor monetario. Decisión intencional:
-// los leads son cotizaciones, no compras, así que asignar el precio de la máquina
-// inflaría el valor de conversión. Si en el futuro se quiere optimización por valor,
-// usar un valor ESPERADO (precio × tasa de cierre), no el precio de lista.
-const PROMO_TRACKING: Record<string, { contentName: string; value: number }> = {
-  "heli-gasolina-25": { contentName: "promo_25t", value: 0 },
-  "heli-gasolina-35": { contentName: "promo_35t", value: 0 },
-  "heli-diesel-k2": { contentName: "promo_k2", value: 0 },
-  "heli-diesel-k2-25t": { contentName: "promo_diesel_25t", value: 0 },
-  "heli-transpaleta-cbd1520": { contentName: "promo_transpaleta_2t", value: 0 },
-  "heli-combustion-g3": { contentName: "promo_combustion_g3", value: 0 },
-  "heli-h4-electrica": { contentName: "promo_h4_electrica", value: 0 },
-  "CPD25-A3LiH4-M": { contentName: "promo_h4_electrica_25t", value: 0 },
+// Una entrada por página de gracias. Si el slug no está, no se dispara el Lead.
+// `value: 0` => Lead sin value (Meta optimiza por volumen). currency CLP sale siempre.
+// contentCategory es explícita: la regla anterior marcaba 'diesel' a todo slug
+// que contenía "combustion", y heli-combustion-g3 es Gas/Bencina.
+const PROMO_TRACKING: Record<
+  string,
+  {
+    contentName: string;
+    value: number;
+    contentCategory: string;
+    formId: string;
+    model: string;
+  }
+> = {
+  "heli-gasolina-25": {
+    contentName: "promo_25t",
+    value: 0,
+    contentCategory: "gasolina",
+    formId: "134",
+    model: "CPQYD25-RC6RG3",
+  },
+  "heli-gasolina-35": {
+    contentName: "promo_35t",
+    value: 0,
+    contentCategory: "gasolina",
+    formId: "133",
+    model: "G3 Gas-Gasolina 3.5T",
+  },
+  "heli-diesel-k2": {
+    contentName: "promo_k2",
+    value: 0,
+    contentCategory: "diesel",
+    formId: "132",
+    model: "CPCD25-Q13K2",
+  },
+  "heli-diesel-k2-cpcd30": {
+    contentName: "promo_k2_cpcd30",
+    value: 0,
+    contentCategory: "diesel",
+    formId: "223",
+    model: "CPCD30-Q13K2",
+  },
+  "heli-diesel-k2-25t": {
+    contentName: "promo_diesel_25t",
+    value: 0,
+    contentCategory: "diesel",
+    formId: "131",
+    model: "CPCD25-Q13K2",
+  },
+  "heli-transpaleta-cbd1520": {
+    contentName: "promo_transpaleta_2t",
+    value: 0,
+    contentCategory: "transpaleta_electrica",
+    formId: "128",
+    model: "CBD20-BLIH",
+  },
+  "heli-apilador-cdd15j": {
+    contentName: "promo_apilador_cdd15j",
+    value: 0,
+    contentCategory: "apilador_electrico",
+    formId: "224",
+    model: "CDD15J-LI",
+  },
+  "heli-combustion-g3": {
+    contentName: "promo_combustion_g3",
+    value: 0,
+    contentCategory: "gas_bencina",
+    formId: "130",
+    model: "CPQYD25-RC6RG3",
+  },
+  "heli-h4-electrica": {
+    contentName: "promo_h4_electrica",
+    value: 0,
+    contentCategory: "electrica",
+    formId: "129",
+    model: "Serie H4",
+  },
+  "CPD25-A3LiH4-M": {
+    contentName: "promo_h4_electrica_25t",
+    value: 0,
+    contentCategory: "electrica",
+    formId: "136",
+    model: "CPD25-A3LiH4-M",
+  },
 };
 
 interface PromoThankYouProps {
@@ -95,31 +164,14 @@ export default function PromoThankYou({
     if (!tracking) return;
     fired.current = true;
 
-    const category =
-      productSlug.includes("diesel") || productSlug.includes("combustion")
-        ? "diesel"
-        : productSlug.includes("transpaleta")
-          ? "transpaleta_electrica"
-          : productSlug.includes("electrica")
-            ? "electrica"
-            : "gasolina";
-
-    void trackMetaEvent({
-      eventName: "Lead",
-      customData: {
-        content_name: tracking.contentName,
-        content_category: category,
-        content_ids: [productSlug],
-        // Solo enviamos value/currency si hay un valor estimado (> 0).
-        // Si value === 0, Meta optimiza por volumen de leads, no por valor.
-        ...(tracking.value > 0
-          ? { value: tracking.value, currency: "CLP" }
-          : {}),
-      },
-      // Si Hapee redirige acá pasando los datos por query string, se usan para
-      // subir el match quality (se hashean en el servidor, nunca viajan en claro
-      // hacia Meta desde el navegador).
-      userData: userDataFromUrl(),
+    firePromoLead({
+      contentName: tracking.contentName,
+      contentCategory: tracking.contentCategory,
+      contentId: productSlug,
+      value: tracking.value,
+      formId: tracking.formId,
+      slug: productSlug,
+      model: tracking.model,
     });
   }, [productSlug]);
 

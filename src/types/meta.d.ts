@@ -18,6 +18,9 @@ declare global {
     ) => void;
 
     dataLayer?: Record<string, unknown>[];
+
+    /** gtag.js (GA4). La conversión de Google Ads solo se llama si hay ID y etiqueta. */
+    gtag?: (...args: unknown[]) => void;
   }
 }
 

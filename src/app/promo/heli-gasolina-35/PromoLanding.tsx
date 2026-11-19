@@ -1022,7 +1022,7 @@ export default function PromoLanding() {
   // Meta Pixel — disparar ViewContent custom al cargar la landing
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "promo_35t",
         content_category: "gasolina",
         content_ids: ["heli-gasolina-35"],

@@ -2,23 +2,23 @@ import type { Metadata } from "next";
 import PromoLanding from "./PromoLanding";
 
 export const metadata: Metadata = {
-  title: "Grúas Horquilla HELI Combustión Serie G3 — Kit de Mantención Incluido",
+  title: "Grúa Horquilla HELI Serie H3 Gas/Bencina 2,5 t — CPQYD25-RC6RG3",
   description:
-    "Grúas Horquilla HELI Combustión Serie G3 de 5, 7 y 10 toneladas. Motor diésel de alto rendimiento, estructura reforzada. Oferta especial: 1 kit de mantención por cada 1.000 horas incluido. Stock disponible en Chile.",
+    "Grúa horquilla HELI Serie H3 Gas/Bencina de 2,5 toneladas, modelo CPQYD25-RC6RG3. Motor Nissan GK25, mástil triple 4.700 mm, containera, 4ª función, desplazador lateral, neumático macizo y asiento con suspensión y apoyabrazos. Primera cuota a 90 días. $14.000.000 + IVA.",
   alternates: { canonical: "/promo/heli-combustion-g3" },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "HELI Combustión G3 · 5/7/10 Tons — Kit de Mantención Incluido",
+    title: "HELI Serie H3 Gas/Bencina 2,5 t · CPQYD25-RC6RG3 — $14.000.000 + IVA",
     description:
-      "Motor diésel de alto rendimiento, estructura reforzada. 1 kit de mantención por cada 1.000 horas incluido. Stock inmediato en Chile.",
+      "Motor Nissan GK25, mástil 4.700 mm y primera cuota a 90 días. $14.000.000 + IVA.",
     type: "website",
     url: "https://heliforklift.cl/promo/heli-combustion-g3",
     images: [
       {
-        url: "/assets/promo/heli-combustion-g3-hero.webp",
+        url: "/assets/promo/heli-gasolina-25-hero.webp",
         width: 1200,
         height: 630,
-        alt: "Grúa Horquilla HELI Combustión Serie G3 — 5/7/10 toneladas Diesel",
+        alt: "Grúa horquilla HELI Serie H3 Gas/Bencina CPQYD25-RC6RG3 de 2,5 toneladas",
       },
     ],
   },

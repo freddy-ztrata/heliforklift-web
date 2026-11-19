@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import {
   Cog,
-  Weight,
   ArrowUpDown,
   Armchair,
   ShieldCheck,
@@ -16,17 +15,19 @@ import {
   Flame,
   Clock,
   Zap,
-  Wrench,
   Award,
   Building2,
-  Fuel,
+  Move,
+  Disc3,
+  Container,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import HapeeForm from "@/components/shared/HapeeForm";
 
-const PRODUCT_IMAGE_HERO = "/assets/promo/heli-combustion-g3-hero.webp"; // Serie 7 & 10 TON (modelo 70)
-const PRODUCT_IMAGE_55 = "/assets/promo/heli-combustion-g3-side.webp"; // Serie 5 TON (modelo 55)
-const GAS_MODEL_IMAGE = "/assets/promo/heli-gasolina-25-hero.webp"; // G3 gasolina 2,5 t
+// Mejor foto del CPQYD25 que hay en el repo (campaña 2,5 t). Ninguna muestra
+// con claridad el cilindro de gas atrás.
+const PRODUCT_IMAGE = "/assets/promo/heli-gasolina-25-hero.webp";
+const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-gasolina-25-side.webp";
 
 // ============================================================
 // COUNTDOWN — sentido de urgencia
@@ -86,29 +87,8 @@ function StockCounter() {
         ))}
       </div>
       <p className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
-        Solo {remainingStock} unidades con kit de mantención incluido
+        Solo {remainingStock} de {totalStock} disponibles
       </p>
-    </div>
-  );
-}
-
-// ============================================================
-// OFFER STRIP — gancho principal: kit de mantención por 1.000 hrs
-// ============================================================
-function OfferStrip() {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl border border-heli-yellow/30 bg-gradient-to-r from-heli-yellow/15 via-heli-yellow/5 to-transparent p-4 backdrop-blur">
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-heli-yellow/20 ring-1 ring-heli-yellow/40">
-        <Wrench className="h-6 w-6 text-heli-yellow" />
-      </div>
-      <div>
-        <p className="font-heading text-lg leading-none text-white sm:text-xl">
-          ¡1 KIT DE MANTENCIÓN POR 1.000 HORAS!
-        </p>
-        <p className="mt-1 text-xs text-steel-300">
-          Incluido en esta oferta especial · menos costo, más disponibilidad
-        </p>
-      </div>
     </div>
   );
 }
@@ -194,7 +174,7 @@ function Hero() {
             >
               <Flame className="h-3.5 w-3.5 text-heli-yellow" />
               <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
-                Oferta especial · Kit de mantención incluido
+                Gas/Bencina · Serie H3 · 2,5 toneladas
               </span>
             </motion.div>
 
@@ -204,13 +184,13 @@ function Hero() {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="font-heading mt-4 text-[clamp(2.5rem,7vw,5.5rem)] font-black leading-[0.9] tracking-tight text-white"
             >
-              GRÚAS HORQUILLA
+              GRÚA HORQUILLA
               <br />
               <span className="bg-gradient-to-r from-heli-red-light via-heli-red to-heli-red-dark bg-clip-text text-transparent">
-                HELI COMBUSTIÓN
+                HELI GAS/BENCINA
               </span>
               <br />
-              <span className="text-heli-yellow">SERIE G3</span>
+              <span className="text-heli-yellow">SERIE H3</span>
             </motion.h1>
 
             <motion.p
@@ -219,58 +199,52 @@ function Hero() {
               transition={{ delay: 0.4 }}
               className="mt-5 max-w-xl text-base leading-relaxed text-steel-300 sm:text-lg"
             >
-              Máxima capacidad de carga, motor diésel de alto rendimiento y la
-              robustez que las operaciones más exigentes necesitan. Disponibles
-              de <strong className="text-white">4 a 10 toneladas</strong> para
-              adaptarse a cualquier desafío industrial.
+              Grúa horquilla HELI Serie H3 Gas/Bencina de{" "}
+              <strong className="text-white">2,5 toneladas</strong>, modelo{" "}
+              <strong className="text-white">CPQYD25-RC6RG3</strong>. Motor{" "}
+              <strong className="text-white">Nissan GK25</strong>, mástil de{" "}
+              <strong className="text-white">4.700 mm</strong> y primera cuota
+              a <strong className="text-white">90 días</strong>.
             </motion.p>
 
-            {/* Tonelajes disponibles */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-6"
+              className="mt-6 max-w-md"
             >
-              <p className="mb-3 text-xs font-bold uppercase tracking-widest text-heli-red-light">
-                Capacidades disponibles
-              </p>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-4 backdrop-blur">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    5
+              <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-5 backdrop-blur">
+                <p className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
+                  Precio · CPQYD25-RC6RG3
+                </p>
+                <div className="mt-1 flex items-baseline gap-2">
+                  <p className="font-heading text-[clamp(2.2rem,5vw,3.4rem)] leading-none text-white">
+                    $14.000.000
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
+                  <span className="text-base font-bold text-steel-300">+ IVA</span>
                 </div>
-                <div className="rounded-2xl border border-heli-red/40 bg-gradient-to-br from-heli-red/30 via-heli-red/15 to-transparent p-4 backdrop-blur ring-1 ring-heli-red/30">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    7
-                  </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-4 backdrop-blur">
-                  <p className="font-heading text-3xl leading-none text-white sm:text-4xl">
-                    10
-                  </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-heli-red-light">
-                    Tons
-                  </p>
-                </div>
+                <p className="mt-2 text-sm text-steel-300">
+                  Gas/Bencina · 2,5 t · primera cuota a 90 días
+                </p>
               </div>
-            </motion.div>
-
-            {/* Offer strip — kit de mantención */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55 }}
-              className="mt-6"
-            >
-              <OfferStrip />
+              <div className="mt-3 grid grid-cols-2 gap-3">
+                {[
+                  { label: "Capacidad", value: "2,5 t" },
+                  { label: "Motor", value: "Nissan GK25" },
+                  { label: "Mástil", value: "4.700 mm" },
+                  { label: "Primera cuota", value: "A 90 días" },
+                ].map((spec) => (
+                  <div
+                    key={spec.label}
+                    className="rounded-2xl border border-white/[0.08] bg-steel-950/60 p-3"
+                  >
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
+                      {spec.label}
+                    </p>
+                    <p className="mt-1 text-sm font-bold text-white">{spec.value}</p>
+                  </div>
+                ))}
+              </div>
             </motion.div>
 
             {/* CTA principal — solo formulario */}
@@ -313,8 +287,8 @@ function Hero() {
 
             <div className="relative h-full w-full">
               <Image
-                src={PRODUCT_IMAGE_HERO}
-                alt="Grúa Horquilla HELI Combustión Serie G3 — 7 y 10 toneladas Diesel"
+                src={PRODUCT_IMAGE}
+                alt="Grúa horquilla HELI Serie H3 Gas/Bencina CPQYD25-RC6RG3 de 2,5 toneladas"
                 fill
                 priority
                 quality={90}
@@ -330,15 +304,11 @@ function Hero() {
               className="absolute right-0 top-4 sm:right-4 sm:top-8"
             >
               <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-heli-red text-white shadow-2xl sm:h-32 sm:w-32">
-                <Wrench className="h-5 w-5 sm:h-6 sm:w-6" />
-                <span className="font-heading text-base leading-none sm:text-lg">
-                  KIT
+                <span className="font-heading text-xl leading-none sm:text-2xl">
+                  2,5 t
                 </span>
-                <span className="font-heading text-base leading-none sm:text-lg">
-                  INCLUIDO
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-                  1.000 hrs
+                <span className="mt-1 text-center text-[10px] font-bold uppercase tracking-wider sm:text-xs">
+                  Gas/Bencina
                 </span>
               </div>
             </motion.div>
@@ -358,7 +328,7 @@ function Hero() {
             className="inline-flex flex-col items-center gap-1 text-steel-500"
           >
             <span className="text-[10px] uppercase tracking-widest">
-              Conoce los dos modelos
+              Conoce las especificaciones
             </span>
             <span className="text-xl">↓</span>
           </motion.div>
@@ -369,134 +339,38 @@ function Hero() {
 }
 
 // ============================================================
-// DESTACADO — CPQYD25-RC6RG3 gasolina, primer bloque bajo el hero
-// ============================================================
-const gasModelSpecs = [
-  { label: "Capacidad", value: "2,5 t" },
-  { label: "Motor", value: "Nissan GK25" },
-  { label: "Mástil", value: "4.700 mm" },
-  { label: "Primera cuota", value: "A 90 días" },
-];
-
-function FeaturedGasModel() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden border-y border-heli-yellow/25 bg-gradient-to-br from-heli-yellow/10 via-steel-950 to-steel-900 py-16 sm:py-20"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,rgba(245,166,35,0.14),transparent_55%)]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="relative order-1 mx-auto aspect-square w-full max-w-md lg:order-none"
-          >
-            <div className="absolute inset-0 rounded-full bg-heli-yellow/20 blur-[90px]" />
-            <Image
-              src={GAS_MODEL_IMAGE}
-              alt="Grúa horquilla HELI gasolina CPQYD25-RC6RG3 de 2,5 toneladas"
-              fill
-              quality={90}
-              className="object-contain drop-shadow-[0_24px_40px_rgba(206,20,45,0.35)]"
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-heli-yellow/40 bg-heli-yellow/15 px-3 py-1.5">
-              <Fuel className="h-3.5 w-3.5 text-heli-yellow" />
-              <span className="text-xs font-bold uppercase tracking-widest text-heli-yellow">
-                Destacado · Gas / Bencina
-              </span>
-            </div>
-
-            <p className="mt-4 text-xs font-bold uppercase tracking-widest text-steel-400">
-              Modelo
-            </p>
-            <h2 className="font-heading mt-1 text-[clamp(2.2rem,5vw,4rem)] leading-none text-white">
-              CPQYD25-RC6RG3
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-steel-300">
-              Grúa horquilla HELI a gasolina de{" "}
-              <strong className="text-white">2,5 toneladas</strong>, con motor{" "}
-              <strong className="text-white">Nissan GK25</strong> y mástil de{" "}
-              <strong className="text-white">4.700 mm</strong>. Primera cuota a{" "}
-              <strong className="text-white">90 días</strong>.
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {gasModelSpecs.map((spec) => (
-                <div
-                  key={spec.label}
-                  className="rounded-2xl border border-white/[0.08] bg-steel-950/70 p-4"
-                >
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-steel-500">
-                    {spec.label}
-                  </p>
-                  <p className="mt-1 text-base font-bold text-white sm:text-lg">
-                    {spec.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="#cotiza"
-              className="group relative mt-6 inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-heli-red px-8 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_30px_rgba(206,20,45,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_0_40px_rgba(206,20,45,0.7)]"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-heli-red-dark via-heli-red to-heli-red-light opacity-0 transition-opacity group-hover:opacity-100" />
-              <span className="relative">Cotizar CPQYD25-RC6RG3</span>
-              <Zap className="relative h-4 w-4" />
-            </a>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================
-// FEATURES — 6 spec cards con animación scroll
+// FEATURES — las 6 características de la grilla
 // ============================================================
 const features = [
   {
-    icon: Fuel,
-    title: "Motor Diesel alto torque",
-    desc: "Potencia y rendimiento sostenido para las cargas más exigentes. Tecnología robusta probada en operaciones intensivas.",
-  },
-  {
-    icon: Weight,
-    title: "De 4 a 10 toneladas",
-    desc: "Amplio rango de capacidades para cubrir operaciones medianas y pesadas con una sola familia de equipos.",
-  },
-  {
-    icon: Wrench,
-    title: "Kit de mantención incluido",
-    desc: "1 kit de mantención por cada 1.000 horas de operación. Reduce tu costo operativo y maximiza la disponibilidad.",
+    icon: Container,
+    title: "Containera",
+    desc: "Preparada para trabajo en contenedor.",
   },
   {
     icon: ArrowUpDown,
-    title: "Elevación hasta 6 m",
-    desc: "Altura de mástil configurable según tu bodega u operación. Optimiza el almacenamiento en altura.",
+    title: "Mástil triple 4.700 mm",
+    desc: "Altura de elevación de 4.700 mm.",
   },
   {
-    icon: ShieldCheck,
-    title: "Estructura reforzada",
-    desc: "Chasis robusto diseñado para operaciones industriales intensivas. Mayor vida útil de tu inversión.",
+    icon: Cog,
+    title: "4ª función",
+    desc: "Cuarta función hidráulica incluida.",
+  },
+  {
+    icon: Move,
+    title: "Desplazador lateral",
+    desc: "Desplazador lateral para posicionar la carga.",
+  },
+  {
+    icon: Disc3,
+    title: "Neumático macizo",
+    desc: "Neumático macizo para la operación.",
   },
   {
     icon: Armchair,
-    title: "Cabina amplia y confortable",
-    desc: "Más comodidad para el operador en largas jornadas. Reduce la fatiga y mejora la productividad.",
+    title: "Asiento con suspensión y apoyabrazos",
+    desc: "Asiento con suspensión y apoyabrazos.",
   },
 ];
 
@@ -560,189 +434,17 @@ function FeaturesGrid() {
   );
 }
 
-// ============================================================
-// TWO MODELS — los dos modelos de la oferta (5 TON y 7&10 TON)
-// ============================================================
-const models = [
-  {
-    image: PRODUCT_IMAGE_55,
-    badge: "G3 Serie 5 TON",
-    name: "Rango medio-alto",
-    specs: [
-      { label: "Capacidad", value: "5.000 kg" },
-      { label: "Altura", value: "4.500 mm" },
-      { label: "Motor", value: "Diesel" },
-    ],
-    features: [
-      "Rango medio-alto de capacidad",
-      "Motor diésel de alto torque",
-      "Cabina amplia y confortable",
-      "Sistema hidráulico de alta eficiencia",
-    ],
-    footnote:
-      "Ideal para operaciones que requieren mayor capacidad de carga en ambientes industriales.",
-    highlight: false,
-  },
-  {
-    image: PRODUCT_IMAGE_HERO,
-    badge: "G3 Serie 7 & 10 TON",
-    name: "Alta capacidad",
-    specs: [
-      { label: "Capacidad", value: "7.000 y 10.000 kg" },
-      { label: "Altura", value: "4.000 mm" },
-      { label: "Motor", value: "Diesel" },
-    ],
-    features: [
-      "Alta capacidad de carga",
-      "Motor diesel de alto rendimiento",
-      "Estructura reforzada",
-      "Para operaciones pesadas",
-    ],
-    footnote:
-      "Robusta y confiable para las operaciones industriales más exigentes.",
-    highlight: true,
-  },
-];
-
-function TwoModels() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section
-      ref={ref}
-      className="relative overflow-hidden bg-gradient-to-b from-steel-950 via-steel-900 to-steel-950 py-20 sm:py-28"
-    >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(206,20,45,0.12),transparent_70%)]" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <p className="text-sm font-bold uppercase tracking-widest text-heli-red-light">
-            Dos modelos, una oferta
-          </p>
-          <h2 className="font-heading mt-3 text-[clamp(2rem,5vw,4rem)] leading-none text-white">
-            ELIGE LA QUE TU
-            <br />
-            <span className="text-heli-red">OPERACIÓN NECESITA</span>
-          </h2>
-          <p className="mt-4 text-base text-steel-400">
-            Ambos modelos de la Serie G3 Combustión incluyen el kit de
-            mantención por cada 1.000 horas de operación.
-          </p>
-        </motion.div>
-
-        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-          {models.map((m, i) => (
-            <motion.div
-              key={m.badge}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className={cn(
-                "group relative overflow-hidden rounded-3xl border bg-gradient-to-br p-6 backdrop-blur transition-all sm:p-8",
-                m.highlight
-                  ? "border-heli-red/40 from-heli-red/15 via-steel-900 to-steel-950 hover:border-heli-red/60 hover:shadow-[0_20px_60px_-15px_rgba(206,20,45,0.5)]"
-                  : "border-white/[0.08] from-steel-900 to-steel-950 hover:border-heli-red/40 hover:shadow-[0_20px_60px_-15px_rgba(206,20,45,0.3)]"
-              )}
-            >
-              <div className="inline-flex items-center gap-2 rounded-full border border-heli-red/30 bg-heli-red/10 px-3 py-1.5">
-                <span className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
-                  {m.badge}
-                </span>
-              </div>
-
-              {/* Imagen del modelo */}
-              <div className="relative mx-auto mt-4 aspect-[4/3] w-full max-w-md">
-                <div className="absolute inset-0 rounded-full bg-heli-red/20 blur-[80px]" />
-                <Image
-                  src={m.image}
-                  alt={`Grúa Horquilla HELI Combustión ${m.badge}`}
-                  fill
-                  quality={90}
-                  className="object-contain drop-shadow-[0_20px_40px_rgba(206,20,45,0.4)]"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                />
-              </div>
-
-              {/* Specs grid */}
-              <div className="mt-4 grid grid-cols-3 gap-3">
-                {m.specs.map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-xl border border-white/[0.06] bg-steel-950/60 p-3 text-center"
-                  >
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-steel-500">
-                      {s.label}
-                    </p>
-                    <p className="mt-1 text-sm font-bold text-white">
-                      {s.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Features */}
-              <ul className="mt-5 space-y-2">
-                {m.features.map((feat) => (
-                  <li key={feat} className="flex items-start gap-2.5">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-heli-red" />
-                    <span className="text-sm text-steel-200">{feat}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-5 border-t border-white/[0.06] pt-4 text-sm italic leading-relaxed text-steel-400">
-                {m.footnote}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Stats bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-6"
-        >
-          {[
-            { value: "10T", label: "Capacidad max" },
-            { value: "Diesel", label: "Tipo motor" },
-            { value: "1.000 hrs", label: "Kit mantención" },
-            { value: "180+", label: "Países" },
-          ].map((s) => (
-            <div
-              key={s.label}
-              className="rounded-2xl border border-white/[0.08] bg-steel-900/50 p-4 text-center backdrop-blur sm:p-6"
-            >
-              <p className="font-heading text-2xl text-heli-red sm:text-4xl">
-                {s.value}
-              </p>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-steel-400 sm:text-xs">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================
-// BENEFITS — 4 grandes diferenciadores (incluye KIT DE MANTENCIÓN)
+// BENEFITS
 // ============================================================
 const benefits = [
   {
-    icon: Wrench,
-    title: "Kit de mantención incluido",
-    desc: "Recibe 1 kit de mantención por cada 1.000 horas de operación. Ahorra en mantención y mantén tu equipo siempre operativo.",
-    stat: "1.000 hrs",
-    statLabel: "por cada kit",
+    icon: Clock,
+    title: "Primera cuota a 90 días",
+    desc: "La condición de esta oferta Gas/Bencina es primera cuota a 90 días.",
+    stat: "90 días",
+    statLabel: "primera cuota",
   },
   {
     icon: ShieldCheck,
@@ -852,8 +554,8 @@ function UseCases() {
         className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2 lg:block"
       >
         <Image
-          src={PRODUCT_IMAGE_HERO}
-          alt="Grúa Horquilla HELI Combustión Serie G3 — vista frontal"
+          src={PRODUCT_IMAGE_SIDE}
+          alt="Grúa horquilla HELI Serie H3 Gas/Bencina CPQYD25-RC6RG3"
           fill
           quality={85}
           className="object-contain"
@@ -877,9 +579,8 @@ function UseCases() {
               <span className="text-heli-red">INDUSTRIA</span>
             </h2>
             <p className="mt-4 text-base text-steel-400">
-              Las HELI Combustión Serie G3 son la solución robusta para
-              operaciones que requieren rendimiento sostenido, máxima carga y
-              bajo costo operativo. Disponibles de 4 a 10 toneladas.
+              La grúa horquilla HELI Serie H3 Gas/Bencina CPQYD25-RC6RG3 de
+              2,5 toneladas, con motor Nissan GK25.
             </p>
           </div>
 
@@ -908,7 +609,7 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-// Formulario de Hapee "Promo Combustión G3 — HELI". Redirige a /promo/heli-combustion-g3/gracias,
+// Formulario de Hapee 130. Redirige a /promo/heli-combustion-g3/gracias,
 // donde se dispara el Lead del Pixel.
 const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia-3";
 
@@ -939,19 +640,17 @@ function ConversionForm() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-steel-300">
-              Cotiza hoy tu grúa horquilla HELI Combustión Serie G3 y llévate el{" "}
-              <strong className="text-white">
-                kit de mantención por cada 1.000 horas
-              </strong>{" "}
-              incluido. Completa el formulario y te contactamos en menos de{" "}
-              <strong className="text-white">2 horas hábiles</strong>.
+              Cotiza el CPQYD25-RC6RG3 Gas/Bencina de 2,5 t a{" "}
+              <strong className="text-white">$14.000.000 + IVA</strong>, con
+              primera cuota a 90 días. Completa el formulario y te contactamos
+              en menos de <strong className="text-white">2 horas hábiles</strong>.
             </p>
 
             <div className="mt-6 space-y-3">
               {[
                 {
-                  icon: Wrench,
-                  text: "Kit de mantención por cada 1.000 horas incluido",
+                  icon: Clock,
+                  text: "Primera cuota a 90 días",
                 },
                 {
                   icon: Zap,
@@ -1146,9 +845,9 @@ export default function PromoLanding() {
   // Meta Pixel — disparar ViewContent custom al cargar la landing
   useEffect(() => {
     if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("trackCustom", "ViewContent", {
+      window.fbq("track", "ViewContent", {
         content_name: "promo_combustion_g3",
-        content_category: "diesel",
+        content_category: "gas_bencina",
         content_ids: ["heli-combustion-g3"],
       });
     }
@@ -1157,9 +856,7 @@ export default function PromoLanding() {
   return (
     <main className="bg-steel-950 pb-20 lg:pb-0">
       <Hero />
-      <FeaturedGasModel />
       <FeaturesGrid />
-      <TwoModels />
       <Benefits />
       <UseCases />
       <ConversionForm />
