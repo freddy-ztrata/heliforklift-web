@@ -105,8 +105,8 @@ const PROMO_TRACKING: Record<
 interface PromoThankYouProps {
   /** Nombre del producto que el lead cotizó (para personalizar el mensaje) */
   productName: string;
-  /** Imagen del producto para mostrar como referencia visual */
-  productImage: string;
+  /** Imagen del producto. Si no hay una de este modelo, se omite el bloque. */
+  productImage?: string;
   /** Eslogan corto debajo del título */
   productTagline: string;
   /** Color identificador del producto (slug) — solo para tracking */
@@ -217,7 +217,13 @@ export default function PromoThankYou({
         </motion.div>
 
         {/* Hero — confirmación con producto */}
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div
+          className={
+            productImage
+              ? "grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16"
+              : "max-w-3xl"
+          }
+        >
           {/* Texto de confirmación */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -266,41 +272,45 @@ export default function PromoThankYou({
             </div>
           </motion.div>
 
-          {/* Imagen del producto cotizado */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="relative aspect-square w-full max-w-xl justify-self-center lg:justify-self-end"
-          >
-            <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
-
-            <div className="relative h-full w-full">
-              <Image
-                src={productImage}
-                alt={productName}
-                fill
-                priority
-                quality={90}
-                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-
-            {/* Badge tagline */}
+          {productImage ? (
             <motion.div
-              initial={{ scale: 0, rotate: -10 }}
-              animate={{ scale: 1, rotate: -8 }}
-              transition={{ delay: 1, type: "spring", stiffness: 200 }}
-              className="absolute -bottom-2 right-0 sm:right-4"
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+              className="relative aspect-square w-full max-w-xl justify-self-center lg:justify-self-end"
             >
-              <div className="rounded-full border border-heli-red/40 bg-steel-950/90 px-5 py-2 backdrop-blur">
-                <span className="whitespace-nowrap text-xs font-bold uppercase tracking-widest text-white sm:text-sm">
-                  {productTagline}
-                </span>
+              <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
+
+              <div className="relative h-full w-full">
+                <Image
+                  src={productImage}
+                  alt={productName}
+                  fill
+                  priority
+                  quality={90}
+                  className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
+
+              <motion.div
+                initial={{ scale: 0, rotate: -10 }}
+                animate={{ scale: 1, rotate: -8 }}
+                transition={{ delay: 1, type: "spring", stiffness: 200 }}
+                className="absolute -bottom-2 right-0 sm:right-4"
+              >
+                <div className="rounded-full border border-heli-red/40 bg-steel-950/90 px-5 py-2 backdrop-blur">
+                  <span className="whitespace-nowrap text-xs font-bold uppercase tracking-widest text-white sm:text-sm">
+                    {productTagline}
+                  </span>
+                </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
+          ) : (
+            <p className="mt-6 text-sm font-bold uppercase tracking-widest text-heli-red-light">
+              {productTagline}
+            </p>
+          )}
         </div>
 
         {/* Próximos pasos */}

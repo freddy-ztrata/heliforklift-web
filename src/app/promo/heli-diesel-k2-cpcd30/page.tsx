@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     url: "https://heliforklift.cl/promo/heli-diesel-k2-cpcd30",
     images: [
       {
-        url: "/assets/promo/heli-diesel-k2-front.webp",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Grúa Horquilla HELI Diesel K2 CPCD30-Q13K2 — 3 toneladas (3.000 kg)",
+        alt: "Heli Forklift Chile",
       },
     ],
   },

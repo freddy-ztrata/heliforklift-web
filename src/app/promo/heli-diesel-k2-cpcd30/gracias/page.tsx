@@ -16,7 +16,6 @@ export default function GraciasDieselK2Cpcd30Page() {
     <PromoThankYou
       productSlug="heli-diesel-k2-cpcd30"
       productName={PRODUCT_LABEL}
-      productImage="/assets/promo/heli-diesel-k2-hero.webp"
       productTagline={PRODUCT_LABEL}
     />
   );
