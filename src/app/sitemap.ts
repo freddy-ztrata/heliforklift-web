@@ -104,7 +104,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [absoluteImg("/assets/promo/heli-h4-electrica-hero.webp")],
     },
     {
-      url: `${baseUrl}/promo/heli-combustion-g3`,
+      url: `${baseUrl}/promo/heli-combustion-h3`,
       lastModified: new Date("2026-11-19T00:00:00Z"),
       changeFrequency: "monthly",
       priority: 0.8,

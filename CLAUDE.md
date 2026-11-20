@@ -110,13 +110,13 @@ LP de marca completa para campañas **always-on de Google Ads** (NO Meta). `robo
 | `/promo/heli-diesel-k2` | HELI Diesel K2 (multi-tonelaje 2.5/3.0/3.5T) | 15 unidades | `8ae22a71-ea73-4cf7-8c57-634e768c0104` | `/promo/heli-diesel-k2/gracias` |
 | `/promo/heli-diesel-k2-25t` | HELI CPCD25-Q13K2 Diesel 2.5T | 10 unidades | `cc1dd61c-972a-4ea8-aaac-d02b857a04d5` | `/promo/heli-diesel-k2-25t/gracias` |
 | `/promo/heli-transpaleta-cbd1520` | Transpaleta Eléctrica HELI CBD15/20 (2T) | — | `ba4815b5-e77a-4cc5-88be-bef4a91ecefd` | `/promo/heli-transpaleta-cbd1520/gracias` |
-| `/promo/heli-combustion-g3` | HELI Combustión G3 (5 TON + 7&10 TON Diesel) | 12 unidades | `89548006-48d3-4313-9301-dc0adbd35a2c` (embed developer) | `/promo/heli-combustion-g3/gracias` |
+| `/promo/heli-combustion-h3` | HELI Combustión G3 (5 TON + 7&10 TON Diesel) | 12 unidades | `89548006-48d3-4313-9301-dc0adbd35a2c` (embed developer) | `/promo/heli-combustion-h3/gracias` |
 | `/promo/heli-h4-electrica` | HELI Eléctrica H4 (Litio-ion 80V, 2.5-3.5T) | 12 unidades | `22d1b041-5bd4-42d2-aae5-de428f4c2f43` (embed developer) | `/promo/heli-h4-electrica/gracias` |
 
 **Estructura común** (cada `PromoLanding.tsx`):
 1. **Hero** — logo HELI blanco clickeable (link a `/`) + countdown 48hrs + título + specs grid + CTA "Cotizar ahora" + stock counter
 2. **FeaturesGrid** — 6 spec cards con animación scroll (motor, capacidad, neumáticos, mástil, desplazador, asiento)
-3. **Showcase** — imagen central grande (max-w-3xl, scale-110) + 2 cards laterales izquierda + 1 card destacada derecha (ANTES tenía hotspots con coords X/Y que nunca quedaban sobre la pieza real, fueron reemplazados por cards laterales). **Excepción:** `heli-combustion-g3` reemplaza Showcase por **`TwoModels`** (2 cards lado a lado, una por modelo: "G3 Serie 5 TON" y "G3 Serie 7 & 10 TON", cada una con imagen + specs grid + features + footnote) porque la campaña promociona dos equipos a la vez.
+3. **Showcase** — imagen central grande (max-w-3xl, scale-110) + 2 cards laterales izquierda + 1 card destacada derecha (ANTES tenía hotspots con coords X/Y que nunca quedaban sobre la pieza real, fueron reemplazados por cards laterales). **Excepción:** `heli-combustion-h3` reemplaza Showcase por **`TwoModels`** (2 cards lado a lado, una por modelo: "G3 Serie 5 TON" y "G3 Serie 7 & 10 TON", cada una con imagen + specs grid + features + footnote) porque la campaña promociona dos equipos a la vez.
 4. **Benefits** — 3 cards (4 en K2 que incluye garantía 1 año)
 5. **UseCases** — 6 industrias aplicables
 6. **ConversionForm** — copy de conversión + form HubSpot embebido (color wrapper `#0d0d18` para matchear con iframe)
@@ -251,7 +251,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-diesel-k2` | `promo_k2` | `diesel` |
 | `/promo/heli-diesel-k2-25t` | `promo_diesel_25t` | `diesel` |
 | `/promo/heli-transpaleta-cbd1520` | `promo_transpaleta_2t` | `transpaleta_electrica` |
-| `/promo/heli-combustion-g3` | `promo_combustion_g3` | `diesel` |
+| `/promo/heli-combustion-h3` | `promo_combustion_g3` | `diesel` |
 | `/promo/heli-h4-electrica` | `promo_h4_electrica` | `electrica` |
 
 `Lead` se dispara en cada thank-you page (conversión principal optimizada en Meta Ads). **Todas las landings disparan `Lead` SIN `value`/`currency`** (decisión intencional: los leads son cotizaciones, no compras, así que se optimiza por VOLUMEN de leads, no por valor monetario). En `PROMO_TRACKING` esto se controla con `value: 0` en cada entry; el `useEffect` omite `value`/`currency` cuando `value === 0`.
@@ -263,7 +263,7 @@ Navbar order (post-feedback): Inicio → **Nosotros (segundo)** → Equipos → 
 | `/promo/heli-diesel-k2/gracias` | `promo_k2` | (sin valor) |
 | `/promo/heli-diesel-k2-25t/gracias` | `promo_diesel_25t` | (sin valor) |
 | `/promo/heli-transpaleta-cbd1520/gracias` | `promo_transpaleta_2t` | (sin valor) |
-| `/promo/heli-combustion-g3/gracias` | `promo_combustion_g3` | (sin valor) |
+| `/promo/heli-combustion-h3/gracias` | `promo_combustion_g3` | (sin valor) |
 | `/promo/heli-h4-electrica/gracias` | `promo_h4_electrica` | (sin valor) |
 | `/gracias` (form principal) | `form_principal` | (sin valor) |
 
