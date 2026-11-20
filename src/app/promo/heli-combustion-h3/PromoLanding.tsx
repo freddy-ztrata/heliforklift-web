@@ -214,18 +214,19 @@ function Hero() {
               className="mt-6 max-w-md"
             >
               <div className="rounded-2xl border border-heli-red/30 bg-gradient-to-br from-heli-red/20 via-heli-red/10 to-transparent p-5 backdrop-blur">
-                <p className="text-xs font-bold uppercase tracking-widest text-heli-red-light">
-                  Precio · CPQYD25-RC6RG3
+                <p className="font-heading text-[clamp(2.2rem,5vw,3.4rem)] leading-none text-white">
+                  Cotiza tu precio
                 </p>
-                <div className="mt-1 flex items-baseline gap-2">
-                  <p className="font-heading text-[clamp(2.2rem,5vw,3.4rem)] leading-none text-white">
-                    $14.000.000
-                  </p>
-                  <span className="text-base font-bold text-steel-300">+ IVA</span>
-                </div>
                 <p className="mt-2 text-sm text-steel-300">
                   Gas/Bencina · 2,5 t · primera cuota a 90 días
                 </p>
+                <a
+                  href="#cotiza"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-heli-red-light hover:text-white"
+                >
+                  Ir al formulario
+                  <Zap className="h-4 w-4" />
+                </a>
               </div>
               <div className="mt-3 grid grid-cols-2 gap-3">
                 {[
@@ -641,8 +642,7 @@ function ConversionForm() {
             </h2>
 
             <p className="mt-5 text-base leading-relaxed text-steel-300">
-              Cotiza el CPQYD25-RC6RG3 Gas/Bencina de 2,5 t a{" "}
-              <strong className="text-white">$14.000.000 + IVA</strong>, con
+              Cotiza el CPQYD25-RC6RG3 Gas/Bencina de 2,5 t, con
               primera cuota a 90 días. Completa el formulario y te contactamos
               en menos de <strong className="text-white">2 horas hábiles</strong>.
             </p>
