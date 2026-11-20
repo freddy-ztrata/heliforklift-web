@@ -58,12 +58,22 @@ const nextConfig: NextConfig = {
     },
     {
       source: "/promo/heli-gasolina-25",
-      destination: "/promo/heli-combustion-g3",
+      destination: "/promo/heli-combustion-h3",
       statusCode: 301,
     },
     {
       source: "/promo/heli-gasolina-25/gracias",
-      destination: "/promo/heli-combustion-g3/gracias",
+      destination: "/promo/heli-combustion-h3/gracias",
+      statusCode: 301,
+    },
+    {
+      source: "/promo/heli-combustion-g3",
+      destination: "/promo/heli-combustion-h3",
+      statusCode: 301,
+    },
+    {
+      source: "/promo/heli-combustion-g3/gracias",
+      destination: "/promo/heli-combustion-h3/gracias",
       statusCode: 301,
     },
     // La G3 4-5 TON estaba mal clasificada como Gas (GLP): la maquina es

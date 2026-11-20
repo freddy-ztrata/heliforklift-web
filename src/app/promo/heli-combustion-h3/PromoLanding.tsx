@@ -609,8 +609,9 @@ function UseCases() {
 // ============================================================
 // FORM CTA — sección de conversión final
 // ============================================================
-// Formulario de Hapee 130. Redirige a /promo/heli-combustion-g3/gracias,
-// donde se dispara el Lead del Pixel.
+// Formulario de Hapee 130 (slug sin cambio). La gracias del Pixel es
+// /promo/heli-combustion-h3/gracias. En Hapee el redirect post-envío sigue
+// apuntando a la URL g3 hasta que se actualice al publicar.
 const HAPEE_FORM_ID = "heliforklift chile/contacto-home-heli-forklift-chile-copia-3";
 
 function ConversionForm() {

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "¡Gracias! — Cotización HELI Serie H3 Gas/Bencina recibida",
   description:
     "Recibimos tu solicitud de cotización por la Grúa Horquilla HELI Serie H3 Gas/Bencina 2,5 t (CPQYD25-RC6RG3). Un ejecutivo te contactará en menos de 2 horas hábiles.",
-  alternates: { canonical: "/promo/heli-combustion-g3/gracias" },
+  alternates: { canonical: "/promo/heli-combustion-h3/gracias" },
   robots: { index: false, follow: false },
 };
 
