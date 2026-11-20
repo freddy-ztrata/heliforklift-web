@@ -25,9 +25,6 @@ import {
 } from "lucide-react";
 import HapeeForm from "@/components/shared/HapeeForm";
 
-const PRODUCT_IMAGE_FRONT = "/assets/promo/heli-diesel-k2-hero.webp";
-const PRODUCT_IMAGE_SIDE = "/assets/promo/heli-diesel-k2-side.webp";
-
 // ============================================================
 // COUNTDOWN — sentido de urgencia
 // ============================================================
@@ -224,43 +221,24 @@ function Hero() {
 
           </motion.div>
 
-          {/* Imagen */}
           <motion.div
             style={{ y: imageY, scale: imageScale }}
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 aspect-square w-full max-w-[17rem] justify-self-center sm:max-w-sm lg:order-2 lg:max-w-2xl lg:justify-self-end"
+            className="relative order-1 w-full max-w-md justify-self-center lg:order-2 lg:max-w-xl lg:justify-self-end"
           >
-            <div className="absolute inset-0 rounded-full bg-heli-red/30 blur-[100px]" />
-
-            <div className="relative h-full w-full">
-              <Image
-                src={PRODUCT_IMAGE_FRONT}
-                alt="Grúa Horquilla HELI Diesel Serie K2 CPCD30-Q13K2 — 3 toneladas (3.000 kg)"
-                fill
-                priority
-                quality={90}
-                className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div className="flex min-h-56 flex-col items-center justify-center rounded-3xl border border-heli-red/40 bg-gradient-to-br from-heli-red via-heli-red-dark to-steel-950 px-8 py-10 text-center shadow-[0_30px_60px_rgba(206,20,45,0.35)] sm:min-h-72">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/80">
+                Serie K2
+              </p>
+              <p className="font-heading mt-3 text-5xl leading-none text-white sm:text-6xl">
+                CPCD30-Q13K2
+              </p>
+              <p className="mt-4 text-sm font-bold uppercase tracking-widest text-white">
+                3 toneladas · 3.000 kg
+              </p>
             </div>
-
-            <motion.div
-              initial={{ scale: 0, rotate: -10 }}
-              animate={{ scale: 1, rotate: -8 }}
-              transition={{ delay: 1, type: "spring", stiffness: 200 }}
-              className="absolute right-0 top-4 sm:right-4 sm:top-8"
-            >
-              <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full bg-heli-red text-white shadow-2xl sm:h-32 sm:w-32">
-                <span className="font-heading text-2xl leading-none sm:text-3xl">
-                  3 t
-                </span>
-                <span className="mt-1 text-center text-[10px] font-bold uppercase tracking-wider sm:text-xs">
-                  3.000 kg
-                </span>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
 
@@ -467,31 +445,23 @@ function Showcase() {
             ))}
           </div>
 
-          {/* Imagen central — agrandada */}
           <div className="lg:col-span-6">
-            <div className="relative mx-auto aspect-[4/3] w-full max-w-3xl">
-              <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute inset-0 rounded-full bg-heli-red/30 blur-[120px]"
-              />
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="relative h-full w-full scale-110"
-              >
-                <Image
-                  src={PRODUCT_IMAGE_SIDE}
-                  alt="HELI Diesel Serie K2 CPCD30-Q13K2 vista lateral"
-                  fill
-                  quality={90}
-                  className="object-contain drop-shadow-[0_30px_60px_rgba(206,20,45,0.5)]"
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                />
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto flex min-h-64 max-w-3xl flex-col items-center justify-center rounded-3xl border border-white/10 bg-gradient-to-br from-steel-900 via-heli-red/20 to-steel-950 px-8 py-12 text-center"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-heli-red-light">
+                CPCD30-Q13K2
+              </p>
+              <p className="font-heading mt-3 text-5xl leading-none text-white sm:text-7xl">
+                3 t
+              </p>
+              <p className="mt-3 text-sm font-bold uppercase tracking-widest text-steel-300">
+                3.000 kg · mástil 4.700 mm
+              </p>
+            </motion.div>
           </div>
 
           {/* Card lateral derecha (1 card grande) — desktop */}
@@ -684,22 +654,6 @@ function UseCases() {
 
   return (
     <section className="relative overflow-hidden bg-steel-950 py-20 sm:py-24">
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={isInView ? { opacity: 0.3, x: 0 } : {}}
-        transition={{ duration: 1 }}
-        className="absolute right-[-10%] top-1/2 hidden h-[500px] w-[500px] -translate-y-1/2 lg:block"
-      >
-        <Image
-          src={PRODUCT_IMAGE_FRONT}
-          alt="Grúa Horquilla HELI Diesel K2 CPCD30-Q13K2 — vista frontal"
-          fill
-          quality={85}
-          className="object-contain"
-          aria-hidden
-        />
-      </motion.div>
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
